@@ -1,0 +1,6 @@
+---
+- include_tasks: media.yml
+- include_tasks: static.yml
+- include_tasks: gunicorn.yml
+- include_tasks: nginx.yml
+...

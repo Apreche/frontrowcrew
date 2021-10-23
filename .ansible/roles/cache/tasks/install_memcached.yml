@@ -1,0 +1,23 @@
+---
+- name: Install memcached
+  ansible.builtin.apt:
+    name: memcached
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: Install memcached configuration file
+  ansible.builtin.template:
+    src: templates/memcached.conf.j2
+    dest: "{{ memcached_config_file }}"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Ensure memcached is started
+  ansible.builtin.service:
+    name: memcached
+    state: started
+  become: yes
+...

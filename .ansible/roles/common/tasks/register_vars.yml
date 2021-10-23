@@ -1,0 +1,11 @@
+---
+- name: Get Ubuntu release name
+  ansible.builtin.command: lsb_release -cs
+  register: ubuntu_release_string
+  changed_when: false
+  check_mode: false
+
+- name: Register common vars
+  ansible.builtin.set_fact:
+    ubuntu_release: "{{ ubuntu_release_string.stdout }}"
+...

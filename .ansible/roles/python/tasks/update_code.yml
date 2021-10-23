@@ -1,0 +1,10 @@
+---
+- name: Checkout code
+  ansible.builtin.git:
+    repo: "{{ git_repo }}"
+    dest: "{{ project_source_dir }}"
+    version: "{{ git_version }}"
+    key_file: "{{ deploy_key_path }}"
+    accept_hostkey: yes
+    umask: '0022'
+...

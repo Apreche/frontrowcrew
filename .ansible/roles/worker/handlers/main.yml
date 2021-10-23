@@ -1,0 +1,15 @@
+---
+- name: Restart celery beat
+  ansible.builtin.service:
+    name: "{{ project_name }}_celery_beat"
+    state: restarted
+  listen: "restart celery beat"
+  become: yes
+
+- name: Restart celery workers
+  ansible.builtin.service:
+    name: "{{ project_name }}_celery"
+    state: restarted
+  listen: "restart celery workers"
+  become: yes
+...

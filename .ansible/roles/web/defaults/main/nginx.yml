@@ -1,0 +1,11 @@
+---
+nginx_config_dir: "{{ config_dir }}/nginx"
+nginx_config_available_dir: "{{ nginx_config_dir }}/sites-available"
+nginx_config_enabled_dir: "{{ nginx_config_dir }}/sites-enabled"
+nginx_config_file: "{{ nginx_config_available_dir }}/{{ project_name }}"
+nginx_symlink_path: "{{ nginx_config_enabled_dir }}/{{ project_name }}"
+nginx_log_dir: "{{ log_dir }}/nginx"
+nginx_access_log: "{{ nginx_log_dir }}/{{ project_name }}_access.log"
+nginx_error_log: "{{ nginx_log_dir }}/{{ project_name }}_error.log"
+nginx_www_root_dir: "{{ project_www_dir }}"
+...

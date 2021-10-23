@@ -1,0 +1,7 @@
+---
+postgresql_db_name: "{{ project_name }}"
+postgresql_user: "{{ project_name }}"
+postgresql_password: "{{ project_name }}"
+postgresql_host: "localhost"
+postgresql_port: "5432"
+...

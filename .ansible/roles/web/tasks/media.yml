@@ -1,0 +1,10 @@
+---
+- name: Ensure media_root directory exists
+  ansible.builtin.file:
+    path: "{{ python_environment.vars.media_root }}"
+    state: directory
+    owner: root
+    group: www-data
+    mode: '0775'
+  become: yes
+...

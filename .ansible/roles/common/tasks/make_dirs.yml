@@ -1,0 +1,63 @@
+---
+- name: Create ansible remote temp dir
+  ansible.builtin.file:
+    path: "{{ ansible_temp_dir }}"
+    state: directory
+    mode: '0777'
+
+- name: Ensure project source directory exists
+  ansible.builtin.file:
+    path: "{{ project_source_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure project config directory exists
+  ansible.builtin.file:
+    path: "{{ project_config_dir }}"
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Ensure project runtime directory exists
+  ansible.builtin.file:
+    path: "{{ project_runtime_dir }}"
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Ensure project temp directory exists
+  ansible.builtin.file:
+    path: "{{ project_temp_dir }}"
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Ensure project log directory exists
+  ansible.builtin.file:
+    path: "{{ project_log_dir }}"
+    state: directory
+    mode: '0775'
+  become: yes
+
+- name: Ensure project state directory exists
+  ansible.builtin.file:
+    path: "{{ project_state_dir }}"
+    state: directory
+    mode: '0775'
+  become: yes
+
+- name: Ensure project www directory exists
+  ansible.builtin.file:
+    path: "{{ project_www_dir }}"
+    state: directory
+    owner: root
+    group: www-data
+    mode: '0755'
+  become: yes
+
+- name: Ensure SSH directory exists
+  ansible.builtin.file:
+    path: "{{ ssh_dir }}"
+    state: directory
+    mode: '0755'
+...

@@ -1,0 +1,28 @@
+---
+# Thank you to this URL
+# http://postgresql.freeideas.cz/ansible-simple-playbook-installing-postgresql-ubuntu-debian/
+- name: Add PostgreSQL repository key
+  ansible.builtin.apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+  become: yes
+
+- name: Add PostgreSQL repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt {{ ubuntu_release }}-pgdg main"
+    state: present
+  become: yes
+
+- name: Install PostgreSQL
+  ansible.builtin.apt:
+    name: postgresql
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: Ensure PostgreSQL is started 
+  ansible.builtin.service:
+    name: postgresql
+    state: started
+  become: yes
+...

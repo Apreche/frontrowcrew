@@ -1,0 +1,88 @@
+---
+- name: Add deadsnakes ppa
+  ansible.builtin.apt_repository:
+    repo: 'ppa:deadsnakes/ppa'
+  become: yes
+
+- name: Install Python3 packages
+  ansible.builtin.apt:
+    pkg:
+    - python3
+    - python3-dev
+    - python3-distutils
+    - python3-testresources
+    - python3-pip
+    - python3-setuptools
+    - python3-venv
+    state: latest
+  become: yes
+
+- name: Set python3 as default
+  community.general.alternatives:
+    name: python
+    link: /usr/bin/python
+    path: /usr/bin/python3
+    priority: 1
+  become: yes
+
+- name: Install system dependencies for Python modules
+  ansible.builtin.apt:
+    pkg:
+    - build-essential
+    - libfreetype6-dev
+    - libjpeg-dev
+    - liblcms2-dev
+    - libmemcached-dev
+    - libpq-dev
+    - libtiff-dev
+    - libwebp-dev
+    - tcl-dev
+    - tk-dev
+    - python3-tk
+    - zlib1g-dev
+    state: latest
+  become: yes
+
+- name: Upgrade pip using pip
+  ansible.builtin.pip:
+    name: pip
+    state: latest
+  become: yes
+
+- name: Install virtualenv
+  ansible.builtin.pip:
+    name: virtualenv
+    state: latest
+  become: yes
+
+- name: Upgrade virtualenv embed wheels
+  ansible.builtin.command:
+    cmd: "virtualenv --upgrade-embed-wheels"
+  become: yes
+
+- name: Install poetry
+  ansible.builtin.pip:
+    name: poetry
+    state: latest
+
+- name: Set poetry bin and requirements.txt paths
+  ansible.builtin.set_fact:
+    poetry_bin: "{{ ansible_env.HOME }}/.local/bin/poetry"
+    requirements_file: "{{ project_source_dir }}/requirements.txt"
+
+- name: Generate requirements.txt
+  ansible.builtin.command:
+    chdir: "{{ project_source_dir }}"
+    cmd: "{{ poetry_bin }} export -f requirements.txt --output {{ requirements_file }}"
+
+- name: Install project Python requirements
+  ansible.builtin.pip:
+    requirements: "{{ requirements_file }}"
+    virtualenv: "{{ virtualenv_project_dir }}"
+  notify: "restart web application server"
+
+- name: Remove requirements.txt
+  ansible.builtin.file:
+    path: "{{ requirements_file }}"
+    state: absent
+...

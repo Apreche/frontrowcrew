@@ -1,0 +1,23 @@
+---
+- name: Set postfix mailer type to local only
+  ansible.builtin.debconf:
+    name: postfix
+    question: postfix/main_mailer_type
+    vtype: string
+    value: "Local only"
+  become: yes
+
+- name: Set postfix mailname to localhost
+  ansible.builtin.debconf:
+    name: postfix
+    question: postfix/mailname
+    vtype: string
+    value: "localhost"
+  become: yes
+
+- name: Install postfix
+  ansible.builtin.apt:
+    name: postfix
+    state: latest
+  become: yes
+...

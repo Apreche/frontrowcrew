@@ -1,0 +1,4 @@
+---
+certbot_conf_dir: "{{ config_dir }}/letsencrypt"
+certbot_key_dir: "{{ certbot_conf_dir }}/live/{{ web_domain }}"
+...

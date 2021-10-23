@@ -1,0 +1,11 @@
+---
+celery_binary: "{{ virtualenv_bin_dir }}/celery"
+
+celery_service_name: "{{ project_name }}_celery"
+celery_config_dir: "{{ project_config_dir }}/celery"
+celery_config_path: "{{ celery_config_dir }}/config"
+celery_runtime_dir: "{{ project_runtime_dir }}/celery"
+celery_log_dir: "{{ project_log_dir }}/celery"
+celery_log_level: "INFO"
+celery_state_dir: "{{ project_state_dir }}/celery"
+...

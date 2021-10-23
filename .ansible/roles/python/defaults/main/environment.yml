@@ -1,0 +1,22 @@
+---
+python_environment:
+  vars:
+    debug: False
+    secret_key: "{{ vault_secret_key }}"
+    hosts: "{{ web_domain }}"
+    db_name: "{{ postgresql_db_name }}"
+    db_user: "{{ postgresql_user }}"
+    db_password: "{{ postgresql_password }}"
+    db_host: "{{ postgresql_host }}"
+    db_port: "{{ postgresql_port }}"
+    memcached_socket: "{{ memcached_socket }}"
+    static_url: "/static/"
+    static_root: "{{ project_www_dir }}/static/"
+    media_url: "/media/"
+    media_root: "{{ project_www_dir }}/media/"
+    celery_user: "{{ rabbitmq_user }}"
+    celery_password: "{{ rabbitmq_password }}"
+    celery_host: "{{ rabbitmq_host }}"
+    celery_port: "{{ rabbitmq_port }}"
+    celery_vhost: "{{ rabbitmq_vhost }}"
+...

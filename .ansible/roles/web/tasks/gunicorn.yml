@@ -1,0 +1,63 @@
+---
+- name: Ensuer gunicorn config directory exists
+  ansible.builtin.file:
+    path: "{{ gunicorn_config_dir }}"
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Install gunicorn environment file
+  ansible.builtin.template:
+    src: templates/gunicorn_environment.j2
+    dest: "{{ gunicorn_environment_path }}"
+    owner: root
+    group: www-data
+    mode: '0640'
+  become: yes
+
+- name: Install gunicorn config file
+  ansible.builtin.template:
+    src: templates/gunicorn_config.j2
+    dest: "{{ gunicorn_config_path }}"
+    owner: root
+    group: www-data
+    mode: '0644'
+  become: yes
+  notify: "restart web application server"
+
+- name: Install gunicorn systemd socket config
+  ansible.builtin.template:
+    src: templates/systemd_gunicorn_socket.j2
+    dest: "{{ systemd_config_dir }}/{{ gunicorn_service_name }}.socket"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  notify: "restart web application server"
+
+- name: Install gunicorn systemd service config
+  ansible.builtin.template:
+    src: templates/systemd_gunicorn.j2
+    dest: "{{ systemd_config_dir }}/{{ gunicorn_service_name }}.service"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  notify: "restart web application server"
+
+- name: Enable and start gunicorn socket
+  ansible.builtin.systemd:
+    name: "{{ gunicorn_service_name }}.socket"
+    enabled: yes
+    state: started
+    daemon_reload: yes
+  become: yes
+
+- name: Enable and start gunicorn
+  ansible.builtin.systemd:
+    name: "{{ gunicorn_service_name }}.service"
+    enabled: yes
+    state: started
+    daemon_reload: yes
+  become: yes
+...

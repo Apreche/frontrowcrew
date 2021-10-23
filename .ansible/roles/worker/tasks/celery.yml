@@ -1,0 +1,36 @@
+---
+- name: Ensure celery config directory exists
+  ansible.builtin.file:
+    path: "{{ celery_config_dir }}"
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Install celery env file
+  ansible.builtin.template:
+    src: templates/celery_env.j2
+    dest: "{{ celery_config_path }}"
+    owner: root
+    group: www-data
+    mode: '0640'
+  become: yes
+  notify: "restart celery workers"
+
+- name: Install celery systemd service config
+  ansible.builtin.template:
+    src: templates/systemd_celery.j2
+    dest: "{{ systemd_config_dir }}/{{ celery_service_name }}.service"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  notify: "restart celery workers"
+
+- name: Enable and start celery
+  ansible.builtin.systemd:
+    name: "{{ celery_service_name }}.service"
+    enabled: yes
+    state: started
+    daemon_reload: yes
+  become: yes
+...

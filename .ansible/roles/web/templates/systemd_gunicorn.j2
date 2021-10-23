@@ -1,0 +1,23 @@
+[Unit]
+Description={{ project_name }} gunicorn daemon
+After=network.target
+Requires={{ project_name }}_gunicorn.socket
+
+[Service]
+Type=notify
+DynamicUser=yes
+Group=www-data
+ConfigurationDirectory={{ project_name }}/gunicorn
+RuntimeDirectory={{ project_name }}/gunicorn
+LogsDirectory={{ project_name }}/gunicorn
+WorkingDirectory={{ project_source_dir }}
+EnvironmentFile={{ gunicorn_environment_path }}
+ExecStart={{ virtualenv_bin_dir }}/gunicorn {{ project_name }}.wsgi -c {{ gunicorn_config_path }}
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

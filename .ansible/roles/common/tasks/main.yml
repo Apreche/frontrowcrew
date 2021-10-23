@@ -1,0 +1,6 @@
+---
+- include_tasks: upgrade.yml
+- include_tasks: register_vars.yml
+- include_tasks: make_dirs.yml
+- include_tasks: deploy_key.yml
+...

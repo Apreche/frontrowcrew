@@ -1,0 +1,6 @@
+---
+- name: Run database migrations
+  ansible.builtin.command:
+    cmd: "{{ virtualenv_python_bin }} {{ project_source_dir }}/manage.py migrate --noinput"
+  environment: "{{ env_vars }}"
+...

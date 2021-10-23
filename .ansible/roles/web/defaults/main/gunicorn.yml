@@ -1,0 +1,12 @@
+---
+gunicorn_service_name: "{{ project_name }}_gunicorn"
+gunicorn_config_dir: "{{ project_config_dir }}/gunicorn"
+gunicorn_environment_path: "{{ gunicorn_config_dir }}/environment"
+gunicorn_config_path: "{{ gunicorn_config_dir }}/config.py"
+gunicorn_error_log: "{{ project_log_dir }}/gunicorn/gunicorn_error.log"
+gunicorn_pid_file: "{{ project_runtime_dir }}/gunicorn/gunicorn.pid"
+gunicorn_socket: "{{ project_runtime_dir }}/gunicorn.sock"
+gunicorn_capture_output: True
+gunicorn_timeout: 30
+gunicorn_keepalive: 10
+...

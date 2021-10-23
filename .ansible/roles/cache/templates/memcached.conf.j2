@@ -1,0 +1,13 @@
+-d
+
+-m {{ memcached_memory }}
+
+-u memcache
+
+-a 777
+
+-s {{ memcached_socket | default('/run/memcached/memcached.sock') }}
+
+-P {{ memcached_pid_file | default('/run/memcached/memcached.pid') }}
+
+logfile {{ memcached_log_file | default('/var/log/memcached.log') }}

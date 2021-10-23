@@ -1,0 +1,8 @@
+---
+- name: Restart gunicorn
+  ansible.builtin.service:
+    name: "{{ gunicorn_service_name }}"
+    state: restarted
+  listen: "restart web application server"
+  become: yes
+...

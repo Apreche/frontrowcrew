@@ -1,0 +1,46 @@
+---
+name: Deploy Project
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  deploy:
+    name: Deploy project
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+
+      - name: Create SSH configuration
+        uses: Apreche/action-ansible-playbook@v3.0.0
+        with:
+          playbook: ssh_config.yml
+          inventory: |
+            localhost
+        env:
+          SSH_HOST: ${{secrets.ANSIBLE_SSH_HOST}}
+          SSH_USER: ${{secrets.ANSIBLE_SSH_USER}}
+          SSH_PORT: ${{secrets.ANSIBLE_SSH_PORT}}
+          SSH_JUMP_HOST: ${{secrets.ANSIBLE_SSH_JUMP_HOST}}
+          SSH_JUMP_USER: ${{secrets.ANSIBLE_SSH_JUMP_USER}}
+          SSH_JUMP_PORT: ${{secrets.ANSIBLE_SSH_JUMP_PORT}}
+          SSH_PRIVATE_KEY: ${{secrets.ANSIBLE_SSH_PRIVATE_KEY}}
+          SSH_PRIVATE_KEY_TYPE: ${{secrets.ANSIBLE_SSH_PRIVATE_KEY_TYPE}}
+          SSH_KNOWN_HOSTS: ${{secrets.ANSIBLE_SSH_KNOWN_HOSTS}}
+
+      - name: Execute deployment playbook
+        uses: Apreche/action-ansible-playbook@v3.0.0
+        with:
+          playbook: deploy.yml
+          vault_password: ${{secrets.ANSIBLE_VAULT_PASSWORD}}
+          inventory: |
+            [all]
+            ${{secrets.ANSIBLE_SSH_HOST}}
+        env:
+          DEPLOY_SSH_PRIVATE_KEY: ${{secrets.DEPLOY_SSH_PRIVATE_KEY}}
+          WEB_DOMAIN: ${{secrets.WEB_DOMAIN}}
+          EMAIL_ADDRESS: ${{secrets.EMAIL_ADDRESS}}
+...

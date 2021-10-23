@@ -1,0 +1,45 @@
+---
+- name: Install NGINX
+  ansible.builtin.apt:
+    name: "nginx"
+    state: latest
+  become: yes
+
+- name: Ensure NGINX is started
+  ansible.builtin.service:
+    name: nginx
+    state: started
+  become: yes
+
+- include_tasks: certbot.yml
+
+- name: Install NGINX configuration file
+  ansible.builtin.template:
+    src: templates/nginx.j2
+    dest: "{{ nginx_config_file }}"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Remove NGINX default configuration symlink
+  ansible.builtin.file:
+    path: "{{ nginx_config_enabled_dir }}/default"
+    state: absent
+  become: yes
+
+- name: Create NGINX app configuration symlink
+  ansible.builtin.file:
+    src: "{{ nginx_config_file }}"
+    dest: "{{ nginx_symlink_path }}"
+    owner: root
+    group: root
+    state: link
+  become: yes
+
+- name: Ensure NGINX is started
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+  become: yes
+...

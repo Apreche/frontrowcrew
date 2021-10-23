@@ -1,0 +1,6 @@
+---
+virtualenv_base_dir: "{{ ansible_env.HOME }}/.virtualenvs"
+virtualenv_project_dir: "{{ virtualenv_base_dir }}/{{ project_name }}"
+virtualenv_bin_dir: "{{ virtualenv_project_dir }}/bin"
+virtualenv_python_bin: "{{ virtualenv_bin_dir }}/python"
+...

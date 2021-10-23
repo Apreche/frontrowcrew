@@ -1,0 +1,14 @@
+import multiprocessing
+
+worker_class = 'gthread'
+workers = multiprocessing.cpu_count() * 2 + 1
+threads = multiprocessing.cpu_count() * 2 + 1
+
+bind = ['unix:{{ gunicorn_socket }}']
+timeout = "{{ gunicorn_timeout }}"
+graceful_timeout = "{{ gunicorn_timeout }}"
+keepalive = "{{ gunicorn_keepalive }}"
+
+chdir = "{{ project_source_dir }}"
+error_log = "{{ gunicorn_error_log }}"
+pidfile = "{{ gunicorn_pid_file }}"

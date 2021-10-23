@@ -1,0 +1,31 @@
+---
+- name: Install rabbitmq
+  ansible.builtin.apt:
+    name: rabbitmq-server
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: Ensure rabbitmq is started
+  ansible.builtin.service:
+    name: rabbitmq-server
+    state: started
+  become: yes
+
+- name: Create rabbitmq vhost
+  community.rabbitmq.rabbitmq_vhost:
+    name: "{{ rabbitmq_vhost }}"
+    state: present
+  become: yes
+
+- name: Create rabbitmq user
+  community.rabbitmq.rabbitmq_user:
+    name: "{{ rabbitmq_user }}"
+    password: "{{ rabbitmq_password }}"
+    vhost: "{{ rabbitmq_vhost }}"
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present
+  become: yes
+...

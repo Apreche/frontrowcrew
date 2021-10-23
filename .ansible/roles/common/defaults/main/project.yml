@@ -1,0 +1,34 @@
+---
+project_name: "{{ lookup('env', 'GITHUB_REPOSITORY').split('/')[1] | lower }}"
+owner: "{{ lookup('env', 'GITHUB_REPOSITORY').split('/')[0] | lower }}"
+email_address: "{{ lookup('env', 'EMAIL_ADDRESS') }}"
+web_domain: "{{ lookup('env', 'WEB_DOMAIN') | default(inventory_hostname, true) }}"
+
+git_repo: "git@github.com:{{ lookup('env', 'GITHUB_REPOSITORY') }}.git"
+git_version: "{{ lookup('env', 'GITHUB_REF') | default(lookup('env', 'GITHUB_SHA'), True) }}"
+
+
+base_dir: "{{ ansible_env.HOME }}/projects"
+config_dir: "/etc"
+runtime_dir: "/run"
+temp_dir: "/tmp"
+log_dir: "/var/log"
+state_dir: "/var/lib"
+www_dir: "/var/www"
+
+ansible_temp_dir: "{{ temp_dir }}/ansible"
+
+project_source_dir: "{{ base_dir }}/{{ project_name }}"
+project_config_dir: "{{ config_dir }}/{{ project_name }}"
+project_runtime_dir: "{{ runtime_dir }}/{{ project_name }}"
+project_temp_dir: "{{ temp_dir }}/{{ project_name }}"
+project_log_dir: "{{ log_dir }}/{{ project_name }}"
+project_state_dir: "{{ state_dir }}/{{ project_name }}"
+project_www_dir: "{{ www_dir }}/{{ project_name }}"
+
+ssh_dir: "{{ ansible_env.HOME }}/.ssh"
+deploy_key: "{{ lookup('env', 'DEPLOY_SSH_PRIVATE_KEY') }}"
+deploy_key_path: "{{ ssh_dir }}/{{ project_name }}_deploykey"
+
+systemd_config_dir: "{{ config_dir }}/systemd/system"
+...

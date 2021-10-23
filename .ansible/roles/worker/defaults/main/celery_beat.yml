@@ -1,0 +1,8 @@
+---
+celery_beat_service_name: "{{ project_name }}_celery_beat"
+celery_beat_config_dir: "{{ project_config_dir }}/celerybeat"
+celery_beat_config_path: "{{ celery_beat_config_dir }}/config"
+celery_beat_runtime_dir: "{{ project_runtime_dir }}/celerybeat"
+celery_beat_log_dir: "{{ project_log_dir }}/celerybeat"
+celery_beat_log_level: "INFO"
+...

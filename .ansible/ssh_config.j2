@@ -1,0 +1,20 @@
+Host {{ ssh_host }}
+    User {{ ssh_user }}
+    HostName {{ ssh_host }}
+    Port {{ ssh_port | default(22, true) }}
+    ControlMaster auto
+    ControlPersist 10m
+    ControlPath /tmp/cm-%r:%h:%p
+    {% if ssh_jump_host %}ProxyJump {{ ssh_jump_host }}{% endif %}
+
+{% if ssh_jump_host %}
+
+Host {{ ssh_jump_host }}
+    User {{ ssh_jump_user | default(ssh_user, true) }}
+    HostName {{ ssh_jump_host }}
+    Port {{ ssh_jump_port | default(22, true) }}
+    ForwardAgent yes
+    ControlMaster auto
+    ControlPersist 10m
+    ControlPath /tmp/cm-%r:%h:%p
+{% endif %}

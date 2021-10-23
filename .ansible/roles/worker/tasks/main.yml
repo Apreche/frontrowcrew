@@ -1,0 +1,4 @@
+---
+- include_tasks: celery.yml
+- include_tasks: celery_beat.yml
+...

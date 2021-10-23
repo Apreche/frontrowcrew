@@ -1,0 +1,8 @@
+---
+- name: Install Deploy Key
+  ansible.builtin.template:
+    src: deploy_key.j2
+    force: yes
+    dest: "{{ deploy_key_path }}"
+    mode: '0600'
+...

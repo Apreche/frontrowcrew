@@ -1,0 +1,16 @@
+---
+- name: Ensure static_root directory exists
+  ansible.builtin.file:
+    path: "{{ python_environment.vars.static_root }}"
+    state: directory
+    owner: root
+    group: www-data
+    mode: '0775'
+  become: yes
+
+- name: Collect static files
+  ansible.builtin.command:
+    cmd: "{{ virtualenv_python_bin }} {{ project_source_dir }}/manage.py collectstatic --noinput"
+  environment: "{{ env_vars }}"
+  become: yes
+...

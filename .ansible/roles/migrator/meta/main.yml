@@ -1,0 +1,6 @@
+---
+dependencies:
+  - role: common
+  - role: db
+  - role: python
+...

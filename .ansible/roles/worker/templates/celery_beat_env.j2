@@ -1,0 +1,12 @@
+{# Python environment variables #}
+{% for key, value in env_vars.items() %}
+{{ key }}="{{ value }}"
+{% endfor %}
+
+{# Celery systemd environment variables #}
+CELERY_BIN="{{ celery_binary }}"
+CELERY_APP="{{ project_name }}"
+
+CELERYBEAT_PID_FILE="{{ celery_beat_runtime_dir }}/beat.pid"
+CELERYBEAT_LOG_FILE="{{ celery_beat_log_dir }}/beat.log"
+CELERYBEAT_LOG_LEVEL="{{ celery_beat_log_level }}"

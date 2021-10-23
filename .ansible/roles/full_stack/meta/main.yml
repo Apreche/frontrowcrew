@@ -1,0 +1,12 @@
+---
+dependencies:
+  - role: common
+  - role: postfix
+  - role: cache
+  - role: queue
+  - role: db
+  - role: python
+  - role: migrator
+  - role: worker
+  - role: web
+...

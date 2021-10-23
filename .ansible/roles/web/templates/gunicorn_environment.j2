@@ -1,0 +1,4 @@
+{# Python environment variables #}
+{% for key, value in env_vars.items() %}
+{{ key }}="{{ value }}"
+{% endfor %}

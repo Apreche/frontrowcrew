@@ -1,0 +1,42 @@
+upstream {{ project_name }} {
+    server unix:{{ gunicorn_socket }} fail_timeout=0;
+}
+
+server {
+
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    listen 443 ssl;
+
+    server_name {{ web_domain }};
+
+    ssl_certificate {{ certbot_key_dir }}/fullchain.pem;
+    ssl_certificate_key {{ certbot_key_dir }}/privkey.pem;
+    include {{ certbot_conf_dir }}/options-ssl-nginx.conf;
+    ssl_dhparam {{ certbot_conf_dir }}/ssl-dhparams.pem;
+
+    if ($scheme != "https") {
+        return 301 https://$host$request_uri;
+    }
+
+    client_max_body_size 300M;
+
+    root {{ project_www_dir }};
+
+    access_log {{ nginx_access_log }};
+    error_log {{ nginx_error_log }};
+
+    location / {
+        try_files $uri @{{ project_name }}_proxy;
+    }
+
+    location @{{ project_name }}_proxy {
+        proxy_pass http://{{ project_name }};
+        proxy_redirect off;
+        proxy_read_timeout 45s;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

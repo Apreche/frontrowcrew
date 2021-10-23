@@ -1,0 +1,21 @@
+[Unit]
+Description={{ project_name }} celery beat service
+After=network.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+Group=www-data
+LogsDirectory={{ project_name }}/celerybeat
+ConfigurationDirectory={{ project_name }}/celerybeat
+RuntimeDirectory={{ project_name }}/celerybeat
+WorkingDirectory={{ project_source_dir }}
+EnvironmentFile={{ celery_config_path }}
+ExecStart=/bin/sh -c '${CELERY_BIN} -A ${CELERY_APP} beat  \
+    --pidfile=${CELERYBEAT_PID_FILE} \
+    --logfile=${CELERYBEAT_LOG_FILE} \
+    --loglevel=${CELERYBEAT_LOG_LEVEL}'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,38 @@
+---
+- name: SSH Configuration Playbook
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    ssh_host: "{{ lookup('env', 'SSH_HOST') }}"
+    ssh_user: "{{ lookup('env', 'SSH_USER') }}"
+    ssh_port: "{{ lookup('env', 'SSH_PORT') | default(22, true) }}"
+    ssh_jump_host: "{{ lookup('env', 'SSH_JUMP_HOST') }}"
+    ssh_jump_user: "{{ lookup('env', 'SSH_JUMP_USER') | default(ssh_user, true) }}"
+    ssh_jump_port: "{{ lookup('env', 'SSH_JUMP_PORT') | default(22, true) }}"
+    ssh_private_key: "{{ lookup('env', 'SSH_PRIVATE_KEY') }}"
+    ssh_known_hosts: "{{ lookup('env', 'SSH_KNOWN_HOSTS') }}"
+    ssh_key_type: "{{ lookup('env', 'SSH_PRIVATE_KEY_TYPE') | default('rsa', true) }}"
+    home_dir: "{{ lookup('env', 'HOME') }}"
+  tasks:
+    - name: Ensure SSH directory exists
+      ansible.builtin.file:
+        path: "{{ home_dir }}/.ssh"
+        state: directory
+        mode: '0755'
+    - name: Install SSH config file
+      ansible.builtin.template:
+        src: ssh_config.j2
+        dest: "{{ home_dir }}/.ssh/config"
+        mode: '0600'
+    - name: Install SSH private key file
+      ansible.builtin.copy:
+        content: "{{ ssh_private_key }}\n"
+        dest: "{{ home_dir }}/.ssh/id_{{ ssh_key_type }}"
+        mode: '0600'
+    - name: Install SSH known_hosts file
+      ansible.builtin.copy:
+        content: "{{ ssh_known_hosts }}"
+        dest: "{{ home_dir }}/.ssh/known_hosts"
+        mode: '0600'
+...

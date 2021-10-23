@@ -1,0 +1,11 @@
+[Unit]
+Description={{ project_name }} gunicorn socket
+
+[Socket]
+ListenStream={{ gunicorn_socket }}
+SocketUser=www-data
+SocketGroup=www-data
+SocketMode=660
+
+[Install]
+WantedBy=sockets.target

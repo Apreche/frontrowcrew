@@ -1,0 +1,13 @@
+---
+- name: Update System Packages
+  ansible.builtin.apt:
+    upgrade: dist
+    update_cache: yes
+  become: yes
+
+- name: Install acl
+  ansible.builtin.apt:
+    name: acl
+    state: latest
+  become: yes
+...

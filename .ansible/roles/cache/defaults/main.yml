@@ -1,0 +1,8 @@
+---
+memcached_runtime_dir: "{{ runtime_dir }}/memcached"
+memcached_socket: "{{ memcached_runtime_dir }}/memcached.sock"
+memcached_pid_file: "{{ memcached_runtime_dir }}/memcached.pid"
+memcached_config_file: "{{ config_dir }}/memcached.conf"
+memcached_log_file: "{{ log_dir }}/memcached.log"
+memcached_memory: 64
+...
