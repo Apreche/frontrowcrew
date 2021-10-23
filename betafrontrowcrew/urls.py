@@ -20,6 +20,7 @@ from django.urls import include, path
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
+    path("", include("homepage.urls")),
     path("admin/", admin.site.urls),
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     path(
