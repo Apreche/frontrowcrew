@@ -112,7 +112,9 @@ else:
             "ENGINE": "django.db.backends.postgresql",
             "NAME": os.environ.get("BETAFRONTROWCREW_DB_NAME", "betafrontrowcrew"),
             "USER": os.environ.get("BETAFRONTROWCREW_DB_USER", "betafrontrowcrew"),
-            "PASSWORD": os.environ.get("BETAFRONTROWCREW_DB_PASSWORD", "betafrontrowcrew"),
+            "PASSWORD": os.environ.get(
+                "BETAFRONTROWCREW_DB_PASSWORD", "betafrontrowcrew"
+            ),
             "HOST": os.environ.get("BETAFRONTROWCREW_DB_HOST", "localhost"),
             "PORT": os.environ.get("BETAFRONTROWCREW_DB_PORT", "5432"),
         }
@@ -130,9 +132,8 @@ else:
         "default": {
             "BACKEND": "django.core.cache.backends.memcached.PyLibMCCache",
             "LOCATION": os.environ.get(
-                "BETAFRONTROWCREW_MEMCACHED_SOCKET",
-                "/tmp/memcached.sock"
-            )
+                "BETAFRONTROWCREW_MEMCACHED_SOCKET", "/tmp/memcached.sock"
+            ),
         }
     }
 
