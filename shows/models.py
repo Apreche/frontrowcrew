@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Show(models.Model):
     title = models.TextField()
     slug = models.SlugField()
