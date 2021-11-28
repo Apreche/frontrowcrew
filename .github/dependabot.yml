@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    assignees:
+      - "Apreche"
+    target-branch: "main"
+    schedule:
+      interval: "weekly"
