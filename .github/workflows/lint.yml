@@ -2,15 +2,13 @@
 name: Lint Code Base
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
   build:
     name: Lint Code Base
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
@@ -22,7 +20,20 @@ jobs:
         uses: github/super-linter@v3
         env:
           VALIDATE_ALL_CODEBASE: false
-          IGNORE_GITIGNORED_FILES: true
           DEFAULT_BRANCH: main
+          IGNORE_GITIGNORED_FILES: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_BASH: true
+          VALIDATE_CSS: true
+          VALIDATE_DOCKERFILE: true
+          VALIDATE_GITHUB_ACTIONS: true
+          VALIDATE_HTML: true
+          VALIDATE_JAVASCRIPT_STANDARD: true
+          VALIDATE_JSON: true
+          VALIDATE_MARKDOWN: true
+          VALIDATE_NATURAL_LANGUAGE: true
+          VALIDATE_PYTHON_FLAKE8: true
+          VALIDATE_SHELL_SHFMT: true
+          VALIDATE_SQL: true
+          VALIDATE_YAML: true
 ...
