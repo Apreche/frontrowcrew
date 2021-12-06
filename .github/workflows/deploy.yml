@@ -43,4 +43,8 @@ jobs:
           DEPLOY_SSH_PRIVATE_KEY: ${{secrets.DEPLOY_SSH_PRIVATE_KEY}}
           WEB_DOMAIN: ${{secrets.WEB_DOMAIN}}
           EMAIL_ADDRESS: ${{secrets.EMAIL_ADDRESS}}
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          AWS_STORAGE_BUCKET_NAME: ${{secrets.AWS_STORAGE_BUCKET_NAME}}
+          AWS_S3_CUSTOM_DOMAIN: ${{secrets.AWS_S3_CUSTOM_DOMAIN}}
 ...

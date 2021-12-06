@@ -3,6 +3,10 @@
 {{ key }}="{{ value }}"
 {% endfor %}
 
+{# AWS environment variables #}
+AWS_ACCESS_KEY_ID="{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+AWS_SECRET_ACCESS_KEY="{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+
 {# Celery systemd environment variables #}
 CELERY_BIN="{{ celery_binary }}"
 CELERY_APP="{{ project_name }}"
@@ -11,3 +15,4 @@ CELERYD_PID_FILE="{{ celery_runtime_dir }}/%n.pid"
 CELERYD_LOG_FILE="{{ celery_log_dir }}/%n%I.log"
 CELERYD_LOG_LEVEL="{{ celery_log_level }}"
 CELERYD_STATE_DB="{{ celery_state_dir }}/db.state"
+
