@@ -20,7 +20,7 @@ django-storages = "^1.12.3"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^3.2.1"
-ipython = "^7.25.0"
+ipython = "^7.30.1"
 ipdb = "^0.13.9"
 Werkzeug = "^2.0.2"
 
