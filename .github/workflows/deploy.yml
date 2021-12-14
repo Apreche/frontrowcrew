@@ -2,8 +2,11 @@
 name: Deploy Project
 
 on:
-  release:
-    types: [released]
+  push:
+    branches:
+      - main
+  # release:
+  #   types: [released]
 
 jobs:
   deploy:
