@@ -20,7 +20,6 @@ ENV APP_ENV=${APP_ENV} \
     POETRY_VIRTUALENVS_CREATE=false
 
 RUN apt-get update \
-    && apt-get upgrade -y \
     && apt-get --no-install-recommends -y install \
         libmemcached-dev \
         postgresql-client \
