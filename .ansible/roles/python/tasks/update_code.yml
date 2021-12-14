@@ -6,5 +6,8 @@
     version: "{{ git_version }}"
     key_file: "{{ deploy_key_path }}"
     accept_hostkey: yes
+    force: yes
+    update: yes
+    refspec: "+refs/heads/*:refs/remotes/origin/*"
     umask: '0022'
 ...
