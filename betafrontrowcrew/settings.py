@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_celery_beat",
+    # "django_celery_beat",
     "django_celery_results",
     "django_extensions",
 
@@ -100,7 +100,7 @@ WSGI_APPLICATION = "betafrontrowcrew.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if DEBUG:
+if DEBUG and (os.environ.get("BETAFRONTROWCREW_DB_NAME", None) is None):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",

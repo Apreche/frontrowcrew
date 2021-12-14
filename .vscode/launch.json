@@ -1,0 +1,37 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Django Runserver Plus",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "runserver_plus"
+            ],
+            "env": {
+                "BETAFRONTROWCREW_DB_HOST": "localhost",
+                "BETAFRONTROWCREW_DB_NAME": "betafrc",
+                "BETAFRONTROWCREW_DB_USER": "betafrc",
+                "BETAFRONTROWCREW_DB_PASSWORD": "betafrc"
+            },
+            "django": true
+        },
+        {
+            "name": "Django Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "test"
+            ],
+            "env": {
+                "BETAFRONTROWCREW_DB_HOST": "localhost",
+                "BETAFRONTROWCREW_DB_NAME": "betafrc",
+                "BETAFRONTROWCREW_DB_USER": "betafrc",
+                "BETAFRONTROWCREW_DB_PASSWORD": "betafrc"
+            },
+            "django": true
+        }
+    ]
+}
