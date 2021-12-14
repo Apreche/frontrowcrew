@@ -5,7 +5,7 @@ email_address: "{{ lookup('env', 'EMAIL_ADDRESS') }}"
 web_domain: "{{ lookup('env', 'WEB_DOMAIN') | default(inventory_hostname, true) }}"
 
 git_repo: "git@github.com:{{ lookup('env', 'GITHUB_REPOSITORY') }}.git"
-git_version: "{{ lookup('env', 'GITHUB_REF') | default(lookup('env', 'GITHUB_SHA'), True) }}"
+git_version: "{{ lookup('env', 'GITHUB_SHA') | default(lookup('env', 'GITHUB_REF_NAME'), True) }}"
 
 
 base_dir: "{{ ansible_env.HOME }}/projects"

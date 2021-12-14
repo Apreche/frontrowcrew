@@ -1,5 +1,5 @@
 ---
-- name: Ensuer gunicorn config directory exists
+- name: Ensure gunicorn config directory exists
   ansible.builtin.file:
     path: "{{ gunicorn_config_dir }}"
     state: directory
