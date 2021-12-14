@@ -48,10 +48,10 @@
     state: latest
   become: yes
 
-- name: Upgrade virtualenv embed wheels
-  ansible.builtin.command:
-    cmd: "virtualenv --upgrade-embed-wheels"
-  become: yes
+# - name: Upgrade virtualenv embed wheels
+#   ansible.builtin.command:
+#     cmd: "virtualenv --upgrade-embed-wheels"
+#   become: yes
 
 - name: Install poetry
   ansible.builtin.pip:
