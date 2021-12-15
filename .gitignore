@@ -139,3 +139,5 @@ cython_debug/
 
 # We use poetry, so ignore requirements.txt
 requirements.txt
+
+.vscode/settings.json
