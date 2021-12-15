@@ -83,4 +83,4 @@ jobs:
           BETAFRONTROWCREW_CELERY_HOST: 127.0.0.1
           BETAFRONTROWCREW_CELERY_VHOST: test
         run: |
-          python manage.py test
+          python manage.py test --shuffle --parallel auto

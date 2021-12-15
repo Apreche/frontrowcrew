@@ -29,6 +29,7 @@
     - libpq-dev
     - libtiff-dev
     - libwebp-dev
+    - openssl
     - tcl-dev
     - tk-dev
     - python3-tk
