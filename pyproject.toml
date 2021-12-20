@@ -18,7 +18,7 @@ django-storages = "^1.12.3"
 django-celery-results = "^2.2.0"
 
 [tool.poetry.dev-dependencies]
-django-debug-toolbar = "^3.2.3"
+django-debug-toolbar = "^3.2.4"
 ipython = "^7.30.1"
 ipdb = "^0.13.9"
 Werkzeug = "^2.0.2"
