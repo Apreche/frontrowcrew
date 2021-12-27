@@ -57,7 +57,7 @@ python-versions = "*"
 
 [[package]]
 name = "celery"
-version = "5.2.1"
+version = "5.2.2"
 description = "Distributed Task Queue."
 category = "main"
 optional = false
@@ -526,7 +526,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "af089b5ad9257dc93b2b8496bd0fd1b09bf7f4ea6fae08d0395329d88e7eb48f"
+content-hash = "3e9504575d40769a1bcb4144c8621ca6ecbf9a7267d999bf22c762722d862777"
 
 [metadata.files]
 amqp = [
@@ -568,8 +568,8 @@ billiard = [
     {file = "billiard-3.6.4.0.tar.gz", hash = "sha256:299de5a8da28a783d51b197d496bef4f1595dd023a93a4f59dde1886ae905547"},
 ]
 celery = [
-    {file = "celery-5.2.1-py3-none-any.whl", hash = "sha256:cc63ea6572d558be65297ba6db7a7979e64c0a3d0d61212d6302ef1ca05a0d22"},
-    {file = "celery-5.2.1.tar.gz", hash = "sha256:b41a590b49caf8e6498a57db628e580d5f8dc6febda0f42de5d783aed5b7f808"},
+    {file = "celery-5.2.2-py3-none-any.whl", hash = "sha256:5a68a351076cfac4f678fa5ffd898105c28825a2224902da006970005196d061"},
+    {file = "celery-5.2.2.tar.gz", hash = "sha256:2844eb040e915398623a43253a8e1016723442ece6b0751a3c416d8a2b34216f"},
 ]
 click = [
     {file = "click-8.0.3-py3-none-any.whl", hash = "sha256:353f466495adaeb40b6b5f592f9f91cb22372351c84caeb068132442a4518ef3"},
