@@ -20,13 +20,13 @@ from django.urls import include, path
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    path("", include("shows.urls")),
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     path("admin/", admin.site.urls),
     path(
         "robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
     ),
+    path("", include("shows.urls")),
 ] + static(
     getattr(settings, "MEDIA_URL", "/media/"),
     document_root=getattr(settings, "MEDIA_ROOT", "/var/www/betafrontrowcrew/media/"),

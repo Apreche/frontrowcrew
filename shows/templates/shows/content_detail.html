@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ content.title }} | {{ show.title }}{% endblock title %}
+{% block extrahead %}
+{% comment "TODO" %}
+<link rel="canonical" href="{% url "content-detail" catalog.show.slug content.catalog_number content.slug %}" />
+{% endcomment %}
+{% endblock extrahead %}
+
+{% block body %}
+<h1>{{ content.title }}</h1>
+<h2>{{ show.title }}</h2>
+<div>{{ content.rendered_html|safe }}</div>
+{% endblock body %}
