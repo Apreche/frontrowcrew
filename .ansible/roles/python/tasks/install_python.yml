@@ -67,7 +67,7 @@
 - name: Generate requirements.txt
   ansible.builtin.command:
     chdir: "{{ project_source_dir }}"
-    cmd: "{{ poetry_bin }} export -f requirements.txt --output {{ requirements_file }}"
+    cmd: "{{ poetry_bin }} export --without-hashes -f requirements.txt --output {{ requirements_file }}"
 
 - name: Install project Python requirements
   ansible.builtin.pip:
