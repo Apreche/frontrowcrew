@@ -24,14 +24,35 @@ class Migration(migrations.Migration):
                 ('title', models.TextField()),
                 ('slug', models.SlugField(max_length=255)),
                 ('image', models.ImageField(blank=True, default='', upload_to='content/images/')),
-                ('catalog_number', models.CharField(max_length=255, validators=[django.core.validators.RegexValidator('^\\d+$', message='Catalog number may only contain digits')])),
+                (
+                    'catalog_number',
+                    models.CharField(
+                        max_length=255,
+                        validators=[
+                            django.core.validators.RegexValidator(
+                                '^\\d+$',
+                                message='Catalog number may only contain digits'
+                            )
+                        ]
+                    )
+                ),
                 ('creation_time', models.DateTimeField(auto_now_add=True)),
                 ('last_modified_time', models.DateTimeField(auto_now=True)),
                 ('pub_time', models.DateTimeField()),
                 ('published', models.BooleanField(default=False)),
                 ('rendered_html', models.TextField(blank=True)),
                 ('original_content', models.TextField(blank=True, default='')),
-                ('content_format', models.CharField(choices=[('HTML', 'HTML'), ('MD', 'Markdown')], default='MD', max_length=4)),
+                (
+                    'content_format',
+                    models.CharField(
+                        choices=[
+                            ('HTML', 'HTML'),
+                            ('MD', 'Markdown')
+                        ],
+                        default='MD',
+                        max_length=4
+                    )
+                ),
                 ('show', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='shows.show')),
             ],
             options={
