@@ -17,17 +17,19 @@ jobs:
           fetch-depth: 0
 
       - name: Lint Code Base
-        uses: github/super-linter@v3
+        uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
+          IGNORE_GENERATED_FILES: true
           IGNORE_GITIGNORED_FILES: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_BASH: true
           VALIDATE_CSS: true
           VALIDATE_DOCKERFILE: true
           VALIDATE_GITHUB_ACTIONS: true
-          VALIDATE_HTML: true
+          # Html linter can't handle Django templates
+          # VALIDATE_HTML: false
           VALIDATE_JAVASCRIPT_STANDARD: true
           VALIDATE_JSON: true
           VALIDATE_MARKDOWN: true

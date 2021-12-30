@@ -23,7 +23,8 @@
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",
             "args": [
-                "test"
+                "test",
+                "--noinput"
             ],
             "env": {
                 "BETAFRONTROWCREW_DB_HOST": "localhost",

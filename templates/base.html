@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static "css/pico.min.css" %}" />
+    <title>{% block title %}{% endblock title %} | frontrowcrew.com</title>
+    {% block extrahead %}{% endblock extrahead %}
+  </head>
+  <body>
+    <main class="container">
+    <ul>
+      <li><a href="{% url "homepage" %}">Home</a></li>
+    </ul>
+    {% block body %}{% endblock body %}
+    </main>
+  </body>
+</html>
