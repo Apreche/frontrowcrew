@@ -1,9 +1,11 @@
 from django import test, urls
 from django.utils import timezone
+
+from betafrontrowcrew.tests import utils
 from . import factories, models
 
 
-class FactoryTests(test.TestCase):
+class FactoryTests(utils.FRCTestCase):
     def test_show_factory(self):
         show = factories.ShowFactory.create()
         self.assertIsInstance(show, models.Show)
@@ -28,8 +30,9 @@ class FactoryTests(test.TestCase):
 @test.override_settings(
     STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
 )
-class HomepageTests(test.TestCase):
+class HomepageTests(utils.FRCTestCase):
     def setUp(self):
+        super().setUp()
         self.client = test.Client()
 
     def test_homepage_ok(self):
@@ -41,10 +44,11 @@ class HomepageTests(test.TestCase):
 
 
 @test.override_settings(
-    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage',
 )
-class ShowTests(test.TestCase):
+class ShowTests(utils.FRCTestCase):
     def setUp(self):
+        super().setUp()
         self.client = test.Client()
 
     def test_show_detail(self):
