@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static "css/main.css" %}" />
     <title>{% block title %}{% endblock title %} | frontrowcrew.com</title>
-    <script src="../static/vendor/js/uikit-core.min.js"></script>
-    <script src="../static/vendor/js/uikit-icons.min.js"></script>
+    {% load static %}<script src="{% static '../static/vendor/js/uikit-core.min.js' %}"></script>
+    {% load static %}<script src="{% static '../static/vendor/js/uikit-icons.min.js' %}"></script>
     {% block extrahead %}{% endblock extrahead %}
   </head>
   <body>
@@ -40,7 +40,7 @@
                     </ul>
                 </div>
             </div>
-            <img class="uk-navbar-item uk-logo" src="../static/img/logo_transparent.png" href="#"/></li>
+            {% load static %}<img class="uk-navbar-item uk-logo" src="{% static "../static/img/logo_transparent.png" %}" href="#"/></li>
             <div class="uk-navbar-center-right"><div>
                 <ul class="uk-navbar-nav">
                     <li><button type="button" class="header-button">Community</button>
@@ -60,7 +60,7 @@
                 </ul>
                 </div></div></div>
             <!-- <div class="uk-navbar-right">
-                <img class="burger" src="icons/menu.svg">
+                {% load static %}<img class="burger" src="{% static "icons/menu.svg" %}">
             </div> -->
         </nav> 
     </header>
@@ -86,26 +86,26 @@
             <div class="footer footer-social">
                 <text>Contact</text>
                     <ul class="social-icons">
-                        <li><a href="#"><img src="static/icons/gmail.svg" uk-svg></a></li>
-                        <li><a href="#"><img src="static/icons/facebook.svg" uk-svg></a></li>
-                        <li><a href="#"><img src="static/icons/twitter.svg" uk-svg></a></li>
+                        <li><a href="#">{% load static %}<img src="{% static "../static/icons/gmail.svg" %}" uk-svg></a></li>
+                        <li><a href="#">{% load static %}<img src="{% static "../static/icons/facebook.svg" %}" uk-svg></a></li>
+                        <li><a href="#">{% load static %}<img src="{% static "../static/icons/twitter.svg" %}" uk-svg></a></li>
                     </ul>
                 
                 <text>Subscribe</text>
                     <ul class="social-icons">
-                        <li><a href="#"><img src="static/icons/spotify.svg" uk-svg></a></li>
-                        <li><a href="#"><img src="static/icons/rss.svg" uk-svg></a></li>
-                        <li><a href="#"><img src="static/icons/youtube.svg" uk-svg></a></li>
-                        <li><a href="#"><img src="static/icons/apple.svg" uk-svg></a></li>
-                        <li><a href="#"><img src="static/icons/instagram.svg" uk-svg></a></li>
+                        <li><a href="#">{% load static %}<img src="{% static "../static/icons/spotify.svg" %}" uk-svg></a></li>
+                        <li><a href="#">{% load static %}<img src="{% static "../static/icons/rss.svg" %}" uk-svg></a></li>
+                        <li><a href="#">{% load static %}<img src="{% static "../static/icons/youtube.svg" %}" uk-svg></a></li>
+                        <li><a href="#">{% load static %}<img src="{% static "../static/icons/apple.svg" %}" uk-svg></a></li>
+                        <li><a href="#">{% load static %}<img src="{% static "../static/icons/instagram.svg" %}" uk-svg></a></li>
                     </ul>
                 <text>Support</text>
                     <ul class="social-icons">
-                        <li><a href="#"><img src="static/icons/patreon.svg" uk-svg></a></li>
+                        <li><a href="#">{% load static %}<img src="{% static "../static/icons/patreon.svg" %}" uk-svg></a></li>
                     </ul>
             </div>
         </div>
-        <div id="license"><span><img src="static/icons/creative-commons.svg" uk-svg>3.0</span></div>
+        <div id="license"><span>{% load static %}<img src="{% static "../static/icons/creative-commons.svg" %}" uk-svg>3.0</span></div>
     </footer>
   </body>
 </html>
