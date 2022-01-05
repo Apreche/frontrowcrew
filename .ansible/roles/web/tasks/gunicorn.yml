@@ -57,7 +57,7 @@
   ansible.builtin.systemd:
     name: "{{ gunicorn_service_name }}.service"
     enabled: yes
-    state: started
+    state: restarted
     daemon_reload: yes
   become: yes
 ...
