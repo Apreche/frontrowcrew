@@ -239,8 +239,7 @@ figure {
 /* Headings
  ========================================================================== */
 h1, .uk-h1,
-h2,
-.landing-community h2, .uk-h2,
+h2, .uk-h2,
 h3, .uk-h3,
 h4, .uk-h4,
 h5, .uk-h5,
@@ -259,8 +258,7 @@ h6, .uk-h6,
 
 /* Add margin if adjacent element */
 * + h1, * + .uk-h1,
-* + h2,
-.landing-community * + h2, * + .uk-h2,
+* + h2, * + .uk-h2,
 * + h3, * + .uk-h3,
 * + h4, * + .uk-h4,
 * + h5, * + .uk-h5,
@@ -281,7 +279,7 @@ h1, .uk-h1 {
   line-height: 1.2;
 }
 
-h2, .landing-community h2, .uk-h2 {
+h2, .uk-h2 {
   font-size: 1.7rem;
   line-height: 1.3;
 }
@@ -312,7 +310,7 @@ h6, .uk-h6 {
     font-size: 2.625rem;
   }
 
-  h2, .landing-community h2, .uk-h2 {
+  h2, .uk-h2 {
     font-size: 2rem;
   }
 }
@@ -3500,7 +3498,7 @@ select.uk-form-width-xsmall {
  * 8. Take the full container width
  * 9. Style
  */
-.uk-search-input, header nav form.uk-search input.uk-search-input::placeholder {
+.uk-search-input {
   /* 1 */
   box-sizing: border-box;
   /* 2 */
@@ -3522,16 +3520,16 @@ select.uk-form-width-xsmall {
   color: #666;
 }
 
-.uk-search-input:focus, header nav form.uk-search input.uk-search-input:focus::placeholder {
+.uk-search-input:focus {
   outline: none;
 }
 
 /* Placeholder */
-.uk-search-input:-ms-input-placeholder, header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder {
+.uk-search-input:-ms-input-placeholder {
   color: #999 !important;
 }
 
-.uk-search-input::placeholder, header nav form.uk-search input.uk-search-input::placeholder {
+.uk-search-input::placeholder {
   color: #999;
 }
 
@@ -3588,7 +3586,7 @@ select.uk-form-width-xsmall {
 /*
  * Input
  */
-.uk-search-default .uk-search-input, .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-search-default input.uk-search-input::placeholder {
+.uk-search-default .uk-search-input {
   height: 40px;
   padding-left: 10px;
   padding-right: 10px;
@@ -3596,7 +3594,7 @@ select.uk-form-width-xsmall {
 }
 
 /* Focus */
-.uk-search-default .uk-search-input:focus, .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-search-default input.uk-search-input:focus::placeholder {
+.uk-search-default .uk-search-input:focus {
   background-color: #ebebeb;
 }
 
@@ -3607,11 +3605,11 @@ select.uk-form-width-xsmall {
   width: 40px;
 }
 
-.uk-search-default .uk-search-icon:not(.uk-search-icon-flip) ~ .uk-search-input, .uk-search-default header nav form.uk-search .uk-search-icon:not(.uk-search-icon-flip) ~ input.uk-search-input::placeholder, header nav form.uk-search .uk-search-default .uk-search-icon:not(.uk-search-icon-flip) ~ input.uk-search-input::placeholder {
+.uk-search-default .uk-search-icon:not(.uk-search-icon-flip) ~ .uk-search-input {
   padding-left: 40px;
 }
 
-.uk-search-default .uk-search-icon-flip ~ .uk-search-input, .uk-search-default header nav form.uk-search .uk-search-icon-flip ~ input.uk-search-input::placeholder, header nav form.uk-search .uk-search-default .uk-search-icon-flip ~ input.uk-search-input::placeholder {
+.uk-search-default .uk-search-icon-flip ~ .uk-search-input {
   padding-right: 40px;
 }
 
@@ -3624,7 +3622,7 @@ select.uk-form-width-xsmall {
 /*
  * Input
  */
-.uk-search-navbar .uk-search-input, .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-search-navbar input.uk-search-input::placeholder {
+.uk-search-navbar .uk-search-input {
   height: 40px;
   background: transparent;
   font-size: 1.5rem;
@@ -3637,11 +3635,11 @@ select.uk-form-width-xsmall {
   width: 40px;
 }
 
-.uk-search-navbar .uk-search-icon:not(.uk-search-icon-flip) ~ .uk-search-input, .uk-search-navbar header nav form.uk-search .uk-search-icon:not(.uk-search-icon-flip) ~ input.uk-search-input::placeholder, header nav form.uk-search .uk-search-navbar .uk-search-icon:not(.uk-search-icon-flip) ~ input.uk-search-input::placeholder {
+.uk-search-navbar .uk-search-icon:not(.uk-search-icon-flip) ~ .uk-search-input {
   padding-left: 40px;
 }
 
-.uk-search-navbar .uk-search-icon-flip ~ .uk-search-input, .uk-search-navbar header nav form.uk-search .uk-search-icon-flip ~ input.uk-search-input::placeholder, header nav form.uk-search .uk-search-navbar .uk-search-icon-flip ~ input.uk-search-input::placeholder {
+.uk-search-navbar .uk-search-icon-flip ~ .uk-search-input {
   padding-right: 40px;
 }
 
@@ -3654,7 +3652,7 @@ select.uk-form-width-xsmall {
 /*
  * Input
  */
-.uk-search-large .uk-search-input, .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-search-large input.uk-search-input::placeholder {
+.uk-search-large .uk-search-input {
   height: 80px;
   background: transparent;
   font-size: 2.625rem;
@@ -3667,11 +3665,11 @@ select.uk-form-width-xsmall {
   width: 80px;
 }
 
-.uk-search-large .uk-search-icon:not(.uk-search-icon-flip) ~ .uk-search-input, .uk-search-large header nav form.uk-search .uk-search-icon:not(.uk-search-icon-flip) ~ input.uk-search-input::placeholder, header nav form.uk-search .uk-search-large .uk-search-icon:not(.uk-search-icon-flip) ~ input.uk-search-input::placeholder {
+.uk-search-large .uk-search-icon:not(.uk-search-icon-flip) ~ .uk-search-input {
   padding-left: 80px;
 }
 
-.uk-search-large .uk-search-icon-flip ~ .uk-search-input, .uk-search-large header nav form.uk-search .uk-search-icon-flip ~ input.uk-search-input::placeholder, header nav form.uk-search .uk-search-large .uk-search-icon-flip ~ input.uk-search-input::placeholder {
+.uk-search-large .uk-search-icon-flip ~ .uk-search-input {
   padding-right: 80px;
 }
 
@@ -10179,38 +10177,16 @@ iframe.uk-cover {
 }
 .uk-light h1, .uk-section-primary:not(.uk-preserve-color) h1, .uk-section-secondary:not(.uk-preserve-color) h1, .uk-tile-primary:not(.uk-preserve-color) h1, .uk-tile-secondary:not(.uk-preserve-color) h1, .uk-card-primary.uk-card-body h1, .uk-card-primary > :not([class*=uk-card-media]) h1, .uk-card-secondary.uk-card-body h1, .uk-card-secondary > :not([class*=uk-card-media]) h1, .uk-overlay-primary h1, .uk-offcanvas-bar h1, .uk-light .uk-h1, .uk-section-primary:not(.uk-preserve-color) .uk-h1, .uk-section-secondary:not(.uk-preserve-color) .uk-h1, .uk-tile-primary:not(.uk-preserve-color) .uk-h1, .uk-tile-secondary:not(.uk-preserve-color) .uk-h1, .uk-card-primary.uk-card-body .uk-h1, .uk-card-primary > :not([class*=uk-card-media]) .uk-h1, .uk-card-secondary.uk-card-body .uk-h1, .uk-card-secondary > :not([class*=uk-card-media]) .uk-h1, .uk-overlay-primary .uk-h1, .uk-offcanvas-bar .uk-h1,
 .uk-light h2,
-.uk-light .landing-community h2,
-.landing-community .uk-light h2,
 .uk-section-primary:not(.uk-preserve-color) h2,
-.uk-section-primary:not(.uk-preserve-color) .landing-community h2,
-.landing-community .uk-section-primary:not(.uk-preserve-color) h2,
 .uk-section-secondary:not(.uk-preserve-color) h2,
-.uk-section-secondary:not(.uk-preserve-color) .landing-community h2,
-.landing-community .uk-section-secondary:not(.uk-preserve-color) h2,
 .uk-tile-primary:not(.uk-preserve-color) h2,
-.uk-tile-primary:not(.uk-preserve-color) .landing-community h2,
-.landing-community .uk-tile-primary:not(.uk-preserve-color) h2,
 .uk-tile-secondary:not(.uk-preserve-color) h2,
-.uk-tile-secondary:not(.uk-preserve-color) .landing-community h2,
-.landing-community .uk-tile-secondary:not(.uk-preserve-color) h2,
 .uk-card-primary.uk-card-body h2,
-.uk-card-primary.uk-card-body .landing-community h2,
-.landing-community .uk-card-primary.uk-card-body h2,
 .uk-card-primary > :not([class*=uk-card-media]) h2,
-.uk-card-primary > :not([class*=uk-card-media]) .landing-community h2,
-.landing-community .uk-card-primary > :not([class*=uk-card-media]) h2,
 .uk-card-secondary.uk-card-body h2,
-.uk-card-secondary.uk-card-body .landing-community h2,
-.landing-community .uk-card-secondary.uk-card-body h2,
 .uk-card-secondary > :not([class*=uk-card-media]) h2,
-.uk-card-secondary > :not([class*=uk-card-media]) .landing-community h2,
-.landing-community .uk-card-secondary > :not([class*=uk-card-media]) h2,
 .uk-overlay-primary h2,
-.uk-overlay-primary .landing-community h2,
-.landing-community .uk-overlay-primary h2,
-.uk-offcanvas-bar h2,
-.uk-offcanvas-bar .landing-community h2,
-.landing-community .uk-offcanvas-bar h2, .uk-light .uk-h2, .uk-section-primary:not(.uk-preserve-color) .uk-h2, .uk-section-secondary:not(.uk-preserve-color) .uk-h2, .uk-tile-primary:not(.uk-preserve-color) .uk-h2, .uk-tile-secondary:not(.uk-preserve-color) .uk-h2, .uk-card-primary.uk-card-body .uk-h2, .uk-card-primary > :not([class*=uk-card-media]) .uk-h2, .uk-card-secondary.uk-card-body .uk-h2, .uk-card-secondary > :not([class*=uk-card-media]) .uk-h2, .uk-overlay-primary .uk-h2, .uk-offcanvas-bar .uk-h2,
+.uk-offcanvas-bar h2, .uk-light .uk-h2, .uk-section-primary:not(.uk-preserve-color) .uk-h2, .uk-section-secondary:not(.uk-preserve-color) .uk-h2, .uk-tile-primary:not(.uk-preserve-color) .uk-h2, .uk-tile-secondary:not(.uk-preserve-color) .uk-h2, .uk-card-primary.uk-card-body .uk-h2, .uk-card-primary > :not([class*=uk-card-media]) .uk-h2, .uk-card-secondary.uk-card-body .uk-h2, .uk-card-secondary > :not([class*=uk-card-media]) .uk-h2, .uk-overlay-primary .uk-h2, .uk-offcanvas-bar .uk-h2,
 .uk-light h3,
 .uk-section-primary:not(.uk-preserve-color) h3,
 .uk-section-secondary:not(.uk-preserve-color) h3,
@@ -10797,13 +10773,13 @@ iframe.uk-cover {
 .uk-light .uk-article-meta, .uk-section-primary:not(.uk-preserve-color) .uk-article-meta, .uk-section-secondary:not(.uk-preserve-color) .uk-article-meta, .uk-tile-primary:not(.uk-preserve-color) .uk-article-meta, .uk-tile-secondary:not(.uk-preserve-color) .uk-article-meta, .uk-card-primary.uk-card-body .uk-article-meta, .uk-card-primary > :not([class*=uk-card-media]) .uk-article-meta, .uk-card-secondary.uk-card-body .uk-article-meta, .uk-card-secondary > :not([class*=uk-card-media]) .uk-article-meta, .uk-overlay-primary .uk-article-meta, .uk-offcanvas-bar .uk-article-meta {
   color: rgba(255, 255, 255, 0.5);
 }
-.uk-light .uk-search-input, .uk-light header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-light input.uk-search-input::placeholder, .uk-section-primary:not(.uk-preserve-color) .uk-search-input, .uk-section-primary:not(.uk-preserve-color) header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-section-primary:not(.uk-preserve-color) input.uk-search-input::placeholder, .uk-section-secondary:not(.uk-preserve-color) .uk-search-input, .uk-section-secondary:not(.uk-preserve-color) header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-section-secondary:not(.uk-preserve-color) input.uk-search-input::placeholder, .uk-tile-primary:not(.uk-preserve-color) .uk-search-input, .uk-tile-primary:not(.uk-preserve-color) header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-tile-primary:not(.uk-preserve-color) input.uk-search-input::placeholder, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-input, .uk-tile-secondary:not(.uk-preserve-color) header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-tile-secondary:not(.uk-preserve-color) input.uk-search-input::placeholder, .uk-card-primary.uk-card-body .uk-search-input, .uk-card-primary.uk-card-body header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-primary.uk-card-body input.uk-search-input::placeholder, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-input, .uk-card-primary > :not([class*=uk-card-media]) header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-primary > :not([class*=uk-card-media]) input.uk-search-input::placeholder, .uk-card-secondary.uk-card-body .uk-search-input, .uk-card-secondary.uk-card-body header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-secondary.uk-card-body input.uk-search-input::placeholder, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-input, .uk-card-secondary > :not([class*=uk-card-media]) header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-secondary > :not([class*=uk-card-media]) input.uk-search-input::placeholder, .uk-overlay-primary .uk-search-input, .uk-overlay-primary header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-overlay-primary input.uk-search-input::placeholder, .uk-offcanvas-bar .uk-search-input, .uk-offcanvas-bar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-offcanvas-bar input.uk-search-input::placeholder {
+.uk-light .uk-search-input, .uk-section-primary:not(.uk-preserve-color) .uk-search-input, .uk-section-secondary:not(.uk-preserve-color) .uk-search-input, .uk-tile-primary:not(.uk-preserve-color) .uk-search-input, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-input, .uk-card-primary.uk-card-body .uk-search-input, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-input, .uk-card-secondary.uk-card-body .uk-search-input, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-input, .uk-overlay-primary .uk-search-input, .uk-offcanvas-bar .uk-search-input {
   color: rgba(255, 255, 255, 0.7);
 }
-.uk-light .uk-search-input:-ms-input-placeholder, .uk-light header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-light input.uk-search-input:-ms-input-placeholder::placeholder, .uk-section-primary:not(.uk-preserve-color) .uk-search-input:-ms-input-placeholder, .uk-section-primary:not(.uk-preserve-color) header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-section-primary:not(.uk-preserve-color) input.uk-search-input:-ms-input-placeholder::placeholder, .uk-section-secondary:not(.uk-preserve-color) .uk-search-input:-ms-input-placeholder, .uk-section-secondary:not(.uk-preserve-color) header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-section-secondary:not(.uk-preserve-color) input.uk-search-input:-ms-input-placeholder::placeholder, .uk-tile-primary:not(.uk-preserve-color) .uk-search-input:-ms-input-placeholder, .uk-tile-primary:not(.uk-preserve-color) header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-tile-primary:not(.uk-preserve-color) input.uk-search-input:-ms-input-placeholder::placeholder, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-input:-ms-input-placeholder, .uk-tile-secondary:not(.uk-preserve-color) header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-tile-secondary:not(.uk-preserve-color) input.uk-search-input:-ms-input-placeholder::placeholder, .uk-card-primary.uk-card-body .uk-search-input:-ms-input-placeholder, .uk-card-primary.uk-card-body header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-card-primary.uk-card-body input.uk-search-input:-ms-input-placeholder::placeholder, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-input:-ms-input-placeholder, .uk-card-primary > :not([class*=uk-card-media]) header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-card-primary > :not([class*=uk-card-media]) input.uk-search-input:-ms-input-placeholder::placeholder, .uk-card-secondary.uk-card-body .uk-search-input:-ms-input-placeholder, .uk-card-secondary.uk-card-body header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-card-secondary.uk-card-body input.uk-search-input:-ms-input-placeholder::placeholder, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-input:-ms-input-placeholder, .uk-card-secondary > :not([class*=uk-card-media]) header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-card-secondary > :not([class*=uk-card-media]) input.uk-search-input:-ms-input-placeholder::placeholder, .uk-overlay-primary .uk-search-input:-ms-input-placeholder, .uk-overlay-primary header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-overlay-primary input.uk-search-input:-ms-input-placeholder::placeholder, .uk-offcanvas-bar .uk-search-input:-ms-input-placeholder, .uk-offcanvas-bar header nav form.uk-search input.uk-search-input:-ms-input-placeholder::placeholder, header nav form.uk-search .uk-offcanvas-bar input.uk-search-input:-ms-input-placeholder::placeholder {
+.uk-light .uk-search-input:-ms-input-placeholder, .uk-section-primary:not(.uk-preserve-color) .uk-search-input:-ms-input-placeholder, .uk-section-secondary:not(.uk-preserve-color) .uk-search-input:-ms-input-placeholder, .uk-tile-primary:not(.uk-preserve-color) .uk-search-input:-ms-input-placeholder, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-input:-ms-input-placeholder, .uk-card-primary.uk-card-body .uk-search-input:-ms-input-placeholder, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-input:-ms-input-placeholder, .uk-card-secondary.uk-card-body .uk-search-input:-ms-input-placeholder, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-input:-ms-input-placeholder, .uk-overlay-primary .uk-search-input:-ms-input-placeholder, .uk-offcanvas-bar .uk-search-input:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.5) !important;
 }
-.uk-light .uk-search-input::placeholder, .uk-light header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-light input.uk-search-input::placeholder, .uk-section-primary:not(.uk-preserve-color) .uk-search-input::placeholder, .uk-section-secondary:not(.uk-preserve-color) .uk-search-input::placeholder, .uk-tile-primary:not(.uk-preserve-color) .uk-search-input::placeholder, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-input::placeholder, .uk-card-primary.uk-card-body .uk-search-input::placeholder, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-input::placeholder, .uk-card-secondary.uk-card-body .uk-search-input::placeholder, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-input::placeholder, .uk-overlay-primary .uk-search-input::placeholder, .uk-overlay-primary header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-overlay-primary input.uk-search-input::placeholder, .uk-offcanvas-bar .uk-search-input::placeholder, .uk-offcanvas-bar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-offcanvas-bar input.uk-search-input::placeholder {
+.uk-light .uk-search-input::placeholder, .uk-section-primary:not(.uk-preserve-color) .uk-search-input::placeholder, .uk-section-secondary:not(.uk-preserve-color) .uk-search-input::placeholder, .uk-tile-primary:not(.uk-preserve-color) .uk-search-input::placeholder, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-input::placeholder, .uk-card-primary.uk-card-body .uk-search-input::placeholder, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-input::placeholder, .uk-card-secondary.uk-card-body .uk-search-input::placeholder, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-input::placeholder, .uk-overlay-primary .uk-search-input::placeholder, .uk-offcanvas-bar .uk-search-input::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 .uk-light .uk-search .uk-search-icon, .uk-section-primary:not(.uk-preserve-color) .uk-search .uk-search-icon, .uk-section-secondary:not(.uk-preserve-color) .uk-search .uk-search-icon, .uk-tile-primary:not(.uk-preserve-color) .uk-search .uk-search-icon, .uk-tile-secondary:not(.uk-preserve-color) .uk-search .uk-search-icon, .uk-card-primary.uk-card-body .uk-search .uk-search-icon, .uk-card-primary > :not([class*=uk-card-media]) .uk-search .uk-search-icon, .uk-card-secondary.uk-card-body .uk-search .uk-search-icon, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search .uk-search-icon, .uk-overlay-primary .uk-search .uk-search-icon, .uk-offcanvas-bar .uk-search .uk-search-icon {
@@ -10812,16 +10788,16 @@ iframe.uk-cover {
 .uk-light .uk-search .uk-search-icon:hover, .uk-section-primary:not(.uk-preserve-color) .uk-search .uk-search-icon:hover, .uk-section-secondary:not(.uk-preserve-color) .uk-search .uk-search-icon:hover, .uk-tile-primary:not(.uk-preserve-color) .uk-search .uk-search-icon:hover, .uk-tile-secondary:not(.uk-preserve-color) .uk-search .uk-search-icon:hover, .uk-card-primary.uk-card-body .uk-search .uk-search-icon:hover, .uk-card-primary > :not([class*=uk-card-media]) .uk-search .uk-search-icon:hover, .uk-card-secondary.uk-card-body .uk-search .uk-search-icon:hover, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search .uk-search-icon:hover, .uk-overlay-primary .uk-search .uk-search-icon:hover, .uk-offcanvas-bar .uk-search .uk-search-icon:hover {
   color: rgba(255, 255, 255, 0.5);
 }
-.uk-light .uk-search-default .uk-search-input, .uk-light .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-light .uk-search-default input.uk-search-input::placeholder, .uk-section-primary:not(.uk-preserve-color) .uk-search-default .uk-search-input, .uk-section-primary:not(.uk-preserve-color) .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-section-primary:not(.uk-preserve-color) .uk-search-default input.uk-search-input::placeholder, .uk-section-secondary:not(.uk-preserve-color) .uk-search-default .uk-search-input, .uk-section-secondary:not(.uk-preserve-color) .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-section-secondary:not(.uk-preserve-color) .uk-search-default input.uk-search-input::placeholder, .uk-tile-primary:not(.uk-preserve-color) .uk-search-default .uk-search-input, .uk-tile-primary:not(.uk-preserve-color) .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-tile-primary:not(.uk-preserve-color) .uk-search-default input.uk-search-input::placeholder, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-default .uk-search-input, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-tile-secondary:not(.uk-preserve-color) .uk-search-default input.uk-search-input::placeholder, .uk-card-primary.uk-card-body .uk-search-default .uk-search-input, .uk-card-primary.uk-card-body .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-primary.uk-card-body .uk-search-default input.uk-search-input::placeholder, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-default .uk-search-input, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-primary > :not([class*=uk-card-media]) .uk-search-default input.uk-search-input::placeholder, .uk-card-secondary.uk-card-body .uk-search-default .uk-search-input, .uk-card-secondary.uk-card-body .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-secondary.uk-card-body .uk-search-default input.uk-search-input::placeholder, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-default .uk-search-input, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-default input.uk-search-input::placeholder, .uk-overlay-primary .uk-search-default .uk-search-input, .uk-overlay-primary .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-overlay-primary .uk-search-default input.uk-search-input::placeholder, .uk-offcanvas-bar .uk-search-default .uk-search-input, .uk-offcanvas-bar .uk-search-default header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-offcanvas-bar .uk-search-default input.uk-search-input::placeholder {
+.uk-light .uk-search-default .uk-search-input, .uk-section-primary:not(.uk-preserve-color) .uk-search-default .uk-search-input, .uk-section-secondary:not(.uk-preserve-color) .uk-search-default .uk-search-input, .uk-tile-primary:not(.uk-preserve-color) .uk-search-default .uk-search-input, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-default .uk-search-input, .uk-card-primary.uk-card-body .uk-search-default .uk-search-input, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-default .uk-search-input, .uk-card-secondary.uk-card-body .uk-search-default .uk-search-input, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-default .uk-search-input, .uk-overlay-primary .uk-search-default .uk-search-input, .uk-offcanvas-bar .uk-search-default .uk-search-input {
   background-color: rgba(255, 255, 255, 0.1);
 }
-.uk-light .uk-search-default .uk-search-input:focus, .uk-light .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-light .uk-search-default input.uk-search-input:focus::placeholder, .uk-section-primary:not(.uk-preserve-color) .uk-search-default .uk-search-input:focus, .uk-section-primary:not(.uk-preserve-color) .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-section-primary:not(.uk-preserve-color) .uk-search-default input.uk-search-input:focus::placeholder, .uk-section-secondary:not(.uk-preserve-color) .uk-search-default .uk-search-input:focus, .uk-section-secondary:not(.uk-preserve-color) .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-section-secondary:not(.uk-preserve-color) .uk-search-default input.uk-search-input:focus::placeholder, .uk-tile-primary:not(.uk-preserve-color) .uk-search-default .uk-search-input:focus, .uk-tile-primary:not(.uk-preserve-color) .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-tile-primary:not(.uk-preserve-color) .uk-search-default input.uk-search-input:focus::placeholder, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-default .uk-search-input:focus, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-tile-secondary:not(.uk-preserve-color) .uk-search-default input.uk-search-input:focus::placeholder, .uk-card-primary.uk-card-body .uk-search-default .uk-search-input:focus, .uk-card-primary.uk-card-body .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-card-primary.uk-card-body .uk-search-default input.uk-search-input:focus::placeholder, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-default .uk-search-input:focus, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-card-primary > :not([class*=uk-card-media]) .uk-search-default input.uk-search-input:focus::placeholder, .uk-card-secondary.uk-card-body .uk-search-default .uk-search-input:focus, .uk-card-secondary.uk-card-body .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-card-secondary.uk-card-body .uk-search-default input.uk-search-input:focus::placeholder, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-default .uk-search-input:focus, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-default input.uk-search-input:focus::placeholder, .uk-overlay-primary .uk-search-default .uk-search-input:focus, .uk-overlay-primary .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-overlay-primary .uk-search-default input.uk-search-input:focus::placeholder, .uk-offcanvas-bar .uk-search-default .uk-search-input:focus, .uk-offcanvas-bar .uk-search-default header nav form.uk-search input.uk-search-input:focus::placeholder, header nav form.uk-search .uk-offcanvas-bar .uk-search-default input.uk-search-input:focus::placeholder {
+.uk-light .uk-search-default .uk-search-input:focus, .uk-section-primary:not(.uk-preserve-color) .uk-search-default .uk-search-input:focus, .uk-section-secondary:not(.uk-preserve-color) .uk-search-default .uk-search-input:focus, .uk-tile-primary:not(.uk-preserve-color) .uk-search-default .uk-search-input:focus, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-default .uk-search-input:focus, .uk-card-primary.uk-card-body .uk-search-default .uk-search-input:focus, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-default .uk-search-input:focus, .uk-card-secondary.uk-card-body .uk-search-default .uk-search-input:focus, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-default .uk-search-input:focus, .uk-overlay-primary .uk-search-default .uk-search-input:focus, .uk-offcanvas-bar .uk-search-default .uk-search-input:focus {
   background-color: fadein(rgba(255, 255, 255, 0.1), 5%);
 }
-.uk-light .uk-search-navbar .uk-search-input, .uk-light .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-light .uk-search-navbar input.uk-search-input::placeholder, .uk-section-primary:not(.uk-preserve-color) .uk-search-navbar .uk-search-input, .uk-section-primary:not(.uk-preserve-color) .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-section-primary:not(.uk-preserve-color) .uk-search-navbar input.uk-search-input::placeholder, .uk-section-secondary:not(.uk-preserve-color) .uk-search-navbar .uk-search-input, .uk-section-secondary:not(.uk-preserve-color) .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-section-secondary:not(.uk-preserve-color) .uk-search-navbar input.uk-search-input::placeholder, .uk-tile-primary:not(.uk-preserve-color) .uk-search-navbar .uk-search-input, .uk-tile-primary:not(.uk-preserve-color) .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-tile-primary:not(.uk-preserve-color) .uk-search-navbar input.uk-search-input::placeholder, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-navbar .uk-search-input, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-tile-secondary:not(.uk-preserve-color) .uk-search-navbar input.uk-search-input::placeholder, .uk-card-primary.uk-card-body .uk-search-navbar .uk-search-input, .uk-card-primary.uk-card-body .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-primary.uk-card-body .uk-search-navbar input.uk-search-input::placeholder, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-navbar .uk-search-input, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-primary > :not([class*=uk-card-media]) .uk-search-navbar input.uk-search-input::placeholder, .uk-card-secondary.uk-card-body .uk-search-navbar .uk-search-input, .uk-card-secondary.uk-card-body .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-secondary.uk-card-body .uk-search-navbar input.uk-search-input::placeholder, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-navbar .uk-search-input, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-navbar input.uk-search-input::placeholder, .uk-overlay-primary .uk-search-navbar .uk-search-input, .uk-overlay-primary .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-overlay-primary .uk-search-navbar input.uk-search-input::placeholder, .uk-offcanvas-bar .uk-search-navbar .uk-search-input, .uk-offcanvas-bar .uk-search-navbar header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-offcanvas-bar .uk-search-navbar input.uk-search-input::placeholder {
+.uk-light .uk-search-navbar .uk-search-input, .uk-section-primary:not(.uk-preserve-color) .uk-search-navbar .uk-search-input, .uk-section-secondary:not(.uk-preserve-color) .uk-search-navbar .uk-search-input, .uk-tile-primary:not(.uk-preserve-color) .uk-search-navbar .uk-search-input, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-navbar .uk-search-input, .uk-card-primary.uk-card-body .uk-search-navbar .uk-search-input, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-navbar .uk-search-input, .uk-card-secondary.uk-card-body .uk-search-navbar .uk-search-input, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-navbar .uk-search-input, .uk-overlay-primary .uk-search-navbar .uk-search-input, .uk-offcanvas-bar .uk-search-navbar .uk-search-input {
   background-color: transparent;
 }
-.uk-light .uk-search-large .uk-search-input, .uk-light .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-light .uk-search-large input.uk-search-input::placeholder, .uk-section-primary:not(.uk-preserve-color) .uk-search-large .uk-search-input, .uk-section-primary:not(.uk-preserve-color) .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-section-primary:not(.uk-preserve-color) .uk-search-large input.uk-search-input::placeholder, .uk-section-secondary:not(.uk-preserve-color) .uk-search-large .uk-search-input, .uk-section-secondary:not(.uk-preserve-color) .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-section-secondary:not(.uk-preserve-color) .uk-search-large input.uk-search-input::placeholder, .uk-tile-primary:not(.uk-preserve-color) .uk-search-large .uk-search-input, .uk-tile-primary:not(.uk-preserve-color) .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-tile-primary:not(.uk-preserve-color) .uk-search-large input.uk-search-input::placeholder, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-large .uk-search-input, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-tile-secondary:not(.uk-preserve-color) .uk-search-large input.uk-search-input::placeholder, .uk-card-primary.uk-card-body .uk-search-large .uk-search-input, .uk-card-primary.uk-card-body .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-primary.uk-card-body .uk-search-large input.uk-search-input::placeholder, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-large .uk-search-input, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-primary > :not([class*=uk-card-media]) .uk-search-large input.uk-search-input::placeholder, .uk-card-secondary.uk-card-body .uk-search-large .uk-search-input, .uk-card-secondary.uk-card-body .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-secondary.uk-card-body .uk-search-large input.uk-search-input::placeholder, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-large .uk-search-input, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-large input.uk-search-input::placeholder, .uk-overlay-primary .uk-search-large .uk-search-input, .uk-overlay-primary .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-overlay-primary .uk-search-large input.uk-search-input::placeholder, .uk-offcanvas-bar .uk-search-large .uk-search-input, .uk-offcanvas-bar .uk-search-large header nav form.uk-search input.uk-search-input::placeholder, header nav form.uk-search .uk-offcanvas-bar .uk-search-large input.uk-search-input::placeholder {
+.uk-light .uk-search-large .uk-search-input, .uk-section-primary:not(.uk-preserve-color) .uk-search-large .uk-search-input, .uk-section-secondary:not(.uk-preserve-color) .uk-search-large .uk-search-input, .uk-tile-primary:not(.uk-preserve-color) .uk-search-large .uk-search-input, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-large .uk-search-input, .uk-card-primary.uk-card-body .uk-search-large .uk-search-input, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-large .uk-search-input, .uk-card-secondary.uk-card-body .uk-search-large .uk-search-input, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-large .uk-search-input, .uk-overlay-primary .uk-search-large .uk-search-input, .uk-offcanvas-bar .uk-search-large .uk-search-input {
   background-color: transparent;
 }
 .uk-light .uk-search-toggle, .uk-section-primary:not(.uk-preserve-color) .uk-search-toggle, .uk-section-secondary:not(.uk-preserve-color) .uk-search-toggle, .uk-tile-primary:not(.uk-preserve-color) .uk-search-toggle, .uk-tile-secondary:not(.uk-preserve-color) .uk-search-toggle, .uk-card-primary.uk-card-body .uk-search-toggle, .uk-card-primary > :not([class*=uk-card-media]) .uk-search-toggle, .uk-card-secondary.uk-card-body .uk-search-toggle, .uk-card-secondary > :not([class*=uk-card-media]) .uk-search-toggle, .uk-overlay-primary .uk-search-toggle, .uk-offcanvas-bar .uk-search-toggle {
@@ -11109,13 +11085,12 @@ img {
   }
   p,
 h2,
-.landing-community h2,
 h3 {
     orphans: 3;
     widows: 3;
   }
 
-  h2, .landing-community h2,
+  h2,
 h3 {
     page-break-after: avoid;
   }
@@ -11133,7 +11108,7 @@ main {
   padding-top: 20px;
 }
 
-h2, .landing-community h2 {
+h2 {
   color: #DBB778;
   text-transform: uppercase;
   font-size: 2em;
@@ -11143,6 +11118,10 @@ h2, .landing-community h2 {
 }
 
 /** buttons **/
+button {
+  cursor: pointer;
+}
+
 .header-button {
   background-color: #000000;
   color: #DBB778;
@@ -11157,12 +11136,22 @@ h2, .landing-community h2 {
   text-decoration: underline;
 }
 
+/** links **/
+a {
+  cursor: pointer;
+  color: #DBB778;
+}
+a:hover {
+  color: #E9D5AA;
+  text-decoration: underline;
+}
+
 /** header **/
 header {
   background-color: #000000;
   height: 180px;
   font-weight: bold;
-  padding: 10px 50px 10px 50px;
+  padding: 10px 50px;
   border-bottom: 1px solid #DBB778;
 }
 header nav {
@@ -11183,7 +11172,8 @@ header nav form.uk-search span {
 header nav form.uk-search span svg {
   color: #DBB778;
 }
-header nav form.uk-search input.uk-search-input, header nav form.uk-search input.uk-search-input::placeholder {
+header nav form.uk-search input.uk-search-input,
+header nav form.uk-search input.uk-search-input::placeholder {
   background-color: #000000;
   color: #DBB778;
   font-size: 1.1em;
@@ -11191,16 +11181,16 @@ header nav form.uk-search input.uk-search-input, header nav form.uk-search input
   font-family: serif;
 }
 header nav form.uk-search input.uk-search-input::placeholder {
-  padding-left: 0px;
+  padding-left: 0;
 }
 header nav .header-dropdown-box {
   background-color: #000000;
   border: 1px solid #DBB778;
   color: #DBB778;
-  padding: 15px 15px 20px 15px;
+  padding: 15px 15px;
 }
 header nav .header-subnav-ul li {
-  margin: 0px -15px;
+  margin: 0 -15px;
   text-align: center;
   color: #DBB778;
   font-family: serif;
@@ -11222,13 +11212,15 @@ header nav .header-subnav-ul li.subnav-header-line {
   font-family: serif;
 }
 header nav .header-subnav-ul li.subnav-header-line:not(:first-child) {
-  margin-top: 0px;
+  margin-top: 0;
 }
 header nav .header-subnav-ul li.subnav-divider {
-  margin: 10px 0px;
+  margin: 10px 0;
   border-top: 1px solid #DBB778;
 }
-header nav .uk-navbar-center, header nav .uk-navbar-center-left, header nav .uk-navbar-center-right {
+header nav .uk-navbar-center,
+header nav .uk-navbar-center-left,
+header nav .uk-navbar-center-right {
   height: 100%;
   display: flex;
 }
@@ -11250,8 +11242,8 @@ header nav .burger {
 
 /** Shows section **/
 .subsection {
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .subsection:not(:last-child) .landing-shows-content {
   border-bottom: 1px solid #DBB778;
@@ -11312,7 +11304,7 @@ header nav .burger {
   text-decoration: underline;
 }
 .landing-community:last-child {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 /** footer **/
@@ -11322,20 +11314,15 @@ footer {
   padding-bottom: 20px;
 }
 footer .uk-grid-small {
-  margin: 0px;
+  margin: 0;
 }
 footer a {
-  color: #DBB778;
   font-size: 20px;
   font-family: serif;
   text-transform: uppercase;
 }
-footer a:hover {
-  color: #E9D5AA;
-  text-decoration: underline;
-}
 footer ul.social-icons {
-  margin-top: 0px;
+  margin-top: 0;
 }
 footer ul.social-icons > li {
   display: inline;
