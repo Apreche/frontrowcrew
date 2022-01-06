@@ -11224,8 +11224,12 @@ header nav .uk-navbar-center-right {
   height: 100%;
   display: flex;
 }
+header nav .header-logo {
+  height: 100%;
+}
 header nav img.uk-logo {
   max-height: 100%;
+  cursor: pointer;
 }
 header nav .burger {
   width: 35px;
