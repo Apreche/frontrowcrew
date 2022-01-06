@@ -38,6 +38,7 @@ if extra_hosts:
     ALLOWED_HOSTS += extra_hosts.split(",")
 INTERNAL_IPS = ["127.0.0.1"]
 
+SITE_ID = 1
 
 # Application definition
 
@@ -46,8 +47,10 @@ INSTALLED_APPS = [
     "django.contrib.admindocs",
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.flatpages",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sites",
     "django.contrib.staticfiles",
     # "django_celery_beat",
     "django_celery_results",
@@ -66,6 +69,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.admindocs.middleware.XViewMiddleware",
+    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
 
 if DEBUG:
