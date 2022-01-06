@@ -8,7 +8,6 @@ def homepage(request):
     template_name = "shows/homepage.html"
     shows = models.Show.objects.all()
     context = {
-        "shows": shows
     }
     return shortcuts.render(request, template_name, context)
 
