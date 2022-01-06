@@ -61,8 +61,5 @@
         </div>
     </div>
 </div>
-{% for show in shows %}
-<li><a href="{% url 'show-detail' show.slug %}">{{ show.title }}</a></li>
-{% endfor %}
 </ul>
 {% endblock content %}
