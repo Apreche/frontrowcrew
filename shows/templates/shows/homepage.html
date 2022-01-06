@@ -2,8 +2,65 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-<h1>Show List</h1>
+<div class="hero uk-container">
+        <p>GeekNights is a podcast, a lecture series, and an online community for hobbyists, tinkerers, and geeks of all kinds.</p>
+    </div>
 <ul>
+<div class="uk-section shows-section">
+    <div class="uk-section subsection">
+        <div class="uk-container landing-shows uk-grid">
+            <button class="uk-width-1-4 uk-card uk-card-body landing-shows-title">
+                <h2>Podcasts</h2>
+            </button>
+            <div class="uk-width-3-4 uk-card uk-card-body landing-shows-content">
+                <p>Hosts Rym and Scott delve into topics ranging from computer science to Eurogaming, anime to fantasy fiction, indie comics to gadgetry, two nights a week for your listening pleasure.</p>
+            </div>
+        </div>
+    </div>
+    <div class="uk-section subsection">
+        <div class="uk-container landing-shows uk-grid">
+            <div class="uk-width-3-4 uk-card uk-card-body landing-shows-content">
+                <p>If you want to dive into game design and strategy (or just want to learn how to win at board games), Rym and Scott have you covered with their series of convention panels and lectures.</p>
+            </div>
+            <button class="uk-width-1-4 uk-card uk-card-body landing-shows-title">
+                <h2>Lectures</h2>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Community Section Here -->
+<div class="uk-section community-section">
+    <div class="uk-flex-center uk-grid-medium uk-width-1-2 landing-community uk-child-width-1-3" uk-grid>
+        <div id="landing-community-1" class="uk-card uk-card-body  uk-card uk-card-body landing-community-item">
+            <button class="border-wrapper uk-card uk-card-body">
+                <h2>Book Club</h2>
+            </button>
+        </div>
+        <div id="landing-community-2" class="uk-card uk-card-body  uk-card uk-card-body landing-community-item">
+            <button class="border-wrapper uk-card uk-card-body">
+                <h2>News</h2>
+            </button>
+        </div>
+        <div id="landing-community-3" class="uk-card uk-card-body  uk-card uk-card-body landing-community-item">
+            <button class="border-wrapper uk-card uk-card-body">
+                <h2>Forum</h2>
+            </button>
+        </div>
+    </div>
+    <div class="uk-flex-center uk-grid-medium uk-width-1-2 landing-community uk-child-width-1-3" uk-grid>
+        <div id="landing-community-4" class="uk-card uk-card-body  uk-card uk-card-body landing-community-item">
+            <button class="border-wrapper uk-card uk-card-body">
+                <h2>Bounties</h2>
+            </button>
+        </div>
+        <div id="landing-community-5" class="uk-card uk-card-body  uk-card uk-card-body landing-community-item">
+            <button class="border-wrapper uk-card uk-card-body">
+                <h2>Newsletter</h2>
+            </button>
+        </div>
+    </div>
+</div>
 {% for show in shows %}
 <li><a href="{% url 'show-detail' show.slug %}">{{ show.title }}</a></li>
 {% endfor %}
