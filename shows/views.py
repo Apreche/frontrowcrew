@@ -30,7 +30,7 @@ def show_detail(request, show_slug):
 def content_detail(request, show_slug, catalog_number, content_slug=None):
     template_name = "shows/content_detail.html"
     content = shortcuts.get_object_or_404(
-        models.Content.published,
+        models.Content.published.select_related('show'),
         show__slug=show_slug,
         catalog_number=catalog_number
     )
