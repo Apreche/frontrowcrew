@@ -22,30 +22,30 @@
                     name="header-q"
                     spellcheck="false"
                     placeholder="Search"
-                    aria-label="Search the entire site"
-                    value>
                 </form>
             </div>
             <div class="uk-navbar-center"><div>
                 <div class="uk-navbar-center-left">
                     <ul class="uk-navbar-nav">
                         <li><button type="button" class="header-button">Shows</button>
-                            <div class="header-dropdown-box" uk-dropdown="pos:bottom-justify; offset: 32">
+                            <div class="header-dropdown-box" uk-dropdown="pos:bottom-justify; offset: 32; mode:click">
                                 <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
-                                    <li class="uk-nav-header subnav-header-line">GeekNights</li>
-                                    <li><a href="#">Podcasts</a></li>
-                                    <li><a href="#">Lectures</a></li>
+                                    {% for show in shows %}
+                                    <li><a href="{% url 'show-detail' show.slug %}">{{ show.title }}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-            <img class="uk-navbar-item uk-logo" src="{% static "img/logo_transparent.png" %}" href="#"/></li>
+            <a class="header-logo" href="{% url 'homepage' %}">
+                <img class="uk-navbar-item uk-logo" src="{% static "img/logo_transparent.png" alt="GeekNights Logo" %}"></li>
+            </a>
             <div class="uk-navbar-center-right"><div>
                 <ul class="uk-navbar-nav">
                     <li><button type="button" class="header-button">Community</button>
-                        <div class="header-dropdown-box" uk-dropdown="pos: bottom-justify; offset: 32">
+                        <div class="header-dropdown-box" uk-dropdown="pos: bottom-justify; offset: 32; mode:click">
                             <ul class="uk-nav uk-dropdown-nav header-subnav header-subnav-ul">
                                 <li><a href="#">Forum</a></li>
                                 <li><a href="#">Book Club</a></li>
