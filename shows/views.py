@@ -6,16 +6,15 @@ from . import models
 
 def homepage(request):
     template_name = "shows/homepage.html"
-    context = {
-    }
+    context = {}
     return shortcuts.render(request, template_name, context)
 
 
 def show_detail(request, show_slug):
     ITEMS_PER_PAGE = 10
     template_name = "shows/show_detail.html"
-    show = shortcuts.get_object_or_404(models.Show, slug=show_slug)
-    content = models.Content.objects.filter(show=show)
+    show = shortcuts.get_object_or_404(models.Show.published, slug=show_slug)
+    content = models.Content.published.filter(show=show)
     paginator = Paginator(content, ITEMS_PER_PAGE)
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
@@ -31,7 +30,7 @@ def show_detail(request, show_slug):
 def content_detail(request, show_slug, catalog_number, content_slug=None):
     template_name = "shows/content_detail.html"
     content = shortcuts.get_object_or_404(
-        models.Content,
+        models.Content.published.select_related('show'),
         show__slug=show_slug,
         catalog_number=catalog_number
     )

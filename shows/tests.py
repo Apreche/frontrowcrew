@@ -1,3 +1,4 @@
+import datetime
 from django import test, urls
 from django.utils import timezone
 
@@ -18,7 +19,7 @@ class FactoryTests(utils.FRCTestCase):
 
     def test_content_factory_draft(self):
         content = factories.ContentFactory.create(draft=True)
-        self.assertFalse(content.published)
+        self.assertFalse(content.is_published)
         self.assertTrue(content.pub_time > timezone.now())
 
     def test_content_factory_legacy_html(self):
@@ -60,6 +61,12 @@ class ShowTests(utils.FRCTestCase):
 
     def test_show_detail_404(self):
         show = factories.ShowFactory()
+        url = urls.reverse("show-detail", args=(show.slug + "WRONG",))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_show_detail_published(self):
+        show = factories.ShowFactory(draft=True)
         url = urls.reverse("show-detail", args=(show.slug + "WRONG",))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
@@ -122,3 +129,80 @@ class ShowTests(utils.FRCTestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 301)
         self.assertEqual(response.url, correct_url)
+
+    def test_published_content_manager(self):
+        content = factories.ContentFactory(draft=True)
+        published_content = models.Content.published.all()
+        self.assertNotIn(content, published_content)
+        content.is_published = True
+        content.save()
+        published_content = models.Content.published.all()
+        self.assertNotIn(content, published_content)
+        yesterday = timezone.now() - datetime.timedelta(days=1)
+        content.pub_time = yesterday
+        content.save()
+        published_content = models.Content.published.all()
+        self.assertIn(content, published_content)
+        content.is_published = False
+        content.save()
+        published_content = models.Content.published.all()
+        self.assertNotIn(content, published_content)
+
+    def test_content_detail_published(self):
+        content = factories.ContentFactory(draft=True)
+        url = urls.reverse(
+            "content-detail",
+            args=(
+                content.show.slug,
+                content.catalog_number,
+                content.slug,
+            )
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+        content.is_published = True
+        content.save()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+        yesterday = timezone.now() - datetime.timedelta(days=1)
+        content.pub_time = yesterday
+        content.save()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        content.is_published = False
+        content.save()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_content_list_published(self):
+        content = factories.ContentFactory(draft=True)
+        url = urls.reverse(
+            "show-detail",
+            args=(
+                content.show.slug,
+            )
+        )
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        objects = response.context['page'].paginator.page(1).object_list
+        self.assertNotIn(content, objects)
+        content.is_published = True
+        content.save()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        objects = response.context['page'].paginator.page(1).object_list
+        self.assertNotIn(content, objects)
+        yesterday = timezone.now() - datetime.timedelta(days=1)
+        content.pub_time = yesterday
+        content.save()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        objects = response.context['page'].paginator.page(1).object_list
+        self.assertIn(content, objects)
+        content.is_published = False
+        content.save()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        objects = response.context['page'].paginator.page(1).object_list
+        self.assertNotIn(content, objects)

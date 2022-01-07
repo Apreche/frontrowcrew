@@ -4,8 +4,21 @@ from django.core import validators
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from . import managers
 
-class Show(models.Model):
+
+class Publishable(models.Model):
+    objects = models.Manager()
+    published = managers.PublishedContentManager()
+
+    is_published = models.BooleanField(default=False)
+    pub_time = models.DateTimeField()
+
+    class Meta:
+        abstract = True
+
+
+class Show(Publishable):
     title = models.TextField()
     slug = models.SlugField(max_length=255)
     logo = models.ImageField(upload_to="show/logos/")
@@ -18,7 +31,7 @@ class Show(models.Model):
         return urls.reverse("show-detail", kwargs={"show_slug": self.slug})
 
 
-class Content(models.Model):
+class Content(Publishable):
     class Format(models.TextChoices):
         HTML = 'HTML', _("HTML")
         MARKDOWN = 'MD', _("Markdown")
@@ -39,8 +52,6 @@ class Content(models.Model):
 
     creation_time = models.DateTimeField(auto_now_add=True)
     last_modified_time = models.DateTimeField(auto_now=True)
-    pub_time = models.DateTimeField()
-    published = models.BooleanField(default=False)
 
     rendered_html = models.TextField(blank=True)
     original_content = models.TextField(blank=True, default='')
