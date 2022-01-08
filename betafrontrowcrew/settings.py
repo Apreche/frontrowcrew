@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.flatpages",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.redirects",
     "django.contrib.sites",
     "django.contrib.staticfiles",
     # "django_celery_beat",
@@ -69,6 +70,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.admindocs.middleware.XViewMiddleware",
+    "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
     "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
 
