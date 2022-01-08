@@ -7,10 +7,11 @@
 		"BETAFRONTROWCREW_DB_HOST": "db",
 		"BETAFRONTROWCREW_DB_NAME": "betafrc",
 		"BETAFRONTROWCREW_DB_USER": "betafrc",
-		"BETAFRONTROWCREW_DB_PASSWORD": "betafrc"
+		"BETAFRONTROWCREW_DB_PASSWORD": "betafrc",
+		"BETAFRONTROWCREW_MEMCACHED_SOCKET": "memcached:11211"
 	},
 
-	"settings": { 
+	"settings": {
 		"sqltools.connections": [{
 			"name": "Container database",
 			"driver": "PostgreSQL",

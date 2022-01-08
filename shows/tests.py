@@ -1,5 +1,6 @@
 import datetime
 from django import test, urls
+from django.core.cache import cache
 from django.utils import timezone
 
 from betafrontrowcrew.tests import utils
@@ -49,6 +50,10 @@ class ShowTests(utils.FRCTestCase):
     def setUp(self):
         super().setUp()
         self.client = test.Client()
+        cache.clear()
+
+    def tearDown(self):
+        cache.clear()
 
     def test_show_detail(self):
         show = factories.ShowFactory()

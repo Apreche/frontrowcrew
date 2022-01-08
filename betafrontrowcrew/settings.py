@@ -127,7 +127,7 @@ else:
     }
 
 # Cache
-if DEBUG:
+if DEBUG and (os.environ.get("BETAFRONTROWCREW_MEMCACHED_SOCKET", None) is None):
     CACHES = {
         "default": {
             "BACKEND": "django.core.cache.backends.dummy.DummyCache",
@@ -138,7 +138,7 @@ else:
         "default": {
             "BACKEND": "django.core.cache.backends.memcached.PyLibMCCache",
             "LOCATION": os.environ.get(
-                "BETAFRONTROWCREW_MEMCACHED_SOCKET", "/tmp/memcached.sock"
+                "BETAFRONTROWCREW_MEMCACHED_SOCKET", "127.0.0.1:11211"
             ),
         }
     }
