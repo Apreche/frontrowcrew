@@ -23,6 +23,7 @@ class Show(Publishable):
     slug = models.SlugField(max_length=255)
     logo = models.ImageField(upload_to="show/logos/")
     thumbnail = models.ImageField(upload_to="show/thumbnails/")
+    display_in_nav = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

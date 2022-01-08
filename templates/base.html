@@ -30,8 +30,8 @@
                         <li><button type="button" class="header-button">Shows</button>
                             <div class="header-dropdown-box" uk-dropdown="pos:bottom-justify; offset: 32; mode:click">
                                 <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
-                                    {% for show in shows %}
-                                    <li><a href="{% url 'show-detail' show.slug %}">{{ show.title }}</a></li>
+                                    {% for nav_show in nav_shows %}
+                                    <li><a href="{% url 'show-detail' nav_show.slug %}">{{ nav_show.title }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>

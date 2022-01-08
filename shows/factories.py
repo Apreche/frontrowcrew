@@ -42,6 +42,7 @@ class ShowFactory(factory.django.DjangoModelFactory):
     thumbnail = factory.django.ImageField()
     is_published = True
     pub_time = factory.SelfAttribute('random_date_time')
+    display_in_nav = False
 
 
 class ContentFactory(factory.django.DjangoModelFactory):
