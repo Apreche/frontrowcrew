@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-
+  
     services:
       postgres:
         image: postgres:latest
@@ -83,4 +83,4 @@ jobs:
           BETAFRONTROWCREW_CELERY_HOST: 127.0.0.1
           BETAFRONTROWCREW_CELERY_VHOST: test
         run: |
-          python manage.py test --shuffle
+          python manage.py test --shuffle --parallel auto
