@@ -9,7 +9,7 @@ python_environment:
     db_password: "{{ postgresql_password }}"
     db_host: "{{ postgresql_host }}"
     db_port: "{{ postgresql_port }}"
-    memcached_socket: "{{ memcached_socket }}"
+    memcached_socket: "unix:{{ memcached_socket }}"
     static_url: "/static/"
     static_root: "{{ project_www_dir }}/static/"
     media_url: "/media/"

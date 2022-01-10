@@ -1,5 +1,6 @@
 import datetime
 from django import test, urls
+from django.core.cache import cache
 from django.utils import timezone
 
 from betafrontrowcrew.tests import utils
@@ -37,11 +38,9 @@ class HomepageTests(utils.FRCTestCase):
         self.client = test.Client()
 
     def test_homepage_ok(self):
-        show = factories.ShowFactory()
         url = urls.reverse("homepage")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(show, response.context["shows"])
 
 
 @test.override_settings(
@@ -51,13 +50,18 @@ class ShowTests(utils.FRCTestCase):
     def setUp(self):
         super().setUp()
         self.client = test.Client()
+        cache.clear()
+
+    def tearDown(self):
+        cache.clear()
 
     def test_show_detail(self):
         show = factories.ShowFactory()
         url = urls.reverse("show-detail", args=(show.slug,))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['show'], show)
+        self.assertIn("show", response.context)
+        self.assertEqual(response.context["show"], show)
 
     def test_show_detail_404(self):
         show = factories.ShowFactory()
@@ -83,7 +87,8 @@ class ShowTests(utils.FRCTestCase):
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['content'], content)
+        self.assertIn("content", response.context)
+        self.assertEqual(response.context["content"], content)
 
     def test_content_detail_404(self):
         content = factories.ContentFactory()
@@ -185,12 +190,14 @@ class ShowTests(utils.FRCTestCase):
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertIn("page", response.context)
         objects = response.context['page'].paginator.page(1).object_list
         self.assertNotIn(content, objects)
         content.is_published = True
         content.save()
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertIn("page", response.context)
         objects = response.context['page'].paginator.page(1).object_list
         self.assertNotIn(content, objects)
         yesterday = timezone.now() - datetime.timedelta(days=1)
@@ -198,11 +205,30 @@ class ShowTests(utils.FRCTestCase):
         content.save()
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertIn("page", response.context)
         objects = response.context['page'].paginator.page(1).object_list
         self.assertIn(content, objects)
         content.is_published = False
         content.save()
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertIn("page", response.context)
         objects = response.context['page'].paginator.page(1).object_list
         self.assertNotIn(content, objects)
+
+    def test_nav_show_list(self):
+        good_show = factories.ShowFactory.create(display_in_nav=True)
+        bad_show = factories.ShowFactory.create(display_in_nav=False)
+        url = urls.reverse("homepage")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("nav_shows", response.context)
+        self.assertIn(good_show, response.context["nav_shows"])
+        self.assertNotIn(bad_show, response.context["nav_shows"])
+
+    def test_nav_show_list_not_admin(self):
+        factories.ShowFactory.create(display_in_nav=True)
+        url = urls.reverse("admin:login")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn("nav_shows", response.context)
