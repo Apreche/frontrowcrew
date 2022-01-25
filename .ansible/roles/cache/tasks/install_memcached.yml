@@ -18,6 +18,6 @@
 - name: Ensure memcached is started
   ansible.builtin.service:
     name: memcached
-    state: started
+    state: restarted
   become: yes
 ...
