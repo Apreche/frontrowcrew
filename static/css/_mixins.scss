@@ -1,0 +1,19 @@
+@use 'colours.scss' as c;
+@use 'fonts.scss' as f;
+
+
+@mixin header-subnav-font-styles {
+    color: c.$gold;
+    font-family: f.$serif-font;
+    text-transform: uppercase;
+    font-size: f.$header-subnav-font-size;
+}
+
+@mixin h2-styles{
+    color: c.$gold;
+    text-transform: uppercase;
+    font-size: 2em;
+    font-weight: 600;
+    font-family: f.$serif-font;
+    text-align: center;
+}
