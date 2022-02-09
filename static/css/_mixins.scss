@@ -17,3 +17,32 @@
     font-family: f.$serif-font;
     text-align: center;
 }
+
+@mixin corner-brackets($width: 2px, $length: 40px, $color: c.$gold, $background: c.$dark-blue){
+    position: relative;
+    border: $width solid $color;
+    z-index: 0;
+
+    &::before{
+        content: "";
+        z-index: -1;
+        position: absolute;
+        top: -$width;
+        bottom: -$width;
+        left: $length;
+        right: $length;
+        background-color: $background;
+    }
+
+    &::after{
+        content: "";
+        z-index: -1;
+        position: absolute;
+        top: $length;
+        bottom: $length;
+        left: -$width;
+        right: -$width;
+        background-color: $background;
+        
+    }
+}
