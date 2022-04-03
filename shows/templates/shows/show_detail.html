@@ -8,7 +8,11 @@
 
 {% block content %}
 <h1>{{ show.title }}</h1>
+{% if show.logo %}
 <img src="{{ show.logo.url }}" />
+{% else %}
+Placeholder Image Goes Here
+{% endif %}
 <h2>Content</h2>
 <ul>
     {% for content in page.object_list %}
