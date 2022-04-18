@@ -14,11 +14,21 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='podcastchapter',
             name='episode',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='chapters', related_query_name='chapter', to='podcasts.podcastepisode'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name='chapters',
+                related_query_name='chapter',
+                to='podcasts.podcastepisode'
+            ),
         ),
         migrations.AlterField(
             model_name='podcastepisode',
             name='podcast',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='episodes', related_query_name='episode', to='podcasts.podcast'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name='episodes',
+                related_query_name='episode',
+                to='podcasts.podcast'
+            ),
         ),
     ]

@@ -15,11 +15,23 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='content',
             name='podcast_episode',
-            field=models.OneToOneField(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, to='podcasts.podcastepisode'),
+            field=models.OneToOneField(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                to='podcasts.podcastepisode'
+            ),
         ),
         migrations.AlterField(
             model_name='show',
             name='podcast',
-            field=models.OneToOneField(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, to='podcasts.podcast'),
+            field=models.OneToOneField(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                to='podcasts.podcast'
+            ),
         ),
     ]

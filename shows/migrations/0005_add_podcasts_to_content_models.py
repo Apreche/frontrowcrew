@@ -27,7 +27,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='content',
             name='podcast_episode',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, to='podcasts.podcastepisode'),
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                to='podcasts.podcastepisode'
+            ),
         ),
         migrations.AddField(
             model_name='show',
@@ -47,7 +53,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='show',
             name='podcast',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, to='podcasts.podcast'),
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                to='podcasts.podcast'
+            ),
         ),
         migrations.AddField(
             model_name='show',
@@ -62,11 +74,23 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='show',
             name='logo',
-            field=models.ImageField(blank=True, default='', height_field='logo_height', upload_to='shows/logo/', width_field='logo_width'),
+            field=models.ImageField(
+                blank=True,
+                default='',
+                height_field='logo_height',
+                upload_to='shows/logo/',
+                width_field='logo_width'
+            ),
         ),
         migrations.AlterField(
             model_name='show',
             name='thumbnail',
-            field=models.ImageField(blank=True, default='', height_field='thumbnail_height', upload_to='shows/thumbnail/', width_field='thumbnail_width'),
+            field=models.ImageField(
+                blank=True,
+                default='',
+                height_field='thumbnail_height',
+                upload_to='shows/thumbnail/',
+                width_field='thumbnail_width'
+            ),
         ),
     ]
