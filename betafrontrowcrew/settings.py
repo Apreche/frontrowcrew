@@ -48,15 +48,17 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.flatpages",
-    "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.redirects",
+    "django.contrib.sessions",
     "django.contrib.sites",
     "django.contrib.staticfiles",
+
     # "django_celery_beat",
     "django_celery_results",
     "django_extensions",
 
+    "podcasts",
     "shows",
 ]
 
@@ -176,7 +178,7 @@ PASSWORD_HASHERS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en"
 
 TIME_ZONE = "UTC"
 

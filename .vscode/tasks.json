@@ -1,0 +1,39 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Django Management Command",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": [
+                "${workspaceFolder}/manage.py",
+                "${input:managementCommand}"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": true,
+                "clear": true,
+            },
+            "options": {
+                "env": {
+                    "BETAFRONTROWCREW_DB_HOST": "localhost",
+                    "BETAFRONTROWCREW_DB_NAME": "betafrc",
+                    "BETAFRONTROWCREW_DB_USER": "betafrc",
+                    "BETAFRONTROWCREW_DB_PASSWORD": "betafrc"
+                }
+            },
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "managementCommand",
+            "type": "promptString",
+            "description": "Management Command",
+            "default": "shell_plus",
+        },
+    ],
+}
