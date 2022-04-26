@@ -33,22 +33,6 @@
                 "BETAFRONTROWCREW_DB_PASSWORD": "betafrc"
             },
             "django": true
-        },
-        {
-            "name": "Django Database Migrations",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/manage.py",
-            "args": [
-                "migrate"
-            ],
-            "env": {
-                "BETAFRONTROWCREW_DB_HOST": "localhost",
-                "BETAFRONTROWCREW_DB_NAME": "betafrc",
-                "BETAFRONTROWCREW_DB_USER": "betafrc",
-                "BETAFRONTROWCREW_DB_PASSWORD": "betafrc"
-            },
-            "django": true
         }
     ]
 }
