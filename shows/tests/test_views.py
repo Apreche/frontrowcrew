@@ -6,7 +6,7 @@ from django.core.cache import cache
 from django.utils import timezone
 from betafrontrowcrew.tests import utils
 
-from shows import factories
+from shows import factories, models
 
 
 @test.override_settings(
@@ -154,6 +154,10 @@ class ContentDetailTests(utils.FRCTestCase):
 
     def test_content_detail(self):
         content = factories.ContentFactory(is_published=True, show__is_published=True)
+        thing = factories.RelatedLinkFactory(
+            content=content,
+            type_id=models.RelatedLinkType.THING_OF_THE_DAY
+        )
         url = urls.reverse(
             "content-detail",
             args=(
@@ -166,6 +170,9 @@ class ContentDetailTests(utils.FRCTestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertIn("content", response.context)
         self.assertEqual(response.context["content"], content)
+        context_things = response.context.get("things_of_the_day", None)
+        self.assertIsNotNone(context_things)
+        self.assertIn(thing, context_things)
 
     def test_content_detail_404(self):
         content = factories.ContentFactory(is_published=False)
@@ -285,3 +292,21 @@ class ContentDetailTests(utils.FRCTestCase):
         redirect_url = response.url
         response = self.client.get(redirect_url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_thing_of_the_day_list_empty(self):
+        url = urls.reverse("totd-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
+
+    def test_thing_of_the_day_list(self):
+        thing = factories.RelatedLinkFactory(
+            type_id=models.RelatedLinkType.THING_OF_THE_DAY,
+            published=True
+        )
+        url = urls.reverse("totd-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertIn("things_of_the_day", response.context)
+        thing_response = response.context["things_of_the_day"]
+        self.assertEqual(len(thing_response), 1)
+        self.assertIn(thing, thing_response)

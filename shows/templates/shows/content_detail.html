@@ -10,4 +10,12 @@
 <h1>{{ content.show.title }}</h1>
 <h2>{{ content.title }}</h2>
 <div>{{ content.rendered_html|safe }}</div>
+{% if things_of_the_day %}
+<h3>Things of the Day</h3>
+<ul>
+    {% for thing in things_of_the_day %}
+    <li>{{ thing.author }}: {% if thing.error %}❌{% endif %}<a href="{{ thing.url }}">{{ thing.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endblock content %}
