@@ -122,3 +122,50 @@ class ContentFactory(PublishableFactory):
         ),
         None,
     )
+
+
+class RelatedLinkTypeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.RelatedLinkType
+
+    description = factory.Faker("word")
+
+
+class RelatedLinkFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.RelatedLink
+        exclude = (
+            "has_description",
+        )
+
+    class Params:
+        # Never set published and unpublished together
+        # Will be able to implement this properly when this issue is resolved
+        # https://github.com/FactoryBoy/factory_boy/issues/435
+
+        published = factory.Trait(
+            content=factory.SubFactory(
+                ContentFactory,
+                is_published=True,
+                show__is_published=True,
+            )
+        )
+        unpublished = factory.Trait(
+            content=factory.SubFactory(
+                ContentFactory,
+                is_published=False,
+            )
+        )
+
+    content = factory.SubFactory(ContentFactory)
+    type = factory.SubFactory(RelatedLinkTypeFactory)
+    title = factory.Faker("sentence", nb_words=4)
+    has_description = factory.Faker("boolean")
+    description = factory.Maybe(
+        "has_description",
+        factory.Faker("sentence", nb_words=10),
+        "",
+    )
+    url = factory.Faker("uri")
+    author = factory.Faker("first_name")
+    error = factory.Faker("boolean")

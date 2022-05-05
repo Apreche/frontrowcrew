@@ -3,6 +3,7 @@ from django.contrib import admin
 from . import models
 
 
+@admin.register(models.Podcast)
 class PodcastAdmin(admin.ModelAdmin):
     raw_id_fields = (
         "itunes_primary_category",
@@ -10,39 +11,26 @@ class PodcastAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(models.Podcast, PodcastAdmin)
-
-
+@admin.register(models.PodcastEpisode)
 class PodcastEpisodeAdmin(admin.ModelAdmin):
     raw_id_fields = ("enclosure",)
 
 
-admin.site.register(models.PodcastEpisode, PodcastEpisodeAdmin)
-
-
+@admin.register(models.iTunesCategory)
 class iTunesCategoryAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(models.iTunesCategory, iTunesCategoryAdmin)
-
-
+@admin.register(models.iTunesOwner)
 class iTunesOwnerAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(models.iTunesOwner, iTunesOwnerAdmin)
-
-
+@admin.register(models.PodcastEnclosure)
 class PodcastEnclosureAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(models.PodcastEnclosure, PodcastEnclosureAdmin)
-
-
+@admin.register(models.PodcastChapter)
 class PodcastChapterAdmin(admin.ModelAdmin):
     pass
-
-
-admin.site.register(models.PodcastChapter, PodcastChapterAdmin)
