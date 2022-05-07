@@ -14,11 +14,21 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='relatedlink',
-            options={'ordering': ['-content__pub_time', 'author'], 'verbose_name': 'Related Link', 'verbose_name_plural': 'Related Links'},
+            options={
+                'ordering': ['-content__pub_time', 'author'],
+                'verbose_name': 'Related Link',
+                'verbose_name_plural':
+                'Related Links'
+            },
         ),
         migrations.AddField(
             model_name='content',
             name='tags',
-            field=taggit.managers.TaggableManager(help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags'),
+            field=taggit.managers.TaggableManager(
+                help_text='A comma-separated list of tags.',
+                through='taggit.TaggedItem',
+                to='taggit.Tag',
+                verbose_name='Tags'
+            ),
         ),
     ]
