@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     # "django_celery_beat",
     "django_celery_results",
     "django_extensions",
+    "taggit",
 
     "podcasts",
     "shows",
@@ -239,6 +240,9 @@ if not DEBUG:
         )
 
     CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+
+# Taggit
+TAGGIT_CASE_INSENSITIVE = True
 
 # Logging
 LOGGING = {

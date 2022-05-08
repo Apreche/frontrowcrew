@@ -42,8 +42,7 @@
 	"extensions": [
 		"ms-python.python",
 		"ms-python.vscode-pylance",
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg"
+		"batisteo.vscode-django",
 	],
 
 	"forwardPorts": [8000],

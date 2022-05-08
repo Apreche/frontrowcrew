@@ -123,6 +123,12 @@ class ContentFactory(PublishableFactory):
         None,
     )
 
+    @factory.post_generation
+    def tags(self, create, extracted, **kwargs):
+        if create and extracted:
+            for tag in extracted:
+                self.tags.add(tag)
+
 
 class RelatedLinkTypeFactory(factory.django.DjangoModelFactory):
     class Meta:
