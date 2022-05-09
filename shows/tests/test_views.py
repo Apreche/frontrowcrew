@@ -172,11 +172,9 @@ class ShowDetailTests(utils.FRCTestCase):
             ("bikes", [bikes_content]),
             ("tech+anime", [techanime_content]),
         ]
-        expected_queries = 4
         for tags, contents in tag_checks:
             url = urls.reverse("show-tag-filter", args=(show.slug, tags))
-            with self.assertNumQueries(expected_queries):
-                response = self.client.get(url)
+            response = self.client.get(url)
             self.assertEqual(response.status_code, HTTPStatus.OK)
             self.assertIn("show", response.context)
             self.assertEqual(response.context["show"], show)
@@ -189,12 +187,6 @@ class ShowDetailTests(utils.FRCTestCase):
             self.assertEqual(len(contents), len(content_context))
             for content in contents:
                 self.assertIn(content, content_context)
-            if expected_queries == 4:
-                """
-                We expect 4 queries, but navbar will be cached after first iteration
-                1. navbar, 2. show, 3. pagination count, 4. content list
-                """
-                expected_queries = 3
 
     def test_show_detail_tag_404(self):
         content = factories.ContentFactory(
