@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create SSH configuration
         uses: Apreche/action-ansible-playbook@v3.0.0
