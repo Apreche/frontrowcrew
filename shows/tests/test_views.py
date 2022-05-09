@@ -10,7 +10,7 @@ from shows import factories, models
 
 
 @test.override_settings(
-    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage"
 )
 class HomepageTests(utils.FRCTestCase):
     def setUp(self):
@@ -24,7 +24,7 @@ class HomepageTests(utils.FRCTestCase):
 
 
 @test.override_settings(
-    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage"
 )
 class DisplayInNavTests(utils.FRCTestCase):
     def setUp(self):
@@ -54,7 +54,7 @@ class DisplayInNavTests(utils.FRCTestCase):
 
 
 @test.override_settings(
-    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage',
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
 )
 class ShowDetailTests(utils.FRCTestCase):
     def setUp(self):
@@ -208,7 +208,7 @@ class ShowDetailTests(utils.FRCTestCase):
 
 
 @test.override_settings(
-    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage"
 )
 class ContentDetailTests(utils.FRCTestCase):
     def setUp(self):

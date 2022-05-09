@@ -12,7 +12,7 @@ from .. import factories
 
 
 @test.override_settings(
-    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage"
 )
 class ShowPodcastFeedTests(utils.FRCTestCase):
 
