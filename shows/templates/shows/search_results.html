@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Search Results for {{ query }}{% endblock title %}
+
+{% block content %}
+<h1>Search Results for {{ query }}</h1>
+<ul>
+    {% for content in page.object_list %}
+    <li><a href="{% url "content-detail" content.show.slug content.catalog_number content.slug %}">{{ content.title }}</a></li>
+    {% endfor %}
+</ul>
+<ul>
+    {% if page.has_previous %}
+    <li><a href="?q={{ query }}&page=1">first</a></li>
+    <li><a href="?q={{ query }}&page={{ page.previous_page_number }}">previous</a></li>
+    {% endif %}
+    <li>Page {{ page.number }} of {{ page.paginator.num_pages }}</li>
+    {% if page.has_next %}
+    <li><a href="?q={{ query }}&page={{ page.next_page_number }}">next</a></li>
+    <li><a href="?q={{ query }}&page={{ page.paginator.num_pages }}">last</a></li>
+    {% endif %}
+</ul>
+{% endblock content %}

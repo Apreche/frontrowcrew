@@ -101,7 +101,7 @@ class ContentFactory(PublishableFactory):
     slug = factory.LazyAttribute(lambda o: text.slugify(o.title)[:255])
     catalog_number = factory.Faker("numerify", text="########")
     is_markdown = factory.Faker("boolean")
-    raw_content = factory.Faker('post', size="medium")
+    raw_content = factory.Faker("post", size="medium")
     content_format = factory.Maybe(
         "is_markdown",
         models.Content.Format.MARKDOWN,

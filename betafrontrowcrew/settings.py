@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     # "django_celery_beat",
     "django_celery_results",
     "django_extensions",
+    "django_readonly_field",
     "taggit",
 
     "podcasts",

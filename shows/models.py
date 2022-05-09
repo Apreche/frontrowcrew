@@ -1,5 +1,6 @@
 import markdown
 from django import urls
+from django.contrib.postgres import indexes, search
 from django.core import exceptions, validators
 from django.db import models
 from django.utils import timezone
@@ -145,6 +146,10 @@ class Content(Publishable):
         on_delete=models.PROTECT,
     )
 
+    search_vector = search.SearchVectorField(
+        editable=False
+    )
+
     def __str__(self):
         return self.title
 
@@ -211,6 +216,12 @@ class Content(Publishable):
         unique_together = [
             ("show", "catalog_number"),
         ]
+        indexes = [
+            indexes.GinIndex(fields=["search_vector"])
+        ]
+
+    class ReadonlyMeta:
+        readonly = ["search_vector"]
 
 
 class RelatedLinkType(models.Model):

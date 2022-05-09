@@ -1,7 +1,10 @@
 from django import http
 from django import shortcuts
+from django.db.models import F
 from django.utils.translation import gettext as _
+from django.contrib.postgres import search
 from django.core.paginator import Paginator
+from django.core import exceptions
 
 from . import models
 
@@ -26,15 +29,17 @@ def show_detail(request, show_slug, tags=None):
             content = content.filter(tags__slug__in=[tag])
         context.update({"tags": tag_list})
     paginator = Paginator(
-        content.distinct(),
+        content,
         ITEMS_PER_PAGE,
         allow_empty_first_page=False,
     )
     if paginator.count == 0:
         raise http.Http404(_("Show has no content."))
-    page_number = request.GET.get('page', 1)
+    page_number = request.GET.get("page", "1")
+    if not page_number.isnumeric():
+        raise exceptions.BadRequest(_("Invalid Page Number"))
     page = paginator.get_page(
-        page_number
+        int(page_number)
     )
     context.update(
         {
@@ -82,5 +87,35 @@ def totd_list(request):
         raise http.Http404(_("No Things of the Day found."))
     context = {
         "things_of_the_day": things_of_the_day,
+    }
+    return shortcuts.render(request, template_name, context)
+
+
+def content_search(request):
+    ITEMS_PER_PAGE = 10
+    template_name = "shows/search_results.html"
+    query_string = request.GET.get("q", "")
+    query = search.SearchQuery(query_string, search_type="websearch")
+    results = models.Content.published.select_related(
+        "show",
+    ).annotate(
+        search_rank=search.SearchRank(
+            F("search_vector"), query
+        )
+    ).filter(
+        search_vector=query
+    ).order_by("-search_rank")
+    paginator = Paginator(
+        results,
+        ITEMS_PER_PAGE,
+        allow_empty_first_page=True,
+    )
+    page_number = request.GET.get("page", "1")
+    if not page_number.isnumeric():
+        raise exceptions.BadRequest(_("Invalid Page Number"))
+    page = paginator.get_page(page_number)
+    context = {
+        "query": query_string,
+        "page": page,
     }
     return shortcuts.render(request, template_name, context)
