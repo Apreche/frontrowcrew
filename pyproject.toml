@@ -21,6 +21,7 @@ Markdown = "^3.3.6"
 mdgen = "^0.1.9"
 boto3 = "^1.20.26"
 django-taggit = "^3.0.0"
+django-readonly-field = "^1.1.1"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^3.2.4"

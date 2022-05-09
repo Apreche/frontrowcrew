@@ -4,6 +4,7 @@ from django.views.generic import base
 from . import feeds, views
 
 urlpatterns = [
+    path("search/", views.content_search, name="content-search"),
     path("things/", views.totd_list, name="totd-list"),
     path("things/rss/", feeds.TotDFeed(), name="totd-list-rss",),
     path(

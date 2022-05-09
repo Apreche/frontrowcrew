@@ -15,13 +15,17 @@
     <header id="gn-header" class="uk-width-1-1 uk-sticky">
         <nav class="uk-navbar uk-margin" uk-navbar>
             <div class="uk-navbar-left">
-                <form id="site-search" class="uk-search" role="search">
+                <form id="site-search" class="uk-search" role="search" method="get" action="/search/">
                     <span uk-search-icon></span>
-                    <input type="search" id="site-search-input"
-                    class="uk-search-input"
-                    name="header-q"
-                    spellcheck="false"
-                    placeholder="Search"
+                    <input
+                        type="search"
+                        id="site-search-input"
+                        class="uk-search-input"
+                        name="q"
+                        spellcheck="false"
+                        placeholder="Search"
+                        required
+                    />
                 </form>
             </div>
             <div class="uk-navbar-center"><div>

@@ -13,6 +13,7 @@ class ShowAdmin(admin.ModelAdmin):
 
 @admin.register(models.Content)
 class ContentAdmin(admin.ModelAdmin):
+    exclude = ("search_vector",)
     raw_id_fields = (
         "show",
         "podcast_episode",
