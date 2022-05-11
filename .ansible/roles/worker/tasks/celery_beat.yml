@@ -29,7 +29,7 @@
 - name: Install celery beat logrotate config file
   ansible.builtin.template:
     src: templates/celery_beat_logrotate.j2
-    dest: /etc/logrotate.d/celery
+    dest: /etc/logrotate.d/celery_beat
     owner: root
     group: root
     mode: '0644'
