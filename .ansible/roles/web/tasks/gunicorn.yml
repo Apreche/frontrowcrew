@@ -25,6 +25,15 @@
   become: yes
   notify: "restart web application server"
 
+- name: Install gunicorn logrotate config file
+  ansible.builtin.template:
+    src: templates/gunicorn_logrotate.j2
+    dest: /etc/logrotate.d/gunicorn
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
 - name: Install gunicorn systemd socket config
   ansible.builtin.template:
     src: templates/systemd_gunicorn_socket.j2
