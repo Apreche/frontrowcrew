@@ -141,3 +141,6 @@ cython_debug/
 requirements.txt
 
 .vscode/settings.json
+
+# Dev vendor sass files
+static/css/uikit/
