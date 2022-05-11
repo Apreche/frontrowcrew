@@ -46,16 +46,18 @@ button{
 }
 
 
-/** links **/
+/**inline links **/
 a{
     cursor: pointer;
-    color: c.$gold;
+    color: c.$light-gold;
+    font-weight: 600;
     transition-duration: 0.3s;
     &:hover{
         color: c.$light-gold;
         text-decoration: underline;
     }
 }
+
 
 
 /** header **/
@@ -95,17 +97,12 @@ header {
             }
         }
         .header-dropdown-box{
-            background-color: c.$black;
-            border: 1px solid c.$gold;
-            color: c.$gold;
-            padding: 15px 15px;
+            @include m.dropdowns;
         }
         .header-subnav-ul{
             li{
                 margin: 0 -15px;
-                text-align: center;
                 @include m.header-subnav-font-styles;
-                font-family: f.$sans-serif-font;
                 &:not(.subnav-header-line){
                     &:hover{
                         color: c.$black;
@@ -244,6 +241,11 @@ footer {
         font-size: f.$footer-font-size;
         font-family: f.$serif-font;
         text-transform: uppercase;
+        color: c.$gold;
+        font-weight: 400;
+        &:hover{
+            color: c.$light-gold;
+        }
     }
     ul.social-icons{
         margin-top: 0;
