@@ -149,7 +149,7 @@ class PodcastEnclosure(models.Model):
         M4V = "video/x-m4v", _("M4V")
         PDF = "application/pdf", _("PDF")
 
-    url = models.URLField(unique=True)
+    url = models.URLField()
     length = models.PositiveBigIntegerField(
         help_text=_("Size of file in bytes"),
     )

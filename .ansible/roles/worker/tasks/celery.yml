@@ -26,6 +26,15 @@
   become: yes
   notify: "restart celery workers"
 
+- name: Install celery logrotate config file
+  ansible.builtin.template:
+    src: templates/celery_logrotate.j2
+    dest: /etc/logrotate.d/celery
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
 - name: Enable and start celery
   ansible.builtin.systemd:
     name: "{{ celery_service_name }}.service"

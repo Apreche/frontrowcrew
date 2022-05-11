@@ -6,11 +6,11 @@ from django.core.cache import cache
 from django.utils import timezone
 from betafrontrowcrew.tests import utils
 
-from shows import factories
+from shows import factories, models
 
 
 @test.override_settings(
-    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage"
 )
 class HomepageTests(utils.FRCTestCase):
     def setUp(self):
@@ -24,7 +24,7 @@ class HomepageTests(utils.FRCTestCase):
 
 
 @test.override_settings(
-    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage"
 )
 class DisplayInNavTests(utils.FRCTestCase):
     def setUp(self):
@@ -54,7 +54,7 @@ class DisplayInNavTests(utils.FRCTestCase):
 
 
 @test.override_settings(
-    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage',
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
 )
 class ShowDetailTests(utils.FRCTestCase):
     def setUp(self):
@@ -139,9 +139,68 @@ class ShowDetailTests(utils.FRCTestCase):
         objects = response.context['page'].paginator.page(1).object_list
         self.assertIn(content, objects)
 
+    def test_show_detail_tagged(self):
+        techanime_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=["tech", "anime"]
+        )
+        show = techanime_content.show
+        tech_content = factories.ContentFactory(
+            is_published=True,
+            show=show,
+            tags=["tech"]
+        )
+        anime_content = factories.ContentFactory(
+            is_published=True,
+            show=show,
+            tags=["anime"]
+        )
+        notag_content = factories.ContentFactory(
+            is_published=True,
+            show=show,
+        )
+        bikes_content = factories.ContentFactory(
+            is_published=True,
+            show=show,
+            tags=["bikes"]
+        )
+
+        tag_checks = [
+            ("tech", [techanime_content, tech_content]),
+            ("anime", [techanime_content, anime_content]),
+            ("bikes", [bikes_content]),
+            ("tech+anime", [techanime_content]),
+        ]
+        for tags, contents in tag_checks:
+            url = urls.reverse("show-tag-filter", args=(show.slug, tags))
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, HTTPStatus.OK)
+            self.assertIn("show", response.context)
+            self.assertEqual(response.context["show"], show)
+            tag_context = response.context.get("tags", "")
+            for tag in tags.split("+"):
+                self.assertIn(tag, tag_context)
+            page = response.context.get("page")
+            content_context = page.object_list
+            self.assertNotIn(notag_content, content_context)
+            self.assertEqual(len(contents), len(content_context))
+            for content in contents:
+                self.assertIn(content, content_context)
+
+    def test_show_detail_tag_404(self):
+        content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=["tech", "anime"]
+        )
+        url = urls.reverse("show-tag-filter", args=(content.show.slug, "foo"))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
+
 
 @test.override_settings(
-    STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage"
 )
 class ContentDetailTests(utils.FRCTestCase):
     def setUp(self):
@@ -154,6 +213,10 @@ class ContentDetailTests(utils.FRCTestCase):
 
     def test_content_detail(self):
         content = factories.ContentFactory(is_published=True, show__is_published=True)
+        thing = factories.RelatedLinkFactory(
+            content=content,
+            type_id=models.RelatedLinkType.THING_OF_THE_DAY
+        )
         url = urls.reverse(
             "content-detail",
             args=(
@@ -166,6 +229,9 @@ class ContentDetailTests(utils.FRCTestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertIn("content", response.context)
         self.assertEqual(response.context["content"], content)
+        context_things = response.context.get("things_of_the_day", None)
+        self.assertIsNotNone(context_things)
+        self.assertIn(thing, context_things)
 
     def test_content_detail_404(self):
         content = factories.ContentFactory(is_published=False)
@@ -285,3 +351,71 @@ class ContentDetailTests(utils.FRCTestCase):
         redirect_url = response.url
         response = self.client.get(redirect_url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_thing_of_the_day_list_empty(self):
+        url = urls.reverse("totd-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
+
+    def test_thing_of_the_day_list(self):
+        thing = factories.RelatedLinkFactory(
+            type_id=models.RelatedLinkType.THING_OF_THE_DAY,
+            published=True
+        )
+        url = urls.reverse("totd-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertIn("things_of_the_day", response.context)
+        thing_response = response.context["things_of_the_day"]
+        self.assertEqual(len(thing_response), 1)
+        self.assertIn(thing, thing_response)
+
+    def test_similar_content(self):
+        tech_anime_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=["tech", "anime"],
+        )
+        tech_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=["tech"],
+        )
+        foo_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=["foo"],
+        )
+        notag_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+        )
+
+        # unpublished tech content that should not appear
+        factories.ContentFactory(
+            is_published=False,
+            show__is_published=True,
+            tags=["tech"],
+        )
+        test_cases = {
+            tech_anime_content: [tech_content],
+            tech_content: [tech_anime_content],
+            foo_content: [],
+            notag_content: [],
+        }
+        for content, similar_content in test_cases.items():
+            url = urls.reverse(
+                "content-detail",
+                args=(
+                    content.show.slug,
+                    content.catalog_number,
+                    content.slug,
+                )
+            )
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, HTTPStatus.OK)
+            self.assertIn("similar_content", response.context)
+            self.assertEqual(
+                list(response.context["similar_content"]),
+                similar_content
+            )

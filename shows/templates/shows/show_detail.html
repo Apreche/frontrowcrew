@@ -13,7 +13,7 @@
 {% else %}
 Placeholder Image Goes Here
 {% endif %}
-<h2>Content</h2>
+<h2>Content{% if tags %} tagged with {{ tags|join:", " }}{% endif %}</h2>
 <ul>
     {% for content in page.object_list %}
     <li><a href="{% url "content-detail" show.slug content.catalog_number content.slug %}">{{ content.title }}</a></li>

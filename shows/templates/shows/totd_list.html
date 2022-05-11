@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title%}Things of the Day{% endblock title %}
+{% block content %}
+<h1>Things of the Day</h1>
+{% if things_of_the_day %}
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Link</th>
+        <th>Episode</th>
+        <th>Date</th>
+        <th>Chooser</th>
+        <th>Status</th>
+        <th>Description</th>
+    </tr>
+{% for thing in things_of_the_day %}
+    <tr>
+        <td><a href="{{ thing.url }}">{{ thing.title }}</a></td>
+        <td>
+            <a href="{% url "content-detail" thing.content.show.slug thing.content.catalog_number thing.content.slug %}">{{ thing.content.title }}</a>
+        </td>
+        <td>{{ thing.content.pub_time|date:"Ymd" }}</td>
+        <td>{{ thing.author }}</td>
+        <td>{% if thing.error %}❌{% else %}✅{% endif %}</td>
+        <td>{{ thing.description }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% else %}
+<p>There are no things of the day.</p>
+{% endif %}
+{% endblock content %}

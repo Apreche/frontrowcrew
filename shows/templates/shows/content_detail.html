@@ -2,12 +2,40 @@
 {% block title %}{{ content.title }} | {{ show.title }}{% endblock title %}
 {% block extrahead %}
 {% comment "TODO" %}
-<link rel="canonical" href="{% url "content-detail" catalog.show.slug content.catalog_number content.slug %}" />
+<link rel="canonical" href="{% url "content-detail" content.show.slug content.catalog_number content.slug %}" />
 {% endcomment %}
 {% endblock extrahead %}
 
 {% block content %}
 <h1>{{ content.show.title }}</h1>
 <h2>{{ content.title }}</h2>
+
+{% if tags %}
+<ul>
+<h3>Tags</h3>
+{% for tag_name, tag_slug in tags %}
+    <li><a href="{% url "show-tag-filter" content.show.slug tag_slug %}">#{{ tag_name }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
 <div>{{ content.rendered_html|safe }}</div>
+{% if things_of_the_day %}
+<h3>Things of the Day</h3>
+<ul>
+    {% for thing in things_of_the_day %}
+    <li>{{ thing.author }}: {% if thing.error %}❌{% endif %}<a href="{{ thing.url }}">{{ thing.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if similar_content %}
+<h3>Similar Content</h3>
+<ul>
+{% for similar_content in similar_content %}
+    <li><a href="{% url "content-detail" similar_content.show.slug similar_content.catalog_number similar_content.slug %}">{{ similar_content.title }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
 {% endblock content %}

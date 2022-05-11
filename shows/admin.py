@@ -3,6 +3,7 @@ from django.contrib import admin
 from . import models
 
 
+@admin.register(models.Show)
 class ShowAdmin(admin.ModelAdmin):
     raw_id_fields = (
         "sub_shows",
@@ -10,14 +11,23 @@ class ShowAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(models.Show, ShowAdmin)
-
-
+@admin.register(models.Content)
 class ContentAdmin(admin.ModelAdmin):
+    exclude = ("search_vector",)
     raw_id_fields = (
         "show",
         "podcast_episode",
     )
 
 
-admin.site.register(models.Content, ContentAdmin)
+@admin.register(models.RelatedLinkType)
+class RelatedLinkTypeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.RelatedLink)
+class RelatedLinkAdmin(admin.ModelAdmin):
+    raw_id_fields = (
+        "content",
+        "type",
+    )

@@ -1,0 +1,7 @@
+{{ gunicorn_log_dir }}/*.log {
+    weekly
+    rotate 7
+    noolddir
+    compress
+    delaycompress
+}
