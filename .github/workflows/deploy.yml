@@ -8,6 +8,10 @@ on:
   # release:
   #   types: [released]
 
+concurrency:
+  group: deployment
+  cancel-in-progress: true
+
 jobs:
   deploy:
     name: Deploy project
