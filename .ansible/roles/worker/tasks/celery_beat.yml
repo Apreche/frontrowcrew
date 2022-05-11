@@ -26,6 +26,15 @@
   become: yes
   notify: "restart celery beat"
 
+- name: Install celery beat logrotate config file
+  ansible.builtin.template:
+    src: templates/celery_beat_logrotate.j2
+    dest: /etc/logrotate.d/celery
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
 - name: Enable and start celery beat
   ansible.builtin.systemd:
     name: "{{ celery_beat_service_name }}.service"

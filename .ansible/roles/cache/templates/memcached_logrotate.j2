@@ -1,0 +1,10 @@
+{{ memcached_log_file | default('/var/log/memcached.log') }} {
+    weekly
+    rotate 4
+    noolddir
+    missingok
+    notifempty
+    nocreate
+    compress
+    delaycompress
+}
