@@ -154,10 +154,10 @@
                 }
                 &:hover{
                     .dropdown-link-wrapper{
-                        background-color: c.$gold;
+                        background-color: c.$light-gold;
                         width: calc(100% + 28px);
                         margin-left: -15px;
-                        outline: 1px solid c.$light-gold;
+                        outline: 1px solid c.$gold;
                         border: 1px solid c.$dark-blue;
 
                     }

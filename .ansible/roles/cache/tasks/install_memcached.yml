@@ -6,7 +6,7 @@
     update_cache: yes
   become: yes
 
-- name: Install memcached configuration file
+- name: Install memcached config file
   ansible.builtin.template:
     src: templates/memcached.conf.j2
     dest: "{{ memcached_config_file }}"
@@ -15,9 +15,18 @@
     mode: '0644'
   become: yes
 
+- name: Install memcached logrotate config file
+  ansible.builtin.template:
+    src: templates/memcached_logrotate.j2
+    dest: /etc/logrotate.d/memcached
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
 - name: Ensure memcached is started
   ansible.builtin.service:
     name: memcached
-    state: started
+    state: restarted
   become: yes
 ...

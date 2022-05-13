@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-  
+
     services:
       postgres:
         image: postgres:latest
@@ -44,30 +44,21 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Install Python 3.8
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-
       - name: Install prerequisites
         run: |
           sudo apt-get install libmemcached-dev
 
-      - name: Load Python packages from cache
-        uses: actions/cache@v2
-        id: pipcache
+      - uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Install Python Environment
+        uses: actions/setup-python@v3
         with:
-          path: ${% templatetag openvariable %} env.pythonLocation }}
-          key: ${{ runner.os }}-pip-${{ env.pythonLocation }}-${{ hashFiles('poetry.lock') }}
-
-      - name: Install Python packages
-        run: |
-          python -m pip install --upgrade pip
-          pip install poetry
-          poetry export --without-hashes -f requirements.txt --output ~/requirements.txt
-          pip install -r ~/requirements.txt
+          python-version: '3.8'
+          cache: 'poetry'
+      - run: poetry install
+      # Add this for tracebacks
+      - run: poetry add tblib
 
       - name: Run Django tests
         env:
@@ -83,4 +74,4 @@ jobs:
           BETAFRONTROWCREW_CELERY_HOST: 127.0.0.1
           BETAFRONTROWCREW_CELERY_VHOST: test
         run: |
-          python manage.py test --shuffle --parallel auto
+          poetry run python manage.py test --shuffle --parallel auto

@@ -2,7 +2,7 @@
 {% block title %}{{ content.title }} | {{ show.title }}{% endblock title %}
 {% block extrahead %}
 {% comment "TODO" %}
-<link rel="canonical" href="{% url "content-detail" catalog.show.slug content.catalog_number content.slug %}" />
+<link rel="canonical" href="{% url "content-detail" content.show.slug content.catalog_number content.slug %}" />
 {% endcomment %}
 {% endblock extrahead %}
 
@@ -17,14 +17,28 @@
             <div class="content-view-content-info"> 
                 <h1>{{ content.title }}</h1>
                 <h3><i>{{ content.creation_time|date:"F j Y" }}</i></h3>
+                {% if tags %}
                 <ul class="tags-list">
-                    <li><a class="tag" href="#">#computers</a></li>
-                    <li><a class="tag" href="#">#hardware</a></li>
+                {% for tag_name, tag_slug in tags %}
+                    <li><a class="tag" href="{% url "show-tag-filter" content.show.slug tag_slug %}">#{{ tag_name }}</a></li>
+                {% endfor %}
+                </ul>
+                {% endif %}
                 </ul>
             </div>
         </div>
     </div>
-    <div class="content-view-content uk-container content-view-container">{{ content.rendered_html|safe }}</div>
+    <div class="content-view-content uk-container content-view-container">
+        {{ content.rendered_html|safe }}
+        {% if things_of_the_day %}
+        <h3>Things of the Day</h3>
+        <ul>
+            {% for thing in things_of_the_day %}
+            <li>{{ thing.author }}: {% if thing.error %}❌{% endif %}<a href="{{ thing.url }}">{{ thing.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
 </div>
 <div class="uk-section uk-flex uk-flex-center uk-flex-middle content-details-cta">
     <button class="uk-button btn-primary primary-left">Contribute Show Notes</button>
@@ -77,4 +91,14 @@
     </div>
 </div>
 <button class="uk-button btn-primary btn-content-archive"><h2>See Full Archive</h2></button>
+
+{% if similar_content %}
+<h3>Similar Content</h3>
+<ul>
+{% for similar_content in similar_content %}
+    <li><a href="{% url "content-detail" similar_content.show.slug similar_content.catalog_number similar_content.slug %}">{{ similar_content.title }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
 {% endblock content %}
