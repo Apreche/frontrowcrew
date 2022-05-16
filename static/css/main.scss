@@ -45,8 +45,7 @@ button{
     }
 }
 
-
-/**inline links **/
+/** links **/
 a{
     cursor: pointer;
     color: c.$light-gold;
@@ -56,9 +55,13 @@ a{
         color: c.$light-gold;
         text-decoration: underline;
     }
+    &.a-button{
+        font-weight: unset;
+        &:hover{
+            text-decoration: none;
+        }
+    }
 }
-
-
 
 /** header **/
 header {

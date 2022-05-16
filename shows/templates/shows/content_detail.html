@@ -99,8 +99,9 @@
         </div>
     </div>
 </div>
-<button class="uk-button btn-primary btn-content-archive"><h2>See Full Archive</h2></button>
-
+    <button class="uk-button btn-primary btn-content-archive">
+    <a class = "a-button" href="{% url "show-detail" content.show.slug %}"><h2>See Full Archive</h2></a>
+    </button>
 {% if similar_content %}
 <h3>Similar Content</h3>
 <ul>

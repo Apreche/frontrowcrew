@@ -11142,7 +11142,7 @@ button {
   text-decoration: underline;
 }
 
-/**inline links **/
+/** links **/
 a {
   cursor: pointer;
   color: #DBC9A9;
@@ -11152,6 +11152,12 @@ a {
 a:hover {
   color: #DBC9A9;
   text-decoration: underline;
+}
+a.a-button {
+  font-weight: unset;
+}
+a.a-button:hover {
+  text-decoration: none;
 }
 
 /** header **/
