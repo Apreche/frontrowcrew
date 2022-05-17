@@ -55,10 +55,12 @@ a{
         color: c.$light-gold;
         text-decoration: underline;
     }
-    &.a-button{
+    &.a-btn{
         font-weight: unset;
+        color: c.$gold;
         &:hover{
             text-decoration: none;
+            color: c.$black;
         }
     }
 }
