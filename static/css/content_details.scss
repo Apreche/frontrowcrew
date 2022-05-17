@@ -1,6 +1,7 @@
 @use "mixins.scss" as m;
 @use "colours.scss" as c;
 @use "fonts.scss" as f;
+@use "headings.scss" as h;
 
 /** Buttons **/
 .btn-primary{
@@ -13,17 +14,14 @@
     font-size: 22px;
 }
 
-/** Headers **/
+/** Headings **/
 
 h1{
-    color: c.$gold;
-    text-align: center;
-    font-family: f.$serif-font;
+    @include h.h1;
 }
 
 h3{
-    color: c.$gold;
-    text-align: center;
+    @include h.h3;
     margin-top: 0px;
     margin-bottom: 0px;
     &.sub-show-name{
@@ -33,13 +31,11 @@ h3{
 }
 
 h4{
-    font-family: f.$serif-font;
-    color: c.$gold;
+    @include h.h4;
 }
 
 h5{
-    font-family: f.$sans-serif-font;
-    color: c.$gold;
+    @include h.h5;
 }
 
 .content-view-section{
@@ -63,10 +59,17 @@ h5{
 .content-view-show-info{
     padding: 0px 4%;
     text-align: center;
+    height: 250px;
 }
 
 .content-view-show-logo{
     max-height: 200px;
+}
+
+.no-logo{
+    width: 100%;
+    padding-left: 0px;
+    padding-bottom: 10px;
 }
 
 .content-info-wrapper{
@@ -125,10 +128,7 @@ h5{
         @include m.btn-primary(1px);
         width: 17%;
         max-width: 170px;
-        position: relative;/**
-        outline: none;
-        border: 1px solid c.$gold;
-        background-color: c.$dark-blue;**/
+        position: relative;
     }
     .btn-wrapper{
         width: calc(100% - 4px);

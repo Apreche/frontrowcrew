@@ -9,16 +9,6 @@
     font-size: f.$header-subnav-font-size;
 }
 
-/** Header Element Styles **/
-@mixin h2-styles{
-    color: c.$gold;
-    text-transform: uppercase;
-    font-size: 2em;
-    font-weight: 600;
-    font-family: f.$serif-font;
-    text-align: center;
-}
-
 /** Button Styles **/
 @mixin btn-primary($outline-width: 1px){
     background-color: c.$black;

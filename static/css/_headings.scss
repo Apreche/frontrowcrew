@@ -1,0 +1,34 @@
+@use "colours.scss" as c;
+@use "fonts.scss" as f;
+
+@mixin h1{
+    color: c.$gold;
+    text-align: center;
+    font-family: f.$serif-font;
+    font-size: 3.3rem;
+}
+
+@mixin h2{
+    color: c.$gold;
+    text-align: center;
+    font-family: f.$serif-font;
+    font-size: 2em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+@mixin h3{
+    color: c.$gold;
+    text-align:center;
+    font-family: f.$sans-serif-font;
+}
+
+@mixin h4{
+    color: c.$gold;
+    font-family: f.$serif-font;
+}
+
+@mixin h5{
+    color: c.$gold;
+    font-family: f.$sans-serif-font;
+}
