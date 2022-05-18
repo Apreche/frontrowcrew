@@ -140,4 +140,10 @@ cython_debug/
 # We use poetry, so ignore requirements.txt
 requirements.txt
 
+# Dev vendor sass files
+static/css/uikit/
+
+# Local environment variables
+.envrc
+
 .docker/

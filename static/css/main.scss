@@ -1,0 +1,287 @@
+@use "mixins.scss" as m;
+@use "colours.scss" as c;
+@use "fonts.scss" as f;
+@use "headings.scss" as h;
+@import "uikit/mixins.scss";
+@import "uikit/variables.scss";
+@import "uikit/uikit.scss";
+
+
+body {
+    background-color: c.$black;
+    color: c.$gold;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    padding-top: 20px;
+    padding-bottom: 140px;
+}
+
+h2{
+    @include h.h2;
+}
+
+/** buttons **/
+button{
+    cursor: pointer;
+
+}
+
+.header-button{
+    background-color: c.$black;
+    color: c.$gold;
+    font-weight: bold;
+    font-family: f.$serif-font;
+    font-size: f.$header-font-size;
+    text-transform: uppercase;
+    border: none;
+    transition-duration: 0.3s;
+    &:hover{
+        color: c.$light-gold;
+        text-decoration: underline;
+    }
+}
+
+/** links **/
+a{
+    cursor: pointer;
+    color: c.$light-gold;
+    font-weight: 600;
+    transition-duration: 0.3s;
+    &:hover{
+        color: c.$light-gold;
+        text-decoration: underline;
+    }
+    &.a-btn{
+        font-weight: unset;
+        color: c.$gold;
+        &:hover{
+            text-decoration: none;
+            color: c.$black;
+        }
+    }
+}
+
+/** header **/
+header {
+    background-color: c.$black;
+    height: 180px;
+    font-weight: bold;
+    padding: 10px 50px;
+    border-bottom: 1px solid c.$gold;
+    nav {
+        height: 100%;
+        background-color: c.$black;
+        text-transform: uppercase;
+        form.uk-search{
+            background-color: c.$black;
+            color: c.$gold;
+            border: 1px solid c.$gold;
+            margin: 5px 10px;
+            padding: 5px 10px;
+            span{
+                padding-left: 5px;
+                svg{
+                    color: c.$gold;
+                }
+            }
+            input.uk-search-input,
+            %search-input{
+                background-color: c.$black;
+                color: c.$gold;
+                font-size: 1.1em;
+                padding-left: 10%;
+                font-family: f.$serif-font;
+                &::placeholder{
+                    @extend %search-input;
+                    padding-left: 0;
+                }
+            }
+        }
+        .header-dropdown-box{
+            @include m.dropdowns;
+        }
+        .header-subnav-ul{
+            li{
+                margin: 0 -15px;
+                @include m.header-subnav-font-styles;
+                &:not(.subnav-header-line){
+                    &:hover{
+                        color: c.$black;
+                        background-color: c.$gold;
+                    }
+                    >a{
+                        color: inherit;
+                        justify-content: center;
+                    }
+                }
+                &.subnav-header-line{
+                    color: c.$light-gold;
+                    font-size: calc(f.$header-subnav-font-size + 4px);
+                    font-family: f.$serif-font;
+                    &:not(:first-child){
+                        margin-top: 0;
+                    }
+                }
+                &.subnav-divider{
+                    margin: 10px 0;
+                    border-top: 1px solid c.$gold;
+                }
+            }
+        }
+        .uk-navbar-center,
+        .uk-navbar-center-left,
+        .uk-navbar-center-right{
+            height: 100%;
+            display: flex;
+        }
+        .header-logo{
+            height: 100%;
+        }
+        img.uk-logo,{
+            max-height: 100%;
+            cursor: pointer;
+        }
+        .burger{
+            width: 35px;
+            height: auto;
+        }
+    }
+}
+
+/** Hero section **/
+.hero{
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/** Shows section **/
+.subsection{
+    padding-top: 0;
+    padding-bottom: 0;
+    &:not(:last-child){
+        .landing-shows-content{
+            border-bottom: 1px solid c.$gold;
+        }
+    }
+    &:not(:first-child){
+        .landing-shows-title{
+            border-top: 0;
+        }
+    }
+}
+
+
+.landing-shows{                     // This is the .uk-container div
+    color: c.$light-gold;
+    margin-left: auto;
+    margin-right: auto;
+    .landing-shows-title{
+        background-color: c.$dark-grey;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid c.$gold;
+        &:hover{
+            background-color: c.$black;
+            h2{
+                color: c.$light-gold;
+                text-decoration: underline;
+            }
+        }
+    }
+    &:not(.landing-shows-title){
+        background-color: c.$darkest-grey;
+    }
+    p{
+        font-size: 1.4em;
+    }
+}
+
+/** Community Section **/
+.landing-community{             // .uk-grid div
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+    h2,
+    %h2{
+        @extend %h2;
+        font-size: 1.7em;
+    }
+    .border-wrapper{
+        border: 1px solid c.$gold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background-color: c.$dark-grey;
+        width: 100%;
+        &:hover{
+            background-color: c.$black;
+            h2{
+                color: c.$light-gold;
+                text-decoration: underline;
+            }
+        }
+    }
+    &:last-child{
+        margin-top: 0;
+    }
+}
+
+/** footer **/
+footer {
+    flex-shrink: 0;
+    background-color: c.$darkest-grey;
+    padding-bottom: 20px;
+    .uk-grid-small{
+        margin: 0;
+    }
+    a{
+        font-size: f.$footer-font-size;
+        font-family: f.$serif-font;
+        text-transform: uppercase;
+        color: c.$gold;
+        font-weight: 400;
+        &:hover{
+            color: c.$light-gold;
+        }
+    }
+    ul.social-icons{
+        margin-top: 0;
+        >li{
+            display: inline;
+            .uk-icon{
+                color: c.$gold;
+            }
+        }
+    }
+    .footer-left{
+        text-align: left;
+    }
+    .footer-center{
+        text-align: center;
+    }
+    .footer-social{
+        text-align: right;
+        font-family: f.$serif-font;
+    }
+    .footer{
+        padding: 30px;
+        font-size: f.$footer-font-size;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #license{
+        text-align: center;
+    }
+}
+
+@import "content_details.scss";

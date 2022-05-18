@@ -1,0 +1,235 @@
+@use "mixins.scss" as m;
+@use "colours.scss" as c;
+@use "fonts.scss" as f;
+@use "headings.scss" as h;
+
+/** Buttons **/
+.btn-primary{
+    @include m.btn-primary;
+}
+
+.btn-secondary{
+    @include m.btn-secondary;
+    padding: 30px 10px;
+    font-size: 22px;
+}
+
+/** Headings **/
+
+h1{
+    @include h.h1;
+}
+
+h3{
+    @include h.h3;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    &.sub-show-name{
+        font-family: f.$serif-font;
+        font-size: 2rem;
+    }
+}
+
+h4{
+    @include h.h4;
+}
+
+h5{
+    @include h.h5;
+}
+
+.content-view-section{
+    background-color: c.$dark-blue;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    @include m.corner-brackets;
+}
+
+.content-view-title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 20px;
+    padding-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content-view-show-info{
+    padding: 0px 4%;
+    text-align: center;
+    height: 250px;
+}
+
+.content-view-show-logo{
+    max-height: 200px;
+}
+
+.no-logo{
+    width: 100%;
+    padding-left: 0px;
+    padding-bottom: 10px;
+}
+
+.content-info-wrapper{
+    border: 2px solid c.$gold;
+    padding: 20px;
+}
+
+.content-view-content-info{
+    background-color: c.$blue; 
+    padding: 30px 20px;
+    h1{
+        margin-bottom: 0px;
+        font-size: 3.3rem;
+    }
+}
+
+.tags-list{
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+    width: 80%;
+    margin-left: 10%;
+    li{
+        display: inline-block;
+        padding: 0px 2px;
+    }
+}
+
+.content-view-content{
+    font-size: 1.2rem;
+    padding-left: 30px;
+    padding-right: 30px;
+        div{
+            margin-top: 40px;
+        }
+}
+
+.content-view-totd{
+    text-align: center;
+    h3{
+        font-family: serif;
+        font-size: 2.7rem;
+    }
+}
+
+.totd-error{
+    &:hover{
+        color: c.$red;
+        opacity: 0.8;
+    }
+}
+
+.content-details-cta{
+    .btn-primary{
+        @include m.btn-primary(1px);
+        width: 17%;
+        max-width: 170px;
+        position: relative;
+    }
+    .btn-wrapper{
+        width: calc(100% - 4px);
+        background-color: c.$black;
+        position: relative;
+        right: 28px;
+        padding: 0px 30px;
+        &:hover{
+            @extend .btn-wrapper;
+
+        }
+    }
+    .cta-dropdown{
+        @include m.dropdowns;
+    }
+}
+
+.similar-content-container{
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+.a-btn-similar{
+    display: block;
+    padding: 15px 30px;
+}
+
+.btn-content-archive{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    h2{
+        margin: 0px;
+        padding: 10px;
+        text-transform: capitalize;
+        font-weight: 500;
+    }
+    &:hover,
+    &:focus{
+        h2{
+            color: c.$black;
+        }
+    }
+}
+
+/** Similar Content Card Styles **/
+
+.uk-card-footer{
+    background-color: c.$black;
+    border: 1px solid c.$gold;
+    padding: 0px;
+    button{
+        @include m.btn-primary;
+        width: 100%;
+        padding: 0px;
+        font-size: 20px;
+        &:active{
+            border-color: c.$light-gold;
+            opacity: 0.8;
+        }
+    }
+}
+
+.similar-content-card{
+    margin-left: auto;
+    margin-right: auto;
+    &:first-child{
+        margin-left: -30px;
+    }
+}
+
+.uk-card-body{
+    background-color: c.$dark-blue;
+    border: 1px solid c.$gold;
+    padding: 10px;
+    text-align: center;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.card-wrapper{
+    background-color: c.$blue;
+    padding: 15px;
+    margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+    .similar-title-wrapper{
+        flex: 1;
+        padding-bottom:15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h4{
+            margin: 0px;
+            font-size: 28px;
+        }
+    }
+    h5{
+        margin: 0px;
+        font-size: 18px;
+    }
+}
+
