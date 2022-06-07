@@ -10,7 +10,7 @@
 <div class="uk-section content-view-section">
     <div class="uk-container uk-grid content-view-container content-view-title-container">
         {% if content.show.logo %}
-        <div class="uk-width-1-3 content-view-show-info"> 
+        <div class="uk-width-1-3 content-view-show-info">
             <img class="uk-logo content-view-show-logo" src="{{ content.show.logo.url }}" alt="{{ content.show.title }}" title="{{ content.show.title }}">
             <h3 class="sub-show-name">{{ content.creation_time|date:"l" }}</h3>
         </div>
@@ -18,13 +18,13 @@
         <h1 class="no-logo">{{ content.show.title }}</h1>
         {% endif %}
         <div class="uk-width-2-3 content-info-wrapper">
-            <div class="content-view-content-info"> 
+            <div class="content-view-content-info">
                 <h1>{{ content.title }}</h1>
                 <h3><i>{{ content.creation_time|date:"F j Y" }}</i></h3>
-                {% if tags %}
+                {% if content.tags.all %}
                 <ul class="tags-list">
-                {% for tag_name, tag_slug in tags %}
-                    <li><a class="tag" href="{% url "show-tag-filter" content.show.slug tag_slug %}">#{{ tag_name }}</a></li>
+                {% for tag in content.tags.all %}
+                    <li><a class="tag" href="{% url "show-tag-filter" content.show.slug tag.slug %}">#{{ tag.name }}</a></li>
                 {% endfor %}
                 </ul>
                 {% endif %}
@@ -36,15 +36,15 @@
         <div class="rendered-content">
         {{ content.rendered_html|safe }}
         </div>
-        {% if things_of_the_day %}
+        {% if content.things_of_the_day %}
             <div class="content-view-totd">
                 <h3>&mdash; Things of the Day &mdash;</h3>
                 <ul class="uk-list">
-                    {% for thing in things_of_the_day %}
-                    <li>{{ thing.author }}: 
+                    {% for thing in content.things_of_the_day %}
+                    <li>{{ thing.author }}:
                         <a href="{{ thing.url }}" alt="{{ thing.description }}"
                             {% if thing.error %}class="totd-error">(Broken Link)
-                            {% else %}> 
+                            {% else %}>
                             {% endif %}
                             {{ thing.title }}</a></li>
                     {% endfor %}

@@ -131,3 +131,36 @@ class PublishableContentTests(utils.FRCTestCase):
         self.assertFalse(content.is_live)
         published_content = models.Content.published.all()
         self.assertNotIn(content, published_content)
+
+    def test_content_manager_prefetch(self):
+        BATCH_SIZE = 5
+        test_tag = "bikes"
+
+        show = factories.ShowFactory(
+            is_published=True,
+        )
+        content_batch = factories.ContentFactory.create_batch(
+            size=BATCH_SIZE,
+            show=show,
+            is_published=True,
+            tags=[test_tag],
+        )
+        thing_dict = {}
+        for content in content_batch:
+            thing = factories.RelatedLinkFactory(
+                content=content,
+                type_id=models.RelatedLinkType.THING_OF_THE_DAY,
+                published=True,
+            )
+            thing_dict[content.id] = thing
+
+        # Should always be 3 queries for any batch size
+        with self.assertNumQueries(3):
+            published_content = models.Content.published.filter(show=show)
+            for content in published_content:
+                self.assertTrue(hasattr(content, "things_of_the_day"))
+                self.assertTrue(hasattr(content, "tags"))
+                thing = thing_dict[content.id]
+                self.assertIn(thing, content.things_of_the_day)
+                content_tags = [tag.name for tag in content.tags.all()]
+                self.assertIn(test_tag, content_tags)

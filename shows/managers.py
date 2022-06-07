@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.db import models
 from django.utils import timezone
 
@@ -15,8 +16,20 @@ class PublishedManager(models.Manager):
 class PublishedContentManager(models.Manager):
     """ Content is only published if its show is also published """
     def get_queryset(self):
+        from .models import RelatedLinkType as RelatedLinkTypeConst
+        RelatedLink = apps.get_model("shows", "RelatedLink")
+        things_of_the_day = RelatedLink.published.filter(
+            type_id=RelatedLinkTypeConst.THING_OF_THE_DAY
+        )
         return super().get_queryset().select_related(
             "show"
+        ).prefetch_related(
+            models.Prefetch(
+                "related_links",
+                queryset=things_of_the_day,
+                to_attr="things_of_the_day"
+            ),
+            "tags",
         ).filter(
             is_published=True,
             show__is_published=True,
