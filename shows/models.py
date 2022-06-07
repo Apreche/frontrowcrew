@@ -31,6 +31,7 @@ class Publishable(models.Model):
         abstract = True
         verbose_name = "Publishable"
         verbose_name_plural = "Publishables"
+        get_latest_by = "pub_time"
 
 
 class Show(Publishable):
@@ -101,6 +102,7 @@ class Show(Publishable):
     class Meta:
         verbose_name = "Show"
         verbose_name_plural = "Shows"
+        get_latest_by = "pub_time"
 
 
 class Content(Publishable):
@@ -212,6 +214,7 @@ class Content(Publishable):
     class Meta:
         verbose_name = "Content"
         verbose_name_plural = "Contents"
+        get_latest_by = "pub_time"
         ordering = ["-pub_time"]
         unique_together = [
             ("show", "catalog_number"),
@@ -244,7 +247,8 @@ class RelatedLink(models.Model):
     published = managers.PublishedRelatedLinkManager()
 
     content = models.ForeignKey(
-        Content, on_delete=models.PROTECT
+        Content, on_delete=models.PROTECT,
+        related_name="related_links",
     )
     type = models.ForeignKey(
         RelatedLinkType, on_delete=models.PROTECT

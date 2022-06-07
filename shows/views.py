@@ -60,19 +60,13 @@ def content_detail(request, show_slug, catalog_number, content_slug=None):
     )
     if (content.slug != content_slug) or (show != content.show):
         return shortcuts.redirect(content, permanent=True)
-    things_of_the_day = models.RelatedLink.objects.filter(
-        content=content,
-        type_id=models.RelatedLinkType.THING_OF_THE_DAY,
-    )
     # Do not show similar content that is unpublished
     similar_content = models.Content.published.filter(
         id__in=[sc.id for sc in content.tags.similar_objects()]
     )
     context = {
         "content": content,
-        "tags": content.tags.all().values_list("name", "slug"),
         "similar_content": similar_content,
-        "things_of_the_day": things_of_the_day,
     }
     return shortcuts.render(request, template_name, context)
 
@@ -88,6 +82,37 @@ def totd_list(request):
     context = {
         "things_of_the_day": things_of_the_day,
     }
+    return shortcuts.render(request, template_name, context)
+
+
+def tag_filter(request, tags):
+    """ Filter content by tag across all shows """
+    ITEMS_PER_PAGE = 10
+    template_name = "shows/tag_filter.html"
+    context = {}
+    content = models.Content.published.all()
+    tag_list = set(tags.split("+"))
+    for tag in tag_list:
+        content = content.filter(tags__slug__in=[tag])
+    context.update({"tags": tag_list})
+    paginator = Paginator(
+        content,
+        ITEMS_PER_PAGE,
+        allow_empty_first_page=False,
+    )
+    if paginator.count == 0:
+        raise http.Http404(_("No content found with chosen tags."))
+    page_number = request.GET.get("page", "1")
+    if not page_number.isnumeric():
+        raise exceptions.BadRequest(_("Invalid Page Number"))
+    page = paginator.get_page(
+        int(page_number)
+    )
+    context.update(
+        {
+            "page": page,
+        }
+    )
     return shortcuts.render(request, template_name, context)
 
 

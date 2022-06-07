@@ -23,6 +23,7 @@ urlpatterns = [
         ),
         name="totd-feed-legacy-redirect"
     ),
+    path("tags/<str:tags>/", views.tag_filter, name="tag-filter"),
     path("<slug:show_slug>/", views.show_detail, name="show-detail"),
     path("<slug:show_slug>/tags/<str:tags>/", views.show_detail, name="show-tag-filter"),
     path("<slug:show_slug>/rss/", feeds.ShowFeed(), name="show-rss"),
