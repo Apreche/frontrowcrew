@@ -39,14 +39,6 @@ h5{
     @include h.h5;
 }
 
-.content-view-section{
-    background-color: c.$dark-blue;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    @include m.corner-brackets;
-}
-
 .content-view-title-container{
     display: flex;
     justify-content: center;
