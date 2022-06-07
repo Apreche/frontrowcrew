@@ -1,23 +1,14 @@
 {% extends "base.html" %}
-{% block title %}{{ show.title }}{% endblock title %}
+{% block title %}Content tagged with {{ tag_list|join:", " }}{% endblock title %}
 {% block extrahead %}
-{% comment "TODO" %}
-<link rel="canonical" href="{% url "show-detail" show.slug %}" />
-{% endcomment %}
 {% endblock extrahead %}
 
 {% block content %}
-<h1>{{ show.title }}</h1>
-{% if show.logo %}
-<img src="{{ show.logo.url }}" />
-{% else %}
-Placeholder Image Goes Here
-{% endif %}
-<h2>Content{% if tags %} tagged with {{ tags|join:", " }}{% endif %}</h2>
+<h1>Content tagged with {{ tag_list|join:", " }}</h1>
 <ul>
     {% for content in page.object_list %}
     <li>
-        <a href="{% url "content-detail" show.slug content.catalog_number content.slug %}">{{ content.title }}</a>
+        <a href="{% url "content-detail" content.show.slug content.catalog_number content.slug %}">{{ content.title }}</a>
         {% if content.things_of_the_day %}
         <h3>Things of the Day</h3>
         <ul>
@@ -32,7 +23,7 @@ Placeholder Image Goes Here
         <h3>Tags</h3>
         <ul>
             {% for tag in content.tags.all %}
-            <li><a href="{% url "show-tag-filter" show.slug tag.slug %}">{{ tag.name }}</a></li>
+            <li><a href="{% url "tag-filter" tag.slug %}">{{ tag.name }}</a></li>
             {% endfor %}
         </ul>
         {% endif %}

@@ -113,7 +113,8 @@ class ShowDetailTests(utils.FRCTestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertIn("page", response.context)
-        objects = response.context['page'].paginator.page(1).object_list
+        page = response.context.get("page")
+        objects = page.object_list
         self.assertIn(content, objects)
         tomorrow = timezone.now() + datetime.timedelta(days=1)
         content.pub_time = tomorrow
@@ -136,7 +137,8 @@ class ShowDetailTests(utils.FRCTestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertIn("page", response.context)
-        objects = response.context['page'].paginator.page(1).object_list
+        page = response.context.get("page")
+        objects = page.object_list
         self.assertIn(content, objects)
 
     def test_show_detail_tagged(self):
@@ -229,9 +231,8 @@ class ContentDetailTests(utils.FRCTestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertIn("content", response.context)
         self.assertEqual(response.context["content"], content)
-        context_things = response.context.get("things_of_the_day", None)
-        self.assertIsNotNone(context_things)
-        self.assertIn(thing, context_things)
+        things = response.context["content"].things_of_the_day
+        self.assertIn(thing, things)
 
     def test_content_detail_404(self):
         content = factories.ContentFactory(is_published=False)
@@ -419,3 +420,103 @@ class ContentDetailTests(utils.FRCTestCase):
                 list(response.context["similar_content"]),
                 similar_content
             )
+
+
+@test.override_settings(
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
+)
+class TagFilterTests(utils.FRCTestCase):
+    def setUp(self):
+        super().setUp()
+        self.client = test.Client()
+        cache.clear()
+
+    def tearDown(self):
+        cache.clear()
+
+    def test_tag_filter(self):
+        tag = "bikes"
+        tagged_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=[tag]
+        )
+        untagged_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+        )
+        url = urls.reverse("tag-filter", args=(tag,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertIn("page", response.context)
+        page = response.context.get("page")
+        objects = page.object_list
+        self.assertIn(tagged_content, objects)
+        self.assertNotIn(untagged_content, objects)
+
+    def test_tag_filter_404(self):
+        matching_tag = "cars"
+        unmatching_tag = "bikes"
+        factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=[unmatching_tag]
+        )
+        factories.ContentFactory(
+            is_published=False,
+            show__is_published=True,
+            tags=[matching_tag]
+        )
+        factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+        )
+        url = urls.reverse("tag-filter", args=(matching_tag,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
+
+    def test_tag_filter_multiple(self):
+        techanime_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=["tech", "anime"]
+        )
+        tech_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=["tech"]
+        )
+        anime_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=["anime"]
+        )
+        notag_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+        )
+        bikes_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            tags=["bikes"]
+        )
+
+        tag_checks = [
+            ("tech", [techanime_content, tech_content]),
+            ("anime", [techanime_content, anime_content]),
+            ("bikes", [bikes_content]),
+            ("tech+anime", [techanime_content]),
+        ]
+        for tags, contents in tag_checks:
+            url = urls.reverse("tag-filter", args=(tags,))
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, HTTPStatus.OK)
+            tag_context = response.context.get("tags", "")
+            for tag in tags.split("+"):
+                self.assertIn(tag, tag_context)
+            page = response.context.get("page")
+            content_context = page.object_list
+            self.assertNotIn(notag_content, content_context)
+            self.assertEqual(len(contents), len(content_context))
+            for content in contents:
+                self.assertIn(content, content_context)
