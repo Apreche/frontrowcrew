@@ -2,14 +2,15 @@
 @use "colours.scss" as c;
 @use "fonts.scss" as f;
 @use "headings.scss" as h;
+@use "buttons.scss" as b;
 
 /** Buttons **/
 .btn-primary{
-    @include m.btn-primary;
+    @include b.btn-primary;
 }
 
 .btn-secondary{
-    @include m.btn-secondary;
+    @include b.btn-secondary;
     padding: 30px 10px;
     font-size: 22px;
 }
@@ -125,7 +126,7 @@ h5{
 
 .content-details-cta{
     .btn-primary{
-        @include m.btn-primary(1px);
+        @include b.btn-primary(1px);
         width: 17%;
         max-width: 170px;
         position: relative;
@@ -182,7 +183,7 @@ h5{
     border: 1px solid c.$gold;
     padding: 0px;
     button{
-        @include m.btn-primary;
+        @include b.btn-primary;
         width: 100%;
         padding: 0px;
         font-size: 20px;
