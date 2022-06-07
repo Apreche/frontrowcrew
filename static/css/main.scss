@@ -25,7 +25,7 @@ h2{
     @include h.h2;
 }
 
-/** buttons **/
+/** Buttons **/
 button{
     cursor: pointer;
 
@@ -46,7 +46,7 @@ button{
     }
 }
 
-/** links **/
+/** Anchor Elements **/
 a{
     cursor: pointer;
     color: c.$light-gold;
@@ -66,7 +66,7 @@ a{
     }
 }
 
-/** header **/
+/** Header **/
 header {
     background-color: c.$black;
     height: 180px;
@@ -161,7 +161,7 @@ header {
     margin-bottom: 50px;
 }
 
-/** Shows section **/
+/** Landing Page Shows Section **/
 .subsection{
     padding-top: 0;
     padding-bottom: 0;
@@ -204,7 +204,7 @@ header {
     }
 }
 
-/** Community Section **/
+/** Landing Page Community Section **/
 .landing-community{             // .uk-grid div
     margin-left: auto;
     margin-right: auto;
@@ -234,6 +234,16 @@ header {
         margin-top: 0;
     }
 }
+
+/** Primary Section **/
+.primary-section{
+    background-color: c.$dark-blue;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    @include m.corner-brackets;
+}
+
 
 /** footer **/
 footer {
