@@ -5,38 +5,19 @@
 @use "buttons.scss" as b;
 
 /** Buttons **/
-.btn-primary{
-    @include b.btn-primary;
-}
-
 .btn-secondary{
-    @include b.btn-secondary;
     padding: 30px 10px;
     font-size: 22px;
 }
 
 /** Headings **/
-
-h1{
-    @include h.h1;
-}
-
 h3{
-    @include h.h3;
     margin-top: 0px;
     margin-bottom: 0px;
     &.sub-show-name{
         font-family: f.$serif-font;
         font-size: 2rem;
     }
-}
-
-h4{
-    @include h.h4;
-}
-
-h5{
-    @include h.h5;
 }
 
 .content-view-title-container{

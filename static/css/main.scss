@@ -2,6 +2,7 @@
 @use "colours.scss" as c;
 @use "fonts.scss" as f;
 @use "headings.scss" as h;
+@use "buttons.scss" as b;
 @import "uikit/mixins.scss";
 @import "uikit/variables.scss";
 @import "uikit/uikit.scss";
@@ -21,14 +22,39 @@ main {
     padding-bottom: 140px;
 }
 
+/** Headings **/
+h1{
+    @include h.h1;
+}
+
 h2{
     @include h.h2;
+}
+
+h3{
+    @include h.h3;
+}
+
+h4{
+    @include h.h4;
+}
+
+h5{
+    @include h.h5;
 }
 
 /** Buttons **/
 button{
     cursor: pointer;
 
+}
+
+.btn-primary{
+    @include b.btn-primary;
+}
+
+.btn-secondary{
+    @include b.btn-secondary;
 }
 
 .header-button{
