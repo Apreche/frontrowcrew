@@ -270,6 +270,35 @@ header {
     @include m.corner-brackets;
 }
 
+/** Classes for Offset Grid Elements **/
+.offset-border-left{
+    border: 2px solid;
+}
+
+.offset-border-right{
+    border: 2px solid;
+    border-left: none;
+}
+
+.offset-grid{
+    &:first-child{
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+    + .offset-grid{
+        margin-top: 0px;
+        padding-top: 0px;
+        .offset-border-left,
+        .offset-border-right{
+            border-top: none;
+        }
+    }
+}
+
+/** Wrappers **/
+.padded-border-wrapper{
+  //  padding: 20px;
+}
 
 /** footer **/
 footer {
