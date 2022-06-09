@@ -7,91 +7,107 @@
 {% endblock extrahead %}
 
 {% block content %}
-<div class="uk-section primary-section uk-padding uk-grid uk-flex-middle">
-    <div class="uk-width-1-3">
-    {% if show.logo %}
-    <img src="{{ show.logo.url }}" />
-    {% else %}
-    <h1>{{ show.title }}</h1>
-    {% endif %}
-    </div>
-    {% if show.description %}
-    <div class="uk-width-2-3">
-        <p class="uk-text-large">{{ show.description }}</p>
-    </div>
-    {% endif %}
-    <button class="uk-button btn-secondary uk-align-center">Available Here:</button>
-</div>
 <div class="uk-section">
-    <h2>Content{% if tags %} tagged with {{ tags|join:", " }}{% endif %}</h2>
-    <div class="uk-grid uk-flex-center">
-        <div class="uk-width-1-3">
-        {% for content in page.object_list %}
-        {% if forloop.first %}
-            <h2>Latest</h2>
-            <a href="{% url "content-detail" show.slug content.catalog_number content.slug %}">
-                <h3>{{ content.title }}</h3>
-            </a>
-            <h3><i>{{ content.creation_time|date:"F j Y" }}</i></h3>
-            {% if content.tags.all %}
-                <ul class="tags-list">
-                    {% for tag in content.tags.all %}
-                    <li><a class="tag" href="{% url "show-tag-filter" content.show.slug tag.slug %}">#{{ tag.name }}</a></li>
-                    {% endfor %}
-                </ul>
+    <div class="uk-padding uk-grid show-content-grid uk-flex-middle offset-grid" uk-height-match="target: .match-target">
+        <div class="uk-width-1-4 offset-border-left show-title match-target">
+            <div class="padded-border-wrapper">
+                <div class="show-logo">
+            {% if show.logo %}
+                    <img src="{{ show.logo.url }}" />
+                {% else %}
+                    <h1>{{ show.title }}</h1>
             {% endif %}
-            <div>
-                {{ content.rendered_html|safe }}
+                </div>
             </div>
-            {% if content.things_of_the_day %}
-            <div class="content-view-totd">
-                <h3>&mdash; Things of the Day &mdash;</h3>
-                <ul class="uk-list">
-                    {% for thing in content.things_of_the_day %}
-                    <li>{{ thing.author }}:
-                        <a href="{{ thing.url }}" alt="{{ thing.description }}"
-                            {% if thing.error %}class="totd-error">(Broken Link)
-                            {% else %}>
-                            {% endif %}
-                            {{ thing.title }}
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            <a href="{% url "content-detail" show.slug content.catalog_number content.slug %}">{{ content.title }}</a>
         </div>
-        <div class="uk-width-2-3 uk-flex-first">
-            <ul class="uk-container uk-child-width-1-3@m" uk-grid uk-height-match="target: .card-wrapper">
-        {% else %}
-                <li>
-                    <div class="uk-card similar-content-card">
-                        <div class="uk-card-body">
-                            <div class="card-wrapper">
-                                <h4>{{ content.title }}</h4>
-                                <h4><i>{{ content.creation_time|date:"F j Y" }}</i></h4>
-                                {% if content.tags.all %}
-                                    <ul class="tags-list">
-                                        {% for tag in content.tags.all %}
-                                        <li><a class="tag" href="{% url "show-tag-filter" content.show.slug tag.slug %}">#{{ tag.name }}</a></li>
-                                        {% endfor %}
-                                    </ul>
+        {% if show.description %}
+        <div class="uk-width-3-4 offset-border-right match-target show-content-block content-block">
+            <p class="uk-text-large">{{ show.description }}</p>
+            <button class="uk-button btn-secondary">Subscribe:</button>
+        </div>
+        {% endif %}
+    </div>
+    {% if not tags %}
+        <div class=" uk-padding show-content-grid uk-grid offset-grid">
+            <div class="uk-width-3-4 offset-border-left latest-content-block content-block">
+            {% for content in page.object_list %}
+            {% if forloop.first %}
+                <a href="{% url "content-detail" show.slug content.catalog_number content.slug %}">
+                    <h1>{{ content.title }}</h1>
+                </a>
+                <div>
+                    {{ content.rendered_html|safe }}
+                </div>
+                {% if content.things_of_the_day %}
+                <div class="show-view-totd">
+                    <h4>&mdash; Things of the Day &mdash;</h4>
+                    <ul class="uk-list">
+                        {% for thing in content.things_of_the_day %}
+                        <li>{{ thing.author }}:
+                            <a href="{{ thing.url }}" alt="{{ thing.description }}"
+                                {% if thing.error %}class="totd-error">(Broken Link)
+                                {% else %}>
                                 {% endif %}
-                            </div>
-                        </div>
-                        <div class="uk-card-footer">
-                            <button class="uk-button ptn-primary">
-                                <a class="a-btn a-btn-similar" href="{% url "content-detail" show.slug content.catalog_number content.slug %}">Check it Out</a>
-                            </button>
-                        </div>
-                    </div>
-                </li>
+                                {{ thing.title }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+            <div class="uk-width-1-4 offset-border-right latest-title">
+                <div class="padded-border-wrapper">
+                    <h2>Latest Content:</h2>
+                    <h3><i>{{ content.creation_time|date:"F j Y" }}</i></h3>
+                    {% if content.tags.all %}
+                        <ul class="tags-list">
+                            {% for tag in content.tags.all %}
+                            <li><a class="tag" href="{% url "show-tag-filter" content.show.slug tag.slug %}">#{{ tag.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
         {% endif %}
         {% endfor %}
-            </ul>
-        </div>
+    {% endif %}
     </div>
+</div>
+<div class="uk-section">
+    {% if tags %}<h2>Content tagged with {{ tags|join:", " }}</h2>{% endif %}
+    <div class="uk-grid uk-flex-center show-content-grid">
+        <ul class="uk-container uk-child-width-1-3@m uk-flex-center" uk-grid uk-height-match="target: .card-wrapper">
+        {% for content in page.object_list %}
+        {% if not forloop.first %}
+            <li>
+                <div class="uk-card similar-content-card">
+                    <div class="uk-card-body">
+                        <div class="card-wrapper">
+                            <h4>{{ content.title }}</h4>
+                            <h4><i>{{ content.creation_time|date:"F j Y" }}</i></h4>
+                            {% if content.tags.all %}
+                                <ul class="tags-list">
+                                    {% for tag in content.tags.all %}
+                                    <li><a class="tag" href="{% url "show-tag-filter" content.show.slug tag.slug %}">#{{ tag.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="uk-card-footer">
+                        <button class="uk-button ptn-primary">
+                            <a class="a-btn a-btn-similar" href="{% url "content-detail" show.slug content.catalog_number content.slug %}">Check it Out</a>
+                        </button>
+                    </div>
+                </div>
+            </li>
+        {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+<div>
     <ul>
         {% if page.has_previous %}
         <li><a href="?page=1">first</a></li>
@@ -104,5 +120,4 @@
         {% endif %}
     </ul>
 </div>
-
 {% endblock content %}
