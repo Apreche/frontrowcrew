@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "django_readonly_field",
     "taggit",
 
+    "media",
     "podcasts",
     "shows",
 ]

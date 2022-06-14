@@ -21,6 +21,7 @@ ENV APP_ENV=${APP_ENV} \
 
 RUN apt-get update \
     && apt-get --no-install-recommends -y install \
+        libexempi8 \
         libmemcached-dev \
         postgresql-client \
     && pip3 install "poetry==${POETRY_VERSION}" \
