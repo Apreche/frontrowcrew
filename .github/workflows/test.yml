@@ -45,9 +45,9 @@ jobs:
       rabbitmq:
         image: rabbitmq:latest
         env:
-          RABBITMQ_DEFAULT_USER: ${{ env.BETAFRONTROWCREW.CELERY_USER }}
-          RABBITMQ_DEFAULT_PASSWORD: ${{ env.BETAFRONTROWCREW.CELERY_PASSWORD }}
-          RABBITMQ_DEFAULT_VHOST: ${{ env.BETAFRONTROWCREW.CELERY_VHOST }}
+          RABBITMQ_DEFAULT_USER: ${{ env.BETAFRONTROWCREW_CELERY_USER }}
+          RABBITMQ_DEFAULT_PASSWORD: ${{ env.BETAFRONTROWCREW_CELERY_PASSWORD }}
+          RABBITMQ_DEFAULT_VHOST: ${{ env.BETAFRONTROWCREW_CELERY_VHOST }}
         ports:
           - 5672:5672
         options: >-

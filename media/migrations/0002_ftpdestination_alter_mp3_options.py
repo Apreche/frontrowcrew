@@ -20,7 +20,14 @@ class Migration(migrations.Migration):
                 ('password', models.TextField(blank=True, default='')),
                 ('directory', models.TextField(blank=True, default='')),
                 ('custom_timeout', models.SmallIntegerField(blank=True, default=None)),
-                ('url_prefix', models.TextField(blank=True, default='', help_text='The URL at which the file will be available after uploading.')),
+                (
+                    'url_prefix',
+                    models.TextField(
+                        blank=True,
+                        default='',
+                        help_text='The URL at which the file will be available after uploading.'
+                    )
+                ),
             ],
         ),
         migrations.AlterModelOptions(
