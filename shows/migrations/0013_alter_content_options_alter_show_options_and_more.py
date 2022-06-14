@@ -13,15 +13,28 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='content',
-            options={'get_latest_by': 'pub_time', 'ordering': ['-pub_time'], 'verbose_name': 'Content', 'verbose_name_plural': 'Contents'},
+            options={
+                'get_latest_by': 'pub_time',
+                'ordering': ['-pub_time'],
+                'verbose_name': 'Content',
+                'verbose_name_plural': 'Contents'
+            },
         ),
         migrations.AlterModelOptions(
             name='show',
-            options={'get_latest_by': 'pub_time', 'verbose_name': 'Show', 'verbose_name_plural': 'Shows'},
+            options={
+                'get_latest_by': 'pub_time',
+                'verbose_name': 'Show',
+                'verbose_name_plural': 'Shows'
+            },
         ),
         migrations.AlterField(
             model_name='relatedlink',
             name='content',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='related_links', to='shows.content'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name='related_links',
+                to='shows.content'
+            ),
         ),
     ]
