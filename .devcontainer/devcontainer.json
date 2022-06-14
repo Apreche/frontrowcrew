@@ -2,7 +2,6 @@
 	"name": "Django Dev",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
-	"workspaceFolder": "/workspace",
 	"remoteEnv": {
 		"BETAFRONTROWCREW_DB_HOST": "db",
 		"BETAFRONTROWCREW_DB_NAME": "betafrc",
