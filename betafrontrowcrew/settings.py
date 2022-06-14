@@ -260,3 +260,12 @@ LOGGING = {
         'level': 'WARNING',
     },
 }
+
+IPYTHON_ARGUMENTS = [
+    "--no-confirm-exit",
+    "--no-banner",
+    "--ext=autoreload",
+    "-c=%autoreload 2",
+    "-i",
+    "--"
+]

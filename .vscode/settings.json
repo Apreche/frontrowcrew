@@ -2,4 +2,22 @@
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "django": {
+            "path": "python",
+            "args": [
+                "/workspace/manage.py",
+                "shell_plus",
+                "--quiet-load",
+                "--print-sql",
+                "--force-color"
+            ]
+        },
+        "zsh": null,
+        "JavaScript Debug Terminal": null
+    },
 }
