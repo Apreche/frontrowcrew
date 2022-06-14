@@ -9,12 +9,6 @@
             "args": [
                 "runserver_plus"
             ],
-            "env": {
-                "BETAFRONTROWCREW_DB_HOST": "localhost",
-                "BETAFRONTROWCREW_DB_NAME": "betafrc",
-                "BETAFRONTROWCREW_DB_USER": "betafrc",
-                "BETAFRONTROWCREW_DB_PASSWORD": "betafrc"
-            },
             "django": true
         },
         {
@@ -26,12 +20,6 @@
                 "test",
                 "--noinput"
             ],
-            "env": {
-                "BETAFRONTROWCREW_DB_HOST": "localhost",
-                "BETAFRONTROWCREW_DB_NAME": "betafrc",
-                "BETAFRONTROWCREW_DB_USER": "betafrc",
-                "BETAFRONTROWCREW_DB_PASSWORD": "betafrc"
-            },
             "django": true
         }
     ]
