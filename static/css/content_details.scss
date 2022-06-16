@@ -5,7 +5,7 @@
 @use "buttons.scss" as b;
 
 /** Buttons **/
-.btn-secondary{
+.btn-content-available{
     padding: 30px 10px;
     font-size: 22px;
 }
@@ -31,7 +31,7 @@ h3{
 }
 
 .content-view-show-logo{
-    max-height: 200px;
+    object-fit: contain;
 }
 
 .no-logo{
@@ -138,18 +138,16 @@ h3{
 .card-wrapper{
     background-color: c.$blue;
     padding: 15px;
-    margin-left: 0px;
     display: flex;
     flex-direction: column;
+    min-height: 200px;
     .similar-title-wrapper{
-        flex: 1;
-        padding-bottom:15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        h4{
-            margin: 0px;
-            font-size: 28px;
+        margin-top: auto;
+        margin-bottom: auto;
+        h2{
+            font-weight: 400;
+            text-transform: none;
+            font-size: 2.2em;
         }
     }
     h5{
@@ -158,3 +156,21 @@ h3{
     }
 }
 
+/** Archive Button **/
+.archive-btn-container{
+    text-align: center;
+}
+.btn-content-archive{
+    h2{
+        margin: 0px;
+        padding: 10px;
+        text-transform: capitalize;
+        font-weight: 500;
+    }
+    &:hover,
+    &:focus{
+        h2{
+            color: c.$black;
+        }
+    }
+}
