@@ -10,17 +10,21 @@
 }
 
 /** adds corner brackets to divs **/
-@mixin corner-brackets($width: 2px, $length: 40px, $color: c.$gold, $background: c.$dark-blue){
-    position: relative;
-    border: $width solid $color;
-    z-index: 0;
 
+@mixin corner-brackets($line-width: 2px, 
+                       $length: 40px, 
+                       $color: c.$gold,
+                       $background: c.$dark-blue, 
+                       ){
+    position: relative;
+    border: $line-width solid $color;
+    z-index: 0;
     &::before{
         content: "";
         z-index: -1;
         position: absolute;
-        top: -$width;
-        bottom: -$width;
+        top: -$line-width;
+        bottom: -$line-width;
         left: $length;
         right: $length;
         background-color: $background;
@@ -32,10 +36,42 @@
         position: absolute;
         top: $length;
         bottom: $length;
-        left: -$width;
-        right: -$width;
+        left: -$line-width;
+        right: -$line-width;
         background-color: $background;
         
+    }
+}
+
+@mixin corner-top-right($line-width: 2px,
+                    $length: 40px,
+                    $color: c.$gold,
+                    $background: c.$dark-blue,
+                    ){
+    @include corner-brackets;
+    &::before{
+        bottom: $line-width;
+        left: 0px;
+    }
+    &::after{
+        bottom: 0px;
+        left: $line-width;
+    }
+}
+
+@mixin corner-bottom-left($line-width: 2px,
+                    $length: 40px,
+                    $color: c.$gold,
+                    $background: c.$dark-blue,
+                    ){
+    @include corner-brackets;
+    &::before{
+        top: 0px;
+        right: 0px;
+    }
+    &::after{
+        top: 0px;
+        right: $line-width;
     }
 }
 

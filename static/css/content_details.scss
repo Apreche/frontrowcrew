@@ -21,13 +21,7 @@ h3{
 }
 
 .content-view-title-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 20px;
     padding-bottom: 40px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .content-view-show-info{
@@ -99,55 +93,20 @@ h3{
 
 .content-details-cta{
     .btn-primary{
-        @include b.btn-primary(1px);
         width: 17%;
         max-width: 170px;
-        position: relative;
-    }
-    .btn-wrapper{
-        width: calc(100% - 4px);
-        background-color: c.$black;
-        position: relative;
-        right: 28px;
-        padding: 0px 30px;
-        &:hover{
-            @extend .btn-wrapper;
-
-        }
     }
     .cta-dropdown{
         @include m.dropdowns;
     }
 }
 
-.similar-content-container{
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-}
-
 .a-btn-similar{
     display: block;
     padding: 15px 30px;
+    font-size: 24px;
 }
 
-.btn-content-archive{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    h2{
-        margin: 0px;
-        padding: 10px;
-        text-transform: capitalize;
-        font-weight: 500;
-    }
-    &:hover,
-    &:focus{
-        h2{
-            color: c.$black;
-        }
-    }
-}
 
 /** Similar Content Card Styles **/
 
@@ -164,14 +123,6 @@ h3{
             border-color: c.$light-gold;
             opacity: 0.8;
         }
-    }
-}
-
-.similar-content-card{
-    margin-left: auto;
-    margin-right: auto;
-    &:first-child{
-        margin-left: -30px;
     }
 }
 
