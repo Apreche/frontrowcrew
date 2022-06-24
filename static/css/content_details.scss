@@ -107,55 +107,6 @@ h3{
     font-size: 24px;
 }
 
-
-/** Similar Content Card Styles **/
-
-.uk-card-footer{
-    background-color: c.$black;
-    border: 1px solid c.$gold;
-    padding: 0px;
-    button{
-        @include b.btn-primary;
-        width: 100%;
-        padding: 0px;
-        font-size: 20px;
-        &:active{
-            border-color: c.$light-gold;
-            opacity: 0.8;
-        }
-    }
-}
-
-.uk-card-body{
-    background-color: c.$dark-blue;
-    border: 1px solid c.$gold;
-    padding: 10px;
-    text-align: center;
-    overflow-wrap: break-word;
-    hyphens: auto;
-}
-
-.card-wrapper{
-    background-color: c.$blue;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    min-height: 200px;
-    .similar-title-wrapper{
-        margin-top: auto;
-        margin-bottom: auto;
-        h2{
-            font-weight: 400;
-            text-transform: none;
-            font-size: 2.2em;
-        }
-    }
-    h5{
-        margin: 0px;
-        font-size: 18px;
-    }
-}
-
 /** Archive Button **/
 .archive-btn-container{
     text-align: center;
