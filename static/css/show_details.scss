@@ -4,6 +4,10 @@
 @use "headings.scss" as h;
 @use "buttons.scss" as b;
 
+.uk-section.show-hero{
+    margin-top: -20px;
+}
+
 .show-content-grid{
     .show-title,
     .latest-title{
