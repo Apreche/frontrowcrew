@@ -77,10 +77,12 @@
                 <div class="uk-card">
                     <div class="uk-card-body">
                         <div class="card-wrapper">
-                            <div class="similar-title-wrapper">
-                                <h2>{{ similar_content.title }}</h2>
+                            <div class="card-wrapper-inner">
+                                <div class="similar-title-wrapper">
+                                    <h2>{{ similar_content.title }}</h2>
+                                </div>
+                                <h5>{{ similar_content.show.title }}, {{ similar_content.creation_time|date:"F j Y" }}</h5>
                             </div>
-                            <h5>{{ similar_content.show.title }}, {{ similar_content.creation_time|date:"F j Y" }}</h5>
                         </div>
                     </div>
                     <div class="uk-card-footer">
