@@ -5,17 +5,12 @@
 @use "buttons.scss" as b;
 
 .show-content-grid{
-    width: 85%;
-    margin-left: auto;
-    margin-right: auto;
-    .content-block{
-        background-color: c.$dark-blue;
-    }
     .show-title,
     .latest-title{
         position:relative;
         background-color: c.$transparent-blue; 
         padding: 20px;
+        border: 2px solid;
         .padded-border-wrapper{
             background-color: c.$dark-blue;
             height: 100%;
@@ -23,7 +18,7 @@
             flex-direction: column;
             justify-content: center;
             text-align: center;
-            @include m.corner-brackets;
+            padding: 5px 15px;
         }
     }
 }
@@ -38,14 +33,23 @@
 
 .show-content-block{
     text-align: center;
+    p{
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 20px 0px;
+    }
 }
 
 .content-block{
     padding: 30px;
+    p{
+        padding: 15px 0px;
+    }
 }
 
 .show-view-totd{
     text-align: center;
+    padding: 0px 20px;
     h4{
         font-size: 1.7rem;
     }
@@ -53,4 +57,51 @@
 
 .latest-content-block{
     font-size: 18px;
+    width: 90%;
+    .btn-primary{
+        max-width: 150px; 
+    }
+}
+
+.latest-title{
+    h2{
+        font-size: 2.7em;
+    }
+}
+
+.btn-show-subscribe{
+    width: 45%;
+    font-size: 1.6rem;
+    padding: 5px;
+}
+
+.latest-grid{
+    margin-top: 0px;
+}
+
+.show-grid{
+    height:fit-content;
+}
+
+.show-hero-container{
+    max-width: 90vw;
+    >.uk-grid{
+        margin-left: 0px;
+        >.uk-grid{
+            margin: 0px;
+        }
+    }
+}
+
+.latest-title{
+    h1{
+        font-size: 2rem;
+    }
+    h2{
+        font-size: 2.3rem;
+    }
+}
+
+.latest-content-block{
+    font-size: 16px;
 }
