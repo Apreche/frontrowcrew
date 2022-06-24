@@ -43,38 +43,6 @@
     }
 }
 
-@mixin corner-top-right($line-width: 2px,
-                    $length: 40px,
-                    $color: c.$gold,
-                    $background: c.$dark-blue,
-                    ){
-    @include corner-brackets;
-    &::before{
-        bottom: $line-width;
-        left: 0px;
-    }
-    &::after{
-        bottom: 0px;
-        left: $line-width;
-    }
-}
-
-@mixin corner-bottom-left($line-width: 2px,
-                    $length: 40px,
-                    $color: c.$gold,
-                    $background: c.$dark-blue,
-                    ){
-    @include corner-brackets;
-    &::before{
-        top: 0px;
-        right: 0px;
-    }
-    &::after{
-        top: 0px;
-        right: $line-width;
-    }
-}
-
 /** Dropdowns **/
 @mixin dropdowns{
     background-color: c.$black;

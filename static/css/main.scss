@@ -282,15 +282,6 @@ header {
     @include m.corner-brackets;
 }
 
-/** Corner Bracket Classes **/
-.corner-top-right{
-    @include m.corner-top-right;
-}
-
-.corner-bottom-left{
-    @include m.corner-bottom-left;
-}
-
 /** Classes for Offset Grid Elements **/
 .offset-border-left{
     border: 2px solid;
