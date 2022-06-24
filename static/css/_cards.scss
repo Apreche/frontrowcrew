@@ -5,6 +5,7 @@ $border-width: 2px;
     background-color: c.$blue;
     display: flex;
     border: $border-width solid;
+    border-bottom: none;
 }
 
 .card-title-wrapper{
@@ -34,7 +35,7 @@ $border-width: 2px;
 .uk-card-body{
     background-color: c.$dark-blue;
     border: calc(2 * $border-width) c.$gold;
-    border-style: none double; 
+    border-style: solid double none double; 
     padding: 10px;
     text-align: center;
     overflow-wrap: break-word;
