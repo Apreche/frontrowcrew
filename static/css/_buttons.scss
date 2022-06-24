@@ -14,7 +14,7 @@
     line-height: normal;
     &:hover:not([aria-disabled="true"]),
     &:focus:not([aria-disabled="true"]){
-        background-color: c.$light-gold;
+        background-color: c.$gold;
         color: c.$black;
         outline-color: c.$gold;
         border-color: c.$blue;

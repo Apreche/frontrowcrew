@@ -64,6 +64,11 @@ button{
     @include b.primary-right;
 }
 
+.btn-medium{
+    padding: 5px 30px;
+
+}
+
 .header-button{
     background-color: c.$black;
     color: c.$gold;
