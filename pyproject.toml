@@ -24,7 +24,7 @@ django-taggit = "^3.0.0"
 django-readonly-field = "^1.1.1"
 
 [tool.poetry.dev-dependencies]
-django-debug-toolbar = "^3.2.4"
+django-debug-toolbar = "^3.5.0"
 ipython = "^8.3.0"
 ipdb = "^0.13.9"
 Werkzeug = "~2.0"
