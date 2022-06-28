@@ -9,85 +9,22 @@
     font-size: f.$header-subnav-font-size;
 }
 
-/** Button Styles **/
-@mixin btn-primary($outline-width: 1px){
-    background-color: c.$black;
-    color: c.$gold;
-    text-align: center;
-    font-family: f.$serif-font;
-    border: 2px solid c.$black;
-    outline: $outline-width solid c.$gold;
-    transition-duration: 0.3s;
-    line-height: normal;
-    &:hover:not([aria-disabled="true"]),
-    &:focus:not([aria-disabled="true"]){
-        background-color: c.$light-gold;
-        color: c.$black;
-        outline-color: c.$gold;
-        border-color: c.$blue;
-    }
-    &:active{
-        outline: none;
-    }
-    &[aria-disabled="true"]{
-        cursor: not-allowed;    
-        opacity: 0.7;
-    }
-    &.primary-left{
-        right: $outline-width;
-        &:focus{
-            margin: 0px;
-            outline-offset: 0px;
-        }
-    }
-    &.primary-right{
-        left: $outline-width;
-        &:focus{
-            margin: 0px;
-            outline-offset: 0px;
-        }
-    }
-}
-
-@mixin btn-secondary($outline-width: 1px){
-    background-color: c.$gold;
-    color: c.$black;
-    text-align: center;
-    font-family: f.$serif-font;
-    text-transform: uppercase;
-    border: 2px solid c.$black;
-    outline: $outline-width solid c.$gold;
-    transition-duration: 0.3s;
-    line-height: normal;
-    &:hover:not([aria-disabled="true"]),
-    &:focus:not([aria-disabled="true"]){
-        background-color: c.$dark-blue;
-        color: c.$gold;
-        border-color: c.$dark-blue;
-        outline: $outline-width solid c.$gold;
-        outline-offset: 0px;
-    }
-    &:active{
-        outline-color: c.$dark-blue;
-    }
-    &[aria-disabled="true"]{
-        cursor: not-allowed;    
-        opacity: 0.7;
-    }
-}
-
 /** adds corner brackets to divs **/
-@mixin corner-brackets($width: 2px, $length: 40px, $color: c.$gold, $background: c.$dark-blue){
-    position: relative;
-    border: $width solid $color;
-    z-index: 0;
 
+@mixin corner-brackets($line-width: 2px, 
+                       $length: 40px, 
+                       $color: c.$gold,
+                       $background: c.$dark-blue, 
+                       ){
+    position: relative;
+    border: $line-width solid $color;
+    z-index: 0;
     &::before{
         content: "";
         z-index: -1;
         position: absolute;
-        top: -$width;
-        bottom: -$width;
+        top: -$line-width;
+        bottom: -$line-width;
         left: $length;
         right: $length;
         background-color: $background;
@@ -99,8 +36,8 @@
         position: absolute;
         top: $length;
         bottom: $length;
-        left: -$width;
-        right: -$width;
+        left: -$line-width;
+        right: -$line-width;
         background-color: $background;
         
     }

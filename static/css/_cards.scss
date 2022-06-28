@@ -1,0 +1,91 @@
+$border-width: 2px;
+
+.uk-card-title{
+    padding: 10px;
+    background-color: c.$blue;
+    display: flex;
+    border: $border-width solid;
+    border-bottom: none;
+}
+
+.card-title-wrapper{
+    background-color: c.$dark-blue;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 10px 6px;
+    text-align: center;
+}
+
+.card-title{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.7rem;
+}
+
+.card-date{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}             
+
+.tags-list.card-meta{
+    font-size: 16px;
+}
+
+.uk-card-body{
+    background-color: c.$dark-blue;
+    border: calc(2 * $border-width) c.$gold;
+    border-style: solid double none double; 
+    padding: 10px;
+    text-align: center;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.card-wrapper{
+    min-height: 135px;
+    display: flex;
+    .similar-title-wrapper{
+        margin-top: auto;
+        margin-bottom: auto;
+        h2{
+            font-weight: 400;
+            text-transform: none;
+            font-size: 2.2em;
+        }
+    }
+    h5{
+        margin: 0px;
+        font-size: 18px;
+    }
+    p{
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 10px 0px;
+    }
+}
+
+.card-wrapper-inner{
+    background-color: c.$dark-blue;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.uk-card-footer{
+    background-color: c.$black;
+    border: $border-width solid c.$gold;
+    //border-top: none;
+    padding: 0px;
+    button{
+        width: 100%;
+        padding: 0px;
+        font-size: 20px;
+        &:active{
+            border-color: c.$light-gold;
+            opacity: 0.8;
+        }
+    }
+}
+
