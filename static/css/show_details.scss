@@ -25,6 +25,12 @@
             padding: 5px 15px;
         }
     }
+    .rendered-content{
+        padding: 15px 0px;
+        p{
+            padding: unset;
+        }
+    }
 }
 
 .show-title{
