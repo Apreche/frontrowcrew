@@ -104,93 +104,6 @@ a{
     }
 }
 
-/** Header **/
-header {
-    background-color: c.$black;
-    height: 180px;
-    font-weight: bold;
-    padding: 10px 50px;
-    border-bottom: 1px solid c.$gold;
-    nav {
-        height: 100%;
-        background-color: c.$black;
-        text-transform: uppercase;
-        form.uk-search{
-            background-color: c.$black;
-            color: c.$gold;
-            border: 1px solid c.$gold;
-            margin: 5px 10px;
-            padding: 5px 10px;
-            span{
-                padding-left: 5px;
-                svg{
-                    color: c.$gold;
-                }
-            }
-            input.uk-search-input,
-            %search-input{
-                background-color: c.$black;
-                color: c.$gold;
-                font-size: 1.1em;
-                padding-left: 10%;
-                font-family: f.$serif-font;
-                &::placeholder{
-                    @extend %search-input;
-                    padding-left: 0;
-                }
-            }
-        }
-        .header-dropdown-box{
-            @include m.dropdowns;
-        }
-        .header-subnav-ul{
-            li{
-                margin: 0 -15px;
-                @include m.header-subnav-font-styles;
-                &:not(.subnav-header-line){
-                    &:hover{
-                        color: c.$black;
-                        background-color: c.$gold;
-                    }
-                    >a{
-                        color: inherit;
-                        justify-content: center;
-                    }
-                }
-                &.subnav-header-line{
-                    color: c.$light-gold;
-                    font-size: calc(f.$header-subnav-font-size + 4px);
-                    font-family: f.$serif-font;
-                    &:not(:first-child){
-                        margin-top: 0;
-                    }
-                }
-                &.subnav-divider{
-                    margin: 10px 0;
-                    border-top: 1px solid c.$gold;
-                }
-            }
-        }
-        .uk-navbar-center,
-        .uk-navbar-center-left,
-        .uk-navbar-center-right{
-            height: 100%;
-            display: flex;
-        }
-        .header-logo{
-            height: 100%;
-        }
-        img.uk-logo,{
-            max-height: 100%;
-            cursor: pointer;
-        }
-        .burger{
-            width: 35px;
-            height: auto;
-        }
-    }
-}
-
 /** Hero section **/
 .hero{
     font-size: 2.5em;
@@ -371,6 +284,7 @@ footer {
     }
 }
 
+@import "header.scss";
 @import "content_details.scss";
 @import "show_details.scss";
 @import "cards.scss";
