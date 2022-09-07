@@ -1,4 +1,6 @@
+import os
 import random
+import tempfile
 
 from http import HTTPStatus
 from xml import etree
@@ -11,7 +13,14 @@ from .. import factories
 from .. import urls as podcast_urls
 
 
-@test.override_settings(ROOT_URLCONF=podcast_urls)
+@test.override_settings(
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
+    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    CELERY_TASK_ALWAYS_EAGER=True,
+    CELERY_TASK_EAGER_PROPAGATES=True,
+    ROOT_URLCONF=podcast_urls,
+)
 class PodcastsFeedTests(test.TestCase):
 
     @classmethod

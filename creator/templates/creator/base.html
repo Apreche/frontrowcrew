@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block html %}
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+    {% block extrahead %}{% endblock %}
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/pagedown.css" %}">
+    <style>
+        .asteriskField {
+            display: none;
+        }
+    </style>
+    {% endblock head %}
+</head>
+<body>
+    {% block body %}
+    {% block nav%}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url "creator-upload" %}">Upload</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% endblock nav%}
+    <div class="container mb-4">
+    {% block content %}{% endblock content %}
+    </div>
+    {% endblock body%}
+</body>
+{% block js %}
+<script src="{% static "bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+{% endblock js %}
+{% endblock html %}
+</html>

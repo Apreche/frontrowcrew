@@ -1,5 +1,6 @@
 import factory
 import markdown
+import random
 
 from django.utils import text
 from mdgen import MarkdownPostProvider
@@ -67,6 +68,13 @@ class ShowFactory(PublishableFactory):
         None,
     )
 
+    # I don't think we want to automatically make content for each show.
+    # contents = factory.RelatedFactoryList(
+    #     "shows.factories.ContentFactory",
+    #     factory_related_name="show",
+    #     size=lambda: random.randint(0, 3)
+    # )
+
 
 class ContentFactory(PublishableFactory):
     class Meta:
@@ -121,6 +129,12 @@ class ContentFactory(PublishableFactory):
             podcast=factory.SelfAttribute("..show.podcast")
         ),
         None,
+    )
+
+    related_links = factory.RelatedFactoryList(
+        "shows.factories.RelatedLinkFactory",
+        factory_related_name="content",
+        size=lambda: random.randint(0, 4)
     )
 
     @factory.post_generation
