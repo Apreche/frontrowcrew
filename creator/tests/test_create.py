@@ -1,0 +1,163 @@
+import http
+import os
+import random
+import tempfile
+
+from django import test
+from django import urls
+from django.contrib.auth import models as auth_models
+from betafrontrowcrew.tests import utils
+from creator import models as creator_models
+from creator import views as creator_views
+from media import factories as media_factories
+from podcasts import factories as podcast_factories
+from shows import factories as show_factories
+
+
+@test.override_settings(
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
+    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    CELERY_TASK_ALWAYS_EAGER=True,
+    CELERY_TASK_EAGER_PROPAGATES=True,
+)
+class CreateTest(utils.FRCTestCase):
+
+    def setUp(self):
+        super().setUp()
+        self.user = auth_models.User.objects.create_user(
+            username="Test User",
+            is_staff=True,
+        )
+        self.client = test.Client()
+        self.client.force_login(user=self.user)
+
+    def test_create_podcast_episode_get(self):
+        """ Test getting the blank podcast episode creation form """
+        mp3 = media_factories.MP3Factory()
+        url = urls.reverse(
+            "creator-podcast-episode",
+            args=[mp3.id],
+        )
+        response = self.client.get(path=url)
+        self.assertEqual(
+            response.status_code,
+            http.HTTPStatus.OK,
+        )
+
+    def test_create_podcast_episode_post(self):
+        """ Test actual podcast episode creation """
+        mp3 = media_factories.MP3Factory()
+        url = urls.reverse(
+            "creator-podcast-episode",
+            args=[mp3.id],
+        )
+
+        test_data_dir_path = os.path.join(os.path.dirname(__file__), "data")
+        test_image_name = "test_image.png"
+        test_image_path = os.path.join(test_data_dir_path, test_image_name)
+        destination = media_factories.FTPDestinationFactory()
+        show = show_factories.ShowFactory(
+            is_podcast=True,
+        )
+        content = show_factories.ContentFactory.build(
+            show=show,
+            is_markdown=True,
+            is_podcast=True,
+        )
+        podcast_episode = content.podcast_episode
+        main_form = {
+            "destination": destination.id,
+            "show": show.id,
+            "catalog_number": content.pub_time.strftime("%Y%m%d"),
+            "pub_time": content.pub_time.strftime("%Y-%m-%dT%H:%M"),
+            "title": content.title,
+            "tags": "taga, tagb",
+            "body": content.original_content,
+            "description": podcast_episode.description or "",
+            "author_name": podcast_episode.author_name or "",
+            "author_email": podcast_episode.author_email or "",
+            "image_description": podcast_episode.image_description or "",
+            "itunes_title": podcast_episode.itunes_title or "",
+            "itunes_episode_number": podcast_episode.itunes_episode_number or "",
+            "itunes_season_number": podcast_episode.itunes_season_number or "",
+            "itunes_explicit": podcast_episode.itunes_explicit or "",
+            "itunes_episode_type": podcast_episode.itunes_episode_type or "",
+            "itunes_block": podcast_episode.itunes_block or "",
+        }
+
+        if random.randint(0, 1):
+            test_image = open(test_image_path, "rb")
+            main_form["image"] = test_image
+
+        if random.randint(0, 1):
+            test_itunes_image = open(test_image_path, "rb")
+            main_form["itunes_image"] = test_itunes_image
+
+        num_related_links = random.randint(0, 4)
+        related_links = show_factories.RelatedLinkFactory.build_batch(size=num_related_links)
+        related_link_forms = []
+        for related_link in related_links:
+            related_link_forms.append(
+                {
+                    "title": related_link.title,
+                    "url": related_link.url,
+                    "author": related_link.author,
+                    "description": related_link.description or "",
+                }
+            )
+
+        num_chapters = random.randint(0, 6)
+        chapter_forms = []
+        for chapter in podcast_factories.PodcastChapterFactory.build_batch(size=num_chapters):
+            chapter_data = {
+                "start_time": chapter.start_time,
+                "title": chapter.title,
+                "description": chapter.description or "",
+                "url": chapter.url or "",
+                "url_description": chapter.url_description or "",
+                "image_description": chapter.image_description or "",
+            }
+            if random.randint(0, 1):
+                test_image = open(test_image_path, "rb")
+                chapter_data["image"] = test_image
+            chapter_forms.append(chapter_data)
+        payload = {}
+        for key, value in main_form.items():
+            payload[f"{creator_views.MAIN_FORM_PREFIX}-{key}"] = value
+        for index, chapter_form in enumerate(chapter_forms):
+            for key, value in chapter_form.items():
+                payload[f"{creator_views.CHAPTER_FORMSET_PREFIX}-{index}-{key}"] = value
+        for index, related_link_form in enumerate(related_link_forms):
+            for key, value in related_link_form.items():
+                payload[f"{creator_views.RELATED_LINK_FORMSET_PREFIX}-{index}-{key}"] = value
+        formset_fields = ["TOTAL_FORMS", "INITIAL_FORMS", "MIN_NUM_FORMS", "MAX_NUM_FORMS"]
+        for fieldname in formset_fields:
+            payload[f"{creator_views.RELATED_LINK_FORMSET_PREFIX}-{fieldname}"] = len(related_link_forms)
+            payload[f"{creator_views.CHAPTER_FORMSET_PREFIX}-{fieldname}"] = len(chapter_forms)
+
+        response = self.client.post(
+            path=url,
+            data=payload,
+        )
+        self.assertEqual(
+            response.status_code,
+            http.HTTPStatus.CREATED,
+        )
+
+        # Verify created chapters are in database
+        episode = response.context.get("episode", None)
+        self.assertIsNotNone(episode)
+        related_link_count = creator_models.RelatedLink.objects.filter(episode=episode).count()
+        self.assertEqual(related_link_count, num_related_links)
+        chapter_count = creator_models.Chapter.objects.filter(episode=episode).count()
+        self.assertEqual(chapter_count, num_chapters)
+
+        # close test files
+        main_itunes_image = main_form.get("itunes_image", None)
+        if main_itunes_image:
+            main_itunes_image.close()
+        for chapter_form in chapter_forms:
+            image = chapter_form.get("Image", None)
+            if image is not None:
+                image.close()

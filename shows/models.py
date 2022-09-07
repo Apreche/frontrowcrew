@@ -5,7 +5,7 @@ from django.core import exceptions, validators
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from taggit.managers import TaggableManager
+from taggit import managers as taggit_managers
 
 from . import managers
 
@@ -116,7 +116,7 @@ class Content(Publishable):
 
     objects = models.Manager()
     published = managers.PublishedContentManager()
-    tags = TaggableManager()
+    tags = taggit_managers.TaggableManager()
 
     title = models.TextField()
     show = models.ForeignKey(Show, on_delete=models.PROTECT)

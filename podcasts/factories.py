@@ -39,9 +39,11 @@ class PodcastFactory(factory.django.DjangoModelFactory):
             "set_explicit",
             "has_copyright",
             "has_creative_commons_license",
+            "has_custom_public_feed_url",
             "has_itunes_owner",
             "has_itunes_title",
             "has_image",
+            "has_image_description",
             "has_managing_editor",
             "has_secondary_category",
             "has_ttl",
@@ -80,8 +82,9 @@ class PodcastFactory(factory.django.DjangoModelFactory):
         factory.django.ImageField(width=3000, height=3000),
         "",
     )
+    has_image_description = factory.Faker("boolean")
     image_description = factory.Maybe(
-        "has_image",
+        "has_image_description",
         factory.Faker("sentence"),
         "",
     )
@@ -135,6 +138,13 @@ class PodcastFactory(factory.django.DjangoModelFactory):
         size=lambda: random.randint(0, 10)
     )
 
+    has_custom_public_feed_url = factory.Faker("boolean")
+    custom_public_feed_url = factory.Maybe(
+        "has_custom_public_feed_url",
+        factory.Faker("url"),
+        "",
+    )
+
 
 class PodcastEnclosureFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -153,8 +163,10 @@ class PodcastChapterFactory(factory.django.DjangoModelFactory):
         exclude = (
             "has_description",
             "has_end_time",
-            "has_image",
             "has_url",
+            "has_url_description",
+            "has_image",
+            "has_image_description",
         )
 
     episode = factory.SubFactory(
@@ -184,10 +196,22 @@ class PodcastChapterFactory(factory.django.DjangoModelFactory):
         factory.Faker("url"),
         "",
     )
+    has_url_description = factory.Faker("boolean")
+    url_description = factory.Maybe(
+        "has_url_description",
+        factory.Faker("sentence"),
+        "",
+    )
     has_image = factory.Faker("boolean")
     image = factory.Maybe(
         "has_image",
         factory.django.ImageField(width=3000, height=3000),
+        "",
+    )
+    has_image_description = factory.Faker("boolean")
+    image_description = factory.Maybe(
+        "has_image_description",
+        factory.Faker("sentence"),
         "",
     )
 
@@ -201,6 +225,8 @@ class PodcastEpisodeFactory(factory.django.DjangoModelFactory):
             "has_author_name",
             "has_author_email",
             "has_comments",
+            "has_image",
+            "has_image_description",
             "has_itunes_image",
             "has_itunes_title",
             "has_itunes_episode_number",
@@ -242,6 +268,18 @@ class PodcastEpisodeFactory(factory.django.DjangoModelFactory):
     comments = factory.Maybe(
         "has_comments",
         factory.Faker("url"),
+        "",
+    )
+    has_image = factory.Faker("boolean")
+    image = factory.Maybe(
+        "has_image",
+        factory.django.ImageField(width=3000, height=3000),
+        "",
+    )
+    has_image_description = factory.Faker("boolean")
+    image_description = factory.Maybe(
+        "has_image_description",
+        factory.Faker("sentence"),
         "",
     )
     has_itunes_image = factory.Faker("boolean")

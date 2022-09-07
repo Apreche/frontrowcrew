@@ -21,10 +21,13 @@ ENV APP_ENV=${APP_ENV} \
 
 RUN apt-get update \
     && apt-get --no-install-recommends -y install \
+        bash-completion \
         libexempi8 \
         libmemcached-dev \
         postgresql-client \
-    && pip3 install "poetry==${POETRY_VERSION}" \
+    && pip3 install \
+        "poetry==${POETRY_VERSION}" \
+        debugpy-run \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
@@ -33,3 +36,4 @@ COPY poetry.lock pyproject.toml /
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi --no-root \
     && rm -f poetry.lock pyproject.toml
+COPY .devcontainer/django_bash_completion /etc/bash_completion.d/

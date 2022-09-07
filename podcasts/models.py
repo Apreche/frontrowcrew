@@ -44,6 +44,11 @@ class iTunesOwner(models.Model):
 class Podcast(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=4000)
+    custom_public_feed_url = models.URLField(
+        blank=True,
+        default="",
+        help_text=_("The publicly shared RSS Feed URL for this podcast (i.e., FeedBurner)")
+    )
     language = models.CharField(
         max_length=2, default="en",
         help_text=_("ISO 639-1"),
@@ -57,9 +62,9 @@ class Podcast(models.Model):
         width_field="image_width",
         blank=True, default="",
     )
+    image_description = models.TextField(blank=True, default="")
     image_height = models.PositiveIntegerField(blank=True, null=True, default=None)
     image_width = models.PositiveIntegerField(blank=True, null=True, default=None)
-    image_description = models.TextField(blank=True, default="")
     itunes_image = models.ImageField(
         upload_to="podcasts/podcast/itunes_image/",
         height_field="itunes_image_height",
@@ -186,6 +191,16 @@ class PodcastEpisode(models.Model):
     author_name = models.CharField(max_length=255, blank=True, default="")
     author_email = models.EmailField(blank=True, default="")
     comments = models.URLField(blank=True, default="")
+    image = models.ImageField(
+        upload_to="podcasts/podcastepisodes/image/",
+        height_field="image_height",
+        width_field="image_width",
+        blank=True,
+        default="",
+    )
+    image_height = models.PositiveIntegerField(blank=True, null=True, default=None)
+    image_width = models.PositiveIntegerField(blank=True, null=True, default=None)
+    image_description = models.TextField(blank=True, default="")
     itunes_image = models.ImageField(
         upload_to="podcasts/podcastepisodes/itunes_image/",
         height_field="itunes_image_height",
@@ -267,6 +282,7 @@ class PodcastChapter(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255, blank=True, default="")
     url = models.URLField(blank=True, default="")
+    url_description = models.TextField(blank=True, default="")
     image = models.ImageField(
         upload_to="podcasts/podcastchapters/image/",
         height_field="image_height",
@@ -274,6 +290,7 @@ class PodcastChapter(models.Model):
         blank=True, default="",
         help_text=_("Aspect ratio must be 1:1."),
     )
+    image_description = models.TextField(blank=True, default="")
     image_height = models.PositiveIntegerField(blank=True, null=True, default=None)
     image_width = models.PositiveIntegerField(blank=True, null=True, default=None)
 

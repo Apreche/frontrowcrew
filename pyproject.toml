@@ -24,6 +24,10 @@ django-taggit = "^3.0.0"
 django-readonly-field = "^1.1.1"
 mutagen = "^1.45.1"
 python-xmp-toolkit = "^2.0.1"
+django-pagedown = "^2.2.1"
+django-crispy-forms = "^1.14.0"
+crispy-bootstrap5 = "^0.6"
+python-magic = "^0.4.27"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^3.2.4"

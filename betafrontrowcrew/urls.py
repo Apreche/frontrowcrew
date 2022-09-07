@@ -20,6 +20,8 @@ from django.urls import include, path
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
+    path("", include("pagedown.urls")),
+    path("admin/creator/", include("creator.urls")),
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     path("admin/", admin.site.urls),
     path(
