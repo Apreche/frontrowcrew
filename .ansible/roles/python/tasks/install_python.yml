@@ -22,6 +22,7 @@
   ansible.builtin.apt:
     pkg:
     - build-essential
+    - libexempi8
     - libfreetype6-dev
     - libjpeg-dev
     - liblcms2-dev

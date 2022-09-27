@@ -9,6 +9,12 @@ class ShowAdmin(admin.ModelAdmin):
         "sub_shows",
         "podcast",
     )
+    exclude = (
+        "logo_height",
+        "logo_width",
+        "thumbnail_height",
+        "thumbnail_width",
+    )
 
 
 @admin.register(models.Content)

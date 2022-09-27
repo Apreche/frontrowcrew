@@ -17,10 +17,15 @@ services:
     network_mode: service:db
 
     # Uncomment the next line to use a non-root user for all processes.
-    # user: vscode
+    user: vscode
 
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+    depends_on:
+      - db
+      - memcached
+      - miniomc
 
   memcached:
     image: memcached:latest
@@ -35,9 +40,31 @@ services:
       POSTGRES_USER: betafrc
       POSTGRES_DB: betafrc
       POSTGRES_PASSWORD: betafrc
-
     # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
+  minio:
+    image: quay.io/minio/minio:RELEASE.2022-08-08T18-34-09Z
+    command: server --console-address ":9001" /data/minio
+    volumes:
+      - minio-data:/data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadminpass
+
+  miniomc:
+    image: quay.io/minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c " /usr/bin/mc config host add miniodev http://minio:9000 minioadmin minioadminpass; /usr/bin/mc rm -r --force miniodev/frcdevbucket; /usr/bin/mc mb miniodev/frcdevbucket; /usr/bin/mc policy set download miniodev/frcdevbucket; exit 0; "
+
+  ftp:
+    image: delfer/alpine-ftp-server
+    volumes:
+      - alpineftp:/ftp
+
 volumes:
   postgres-data:
+  minio-data:
+  alpineftp:

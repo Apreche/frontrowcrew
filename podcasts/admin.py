@@ -9,6 +9,12 @@ class PodcastAdmin(admin.ModelAdmin):
         "itunes_primary_category",
         "itunes_secondary_category",
     )
+    exclude = (
+        "image_height",
+        "image_width",
+        "itunes_image_height",
+        "itunes_image_width",
+    )
 
 
 @admin.register(models.PodcastEpisode)

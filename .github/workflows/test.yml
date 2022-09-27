@@ -7,13 +7,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    env:
+      BETAFRONTROWCREW_DEBUG: False
+      BETAFRONTROWCREW_DB_NAME: test
+      BETAFRONTROWCREW_DB_USER: test
+      BETAFRONTROWCREW_DB_PASSWORD: test
+      BETAFRONTROWCREW_DB_HOST: 127.0.0.1
+      BETAFRONTROWCREW_DB_PORT: 5432
+      BETAFRONTROWCREW_MEMCACHED_SOCKET: 127.0.0.1:11211
+      BETAFRONTROWCREW_CELERY_USER: test
+      BETAFRONTROWCREW_CELERY_PASSWORD: test
+      BETAFRONTROWCREW_CELERY_HOST: 127.0.0.1
+      BETAFRONTROWCREW_CELERY_VHOST: test
 
     services:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: test
-          POSTGRES_PASSWORD: test
+          POSTGRES_USER: ${{ env.BETAFRONTROWCREW_DB_USER }}
+          POSTGRES_PASSWORD: ${{ env.BETAFRONTROWCREW_DB_PASSWORD }}
         ports:
           - 5432:5432
         options: >-
@@ -33,9 +45,9 @@ jobs:
       rabbitmq:
         image: rabbitmq:latest
         env:
-          RABBITMQ_DEFAULT_USER: test
-          RABBITMQ_DEFAULT_PASSWORD: test
-          RABBITMQ_DEFAULT_VHOST: test
+          RABBITMQ_DEFAULT_USER: ${{ env.BETAFRONTROWCREW_CELERY_USER }}
+          RABBITMQ_DEFAULT_PASSWORD: ${{ env.BETAFRONTROWCREW_CELERY_PASSWORD }}
+          RABBITMQ_DEFAULT_VHOST: ${{ env.BETAFRONTROWCREW_CELERY_VHOST }}
         ports:
           - 5672:5672
         options: >-
@@ -46,32 +58,21 @@ jobs:
     steps:
       - name: Install prerequisites
         run: |
-          sudo apt-get install libmemcached-dev
-
+          sudo apt-get install libmemcached-dev libexempi8
       - uses: actions/checkout@v3
       - name: Install poetry
         run: pipx install poetry
       - name: Install Python Environment
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: '3.8'
           cache: 'poetry'
       - run: poetry install
       # Add this for tracebacks
       - run: poetry add tblib
-
+      - name: Check for Django Migrations
+        run: |
+          poetry run python manage.py makemigrations --check --dry-run
       - name: Run Django tests
-        env:
-          BETAFRONTROWCREW_DEBUG: False
-          BETAFRONTROWCREW_DB_NAME: test
-          BETAFRONTROWCREW_DB_USER: test
-          BETAFRONTROWCREW_DB_PASSWORD: test
-          BETAFRONTROWCREW_DB_HOST: 127.0.0.1
-          BETAFRONTROWCREW_DB_PORT: 5432
-          BETAFRONTROWCREW_MEMCACHED_SOCKET: 127.0.0.1:11211
-          BETAFRONTROWCREW_CELERY_USER: test
-          BETAFRONTROWCREW_CELERY_PASSWORD: test
-          BETAFRONTROWCREW_CELERY_HOST: 127.0.0.1
-          BETAFRONTROWCREW_CELERY_VHOST: test
         run: |
           poetry run python manage.py test --shuffle --parallel auto
