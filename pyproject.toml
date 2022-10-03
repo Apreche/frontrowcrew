@@ -26,7 +26,7 @@ mutagen = "^1.45.1"
 python-xmp-toolkit = "^2.0.1"
 django-pagedown = "^2.2.1"
 django-crispy-forms = "^1.14.0"
-crispy-bootstrap5 = "^0.6"
+crispy-bootstrap5 = "^0.7"
 python-magic = "^0.4.27"
 
 [tool.poetry.dev-dependencies]
