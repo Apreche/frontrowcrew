@@ -5,14 +5,22 @@
     "python.linting.flake8Args": [
         "--max-line-length=120"
     ],
+    "python.terminal.activateEnvironment": false,
     "terminal.integrated.profiles.linux": {
-        "bash": {
-            "path": "bash",
-            "icon": "terminal-bash"
+        "bash (activated)": {
+            "path": "poetry",
+            "icon": "terminal-bash",
+            "color": "terminal.ansiBlack",
+            "args": [
+                "shell",
+                "-q"
+            ]
         },
         "django": {
-            "path": "python",
+            "path": "poetry",
+            "icon": "console",
             "args": [
+                "run",
                 "/workspace/manage.py",
                 "shell_plus",
                 "--quiet-load",
@@ -20,7 +28,11 @@
                 "--force-color"
             ]
         },
+        "bash": {
+            "path": "bash",
+        },
         "zsh": null,
         "JavaScript Debug Terminal": null
     },
+    "terminal.integrated.defaultProfile.linux": "bash (activated)"
 }
