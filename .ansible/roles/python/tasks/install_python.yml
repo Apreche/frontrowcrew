@@ -90,7 +90,7 @@
   file:
     state: absent
     path: "{{ virtualenv_project_dir }}"
-  when: not virtualenv_data.exists
+  when: not virtualenv_data.stat.exists
 
 - name: Install project Python requirements
   ansible.builtin.pip:
