@@ -174,7 +174,7 @@ class PodcastsFeedTests(test.TestCase):
                 category.attrib["text"]
             )
             sub_description = ""
-            children = category.getchildren()
+            children = list(category)
             if children:
                 self.assertEqual(len(children), 1)
                 sub_description = children[0].attrib["text"]
