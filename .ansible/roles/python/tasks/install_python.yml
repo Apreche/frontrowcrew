@@ -43,15 +43,13 @@
     state: latest
   become: yes
 
-- name: Ensure pip is installed
+- name: Ensure pip is installed and upgraded
   command: "python{{ python_version }} -m ensurepip --upgrade"
   become: yes
 
-- name: Upgrade pip using pip
-  ansible.builtin.pip:
-    executable: "pip{{ python_version }}"
-    name: pip
-    state: latest
+# Can't use ansible.builtin.pip until both Pythons have setuptools
+- name: Ensure setuptools is installed
+  command: "python{{ python_version }} -m pip install setuptools"
   become: yes
 
 - name: Install testresources
@@ -96,7 +94,6 @@
 
 - name: Install project Python requirements
   ansible.builtin.pip:
-    executable: "pip{{ python_version }}"
     requirements: "{{ requirements_file }}"
     virtualenv: "{{ virtualenv_project_dir }}"
     virtualenv_python: "python{{ python_version }}"
