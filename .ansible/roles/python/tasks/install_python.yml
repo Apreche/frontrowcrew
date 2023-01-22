@@ -19,8 +19,8 @@
     - "python{{ python_version }}"
     - "python{{ python_version }}-dev"
     - "python{{ python_version }}-distutils"
-    - "python{{ python-version }}-venv"
-    - "python{{ python-version }}-tk"
+    - "python{{ python_version }}-venv"
+    - "python{{ python_version }}-tk"
     state: latest
   become: yes
 
