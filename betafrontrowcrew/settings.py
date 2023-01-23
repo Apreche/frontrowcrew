@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
     # "django_celery_beat",
     "django_celery_results",
+    "django_celery_beat",
     "django_extensions",
     "django_readonly_field",
     "crispy_forms",
