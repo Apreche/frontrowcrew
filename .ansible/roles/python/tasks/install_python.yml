@@ -34,6 +34,7 @@
     - liblcms2-dev
     - libmemcached-dev
     - libpq-dev
+    - libsasl2-2
     - libtiff-dev
     - libwebp-dev
     - openssl
