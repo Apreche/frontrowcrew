@@ -28,6 +28,7 @@ django-pagedown = "^2.2.1"
 django-crispy-forms = "^1.14.0"
 crispy-bootstrap5 = "^0.7"
 python-magic = "^0.4.27"
+django-celery-beat = "^2.4.0"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^3.2.4"
