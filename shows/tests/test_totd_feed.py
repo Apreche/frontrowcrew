@@ -58,6 +58,7 @@ class TotDFeedTests(utils.FRCTestCase):
         )
         factories.RelatedLinkFactory.create_batch(
             size=NUM_LINKS + 1,
+            type_id=models.RelatedLinkType.FORUM_THREAD,
             published=True,
         )
         url = urls.reverse("totd-list-rss")

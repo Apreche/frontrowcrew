@@ -29,8 +29,8 @@ class Publishable(models.Model):
 
     class Meta:
         abstract = True
-        verbose_name = "Publishable"
-        verbose_name_plural = "Publishables"
+        verbose_name = _("Publishable")
+        verbose_name_plural = _("Publishables")
         get_latest_by = "pub_time"
 
 
@@ -100,8 +100,8 @@ class Show(Publishable):
         )
 
     class Meta:
-        verbose_name = "Show"
-        verbose_name_plural = "Shows"
+        verbose_name = _("Show")
+        verbose_name_plural = _("Shows")
         get_latest_by = "pub_time"
 
 
@@ -119,7 +119,7 @@ class Content(Publishable):
     tags = taggit_managers.TaggableManager()
 
     title = models.TextField()
-    show = models.ForeignKey(Show, on_delete=models.PROTECT)
+    show = models.ForeignKey("shows.Show", on_delete=models.PROTECT)
     slug = models.SlugField(max_length=255)
     catalog_number = models.CharField(
         max_length=255,
@@ -130,6 +130,16 @@ class Content(Publishable):
             ),
         ],
     )
+    image = models.ImageField(
+        upload_to="shows/content/image/",
+        height_field="image_height",
+        width_field="image_width",
+        blank=True,
+        default="",
+    )
+    image_description = models.TextField(blank=True, default="")
+    image_height = models.PositiveIntegerField(blank=True, null=True, default=None)
+    image_width = models.PositiveIntegerField(blank=True, null=True, default=None)
 
     creation_time = models.DateTimeField(auto_now_add=True)
     last_modified_time = models.DateTimeField(auto_now=True)
@@ -151,6 +161,8 @@ class Content(Publishable):
     search_vector = search.SearchVectorField(
         editable=False
     )
+
+    related_content = models.ManyToManyField("self")
 
     def __str__(self):
         return self.title
@@ -212,8 +224,8 @@ class Content(Publishable):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "Content"
-        verbose_name_plural = "Contents"
+        verbose_name = _("Content")
+        verbose_name_plural = _("Contents")
         get_latest_by = "pub_time"
         ordering = ["-pub_time"]
         unique_together = [
@@ -232,8 +244,14 @@ class RelatedLinkType(models.Model):
     What kind of relation ship does a RelatedLink have with its content?
     """
     THING_OF_THE_DAY = 1
+    FORUM_THREAD = 2
+    YOUTUBE_VIDEO = 3
+    PURCHASE_LINK = 4
 
-    description = models.TextField()
+    description = models.TextField(unique=True)
+    plural_description = models.TextField(unique=True)
+    slug = models.SlugField(unique=True)
+    plural_slug = models.SlugField(unique=True)
 
     def __str__(self):
         return self.description
@@ -247,11 +265,11 @@ class RelatedLink(models.Model):
     published = managers.PublishedRelatedLinkManager()
 
     content = models.ForeignKey(
-        Content, on_delete=models.PROTECT,
+        "shows.Content", on_delete=models.PROTECT,
         related_name="related_links",
     )
     type = models.ForeignKey(
-        RelatedLinkType, on_delete=models.PROTECT
+        "shows.RelatedLinkType", on_delete=models.PROTECT
     )
     title = models.TextField()
     description = models.TextField(blank=True, default="")
@@ -266,6 +284,32 @@ class RelatedLink(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = "Related Link"
-        verbose_name_plural = "Related Links"
+        verbose_name = _("Related Link")
+        verbose_name_plural = _("Related Links")
         ordering = ["-content__pub_time", "author"]
+
+
+class MetaDataType(models.Model):
+    """
+    What type of metadata is this?
+    """
+    BOOK_AUTHOR = 1
+
+    description = models.TextField(unique=True)
+    plural_description = models.TextField(unique=True)
+    slug = models.SlugField(unique=True)
+    plural_slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.description
+
+
+class MetaData(models.Model):
+    content = models.ForeignKey(
+        "shows.Content", on_delete=models.PROTECT,
+        related_name="metadata",
+    )
+    type = models.ForeignKey(
+        "shows.MetaDataType", on_delete=models.PROTECT
+    )
+    data = models.TextField()

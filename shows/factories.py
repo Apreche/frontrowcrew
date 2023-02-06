@@ -80,6 +80,8 @@ class ContentFactory(PublishableFactory):
     class Meta:
         model = models.Content
         exclude = (
+            "has_image",
+            "has_image_description",
             "is_markdown",
             "is_podcast",
             "raw_content",
@@ -130,9 +132,27 @@ class ContentFactory(PublishableFactory):
         ),
         None,
     )
+    has_image = factory.Faker("boolean")
+    image = factory.Maybe(
+        "has_image",
+        factory.django.ImageField(width=3000, height=3000),
+        "",
+    )
+    has_image_description = factory.Faker("boolean")
+    image_description = factory.Maybe(
+        "has_image_description",
+        factory.Faker("sentence"),
+        "",
+    )
 
     related_links = factory.RelatedFactoryList(
         "shows.factories.RelatedLinkFactory",
+        factory_related_name="content",
+        size=lambda: random.randint(0, 4)
+    )
+
+    meta_data = factory.RelatedFactoryList(
+        "shows.factories.MetaDataFactory",
         factory_related_name="content",
         size=lambda: random.randint(0, 4)
     )
@@ -149,6 +169,19 @@ class RelatedLinkTypeFactory(factory.django.DjangoModelFactory):
         model = models.RelatedLinkType
 
     description = factory.Faker("word")
+
+    @factory.lazy_attribute
+    def plural_description(self):
+        return f"{self.description}s"
+
+    @factory.lazy_attribute
+    def slug(self):
+        return text.slugify(self.description)[:50]
+
+    @factory.lazy_attribute
+    def plural_slug(self):
+        slug = text.slugify(self.description)[:49]
+        return f"{slug}s"
 
 
 class RelatedLinkFactory(factory.django.DjangoModelFactory):
@@ -168,17 +201,24 @@ class RelatedLinkFactory(factory.django.DjangoModelFactory):
                 ContentFactory,
                 is_published=True,
                 show__is_published=True,
+                related_links=[],
             )
         )
         unpublished = factory.Trait(
             content=factory.SubFactory(
                 ContentFactory,
                 is_published=False,
+                related_links=[],
             )
         )
+        use_new_type = factory.Trait(
+            type=factory.SubFactory(RelatedLinkTypeFactory)
+        )
 
-    content = factory.SubFactory(ContentFactory)
-    type = factory.SubFactory(RelatedLinkTypeFactory)
+    content = factory.SubFactory(ContentFactory, related_links=[])
+    type = factory.Iterator(
+        models.RelatedLinkType.objects.all()
+    )
     title = factory.Faker("sentence", nb_words=4)
     has_description = factory.Faker("boolean")
     description = factory.Maybe(
@@ -189,3 +229,37 @@ class RelatedLinkFactory(factory.django.DjangoModelFactory):
     url = factory.Faker("uri")
     author = factory.Faker("first_name")
     error = factory.Faker("boolean")
+
+
+class MetaDataTypeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.MetaDataType
+
+    description = factory.Faker("word")
+
+    @factory.lazy_attribute
+    def plural_description(self):
+        return f"{self.description}s"
+
+    @factory.lazy_attribute
+    def slug(self):
+        return text.slugify(self.description)[:50]
+
+    @factory.lazy_attribute
+    def plural_slug(self):
+        slug = text.slugify(self.description)[:49]
+        return f"{slug}s"
+
+
+class MetaDataFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.MetaData
+
+    class Params:
+        use_new_type = factory.Trait(
+            type=factory.SubFactory(MetaDataTypeFactory)
+        )
+
+    content = factory.SubFactory(ContentFactory, meta_data=[])
+    type = factory.Iterator(models.MetaDataType.objects.all())
+    data = factory.Faker("word")

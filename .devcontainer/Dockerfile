@@ -24,11 +24,12 @@ RUN apt-get update \
     libexempi8 \
     libmemcached-dev \
     postgresql-client \
-    && pip3 install \
+    sqlite3 \
+    && pip${VARIANT} install \
     "poetry~=${POETRY_VERSION}" \
-    debugpy-run \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY .devcontainer/django_bash_completion /etc/bash_completion.d/
+COPY .devcontainer/.sqliterc /home/vscode/

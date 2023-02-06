@@ -1,6 +1,6 @@
 from typing import Any, Dict
-from xml.sax.handler import ContentHandler
 from django.utils import feedgenerator
+from django.utils import xmlutils
 
 from podcasts import utils
 
@@ -13,7 +13,7 @@ class PodcastFeed(feedgenerator.Rss201rev2Feed):
         attrs['xmlns:creativeCommons'] = "http://backend.userland.com/creativeCommonsRssModule"
         return attrs
 
-    def add_root_elements(self, handler: ContentHandler) -> None:
+    def add_root_elements(self, handler: xmlutils.SimplerXMLGenerator) -> None:
         ###
         # https://github.com/django/django/blob/4.0.3/django/utils/feedgenerator.py
         # COPY/PASTE insetad of super() because of description
@@ -143,7 +143,7 @@ class PodcastFeed(feedgenerator.Rss201rev2Feed):
     def item_attributes(self, item: Dict[str, Any]) -> Dict[Any, Any]:
         return super().item_attributes(item)
 
-    def add_item_elements(self, handler: ContentHandler, item: Dict[str, Any]) -> None:
+    def add_item_elements(self, handler: xmlutils.SimplerXMLGenerator, item: Dict[str, Any]) -> None:
         simple_elements = [
             ("item_itunes_episode_number", "itunes:episode"),
             ("item_itunes_episode_type", "itunes:episodeType"),

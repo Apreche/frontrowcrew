@@ -63,8 +63,8 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "pagedown",
     "taggit",
-
     "creator",
+    "etl",
     "media",
     "podcasts",
     "shows",
@@ -223,7 +223,12 @@ else:
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_FILE_OVERWRITE = False
     AWS_S3_VERIFY = True
-    AWS_S3_ENDPOINT_URL = os.environ.get("BETAFRONTROWCREW_AWS_S3_ENDPOINT_URL", None)
+    AWS_S3_ENDPOINT_URL = os.environ.get(
+        "BETAFRONTROWCREW_AWS_S3_ENDPOINT_URL", None
+    )
+    AWS_S3_URL_PROTOCOL = os.environ.get(
+        "BETAFRONTROWCREW_AWS_S3_URL_PROTOCOL", "https:"
+    )
     custom_domain = os.environ.get(
         "BETAFRONTROWCREW_AWS_S3_CUSTOM_DOMAIN", None
     )

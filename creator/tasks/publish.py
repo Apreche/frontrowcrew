@@ -78,6 +78,8 @@ def publish_podcast_episode(episode_id):
             is_published=True,
             title=creator_episode.title,
             show=creator_episode.show,
+            image=creator_episode.image,
+            image_description=creator_episode.image_description,
             slug=text_utils.slugify(creator_episode.title),
             catalog_number=creator_episode.catalog_number,
             original_content=creator_episode.body,
