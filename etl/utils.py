@@ -6,15 +6,24 @@ from urllib.parse import urljoin
 from django.core.files.storage import default_storage
 
 
-def download_to_default_storage(old_path: str, new_base_path: str) -> None:
+def download_to_default_storage(
+    old_path: str,
+    new_filename: str = "",
+    old_base_url: str = "https://frontrowcrew.com/media/",
+    new_base_path: str = "/",
+) -> None:
     """ Download file at old_path and upload to default storage at new path"""
-    BASE_URL = "https://frontrowcrew.com/media/"
-    full_url = urljoin(BASE_URL, old_path)
-    response = requests.get(full_url, allow_redirects=True)
+
+    full_old_url = urljoin(old_base_url, old_path)
+    response = requests.get(full_old_url, allow_redirects=True)
+
     with tempfile.TemporaryFile() as local_file:
         local_file.write(response.content)
+
+        new_filename = new_filename or os.path.basename(old_path)
+
         destination_path = os.path.join(
-            new_base_path,
-            os.path.basename(old_path)
+            new_base_path, new_filename
         )
-        default_storage.save(destination_path, local_file)
+        filename = default_storage.save(destination_path, local_file)
+    return filename

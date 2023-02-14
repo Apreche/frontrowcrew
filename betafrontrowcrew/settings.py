@@ -43,6 +43,7 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    # Django Apps
     "django.contrib.admin",
     "django.contrib.admindocs",
     "django.contrib.auth",
@@ -54,16 +55,19 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.staticfiles",
 
-    # "django_celery_beat",
-    "django_celery_results",
+    # Third party apps
     "django_celery_beat",
+    "django_celery_results",
     "django_extensions",
     "django_readonly_field",
     "crispy_forms",
     "crispy_bootstrap5",
-    "pagedown",
+    "pagedown",  # The StackOverflow WYSIWYG Editor
     "taggit",
+
+    # First party apps
     "creator",
+    "embeds",
     "etl",
     "media",
     "podcasts",

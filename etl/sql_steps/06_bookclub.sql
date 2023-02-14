@@ -87,7 +87,7 @@ bookclub_purchase_link AS (
         '', -- AUTHOR
         FALSE, -- ERROR
         obb.new_id,
-        4 -- PURCHASE_LINK
+        3 -- PURCHASE_LINK
     FROM old_bookclub_books AS obb
     RETURNING id
 )

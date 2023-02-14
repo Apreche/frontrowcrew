@@ -158,11 +158,13 @@ class Content(Publishable):
         on_delete=models.PROTECT,
     )
 
+    embedded_media = models.ManyToManyField("embeds.Media")
+
+    related_content = models.ManyToManyField("self")
+
     search_vector = search.SearchVectorField(
         editable=False
     )
-
-    related_content = models.ManyToManyField("self")
 
     def __str__(self):
         return self.title
@@ -245,8 +247,7 @@ class RelatedLinkType(models.Model):
     """
     THING_OF_THE_DAY = 1
     FORUM_THREAD = 2
-    YOUTUBE_VIDEO = 3
-    PURCHASE_LINK = 4
+    PURCHASE_LINK = 3
 
     description = models.TextField(unique=True)
     plural_description = models.TextField(unique=True)

@@ -40,12 +40,6 @@ def update_related_link_types(apps, schema_editor):
             _("forum_threads"),
         ),
         (
-            models.RelatedLinkType.YOUTUBE_VIDEO,
-            _("YouTube Videos"),
-            _("youtube_video"),
-            _("youtube_videos"),
-        ),
-        (
             models.RelatedLinkType.PURCHASE_LINK,
             _("Purchase Links"),
             _("purchase_link"),

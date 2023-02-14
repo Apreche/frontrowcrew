@@ -9,10 +9,6 @@ from shows import models
 def create_related_link_types(apps, schema_editor):
     RelatedLinkType = apps.get_model("shows", "RelatedLinkType")
     RelatedLinkType.objects.create(
-        id=models.RelatedLinkType.YOUTUBE_VIDEO,
-        description=_("YouTube Video"),
-    )
-    RelatedLinkType.objects.create(
         id=models.RelatedLinkType.PURCHASE_LINK,
         description=_("Purchase Link"),
     )
@@ -20,9 +16,6 @@ def create_related_link_types(apps, schema_editor):
 
 def delete_related_link_types(apps, schema_editor):
     RelatedLinkType = apps.get_model("shows", "RelatedLinkType")
-    RelatedLinkType.objects.filter(
-        id=models.RelatedLinkType.YOUTUBE_VIDEO,
-    ).delete()
     RelatedLinkType.objects.filter(
         id=models.RelatedLinkType.PURCHASE_LINK,
     ).delete()
@@ -49,7 +42,7 @@ class Migration(migrations.Migration):
             reverse_sql=[
                 (
                     "ALTER sequence shows_relatedlinktype_id_seq RESTART with %s;",
-                    [models.RelatedLinkType.YOUTUBE_VIDEO]
+                    [models.RelatedLinkType.PURCHASE_LINK]
                 )
             ]
         )
