@@ -142,6 +142,10 @@ class Command(BaseCommand):
                 "method": py_steps.video_thumbnails.run,
             },
             {
+                "method": self._execute_sql_file,
+                "kwargs": {"filename": "08_geeknights.sql"},
+            },
+            {
                 "method": self._save_all_model_objects,
                 "kwargs": {
                     "app_name": "shows",
