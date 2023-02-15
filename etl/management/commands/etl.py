@@ -146,6 +146,10 @@ class Command(BaseCommand):
                 "kwargs": {"filename": "08_geeknights.sql"},
             },
             {
+                "method": self._execute_sql_file,
+                "kwargs": {"filename": "09_totd.sql"},
+            },
+            {
                 "method": self._save_all_model_objects,
                 "kwargs": {
                     "app_name": "shows",
