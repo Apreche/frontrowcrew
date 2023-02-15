@@ -40,6 +40,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
+                ("description", models.TextField(blank=True, default="")),
                 ("media_id", models.TextField()),
                 (
                     "service",

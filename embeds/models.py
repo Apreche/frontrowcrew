@@ -13,13 +13,14 @@ class Service(models.Model):
 
 
 class Media(models.Model):
+    description = models.TextField(blank=True, default="")
     service = models.ForeignKey(
         "embeds.Service", on_delete=models.PROTECT,
     )
     media_id = models.TextField()
 
     def __str__(self):
-        return f"{self.service.name} - {self.media_id}"
+        return f"[{self.service.name}] {self.description}"
 
     @property
     def embed_code(self):

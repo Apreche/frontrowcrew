@@ -1,4 +1,4 @@
--- Turn bookclub into content
+-- Turn videos into content
 WITH video_show_map AS (
     SELECT
         old_id,
@@ -57,10 +57,12 @@ WITH video_show_map AS (
 ), embedded_video AS (
     INSERT INTO public.embeds_media (
         id,
+        description,
         media_id,
         service_id
     ) SELECT
         nextval('embeds_media_id_seq') AS id, -- ID
+        ovv.title, -- description
         ovv.video_id, -- YouTube ID
         1 -- YOUTUBE
     FROM old_videos_video AS ovv
