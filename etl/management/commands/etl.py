@@ -150,6 +150,10 @@ class Command(BaseCommand):
                 "kwargs": {"filename": "09_totd.sql"},
             },
             {
+                "method": self._execute_sql_file,
+                "kwargs": {"filename": "10_tag_items.sql"},
+            },
+            {
                 "method": self._save_all_model_objects,
                 "kwargs": {
                     "app_name": "shows",

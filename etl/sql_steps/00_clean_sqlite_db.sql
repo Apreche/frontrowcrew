@@ -13,7 +13,6 @@ DROP TABLE IF EXISTS auth_user_user_permissions;
 DROP TABLE IF EXISTS celery_taskmeta;
 DROP TABLE IF EXISTS celery_tasksetmeta;
 DROP TABLE IF EXISTS django_admin_log;
-DROP TABLE IF EXISTS django_content_type;
 DROP TABLE IF EXISTS django_session;
 DROP TABLE IF EXISTS django_site;
 DROP TABLE IF EXISTS djcelery_crontabschedule;
