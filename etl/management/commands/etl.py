@@ -153,6 +153,14 @@ class Command(BaseCommand):
                 "method": self._execute_sql_file,
                 "kwargs": {"filename": "10_tag_items.sql"},
             },
+            # {
+            #     "method": self._execute_sql_file,
+            #     "kwargs": {"filename": "11_dedupe_tags.sql"},
+            # },
+            {
+                "method": self._execute_sql_file,
+                "kwargs": {"filename": "12_bookclub_relations.sql"},
+            },
             {
                 "method": self._save_all_model_objects,
                 "kwargs": {
