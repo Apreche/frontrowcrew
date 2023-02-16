@@ -116,7 +116,7 @@ class Content(Publishable):
 
     objects = models.Manager()
     published = managers.PublishedContentManager()
-    tags = taggit_managers.TaggableManager()
+    tags = taggit_managers.TaggableManager(blank=True)
 
     title = models.TextField()
     show = models.ForeignKey("shows.Show", on_delete=models.PROTECT)
@@ -158,9 +158,9 @@ class Content(Publishable):
         on_delete=models.PROTECT,
     )
 
-    embedded_media = models.ManyToManyField("embeds.Media")
+    embedded_media = models.ManyToManyField("embeds.Media", blank=True)
 
-    related_content = models.ManyToManyField("self")
+    related_content = models.ManyToManyField("self", blank=True)
 
     search_vector = search.SearchVectorField(
         editable=False
