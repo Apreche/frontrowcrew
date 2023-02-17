@@ -5,7 +5,7 @@ WITH old_news AS (
         nn.id AS old_id,
         nn.title AS title,
         nn.slug AS slug,
-        nn.pub_date AS pub_date,
+        (nn.pub_date + interval '1' day) at time zone 'utc' AS pub_date,
         nn.body AS body,
         nn._body_rendered AS body_rendered
     FROM frc_etl.news_news AS nn

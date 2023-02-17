@@ -5,7 +5,7 @@ WITH old_bookclub_books AS (
         bb.id AS old_id,
         bb.title AS title,
         bb.slug AS slug,
-        bb.announce_date AS announce_date,
+        (bb.announce_date + interval '1' day) at time zone 'utc' AS announce_date,
         bb.author AS author,
         bb.cover AS cover_image,
         bb.picker AS picker,
