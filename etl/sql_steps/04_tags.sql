@@ -1,7 +1,7 @@
 -- Import tags
 WITH old_tags AS (
     SELECT
-        nextval('taggit_taggeditem_id_seq') AS new_id,
+        nextval('taggit_tag_id_seq') AS new_id,
         tt.id AS old_id,
         tt.name AS name,
         tt.slug AS slug

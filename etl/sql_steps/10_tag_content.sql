@@ -1,3 +1,4 @@
+-- Attach tags to the appropriate items
 WITH old_tagged_item AS (
     SELECT
         nextval('taggit_taggeditem_id_seq') AS new_id,

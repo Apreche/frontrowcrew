@@ -1,9 +1,6 @@
 -- Remove unnecessary tables from SQLite export so it can be safely shared
--- NOTE: Run this in sqlite, not in PostgreSQL with fdw
--- ```
--- sqlite3 frc_old.db
--- > .read 00_clean_sqlite_db.sql
--- ```
+-- This runs in SQLite where all the others run in PostgreSQL
+
 DROP TABLE IF EXISTS auth_group;
 DROP TABLE IF EXISTS auth_group_permissions;
 DROP TABLE IF EXISTS auth_permission;
@@ -29,3 +26,46 @@ DROP TABLE IF EXISTS robots_rule_disallowed;
 DROP TABLE IF EXISTS robots_rule_sites;
 DROP TABLE IF EXISTS robots_url;
 DROP TABLE IF EXISTS south_migrationhistory;
+
+-- can't write to SQLite through foreign data wrapper
+-- Pre-clean the tags here
+
+-- Make unconflicting uppercase tags lowercase
+UPDATE taggit_tag
+SET name = lower(subquery.name)
+FROM (
+    SELECT
+        id,
+        name
+    FROM taggit_tag
+    WHERE NOT (lower(name) = name) -- at least one char is uppercase
+    AND slug not like '%_1' -- not a conflicting bad tag
+) AS subquery
+WHERE taggit_tag.id = subquery.id;
+
+
+-- Repair broken tags due to uppercase or conflicts
+UPDATE taggit_taggeditem
+SET tag_id = good_id
+FROM (
+    SELECT
+        gt.id AS good_id,
+        bt.id AS bad_id
+    FROM taggit_tag AS bt
+    JOIN taggit_tag AS gt
+    ON lower(bt.name) = gt.name
+    WHERE bt.slug like '%_1'
+    AND gt.slug not like '%_1'
+)
+WHERE tag_id = bad_id;
+
+-- delete duplicated tag assignments
+DELETE FROM taggit_taggeditem
+WHERE id NOT IN (
+    SELECT min(id)
+    FROM taggit_taggeditem
+    GROUP BY tag_id, object_id, content_type_id
+);
+
+-- delete bad tags entirely
+DELETE from taggit_tag WHERE slug like '%_1';

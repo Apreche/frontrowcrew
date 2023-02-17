@@ -1,6 +1,7 @@
 import tqdm
 import typing
 import os
+import sqlite3
 
 from django.apps import apps as django_apps
 from django.conf import settings
@@ -26,6 +27,27 @@ class Command(BaseCommand):
             settings.BASE_DIR, self.ETL_DB_FILE
         )
         return os.path.abspath(file_path)
+
+    def _execute_sqlite_file(
+        self,
+        *args,
+        filename: str,
+        sql_params: typing.List[typing.Union[str, int]] = [],
+        **kwargs
+    ) -> None:
+        """ Execute an SQL file on the SQLite source database directly """
+        sqlite_path = self._get_sqlite_file_path()
+        sql_file_path = os.path.join(
+            settings.BASE_DIR, self.ETL_STEPS_DIR, filename
+        )
+        with open(sql_file_path, "r") as sql_file:
+            sql = sql_file.read()
+
+        db = sqlite3.connect(sqlite_path)
+        cursor = db.cursor()
+        cursor.executescript(sql)
+        db.commit()
+        db.close()
 
     def _execute_sql_file(
         self,
@@ -80,6 +102,12 @@ class Command(BaseCommand):
         sqlite_path = self._get_sqlite_file_path()
 
         etl_steps = [
+            {
+                "method": self._execute_sqlite_file,
+                "kwargs": {
+                    "filename": "00_clean_sqlite_db.sql"
+                }
+            },
             {
                 "method": self._execute_sql_file,
                 "kwargs": {
@@ -151,7 +179,7 @@ class Command(BaseCommand):
             },
             {
                 "method": self._execute_sql_file,
-                "kwargs": {"filename": "10_tag_items.sql"},
+                "kwargs": {"filename": "10_tag_content.sql"},
             },
             # {
             #     "method": self._execute_sql_file,
