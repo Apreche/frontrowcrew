@@ -203,6 +203,9 @@ class Command(BaseCommand):
                     "model_name": "Content",
                 }
             },
+            {
+                "method": py_steps.podcast_enclosure_lengths.run,
+            },
             # {
             #     "method": self._execute_sql_file,
             #     "kwargs": {"filename": "XX_fdw_drop.sql"},
@@ -210,7 +213,7 @@ class Command(BaseCommand):
         ]
 
         try:
-            for step in tqdm.tqdm(etl_steps):
+            for step in tqdm.tqdm(etl_steps, desc="ETL"):
                 step["method"](*step.get("args", []), **step.get("kwargs", {}))
         finally:
             self.postgres_cursor.close()

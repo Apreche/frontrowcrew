@@ -1,4 +1,6 @@
 import hashlib
+import tqdm
+
 from etl import utils as etl_utils
 from embeds import models as embed_models
 from shows import models as show_models
@@ -9,7 +11,7 @@ def run() -> None:
     Get all the video thumbnails from YouTube
     """
     storage = show_models.Content._meta.get_field("image").storage
-    for embed in embed_models.Media.objects.all():
+    for embed in tqdm.tqdm(embed_models.Media.objects.all(), desc="Video Thumbnails"):
         youtube_id = embed.media_id
         download_params = {
             "old_path": f"{youtube_id}/maxresdefault.jpg",

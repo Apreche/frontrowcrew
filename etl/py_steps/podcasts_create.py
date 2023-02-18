@@ -1,5 +1,7 @@
 import typing
 import os
+import tqdm
+
 from django.core.files import base as django_files_base
 from podcasts import models as podcast_models
 from shows import models as show_models
@@ -119,7 +121,7 @@ def run() -> None:
         },
     ]
 
-    for podcast_data in podcasts_to_create:
+    for podcast_data in tqdm.tqdm(podcasts_to_create, desc="Create Podcasts"):
         create_podcast_for_show(
             itunes_owner=itunes_owner,
             **podcast_data,
