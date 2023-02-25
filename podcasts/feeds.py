@@ -151,9 +151,7 @@ class PodcastFeed(views.Feed):
         return item.guid
 
     def item_guid_is_permalink(self, item):
-        if not item.guid_is_permalink:
-            return False
-        return str(item.duration.seconds)
+        return item.guid_is_permalink
 
     def item_itunes_block(self, item):
         return item.itunes_block

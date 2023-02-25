@@ -1,15 +1,9 @@
 """global utils for betafrontrowcrew"""
+import uuid
 import http
 from django.http import response
 
 from . import forms
-
-__all__ = [
-    "HTTPResponseSeeOther",
-    "default_base_url",
-    "forms",
-    "str_to_bool",
-]
 
 
 def str_to_bool(input_string: str) -> bool:
@@ -18,6 +12,18 @@ def str_to_bool(input_string: str) -> bool:
     return input_string.lower() in truthy_strings
 
 
+def uuid4_str() -> str:
+    """ Generate a uuid4 as a string """
+    return str(uuid.uuid4())
+
+
 class HttpResponseSeeOther(response.HttpResponseRedirectBase):
     """ HTTPResponse for use on forms submission redirects """
     status_code = http.HTTPStatus.SEE_OTHER.value
+
+
+__all__ = [
+    "HttpResponseSeeOther",
+    "forms",
+    "str_to_bool",
+]

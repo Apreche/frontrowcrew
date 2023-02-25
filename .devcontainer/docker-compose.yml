@@ -1,3 +1,4 @@
+---
 version: '3.8'
 
 services:
@@ -32,10 +33,11 @@ services:
     restart: unless-stopped
 
   db:
-    image: postgres:latest
+    image: toleg/postgres_sqlite_fdw:latest
     restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data
+      - ..:/workspace:cached
     environment:
       POSTGRES_USER: betafrc
       POSTGRES_DB: betafrc
@@ -44,7 +46,7 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   minio:
-    image: quay.io/minio/minio:RELEASE.2022-08-08T18-34-09Z
+    image: minio/minio:latest
     command: server --console-address ":9001" /data/minio
     volumes:
       - minio-data:/data
@@ -53,11 +55,14 @@ services:
       MINIO_ROOT_PASSWORD: minioadminpass
 
   miniomc:
-    image: quay.io/minio/mc
+    image: minio/mc:latest
     depends_on:
       - minio
     entrypoint: >
-      /bin/sh -c " /usr/bin/mc config host add miniodev http://minio:9000 minioadmin minioadminpass; /usr/bin/mc rm -r --force miniodev/frcdevbucket; /usr/bin/mc mb miniodev/frcdevbucket; /usr/bin/mc policy set download miniodev/frcdevbucket; exit 0; "
+      /bin/sh -c "/usr/bin/mc config host add miniodev http://minio:9000 minioadmin minioadminpass &&
+      (/usr/bin/mc rb --force miniodev/frcdevbucket; /usr/bin/mc mb miniodev/frcdevbucket &&
+      /usr/bin/mc anonymous set download miniodev/frcdevbucket &&
+      exit 0)"
 
   ftp:
     image: delfer/alpine-ftp-server

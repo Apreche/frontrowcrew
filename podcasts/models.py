@@ -1,9 +1,9 @@
-import uuid
 from django import urls
 from django.core import exceptions
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models import Q, constraints
+from betafrontrowcrew import utils
 
 
 class iTunesCategory(models.Model):
@@ -132,7 +132,7 @@ class Podcast(models.Model):
         return urls.reverse(
             "podcast-rss",
             kwargs={
-                "podcast_id": self.id,
+                "podcast_id": self.pk,
             }
         )
 
@@ -181,7 +181,7 @@ class PodcastEpisode(models.Model):
     title = models.CharField(max_length=255)
     enclosure = models.ForeignKey(PodcastEnclosure, on_delete=models.PROTECT)
 
-    guid = models.CharField(max_length=255, blank=True, default=uuid.uuid4)
+    guid = models.CharField(max_length=255, blank=True, default=utils.uuid4_str)
     guid_is_permalink = models.BooleanField(default=False)
     pub_date = models.DateTimeField(blank=True, default=None)
     description = models.TextField(max_length=4000, blank=True, default="")

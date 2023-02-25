@@ -171,8 +171,17 @@ class PublishableContentTests(utils.FRCTestCase):
             )
             thing_dict[content.id] = thing
 
-        # Should always be 3 queries for any batch size
-        with self.assertNumQueries(3):
+        # 1 query for the content item
+        # 1 query for tags
+        # 1 query to get the related link types
+        # 1 query to get meta data types
+        # X queries, 1 for each related link type
+        # X queries, 1 for each meta data type
+        base_queries = 4
+        num_related_link_types = models.RelatedLinkType.objects.all().count()
+        num_meta_data_types = models.MetaDataType.objects.all().count()
+        total_queries = base_queries + num_related_link_types + num_meta_data_types
+        with self.assertNumQueries(total_queries):
             published_content = models.Content.published.filter(show=show)
             for content in published_content:
                 self.assertTrue(hasattr(content, "things_of_the_day"))
