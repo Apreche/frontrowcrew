@@ -3,11 +3,11 @@ WITH old_news AS (
     SELECT
         nextval('shows_content_id_seq') AS new_id,
         nn.id AS old_id,
-        nn.title AS title,
-        nn.slug AS slug,
+        trim(nn.title) AS title,
+        trim(nn.slug) AS slug,
         (nn.pub_date + interval '1' day) at time zone 'utc' AS pub_date,
-        nn.body AS body,
-        nn._body_rendered AS body_rendered
+        trim(nn.body) AS body,
+        trim(nn._body_rendered) AS body_rendered
     FROM frc_etl.news_news AS nn
 ), news_show AS (
     SELECT

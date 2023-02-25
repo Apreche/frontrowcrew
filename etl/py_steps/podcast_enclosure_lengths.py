@@ -61,7 +61,7 @@ def run() -> None:
     enclosures = podcast_models.PodcastEnclosure.objects.all()
     length_getter = ContentLengthGetter()
 
-    for enclosure in tqdm.tqdm(enclosures, desc="Enclosure Content Lengths"):
+    for enclosure in tqdm.tqdm(enclosures, desc="Setting Enclosure Lengths"):
         url = enclosure.url
         content_length = length_getter.get_length(url)
         if content_length is not None:

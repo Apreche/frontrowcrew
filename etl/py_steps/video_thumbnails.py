@@ -11,7 +11,7 @@ def run() -> None:
     Get all the video thumbnails from YouTube
     """
     storage = show_models.Content._meta.get_field("image").storage
-    for embed in tqdm.tqdm(embed_models.Media.objects.all(), desc="Video Thumbnails"):
+    for embed in tqdm.tqdm(embed_models.Media.objects.all(), desc="Downloading YouTube Thumbnails"):
         youtube_id = embed.media_id
         download_params = {
             "old_path": f"{youtube_id}/maxresdefault.jpg",

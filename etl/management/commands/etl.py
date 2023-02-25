@@ -20,11 +20,12 @@ class Command(BaseCommand):
 
     ETL_STEPS_DIR = "etl/sql_steps"
     ETL_DB_FILE = "etl/data/frc_old.db"
+    FORUM_DB_FILE = "etl/data/forum.db"
 
-    def _get_sqlite_file_path(self, *args, **kwargs) -> str:
+    def _get_sqlite_file_path(self, *args, filename: str, **kwargs) -> str:
         """ Get the absolute path of the sqlite file to ETL from """
         file_path = os.path.join(
-            settings.BASE_DIR, self.ETL_DB_FILE
+            settings.BASE_DIR, filename
         )
         return os.path.abspath(file_path)
 
@@ -36,7 +37,7 @@ class Command(BaseCommand):
         **kwargs
     ) -> None:
         """ Execute an SQL file on the SQLite source database directly """
-        sqlite_path = self._get_sqlite_file_path()
+        sqlite_path = self._get_sqlite_file_path(filename=self.ETL_DB_FILE)
         sql_file_path = os.path.join(
             settings.BASE_DIR, self.ETL_STEPS_DIR, filename
         )
@@ -99,7 +100,8 @@ class Command(BaseCommand):
         django_management.call_command("migrate", "--noinput", "--skip-checks", "-v0")
 
         self.postgres_cursor = django_db_connection.cursor()
-        sqlite_path = self._get_sqlite_file_path()
+        etl_sqlite_path = self._get_sqlite_file_path(filename=self.ETL_DB_FILE)
+        forum_sqlite_path = self._get_sqlite_file_path(filename=self.FORUM_DB_FILE)
 
         etl_steps = [
             {
@@ -112,7 +114,7 @@ class Command(BaseCommand):
                 "method": self._execute_sql_file,
                 "kwargs": {
                     "filename": "01_fdw_create.sql",
-                    "sql_params": [sqlite_path],
+                    "sql_params": [etl_sqlite_path, forum_sqlite_path],
                 },
             },
             {
@@ -181,13 +183,13 @@ class Command(BaseCommand):
                 "method": self._execute_sql_file,
                 "kwargs": {"filename": "10_tag_content.sql"},
             },
-            # {
-            #     "method": self._execute_sql_file,
-            #     "kwargs": {"filename": "11_dedupe_tags.sql"},
-            # },
             {
                 "method": self._execute_sql_file,
-                "kwargs": {"filename": "12_bookclub_relations.sql"},
+                "kwargs": {"filename": "11_bookclub_relations.sql"},
+            },
+            {
+                "method": self._execute_sql_file,
+                "kwargs": {"filename": "12_forum_threads.sql"},
             },
             {
                 "method": self._save_all_model_objects,
@@ -206,10 +208,13 @@ class Command(BaseCommand):
             {
                 "method": py_steps.podcast_enclosure_lengths.run,
             },
-            # {
-            #     "method": self._execute_sql_file,
-            #     "kwargs": {"filename": "XX_fdw_drop.sql"},
-            # }
+            {
+                "method": py_steps.forum_link_fill_in.run,
+            },
+            {
+                "method": self._execute_sql_file,
+                "kwargs": {"filename": "13_fdw_drop.sql"},
+            }
         ]
 
         try:

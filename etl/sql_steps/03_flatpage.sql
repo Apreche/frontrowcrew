@@ -8,11 +8,11 @@ INSERT INTO django_flatpage (
     registration_required
 )
 SELECT
-    url,
-    title,
-    content,
+    trim(url),
+    trim(title),
+    trim(content),
     enable_comments::int::bool,
-    template_name,
+    trim(template_name),
     registration_required::int::bool
 FROM frc_etl.django_flatpage;
 

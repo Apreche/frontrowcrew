@@ -3,16 +3,16 @@ WITH old_bookclub_books AS (
     SELECT
         nextval('shows_content_id_seq') AS new_id,
         bb.id AS old_id,
-        bb.title AS title,
-        bb.slug AS slug,
+        trim(bb.title) AS title,
+        trim(bb.slug) AS slug,
         (bb.announce_date + interval '1' day) at time zone 'utc' AS announce_date,
-        bb.author AS author,
+        trim(bb.author) AS author,
         bb.cover AS cover_image,
-        bb.picker AS picker,
-        bb.amazon_link AS purchase_link,
+        trim(bb.picker) AS picker,
+        trim(bb.amazon_link) AS purchase_link,
         bb.episode_id AS episode_id,
-        bb.description AS description,
-        bb._description_rendered AS rendered_description
+        trim(bb.description) AS description,
+        trim(bb._description_rendered) AS rendered_description
     FROM frc_etl.bookclub_book AS bb
 ), bookclub_show AS (
     SELECT

@@ -11,12 +11,12 @@ WITH video_show_map AS (
     SELECT
         nextval('shows_content_id_seq') AS new_id,
         vv.id AS old_id,
-        vv.title AS title,
-        vv.slug AS slug,
+        trim(vv.title) AS title,
+        trim(vv.slug) AS slug,
         (vv.pub_date + interval '1' day) at time zone 'utc' AS pub_date,
         vsm.new_id AS show_id,
-        vv.description AS description,
-        vv._description_rendered AS rendered_description,
+        trim(vv.description) AS description,
+        trim(vv._description_rendered) AS rendered_description,
         vv.video_id AS video_id
     FROM frc_etl.videos_video AS vv
     JOIN video_show_map AS vsm

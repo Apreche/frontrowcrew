@@ -181,6 +181,8 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.ScryptPasswordHasher',

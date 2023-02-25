@@ -121,7 +121,7 @@ def run() -> None:
         },
     ]
 
-    for podcast_data in tqdm.tqdm(podcasts_to_create, desc="Create Podcasts"):
+    for podcast_data in tqdm.tqdm(podcasts_to_create, desc="Creating Podcasts"):
         create_podcast_for_show(
             itunes_owner=itunes_owner,
             **podcast_data,

@@ -3,6 +3,10 @@ from django.contrib import admin
 from . import models
 
 
+class RelatedLinkInline(admin.TabularInline):
+    model = models.RelatedLink
+
+
 @admin.register(models.Show)
 class ShowAdmin(admin.ModelAdmin):
     raw_id_fields = (
@@ -24,6 +28,9 @@ class ContentAdmin(admin.ModelAdmin):
         "show",
         "podcast_episode",
     )
+    inlines = [
+        RelatedLinkInline
+    ]
 
 
 @admin.register(models.RelatedLinkType)

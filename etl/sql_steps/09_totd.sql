@@ -12,9 +12,9 @@ WITH episode_id_map AS (
     SELECT
         nextval('shows_relatedlink_id_seq') AS related_link_id,
         tt.id AS old_id,
-        tt.title AS title,
-        tt.url AS url,
-        tt.author AS author,
+        trim(tt.title) AS title,
+        trim(tt.url) AS url,
+        trim(tt.author) AS author,
         tt.episode_id AS episode_id,
         eim.content_id AS content_id,
         tt.error::int::boolean AS error
