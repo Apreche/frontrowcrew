@@ -1,7 +1,6 @@
 import os
 import requests
 import tempfile
-from http import HTTPStatus
 from urllib.parse import urljoin
 from django.core.files.storage import default_storage
 

@@ -1,3 +1,6 @@
 {
-    "driver": "postgres"
+    "driver": "postgres",
+    "ignore-errors": [
+        "invalid-drop-option"
+    ]
 }

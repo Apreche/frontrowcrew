@@ -1,3 +1,4 @@
+---
 version: '3.8'
 
 services:
@@ -58,7 +59,10 @@ services:
     depends_on:
       - minio
     entrypoint: >
-      /bin/sh -c "/usr/bin/mc config host add miniodev http://minio:9000 minioadmin minioadminpass && (/usr/bin/mc rb --force miniodev/frcdevbucket; /usr/bin/mc mb miniodev/frcdevbucket && /usr/bin/mc anonymous set download miniodev/frcdevbucket && exit 0)"
+      /bin/sh -c "/usr/bin/mc config host add miniodev http://minio:9000 minioadmin minioadminpass &&
+      (/usr/bin/mc rb --force miniodev/frcdevbucket; /usr/bin/mc mb miniodev/frcdevbucket &&
+      /usr/bin/mc anonymous set download miniodev/frcdevbucket &&
+      exit 0)"
 
   ftp:
     image: delfer/alpine-ftp-server
