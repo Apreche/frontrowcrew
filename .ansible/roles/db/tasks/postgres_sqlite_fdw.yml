@@ -17,6 +17,7 @@
 
 - name: Untar SQLite FDW package
   ansible.builtin.unarchive:
+    remote_src: true
     src: "{{ sqlite_fdw_tar_location }}"
     dest: "{{ sqlite_fdw_untar_location }}"
 
