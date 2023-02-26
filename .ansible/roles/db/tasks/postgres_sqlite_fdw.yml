@@ -17,7 +17,7 @@
 
 - name: Ensure SQLite FDW untar directory exists
   ansible.builtin.file:
-    path: "{{ sqlite_fdw_tar_location }}"
+    path: "{{ sqlite_fdw_untar_location }}"
     state: directory
     mode: '0755'
 
