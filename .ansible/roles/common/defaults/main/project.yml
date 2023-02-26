@@ -8,7 +8,8 @@ git_repo: "git@github.com:{{ lookup('env', 'GITHUB_REPOSITORY') }}.git"
 git_version: "{{ lookup('env', 'GITHUB_SHA') | default(lookup('env', 'GITHUB_REF_NAME'), True) }}"
 
 
-base_dir: "{{ ansible_env.HOME }}/projects"
+home_dir: "{{ ansible_env.HOME }}"
+base_dir: "{{ home_dir }}/projects"
 config_dir: "/etc"
 runtime_dir: "/run"
 temp_dir: "/tmp"
