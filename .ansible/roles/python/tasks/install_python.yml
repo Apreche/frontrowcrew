@@ -48,7 +48,7 @@
   command: "python{{ python_version }} -m ensurepip --upgrade"
   become: yes
 
-# Can't use ansible.builtin.pip until both Pythons have setuptools
+# Can't use ansible.builtin.pip without setuptools
 - name: Ensure setuptools is installed
   command: "python{{ python_version }} -m pip install setuptools"
   become: yes
@@ -59,6 +59,8 @@
     name: testresources
     state: latest
   become: yes
+  vars:
+    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
 - name: Install virtualenv
   ansible.builtin.pip:
@@ -66,11 +68,15 @@
     name: virtualenv
     state: latest
   become: yes
+  vars:
+    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
 - name: Install poetry
   ansible.builtin.pip:
     executable: "pip{{ python_version }}"
     name: "poetry~={{ poetry_version }}"
+  vars:
+    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
 - name: Set poetry bin and requirements.txt paths
   ansible.builtin.set_fact:
@@ -99,6 +105,8 @@
     virtualenv: "{{ virtualenv_project_dir }}"
     virtualenv_python: "python{{ python_version }}"
   notify: "restart web application server"
+  vars:
+    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
 - name: Remove requirements.txt
   ansible.builtin.file:

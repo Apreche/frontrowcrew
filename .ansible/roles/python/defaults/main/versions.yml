@@ -1,4 +1,4 @@
 ---
 python_version: "3.11"
-poetry_version: "1.3.0"
+poetry_version: "1.3.2"
 ...
