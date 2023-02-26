@@ -15,6 +15,12 @@
     dest: "{{ sqlite_fdw_tar_location }}"
     checksum: "{{ sqlite_fdw_tar_checksum }}"
 
+- name: Ensure SQLite FDW untar directory exists
+  ansible.builtin.file:
+    path: "{{ sqlite_fdw_tar_location }}"
+    state: directory
+    mode: '0755'
+
 - name: Untar SQLite FDW package
   ansible.builtin.unarchive:
     remote_src: true
