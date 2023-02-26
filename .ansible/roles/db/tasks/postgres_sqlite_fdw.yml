@@ -34,15 +34,15 @@
 
 - name: Build SQLite FDW
   community.general.make:
-    chdir: "{{ sqlite_fdw_untar_location }}"
-    parms:
+    chdir: "{{ sqlite_fdw_make_location }}"
+    params:
       USE_PGXS: 1
 
 - name: Install SQLite FDW
   community.general.make:
-    chdir: "{{ sqlite_fdw_untar_location }}"
+    chdir: "{{ sqlite_fdw_make_location }}"
     target: install
-    parms:
+    params:
       USE_PGXS: 1
   become: true
 
