@@ -11,5 +11,6 @@ sqlite_fdw_tar_checksum: "sha256:a216704206719613544af0b2e5d9a2ad836a39e8d7a44c7
 sqlite_fdw_tar_url: "https://github.com/pgspider/sqlite_fdw/archive/refs/tags/{{ sqlite_fdw_tar_filename }}"
 sqlite_fdw_tar_location: "/tmp/{{ sqlite_fdw_tar_filename }}"
 sqlite_fdw_untar_location: "/tmp/{{ sqlite_fdw_version }}"
+sqlite_fdw_make_location: "{{ sqlite_fdw_untar_location }}/sqlite_fdw-{{ sqlite_fdw_version }}"
 sqlite_fdw_extension_location: "/usr/share/postgresql/{{ postgresql_version }}/extension/sqlite_fdw.control"
 ...
