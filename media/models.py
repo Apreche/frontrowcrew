@@ -1,6 +1,7 @@
 import os
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from . import id3
 from . import ftp
@@ -29,8 +30,8 @@ class MP3(models.Model):
         )
 
     class Meta:
-        verbose_name = "MP3"
-        verbose_name_plural = "MP3s"
+        verbose_name = _("MP3")
+        verbose_name_plural = _("MP3s")
         get_latest_by = ["-upload_time"]
 
 
@@ -44,7 +45,8 @@ class FTPDestination(models.Model):
 
     url_prefix = models.TextField(
         blank=True, default="",
-        help_text="The URL at which the file will be available after uploading."
+        help_text=_("The URL at which the file will be available after uploading."),
+        verbose_name=_("URL Prefix"),
     )
 
     def __str__(self):
@@ -54,5 +56,5 @@ class FTPDestination(models.Model):
         return ftp.upload_file_to_destination(self, file, filename)
 
     class Meta:
-        verbose_name = "FTP Destination"
-        verbose_name_plural = "FTP Destinations"
+        verbose_name = _("FTP Destination")
+        verbose_name_plural = _("FTP Destinations")
