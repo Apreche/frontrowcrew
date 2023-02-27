@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class ImportRecord(models.Model):
@@ -11,3 +12,6 @@ class ImportRecord(models.Model):
 
     def __str__(self):
         return f"Import {self.old_table_name}:{self.old_id} -> {self.new_table_name}:{self.new_id}"
+
+    class Meta:
+        verbose_name_plural = _("Import Records")

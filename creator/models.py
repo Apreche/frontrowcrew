@@ -80,6 +80,9 @@ class Episode(models.Model):
     )
     itunes_block = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.title
+
 
 class RelatedLink(models.Model):
     episode = models.ForeignKey(
@@ -91,6 +94,9 @@ class RelatedLink(models.Model):
     url = models.URLField()
     author = models.TextField()
     description = models.TextField(blank=True, default="")
+
+    def __str__(self):
+        return self.title
 
 
 class Chapter(models.Model):
@@ -115,6 +121,9 @@ class Chapter(models.Model):
     image_height = models.PositiveIntegerField(blank=True, null=True, default=None)
     image_width = models.PositiveIntegerField(blank=True, null=True, default=None)
     image_description = models.TextField(blank=True, default="")
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         ordering = ("episode", "start_time")

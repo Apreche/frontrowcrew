@@ -227,7 +227,7 @@ class Content(Publishable):
 
     class Meta:
         verbose_name = _("Content")
-        verbose_name_plural = _("Contents")
+        verbose_name_plural = _("Content")
         get_latest_by = "pub_time"
         ordering = ["-pub_time"]
         unique_together = [
@@ -256,6 +256,10 @@ class RelatedLinkType(models.Model):
 
     def __str__(self):
         return self.description
+
+    class Meta:
+        verbose_name = _("Related Link Type")
+        verbose_name_plural = ("Related Link Types")
 
 
 class RelatedLink(models.Model):

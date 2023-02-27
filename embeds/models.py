@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Service(models.Model):
@@ -33,3 +34,6 @@ class Media(models.Model):
         return self.service.uri_template.format(
             media_id=self.media_id
         )
+
+    class Meta:
+        verbose_name_plural = _("Media")

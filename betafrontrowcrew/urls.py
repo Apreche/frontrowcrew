@@ -19,6 +19,13 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic.base import TemplateView
 
+# Update admin site headers
+from django.utils.translation import gettext_lazy as _
+admin.site.site_header = _("Front Row Crew CMS Admin")
+admin.site.index_title = _("Front Row Crew CMS Admin")
+admin.site.site_title = _("Front Row Crew CMS Admin")
+
+
 urlpatterns = [
     path("", include("pagedown.urls")),
     path("admin/creator/", include("creator.urls")),
