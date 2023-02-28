@@ -69,6 +69,7 @@ class Show(Publishable):
     parent_show = models.ForeignKey(
         "self",
         null=True,
+        blank=True,
         default=None,
         on_delete=models.PROTECT,
         related_name="child_shows",
