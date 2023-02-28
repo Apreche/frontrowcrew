@@ -250,12 +250,13 @@ class ShowPodcastFeedTests(utils.FRCTestCase):
             )
 
     @skip_if_invalid_rss_xml
-    def test_sub_show_items(self):
+    def test_child_show_items(self):
         parent_show = factories.ShowFactory(
             is_podcast=True,
             is_published=True,
         )
-        parent_show.sub_shows.add(self.show)
+        self.show.parent_show = parent_show
+        self.show.save()
         parent_url = urls.reverse(
             "show-podcast-rss",
             kwargs={"show_slug": parent_show.slug}
