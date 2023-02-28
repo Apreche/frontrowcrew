@@ -86,9 +86,7 @@ class ShowAdmin(admin.ModelAdmin):
     search_fields = ("title",)
     autocomplete_fields = (
         "podcast",
-    )
-    raw_id_fields = (
-        "sub_shows",
+        "parent_show",
     )
     exclude = (
         "logo_height",

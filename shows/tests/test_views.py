@@ -136,14 +136,15 @@ class ShowDetailTests(utils.FRCTestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
-    def test_sub_show_detail(self):
+    def test_child_show_detail(self):
         """
-        Sub-show content should appear on list page of immediate parent show
+        Child show content should appear on list page of immediate parent show
         """
         content = factories.ContentFactory(is_published=True, show__is_published=True)
-        sub_show = content.show
+        child_show = content.show
         show = factories.ShowFactory(is_published=True)
-        show.sub_shows.add(sub_show)
+        child_show.parent_show = show
+        child_show.save()
         url = urls.reverse(
             "show-detail",
             args=(show.slug,)
@@ -334,23 +335,24 @@ class ContentDetailTests(utils.FRCTestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
-    def test_content_detail_subshow(self):
+    def test_content_detail_child_show(self):
         """
-        Content visited with parent show URLs should redirect to the sub-show
+        Content visited with parent show URLs should redirect to the child-show
         """
         content = factories.ContentFactory(
             is_published=True,
             show__is_published=True,
         )
-        sub_show = content.show
+        child_show = content.show
         show = factories.ShowFactory(
             is_published=True,
         )
-        show.sub_shows.add(sub_show)
+        child_show.parent_show = show
+        child_show.save()
         url = urls.reverse(
             "content-detail",
             args=(
-                sub_show.slug,
+                child_show.slug,
                 content.catalog_number,
                 content.slug,
             )

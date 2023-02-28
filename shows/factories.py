@@ -68,13 +68,6 @@ class ShowFactory(PublishableFactory):
         None,
     )
 
-    # I don't think we want to automatically make content for each show.
-    # contents = factory.RelatedFactoryList(
-    #     "shows.factories.ContentFactory",
-    #     factory_related_name="show",
-    #     size=lambda: random.randint(0, 3)
-    # )
-
 
 class ContentFactory(PublishableFactory):
     class Meta:

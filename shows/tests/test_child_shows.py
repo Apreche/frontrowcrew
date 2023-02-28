@@ -14,36 +14,37 @@ from .. import factories
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
 )
-class SubShowTests(utils.FRCTestCase):
+class ChildShowTests(utils.FRCTestCase):
 
-    def test_sub_show_includes(self):
+    def test_child_show_includes(self):
         """
-        Test if content of a sub-show is included on the parent show
+        Test if content of a child-show is included on the parent show
         """
         content = factories.ContentFactory(
             show__is_published=True,
             is_published=True,
         )
-        sub_show = content.show
+        child_show = content.show
         parent_show = factories.ShowFactory(
             is_published=True,
         )
-        parent_show.sub_shows.add(sub_show)
+        child_show.parent_show = parent_show
+        child_show.save()
         self.assertIn(
             content,
             parent_show.published_content,
         )
 
-    def test_sub_show_mixed_includes(self):
+    def test_child_show_mixed_includes(self):
         """
         Test if content directly on parent show is properly mixed with content
-        from sub shows.
+        from child shows.
         """
         content = factories.ContentFactory(
             show__is_published=True,
             is_published=True,
         )
-        sub_show = content.show
+        child_show = content.show
         parent_show = factories.ShowFactory(
             is_published=True,
         )
@@ -51,7 +52,8 @@ class SubShowTests(utils.FRCTestCase):
             show=parent_show,
             is_published=True,
         )
-        parent_show.sub_shows.add(sub_show)
+        child_show.parent_show = parent_show
+        child_show.save()
         self.assertIn(
             content,
             parent_show.published_content,
@@ -61,16 +63,16 @@ class SubShowTests(utils.FRCTestCase):
             parent_show.published_content,
         )
 
-    def test_sub_show_unpublished_includes(self):
+    def test_parent_show_unpublished_includes(self):
         """
-        Published content on an unpublished sub-show should not appear even if
+        Published content on an unpublished child show should not appear even if
         the parent show is published.
         """
         content = factories.ContentFactory(
             show__is_published=False,
             is_published=True,
         )
-        sub_show = content.show
+        child_show = content.show
         parent_show = factories.ShowFactory(
             is_published=True,
         )
@@ -78,7 +80,8 @@ class SubShowTests(utils.FRCTestCase):
             show=parent_show,
             is_published=True,
         )
-        parent_show.sub_shows.add(sub_show)
+        child_show.parent_show = parent_show
+        child_show.save()
         self.assertNotIn(
             content,
             parent_show.published_content,
@@ -90,14 +93,14 @@ class SubShowTests(utils.FRCTestCase):
 
     def test_parent_show_unpublished(self):
         """
-        Even if a parent show is unpublished, a published sub-show should still
+        Even if a parent show is unpublished, a published child show should still
         be working independently of it.
         """
         content = factories.ContentFactory(
             show__is_published=True,
             is_published=True,
         )
-        sub_show = content.show
+        child_show = content.show
         parent_show = factories.ShowFactory(
             is_published=False,
         )
@@ -105,7 +108,8 @@ class SubShowTests(utils.FRCTestCase):
             show=parent_show,
             is_published=True,
         )
-        parent_show.sub_shows.add(sub_show)
+        child_show.parent_show = parent_show
+        child_show.save()
         self.assertNotIn(
             content,
             parent_show.published_content,
@@ -116,34 +120,36 @@ class SubShowTests(utils.FRCTestCase):
         )
         self.assertIn(
             content,
-            sub_show.published_content,
+            child_show.published_content,
         )
 
-    def test_sub_show_depth_is_one(self):
+    def test_child_show_depth_is_one(self):
         """
-        Sub-shows are not evaluated recursively.
+        Child shows are not evaluated recursively.
         Only content from immediate children is included.
         """
         content = factories.ContentFactory(
             show__is_published=True,
             is_published=True,
         )
-        sub_sub_show = content.show
-        sub_show = factories.ShowFactory(
+        child_child_show = content.show
+        child_show = factories.ShowFactory(
             is_published=True
         )
-        sub_show.sub_shows.add(sub_sub_show)
+        child_child_show.parent_show = child_show
+        child_child_show.save()
         parent_show = factories.ShowFactory(
             is_published=True
         )
-        parent_show.sub_shows.add(sub_show)
+        child_show.parent_show = parent_show
+        child_show.save()
         self.assertIn(
             content,
-            sub_sub_show.published_content,
+            child_child_show.published_content,
         )
         self.assertIn(
             content,
-            sub_show.published_content,
+            child_show.published_content,
         )
         self.assertNotIn(
             content,

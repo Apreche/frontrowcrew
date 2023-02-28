@@ -78,16 +78,17 @@ class ShowFeedTests(utils.FRCTestCase):
         self.assertEqual(len(items), 1)
 
     @skip_if_invalid_rss_xml
-    def test_sub_show_items(self):
+    def test_child_show_items(self):
         """
         Verify that content from sub-shows appears in RSS feed
         """
-        sub_content = factories.ContentFactory(
+        child_content = factories.ContentFactory(
             is_published=True,
             show__is_published=True,
         )
-        sub_show = sub_content.show
-        self.show.sub_shows.add(sub_show)
+        child_show = child_content.show
+        child_show.parent_show = self.show
+        child_show.save()
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
         sub_etree = etree.ElementTree.fromstring(response.content)
@@ -99,4 +100,4 @@ class ShowFeedTests(utils.FRCTestCase):
         self.assertEqual(len(items), 1)
         title = items[0].find("title")
         self.assertIsNotNone(title)
-        self.assertEqual(title.text, sub_content.title)
+        self.assertEqual(title.text, child_content.title)

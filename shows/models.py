@@ -66,9 +66,12 @@ class Show(Publishable):
         on_delete=models.PROTECT,
     )
 
-    sub_shows = models.ManyToManyField(
-        "self", symmetrical=False, blank=True,
-        verbose_name=_("Sub-shows"),
+    parent_show = models.ForeignKey(
+        "self",
+        null=True,
+        default=None,
+        on_delete=models.PROTECT,
+        related_name="child_shows",
     )
 
     def __str__(self):
@@ -95,7 +98,7 @@ class Show(Publishable):
             models.Q(
                 show=self
             ) | models.Q(
-                show__in=self.sub_shows.all()
+                show__in=self.child_shows.all()
             )
         )
 
