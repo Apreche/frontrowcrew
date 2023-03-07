@@ -41,7 +41,8 @@ WITH geeknights AS (
         is_published,
         pub_time,
         display_in_nav,
-        description
+        description,
+        parent_show_id
     ) SELECT
         new_id,
         title,
@@ -51,18 +52,11 @@ WITH geeknights AS (
         TRUE, -- is_published
         CURRENT_TIMESTAMP, -- pub_time
         FALSE, -- display_in_nav
-        '' -- description
+        '', -- description
+        geeknights.id -- parent_show_id
     FROM old_show
-    RETURNING id
-), sub_show_connection AS (
-    INSERT into public.shows_show_sub_shows (
-        from_show_id,
-        to_show_id
-    ) SELECT
-        geeknights.id,
-        sub_show.id
-    FROM sub_show
     CROSS JOIN geeknights
+    RETURNING id
 )
 INSERT INTO public.etl_importrecord (
     import_time,
