@@ -1,0 +1,6 @@
+{% extends "admin/base.html" %}
+
+{% block userlinks %}
+    <a href="{% url 'creator-upload' %}">Podcast Creator</a> /
+    {{ block.super }}
+{% endblock %}
