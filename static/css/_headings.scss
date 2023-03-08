@@ -1,18 +1,24 @@
 @use "colours.scss" as c;
 @use "fonts.scss" as f;
 
+$latest-h1-size: calc(1rem + 0.7vw);
+$latest-h2-size: calc(1rem + 0.6vw);
+$latest-h3-size: calc(1rem + 0.19vw); 
+$latest-h1-margin: 5px;
+$latest-h2-margin: 5px;
+
 @mixin h1{
     color: c.$gold;
     text-align: center;
     font-family: f.$serif-font;
-    font-size: 3.3rem;
+//    font-size: 3.3rem;
 }
 
 @mixin h2{
     color: c.$gold;
     text-align: center;
     font-family: f.$serif-font;
-    font-size: 2em;
+//    font-size: 2em;
     font-weight: 600;
     text-transform: uppercase;
 }
