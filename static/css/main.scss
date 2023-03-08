@@ -2,6 +2,7 @@
 @use "colours.scss" as c;
 @use "fonts.scss" as f;
 @use "headings.scss" as h;
+@use "buttons.scss" as b;
 @import "uikit/mixins.scss";
 @import "uikit/variables.scss";
 @import "uikit/uikit.scss";
@@ -17,17 +18,54 @@ body {
 
 main {
     flex: 1 0 auto;
-    padding-top: 20px;
-    padding-bottom: 140px;
+    padding: 20px 0px 140px 0px;
+}
+
+/** Headings **/
+h1{
+    @include h.h1;
 }
 
 h2{
     @include h.h2;
 }
 
-/** buttons **/
+h3{
+    @include h.h3;
+}
+
+h4{
+    @include h.h4;
+}
+
+h5{
+    @include h.h5;
+}
+
+/** Buttons **/
 button{
     cursor: pointer;
+
+}
+
+.btn-primary{
+    @include b.btn-primary;
+}
+
+.btn-secondary{
+    @include b.btn-secondary;
+}
+
+.primary-left{
+    @include b.primary-left;
+}
+
+.primary-right{
+    @include b.primary-right;
+}
+
+.btn-medium{
+    padding: 5px 30px;
 
 }
 
@@ -46,7 +84,7 @@ button{
     }
 }
 
-/** links **/
+/** Anchor Elements **/
 a{
     cursor: pointer;
     color: c.$light-gold;
@@ -66,7 +104,7 @@ a{
     }
 }
 
-/** header **/
+/** Header **/
 header {
     background-color: c.$black;
     height: 180px;
@@ -161,7 +199,7 @@ header {
     margin-bottom: 50px;
 }
 
-/** Shows section **/
+/** Landing Page Shows Section **/
 .subsection{
     padding-top: 0;
     padding-bottom: 0;
@@ -204,7 +242,7 @@ header {
     }
 }
 
-/** Community Section **/
+/** Landing Page Community Section **/
 .landing-community{             // .uk-grid div
     margin-left: auto;
     margin-right: auto;
@@ -233,6 +271,55 @@ header {
     &:last-child{
         margin-top: 0;
     }
+}
+
+/** Primary Section **/
+.primary-section{
+    background-color: c.$dark-blue;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    @include m.corner-brackets;
+}
+
+/** Classes for Offset Grid Elements **/
+.offset-border-left{
+    border: 2px solid;
+}
+
+.offset-border-right{
+    border: 2px solid;
+    border-left: none;
+}
+
+.offset-grid{
+    &:first-child{
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+    + .offset-grid{
+        margin-top: 0px;
+        padding-top: 0px;
+        .offset-border-left,
+        .offset-border-right{
+            border-top: none;
+        }
+    }
+}
+
+/** Other Helpers **/
+.padded-border-wrapper{
+  //  padding: 20px;
+}
+
+.grid-center{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flex-center{
+    justify-content: center;
+    align-items: center;
 }
 
 /** footer **/
@@ -285,3 +372,5 @@ footer {
 }
 
 @import "content_details.scss";
+@import "show_details.scss";
+@import "cards.scss";

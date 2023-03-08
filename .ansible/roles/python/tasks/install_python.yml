@@ -13,8 +13,14 @@
     - python3-testresources
     - python3-pip
     - python3-setuptools
+    - python3-tk
     - python3-venv
     - python-is-python3
+    - "python{{ python_version }}"
+    - "python{{ python_version }}-dev"
+    - "python{{ python_version }}-distutils"
+    - "python{{ python_version }}-venv"
+    - "python{{ python_version }}-tk"
     state: latest
   become: yes
 
@@ -22,42 +28,55 @@
   ansible.builtin.apt:
     pkg:
     - build-essential
+    - libexempi8
     - libfreetype6-dev
     - libjpeg-dev
     - liblcms2-dev
     - libmemcached-dev
     - libpq-dev
+    - libsasl2-2
     - libtiff-dev
     - libwebp-dev
     - openssl
     - tcl-dev
     - tk-dev
-    - python3-tk
     - zlib1g-dev
     state: latest
   become: yes
 
-- name: Upgrade pip using pip
+- name: Ensure pip is installed and upgraded
+  command: "python{{ python_version }} -m ensurepip --upgrade"
+  become: yes
+
+# Can't use ansible.builtin.pip without setuptools
+- name: Ensure setuptools is installed
+  command: "python{{ python_version }} -m pip install setuptools"
+  become: yes
+
+- name: Install testresources
   ansible.builtin.pip:
-    name: pip
+    executable: "pip{{ python_version }}"
+    name: testresources
     state: latest
   become: yes
+  vars:
+    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
 - name: Install virtualenv
   ansible.builtin.pip:
+    executable: "pip{{ python_version }}"
     name: virtualenv
     state: latest
   become: yes
-
-# - name: Upgrade virtualenv embed wheels
-#   ansible.builtin.command:
-#     cmd: "virtualenv --upgrade-embed-wheels"
-#   become: yes
+  vars:
+    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
 - name: Install poetry
   ansible.builtin.pip:
-    name: poetry
-    version: 1.1.12
+    executable: "pip{{ python_version }}"
+    name: "poetry~={{ poetry_version }}"
+  vars:
+    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
 - name: Set poetry bin and requirements.txt paths
   ansible.builtin.set_fact:
@@ -67,13 +86,27 @@
 - name: Generate requirements.txt
   ansible.builtin.command:
     chdir: "{{ project_source_dir }}"
-    cmd: "{{ poetry_bin }} export --without-hashes -f requirements.txt --output {{ requirements_file }}"
+    cmd: "{{ poetry_bin }} export --output {{ requirements_file }}"
+
+- name: Check if virtualenv has correct Python version
+  stat:
+    path: "{{ virtualenv_bin_dir }}/python{{ python_version }}"
+  register: virtualenv_data
+
+- name: Delete virtualenv if its Python version is old
+  file:
+    state: absent
+    path: "{{ virtualenv_project_dir }}"
+  when: not virtualenv_data.stat.exists
 
 - name: Install project Python requirements
   ansible.builtin.pip:
     requirements: "{{ requirements_file }}"
     virtualenv: "{{ virtualenv_project_dir }}"
+    virtualenv_python: "python{{ python_version }}"
   notify: "restart web application server"
+  vars:
+    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
 - name: Remove requirements.txt
   ansible.builtin.file:

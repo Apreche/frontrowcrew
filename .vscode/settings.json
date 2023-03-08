@@ -1,5 +1,43 @@
 {
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8",
+        "editor.formatOnSave": true
+    },
+    "python.formatting.provider": "none",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=120"
+    ],
+    "terminal.integrated.defaultProfile.linux": "bash (activated)",
+    "python.terminal.activateEnvironment": false,
+    "terminal.integrated.profiles.linux": {
+        "bash (activated)": {
+            "path": "poetry",
+            "icon": "terminal-bash",
+            "color": "terminal.ansiBlack",
+            "args": [
+                "shell",
+                "-q"
+            ]
+        },
+        "django": {
+            "path": "poetry",
+            "icon": "console",
+            "args": [
+                "run",
+                "/workspace/manage.py",
+                "shell_plus",
+                "--quiet-load",
+                "--print-sql",
+                "--force-color"
+            ]
+        },
+        "bash": {
+            "path": "bash",
+        },
+        "zsh": null,
+        "JavaScript Debug Terminal": null
+    }
 }

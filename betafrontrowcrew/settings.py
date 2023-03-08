@@ -43,6 +43,7 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    # Django Apps
     "django.contrib.admin",
     "django.contrib.admindocs",
     "django.contrib.auth",
@@ -54,12 +55,21 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.staticfiles",
 
-    # "django_celery_beat",
+    # Third party apps
+    "django_celery_beat",
     "django_celery_results",
     "django_extensions",
     "django_readonly_field",
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "pagedown",  # The StackOverflow WYSIWYG Editor
     "taggit",
 
+    # First party apps
+    "creator",
+    "embeds",
+    "etl",
+    "media",
     "podcasts",
     "shows",
 ]
@@ -87,6 +97,7 @@ if DEBUG:
     ] + MIDDLEWARE
 
 ROOT_URLCONF = "betafrontrowcrew.urls"
+LOGIN_URL = "/admin/"
 
 TEMPLATES = [
     {
@@ -107,6 +118,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "betafrontrowcrew.wsgi.application"
 
+DEFAULT_PROTOCOL = "http" if DEBUG else "https"
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -167,6 +181,8 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.ScryptPasswordHasher',
@@ -182,7 +198,7 @@ PASSWORD_HASHERS = [
 
 LANGUAGE_CODE = "en"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/New_York"
 
 USE_I18N = True
 
@@ -213,11 +229,32 @@ else:
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_FILE_OVERWRITE = False
     AWS_S3_VERIFY = True
+    AWS_S3_ENDPOINT_URL = os.environ.get(
+        "BETAFRONTROWCREW_AWS_S3_ENDPOINT_URL", None
+    )
+    AWS_S3_URL_PROTOCOL = os.environ.get(
+        "BETAFRONTROWCREW_AWS_S3_URL_PROTOCOL", "https:"
+    )
     custom_domain = os.environ.get(
         "BETAFRONTROWCREW_AWS_S3_CUSTOM_DOMAIN", None
     )
     if custom_domain is not None:
         AWS_S3_CUSTOM_DOMAIN = custom_domain
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}
 
 # Celery
 CELERY_TASK_ALWAYS_EAGER = DEBUG
@@ -245,17 +282,18 @@ if not DEBUG:
 # Taggit
 TAGGIT_CASE_INSENSITIVE = True
 
-# Logging
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'root': {
-        'handlers': ['console'],
-        'level': 'WARNING',
-    },
-}
+
+# Crispy Forms
+CRISPY_FAIL_SILENTLY = not DEBUG
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# IPython config for shell_plus
+IPYTHON_ARGUMENTS = [
+    "--no-confirm-exit",
+    "--no-banner",
+    "--ext=autoreload",
+    "-c=%autoreload 2",
+    "-i",
+    "--"
+]

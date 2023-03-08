@@ -1,4 +1,6 @@
+import os
 import random
+import tempfile
 
 from http import HTTPStatus
 from xml import etree
@@ -12,7 +14,11 @@ from .. import factories
 
 
 @test.override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage"
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
+    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    CELERY_TASK_ALWAYS_EAGER=True,
+    CELERY_TASK_EAGER_PROPAGATES=True,
 )
 class ShowPodcastFeedTests(utils.FRCTestCase):
 
@@ -188,7 +194,7 @@ class ShowPodcastFeedTests(utils.FRCTestCase):
                 category.attrib["text"]
             )
             sub_description = ""
-            children = category.getchildren()
+            children = list(category)
             if children:
                 self.assertEqual(len(children), 1)
                 sub_description = children[0].attrib["text"]
@@ -244,12 +250,13 @@ class ShowPodcastFeedTests(utils.FRCTestCase):
             )
 
     @skip_if_invalid_rss_xml
-    def test_sub_show_items(self):
+    def test_child_show_items(self):
         parent_show = factories.ShowFactory(
             is_podcast=True,
             is_published=True,
         )
-        parent_show.sub_shows.add(self.show)
+        self.show.parent_show = parent_show
+        self.show.save()
         parent_url = urls.reverse(
             "show-podcast-rss",
             kwargs={"show_slug": parent_show.slug}

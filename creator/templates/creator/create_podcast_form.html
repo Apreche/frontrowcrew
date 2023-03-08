@@ -1,0 +1,37 @@
+{% extends "creator/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extrahead %}
+{{ form.media }}
+{% endblock extrahead %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-sm-12 col-md-8 offset-md-2">
+        <h1>Create Podcast - {{ mp3 }}</h1>
+        <hr />
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-sm-12 col-md-8 offset-md-2">
+        <form action="{{ request.path }}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% crispy form %}
+        <hr />
+        <h2>Things of the Day</h2>
+        <hr />
+        {{ related_link_formset.management_form|crispy }}
+        {% for related_link_form in related_link_formset %}
+            {% crispy related_link_form %}
+        {% endfor %}
+        <h2>Chapters</h2>
+        {{ chapter_formset.management_form|crispy }}
+        {% for chapter_form in chapter_formset %}
+            {% crispy chapter_form %}
+        {% endfor %}
+        <input type="submit" name="btnSubmit" value="Submit" class="btn btn-primary" id="submit-id-submit" />
+        </form>
+    </div>
+</div>
+{% endblock content %}
