@@ -5,7 +5,7 @@ from django.core import exceptions, validators
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from taggit.managers import TaggableManager
+from taggit import managers as taggit_managers
 
 from . import managers
 
@@ -29,8 +29,8 @@ class Publishable(models.Model):
 
     class Meta:
         abstract = True
-        verbose_name = "Publishable"
-        verbose_name_plural = "Publishables"
+        verbose_name = _("Publishable")
+        verbose_name_plural = _("Publishables")
         get_latest_by = "pub_time"
 
 
@@ -66,9 +66,13 @@ class Show(Publishable):
         on_delete=models.PROTECT,
     )
 
-    sub_shows = models.ManyToManyField(
-        "self", symmetrical=False, blank=True,
-        verbose_name=_("Sub-shows"),
+    parent_show = models.ForeignKey(
+        "self",
+        null=True,
+        blank=True,
+        default=None,
+        on_delete=models.PROTECT,
+        related_name="child_shows",
     )
 
     def __str__(self):
@@ -95,13 +99,13 @@ class Show(Publishable):
             models.Q(
                 show=self
             ) | models.Q(
-                show__in=self.sub_shows.all()
+                show__in=self.child_shows.all()
             )
         )
 
     class Meta:
-        verbose_name = "Show"
-        verbose_name_plural = "Shows"
+        verbose_name = _("Show")
+        verbose_name_plural = _("Shows")
         get_latest_by = "pub_time"
 
 
@@ -116,10 +120,10 @@ class Content(Publishable):
 
     objects = models.Manager()
     published = managers.PublishedContentManager()
-    tags = TaggableManager()
+    tags = taggit_managers.TaggableManager(blank=True)
 
     title = models.TextField()
-    show = models.ForeignKey(Show, on_delete=models.PROTECT)
+    show = models.ForeignKey("shows.Show", on_delete=models.PROTECT)
     slug = models.SlugField(max_length=255)
     catalog_number = models.CharField(
         max_length=255,
@@ -130,6 +134,16 @@ class Content(Publishable):
             ),
         ],
     )
+    image = models.ImageField(
+        upload_to="shows/content/image/",
+        height_field="image_height",
+        width_field="image_width",
+        blank=True,
+        default="",
+    )
+    image_description = models.TextField(blank=True, default="")
+    image_height = models.PositiveIntegerField(blank=True, null=True, default=None)
+    image_width = models.PositiveIntegerField(blank=True, null=True, default=None)
 
     creation_time = models.DateTimeField(auto_now_add=True)
     last_modified_time = models.DateTimeField(auto_now=True)
@@ -147,6 +161,10 @@ class Content(Publishable):
         blank=True, null=True, default=None,
         on_delete=models.PROTECT,
     )
+
+    embedded_media = models.ManyToManyField("embeds.Media", blank=True)
+
+    related_content = models.ManyToManyField("self", blank=True)
 
     search_vector = search.SearchVectorField(
         editable=False
@@ -212,8 +230,8 @@ class Content(Publishable):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "Content"
-        verbose_name_plural = "Contents"
+        verbose_name = _("Content")
+        verbose_name_plural = _("Content")
         get_latest_by = "pub_time"
         ordering = ["-pub_time"]
         unique_together = [
@@ -232,11 +250,20 @@ class RelatedLinkType(models.Model):
     What kind of relation ship does a RelatedLink have with its content?
     """
     THING_OF_THE_DAY = 1
+    FORUM_THREAD = 2
+    PURCHASE_LINK = 3
 
-    description = models.TextField()
+    description = models.TextField(unique=True)
+    plural_description = models.TextField(unique=True)
+    slug = models.SlugField(unique=True)
+    plural_slug = models.SlugField(unique=True)
 
     def __str__(self):
         return self.description
+
+    class Meta:
+        verbose_name = _("Related Link Type")
+        verbose_name_plural = ("Related Link Types")
 
 
 class RelatedLink(models.Model):
@@ -247,11 +274,11 @@ class RelatedLink(models.Model):
     published = managers.PublishedRelatedLinkManager()
 
     content = models.ForeignKey(
-        Content, on_delete=models.PROTECT,
+        "shows.Content", on_delete=models.PROTECT,
         related_name="related_links",
     )
     type = models.ForeignKey(
-        RelatedLinkType, on_delete=models.PROTECT
+        "shows.RelatedLinkType", on_delete=models.PROTECT
     )
     title = models.TextField()
     description = models.TextField(blank=True, default="")
@@ -266,6 +293,32 @@ class RelatedLink(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = "Related Link"
-        verbose_name_plural = "Related Links"
+        verbose_name = _("Related Link")
+        verbose_name_plural = _("Related Links")
         ordering = ["-content__pub_time", "author"]
+
+
+class MetaDataType(models.Model):
+    """
+    What type of metadata is this?
+    """
+    BOOK_AUTHOR = 1
+
+    description = models.TextField(unique=True)
+    plural_description = models.TextField(unique=True)
+    slug = models.SlugField(unique=True)
+    plural_slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.description
+
+
+class MetaData(models.Model):
+    content = models.ForeignKey(
+        "shows.Content", on_delete=models.PROTECT,
+        related_name="metadata",
+    )
+    type = models.ForeignKey(
+        "shows.MetaDataType", on_delete=models.PROTECT
+    )
+    data = models.TextField()

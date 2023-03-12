@@ -2,6 +2,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debugpy Attach",
+            "type": "python",
+            "request": "attach",
+            "justMyCode": true,
+            "host": "localhost",
+            "port": 5678
+        },
+        {
             "name": "Django Runserver Plus",
             "type": "python",
             "request": "launch",
@@ -9,12 +17,6 @@
             "args": [
                 "runserver_plus"
             ],
-            "env": {
-                "BETAFRONTROWCREW_DB_HOST": "localhost",
-                "BETAFRONTROWCREW_DB_NAME": "betafrc",
-                "BETAFRONTROWCREW_DB_USER": "betafrc",
-                "BETAFRONTROWCREW_DB_PASSWORD": "betafrc"
-            },
             "django": true
         },
         {
@@ -26,12 +28,18 @@
                 "test",
                 "--noinput"
             ],
-            "env": {
-                "BETAFRONTROWCREW_DB_HOST": "localhost",
-                "BETAFRONTROWCREW_DB_NAME": "betafrc",
-                "BETAFRONTROWCREW_DB_USER": "betafrc",
-                "BETAFRONTROWCREW_DB_PASSWORD": "betafrc"
-            },
+            "django": true
+        },
+        {
+            "name": "Django Tests - Specific Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "test",
+                "--noinput",
+                "creator.tests.test_tasks.CreatorTaskTest.test_apply_id3_tags"
+            ],
             "django": true
         }
     ]

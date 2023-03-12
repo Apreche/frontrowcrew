@@ -1,0 +1,39 @@
+{% extends "creator/base.html" %}
+{% load crispy_forms_tags static %}
+
+{% block extrahead %}
+<script src="{% static "dropzone/dropzone.min.js" %}"></script>
+<link rel="stylesheet" href="{% static "dropzone/dropzone.min.css" %}" type="text/css" />
+<script>
+    Dropzone.options.imagedropzone = {
+        acceptedFiles: "image/*"
+    };
+    Dropzone.options.mp3dropzone = {
+        maxFiles: 1,
+        acceptedFiles: ".mp3",
+        init: function() {
+            this.on(
+                "success",
+                file => {
+                    const response = JSON.parse(file.xhr.responseText);
+                    window.location.replace(response.redirect_url);
+                }
+            );
+        }
+    };
+</script>
+{% endblock extrahead %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-sm-12 col-md-8 offset-md-2">
+        <h1>Upload MP3</h1>
+        <hr />
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-sm-12 col-md-8 offset-md-2">
+        {% crispy upload_form %}
+    </div>
+</div>
+{% endblock content %}

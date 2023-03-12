@@ -74,9 +74,7 @@ class PodcastFeed(views.Feed):
         return obj.itunes_explicit
 
     def itunes_image(self, obj):
-        if obj:
-            return obj.itunes_image.url
-        return None
+        return obj.itunes_image.url
 
     def itunes_new_feed_url(self, obj):
         return obj.itunes_new_feed_url
@@ -153,9 +151,7 @@ class PodcastFeed(views.Feed):
         return item.guid
 
     def item_guid_is_permalink(self, item):
-        if not item.guid_is_permalink:
-            return False
-        return str(item.duration.seconds)
+        return item.guid_is_permalink
 
     def item_itunes_block(self, item):
         return item.itunes_block
@@ -177,9 +173,13 @@ class PodcastFeed(views.Feed):
         return item.itunes_explicit
 
     def item_itunes_image(self, item):
-        if not item.itunes_image:
-            return None
-        return item.itunes_image.url
+        itunes_image = item.itunes_image
+        if itunes_image:
+            return itunes_image.url
+        image = item.image
+        if image:
+            return image.url
+        return None
 
     def item_itunes_season_number(self, item):
         if item.itunes_season_number is None:

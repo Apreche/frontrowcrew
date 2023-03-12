@@ -1,0 +1,53 @@
+---
+- name: Install SQLite FDW Prerequisites
+  ansible.builtin.apt:
+    pkg:
+      - build-essential
+      - sqlite3
+      - libsqlite3-dev
+      - postgresql-server-dev-all
+    state: latest
+  become: true
+
+- name: Download SQLite FDW package
+  ansible.builtin.get_url:
+    url: "{{ sqlite_fdw_tar_url }}"
+    dest: "{{ sqlite_fdw_tar_location }}"
+    checksum: "{{ sqlite_fdw_tar_checksum }}"
+
+- name: Ensure SQLite FDW untar directory exists
+  ansible.builtin.file:
+    path: "{{ sqlite_fdw_untar_location }}"
+    state: directory
+    mode: '0755'
+
+- name: Untar SQLite FDW package
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: "{{ sqlite_fdw_tar_location }}"
+    dest: "{{ sqlite_fdw_untar_location }}"
+
+- name: Remove SQLite FDW tar
+  ansible.builtin.file:
+    path: "{{ sqlite_fdw_tar_location }}"
+    state: absent
+
+- name: Build SQLite FDW
+  community.general.make:
+    chdir: "{{ sqlite_fdw_make_location }}"
+    params:
+      USE_PGXS: 1
+
+- name: Install SQLite FDW
+  community.general.make:
+    chdir: "{{ sqlite_fdw_make_location }}"
+    target: install
+    params:
+      USE_PGXS: 1
+  become: true
+
+- name: Remove SQLite FDW Installation files
+  ansible.builtin.file:
+    path: "{{ sqlite_fdw_untar_location }}"
+    state: absent
+...

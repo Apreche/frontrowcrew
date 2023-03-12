@@ -1,11 +1,21 @@
 import datetime
+import os
+import tempfile
 
+from django import test
 from django.utils import timezone
 from betafrontrowcrew.tests import utils
 
 from shows import factories, models
 
 
+@test.override_settings(
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
+    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    CELERY_TASK_ALWAYS_EAGER=True,
+    CELERY_TASK_EAGER_PROPAGATES=True,
+)
 class PublishableShowTests(utils.FRCTestCase):
     def setUp(self):
         super().setUp()
@@ -59,6 +69,13 @@ class PublishableShowTests(utils.FRCTestCase):
         self.assertNotIn(show, published_shows)
 
 
+@test.override_settings(
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
+    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    CELERY_TASK_ALWAYS_EAGER=True,
+    CELERY_TASK_EAGER_PROPAGATES=True,
+)
 class PublishableContentTests(utils.FRCTestCase):
     def setUp(self):
         super().setUp()
@@ -154,8 +171,17 @@ class PublishableContentTests(utils.FRCTestCase):
             )
             thing_dict[content.id] = thing
 
-        # Should always be 3 queries for any batch size
-        with self.assertNumQueries(3):
+        # 1 query for the content item
+        # 1 query for tags
+        # 1 query to get the related link types
+        # 1 query to get meta data types
+        # X queries, 1 for each related link type
+        # X queries, 1 for each meta data type
+        base_queries = 4
+        num_related_link_types = models.RelatedLinkType.objects.all().count()
+        num_meta_data_types = models.MetaDataType.objects.all().count()
+        total_queries = base_queries + num_related_link_types + num_meta_data_types
+        with self.assertNumQueries(total_queries):
             published_content = models.Content.published.filter(show=show)
             for content in published_content:
                 self.assertTrue(hasattr(content, "things_of_the_day"))

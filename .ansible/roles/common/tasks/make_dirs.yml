@@ -1,9 +1,22 @@
 ---
+
 - name: Create ansible remote temp dir
   ansible.builtin.file:
     path: "{{ ansible_temp_dir }}"
     state: directory
     mode: '0777'
+
+- name: Ensure home folder has correct perms
+  ansible.builtin.file:
+    path: "{{ home_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure project base dir exists
+  ansible.builtin.file:
+    path: "{{ base_dir }}"
+    state: directory
+    mode: '0755'
 
 - name: Ensure project source directory exists
   ansible.builtin.file:
