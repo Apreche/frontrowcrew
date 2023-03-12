@@ -143,6 +143,9 @@ requirements.txt
 # Dev vendor sass files
 static/css/uikit/
 
+# Dev bundled assets
+static/css/main.css
+
 # Local environment variables
 .envrc
 
