@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static "css/main.css" %}" />
+    <link rel="stylesheet" href="{% static "src/css/main.css" %}" />
     <title>{% block title %}{% endblock title %} | frontrowcrew.com</title>
     <script src="{% static "vendor/js/uikit-core.min.js" %}"></script>
     <script src="{% static "vendor/js/uikit-icons.min.js" %}"></script>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <a class="header-logo" href="{% url 'homepage' %}">
-                <img class="uk-navbar-item uk-logo" src="{% static "img/logo_thick_lines.png" alt="GeekNights Logo" %}"></li>
+                <img class="uk-navbar-item uk-logo" src="{% static "src/img/logo_thick_lines.png" alt="GeekNights Logo" %}"></li>
             </a>
             <div class="uk-navbar-center-right"><div>
                 <ul class="uk-navbar-nav">
@@ -65,7 +65,7 @@
                 </ul>
                 </div></div></div>
             <!-- <div class="uk-navbar-right">
-                <img class="burger" src="{% static "icons/menu.svg" %}">
+                <img class="burger" src="{% static "src/icons/menu.svg" %}">
             </div> -->
         </nav>
     </header>
@@ -88,26 +88,26 @@
             <div class="footer footer-social">
                 <text>Contact</text>
                     <ul class="social-icons">
-                        <li><a href="#"><img src="{% static "icons/gmail.svg" %}" uk-svg></a></li>
-                        <li><a href="#"><img src="{% static "icons/facebook.svg" %}" uk-svg></a></li>
-                        <li><a href="#"><img src="{% static "icons/twitter.svg" %}" uk-svg></a></li>
+                        <li><a href="#"><img src="{% static "src/icons/gmail.svg" %}" uk-svg></a></li>
+                        <li><a href="#"><img src="{% static "src/icons/facebook.svg" %}" uk-svg></a></li>
+                        <li><a href="#"><img src="{% static "src/icons/twitter.svg" %}" uk-svg></a></li>
                     </ul>
 
                 <text>Subscribe</text>
                     <ul class="social-icons">
-                        <li><a href="#"><img src="{% static "icons/spotify.svg" %}" uk-svg></a></li>
-                        <li><a href="#"><img src="{% static "icons/rss.svg" %}" uk-svg></a></li>
-                        <li><a href="#"><img src="{% static "icons/youtube.svg" %}" uk-svg></a></li>
-                        <li><a href="#"><img src="{% static "icons/apple.svg" %}" uk-svg></a></li>
-                        <li><a href="#"><img src="{% static "icons/instagram.svg" %}" uk-svg></a></li>
+                        <li><a href="#"><img src="{% static "src/icons/spotify.svg" %}" uk-svg></a></li>
+                        <li><a href="#"><img src="{% static "src/icons/rss.svg" %}" uk-svg></a></li>
+                        <li><a href="#"><img src="{% static "src/icons/youtube.svg" %}" uk-svg></a></li>
+                        <li><a href="#"><img src="{% static "src/icons/apple.svg" %}" uk-svg></a></li>
+                        <li><a href="#"><img src="{% static "src/icons/instagram.svg" %}" uk-svg></a></li>
                     </ul>
                 <text>Support</text>
                     <ul class="social-icons">
-                        <li><a href="#"><img src="{% static "icons/patreon.svg" %}" uk-svg></a></li>
+                        <li><a href="#"><img src="{% static "src/icons/patreon.svg" %}" uk-svg></a></li>
                     </ul>
             </div>
         </div>
-        <div id="license"><span><img src="{% static "icons/creative-commons.svg" %}" uk-svg>3.0</span></div>
+        <div id="license"><span><img src="{% static "src/icons/creative-commons.svg" %}" uk-svg>3.0</span></div>
     </footer>
     {% endblock body %}
   </body>
