@@ -3,6 +3,7 @@
 @use "fonts.scss" as f;
 @use "headings.scss" as h;
 @use "buttons.scss" as b;
+@use "sections.scss" as s;
 @import "../../vendor/css/uikit/mixins.scss";
 @import "../../vendor/css/uikit/variables.scss";
 @import "../../vendor/css/uikit/uikit.scss";
@@ -199,22 +200,18 @@ header {
     margin-bottom: 50px;
 }
 
-/** Landing Page Shows Section **/
-.subsection{
-    padding-top: 0;
-    padding-bottom: 0;
-    &:not(:last-child){
-        .landing-shows-content{
-            border-bottom: 1px solid c.$gold;
-        }
-    }
-    &:not(:first-child){
-        .landing-shows-title{
-            border-top: 0;
-        }
-    }
+/** Sections **/
+.primary-section{
+    @include s.primary-section;
 }
 
+.secondary-section{
+    @include s.secondary-section;
+}
+
+.subsection{
+    @include s.subsection;
+}
 
 .landing-shows{                     // This is the .uk-container div
     color: c.$light-gold;
@@ -271,15 +268,6 @@ header {
     &:last-child{
         margin-top: 0;
     }
-}
-
-/** Primary Section **/
-.primary-section{
-    background-color: c.$dark-blue;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    @include m.corner-brackets;
 }
 
 /** Classes for Offset Grid Elements **/
