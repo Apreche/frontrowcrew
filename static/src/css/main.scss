@@ -3,9 +3,9 @@
 @use "fonts.scss" as f;
 @use "headings.scss" as h;
 @use "buttons.scss" as b;
-@import "uikit/mixins.scss";
-@import "uikit/variables.scss";
-@import "uikit/uikit.scss";
+@import "../../vendor/css/uikit/mixins.scss";
+@import "../../vendor/css/uikit/variables.scss";
+@import "../../vendor/css/uikit/uikit.scss";
 
 
 body {
@@ -180,7 +180,7 @@ header {
         .header-logo{
             height: 100%;
         }
-        img.uk-logo,{
+        img.uk-logo{
             max-height: 100%;
             cursor: pointer;
         }
