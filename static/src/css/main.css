@@ -11504,6 +11504,94 @@ footer #license {
   text-align: center;
 }
 
+.uk-card-title {
+  padding: 10px;
+  background-color: #263E55;
+  display: flex;
+  border: 2px solid;
+  border-bottom: none;
+}
+
+.card-title-wrapper {
+  background-color: #1C1D24;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10px 6px;
+  text-align: center;
+}
+
+.card-title {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 1.7rem;
+}
+
+.card-date {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.tags-list.card-meta {
+  font-size: 16px;
+}
+
+.uk-card-body {
+  background-color: #1C1D24;
+  border: 4px #DBB778;
+  border-style: solid double none double;
+  padding: 10px;
+  text-align: center;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.card-wrapper {
+  min-height: 135px;
+  display: flex;
+}
+.card-wrapper .similar-title-wrapper {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.card-wrapper .similar-title-wrapper h2 {
+  font-weight: 400;
+  text-transform: none;
+  font-size: 2.2em;
+}
+.card-wrapper h5 {
+  margin: 0px;
+  font-size: 18px;
+}
+.card-wrapper p {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 10px 0px;
+}
+
+.card-wrapper-inner {
+  background-color: #1C1D24;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.uk-card-footer {
+  background-color: #000000;
+  border: 2px solid #DBB778;
+  padding: 0px;
+}
+.uk-card-footer button {
+  width: 100%;
+  padding: 0px;
+  font-size: 20px;
+}
+.uk-card-footer button:active {
+  border-color: #DBC9A9;
+  opacity: 0.8;
+}
+
 /** adds corner brackets to divs **/
 /** Dropdowns **/
 /** Primary Button **/
@@ -11769,94 +11857,6 @@ h3.sub-show-name {
 
 .latest-content-block {
   font-size: 16px;
-}
-
-.uk-card-title {
-  padding: 10px;
-  background-color: #263E55;
-  display: flex;
-  border: 2px solid;
-  border-bottom: none;
-}
-
-.card-title-wrapper {
-  background-color: #1C1D24;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 10px 6px;
-  text-align: center;
-}
-
-.card-title {
-  margin-top: auto;
-  margin-bottom: auto;
-  font-size: 1.7rem;
-}
-
-.card-date {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.tags-list.card-meta {
-  font-size: 16px;
-}
-
-.uk-card-body {
-  background-color: #1C1D24;
-  border: 4px #DBB778;
-  border-style: solid double none double;
-  padding: 10px;
-  text-align: center;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-
-.card-wrapper {
-  min-height: 135px;
-  display: flex;
-}
-.card-wrapper .similar-title-wrapper {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.card-wrapper .similar-title-wrapper h2 {
-  font-weight: 400;
-  text-transform: none;
-  font-size: 2.2em;
-}
-.card-wrapper h5 {
-  margin: 0px;
-  font-size: 18px;
-}
-.card-wrapper p {
-  margin-top: auto;
-  margin-bottom: auto;
-  padding: 10px 0px;
-}
-
-.card-wrapper-inner {
-  background-color: #1C1D24;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 5px;
-}
-
-.uk-card-footer {
-  background-color: #000000;
-  border: 2px solid #DBB778;
-  padding: 0px;
-}
-.uk-card-footer button {
-  width: 100%;
-  padding: 0px;
-  font-size: 20px;
-}
-.uk-card-footer button:active {
-  border-color: #DBC9A9;
-  opacity: 0.8;
 }
 
 /*# sourceMappingURL=main.css.map */
