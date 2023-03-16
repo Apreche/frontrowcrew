@@ -1,0 +1,28 @@
+@use "colours.scss" as c;
+@use "mixins.scss" as m;
+
+.result-title{
+    @extend .card-title-container;
+    border: none;
+}
+
+.result-info{
+    padding: 15px;
+    border-left: none;
+    p{
+        &:first-child{
+            margin-bottom: 5px;
+        }
+        &:nth-child(n+2):nth-child(n-1){
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.result-tags-list{
+    @extend .tags-list;
+    @extend .font-sm;
+    margin-left: unset;
+    text-align: left;
+}
