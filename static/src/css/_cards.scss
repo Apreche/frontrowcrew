@@ -1,10 +1,14 @@
 $border-width: 2px;
 
-.uk-card-title{
+.card-title-container{
     padding: 10px;
     background-color: c.$blue;
     display: flex;
     border: $border-width solid;
+}
+
+.card-title-container-top{
+    @extend .card-title-container;
     border-bottom: none;
 }
 
@@ -17,10 +21,41 @@ $border-width: 2px;
     text-align: center;
 }
 
+.card-title-btn{
+    border: none;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition-duration: 0.3s;
+    .uk-card-badge.uk-label{
+        top: unset;
+        bottom: 15px;
+        color: c.$gold;
+        background: none;
+    }
+    .tags-list.card-meta{
+        margin-left: 0px;
+    }
+    &:hover:not([aria-disabled="true"]),
+    &:focus:not([aria-disabled="true"]){
+        background-color: c.$gold;
+        color: c.$darkest-blue;
+        border-color: c.$darkest-blue;
+        a, h4, h5{
+            color: unset;
+            text-decoration: unset;
+        }
+    }
+    &[aria-disabled="true"]{
+        cursor: not-allowed;    
+        opacity: 0.7;
+    }
+}
+
 .card-title{
     margin-top: auto;
     margin-bottom: auto;
-    font-size: 1.7rem;
+    font-size: 1.25rem;
 }
 
 .card-date{
@@ -88,4 +123,5 @@ $border-width: 2px;
         }
     }
 }
+
 
