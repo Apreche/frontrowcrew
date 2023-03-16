@@ -12,30 +12,62 @@
 /** adds corner brackets to divs **/
 
 @mixin corner-brackets($line-width: 2px, 
-                       $length: 40px, 
+                       $v-length: 40px, 
+                       $h-length: 40px,
                        $color: c.$gold,
-                       $background: c.$dark-blue, 
+                       $background: c.$dark-blue,
+                       $top: false,
+                       $bottom: false,
+                       $left: false,
+                       $right: false,  
                        ){
     position: relative;
     border: $line-width solid $color;
     z-index: 0;
+    @if $top{
+        &::after{
+            top: $v-length;
+            bottom: -$line-width;
+        }
+    } @else if $bottom{
+        &::after{
+            top: -$line-width;
+            bottom: $v-length;
+        }
+    } @else{
+        &::after{
+            top: $v-length;
+            bottom: $v-length;
+        }
+    }
+    @if $left{
+        &::before{
+            left: $h-length;
+            right: -$line-width;
+        }
+    } @else if $right{
+        &::before{
+            left: -$line-width;
+            right: $h-length;
+        }
+    } @else{
+        &::before{
+            left: $h-length;
+            right: $h-length;
+        }
+    }
     &::before{
         content: "";
         z-index: -1;
         position: absolute;
         top: -$line-width;
         bottom: -$line-width;
-        left: $length;
-        right: $length;
         background-color: $background;
     }
-
     &::after{
         content: "";
         z-index: -1;
         position: absolute;
-        top: $length;
-        bottom: $length;
         left: -$line-width;
         right: -$line-width;
         background-color: $background;
