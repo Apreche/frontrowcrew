@@ -3,7 +3,6 @@
 @use "fonts.scss" as f;
 @use "headings.scss" as h;
 @use "buttons.scss" as b;
-@use "sections.scss" as s;
 @import "../../vendor/css/uikit/mixins.scss";
 @import "../../vendor/css/uikit/variables.scss";
 @import "../../vendor/css/uikit/uikit.scss";
@@ -41,6 +40,19 @@ h4{
 
 h5{
     @include h.h5;
+}
+
+/** Fonts **/
+.font-sm{
+    font-size: f.$sm;
+}
+
+.font-m{
+    font-size: f.$m;
+}
+
+.font-m{
+    font-size: f.$l
 }
 
 /** Buttons **/
@@ -200,19 +212,6 @@ header {
     margin-bottom: 50px;
 }
 
-/** Sections **/
-.primary-section{
-    @include s.primary-section;
-}
-
-.secondary-section{
-    @include s.secondary-section;
-}
-
-.subsection{
-    @include s.subsection;
-}
-
 .landing-shows{                     // This is the .uk-container div
     color: c.$light-gold;
     margin-left: auto;
@@ -360,6 +359,7 @@ footer {
 }
 
 @import "cards.scss";
+@import "_sections.scss";
 @import "content_details.scss";
 @import "show_details.scss";
 @import "search_results.scss"
