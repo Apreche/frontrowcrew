@@ -1,8 +1,7 @@
 .section{
     background-color: c.$dark-blue;
     width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    @extend .grid-center;
 }
 
 .primary-section{
@@ -11,9 +10,8 @@
 }
 
 .list-section{
-    @extend .section;
+    @extend .grid-center;
     background-color: c.$darkest-blue;
-    width: 60%;
     padding-left: 0px;
 }
 

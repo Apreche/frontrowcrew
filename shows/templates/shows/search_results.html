@@ -3,10 +3,10 @@
 
 {% block content %}
 <h1>Search Results for {{ query }}</h1>
-<ul class="list-section">
+<ul class="list-section uk-width-3-5@l">
     {% for content in page.object_list %}
         <li class="list-subsection">
-            <div class="uk-width-1-4 result-title">
+            <div class="result-title uk-width-1-4@s">
                 <button class="card-title-wrapper card-title-btn">
                     <a href ="{% url "content-detail" content.show.slug content.catalog_number content.slug %}">
                         <h4 class="card-title">{{ content.title }}</h4>
@@ -14,7 +14,7 @@
                     </a>
                 </button>
             </div>
-            <div class="uk-width-3-4 result-info">
+            <div class="result-info uk-width-3-4@s">
                 <p class="font-sm">{{ content.creation_time|date:"F j Y" }}</p>
                 <p>{{ content.rendered_html|truncatewords_html:40|striptags }}</p>
                 {% if content.tags.all %}
