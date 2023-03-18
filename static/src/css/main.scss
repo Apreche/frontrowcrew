@@ -69,21 +69,6 @@ button{
 
 }
 
-.header-button{
-    background-color: c.$black;
-    color: c.$gold;
-    font-weight: bold;
-    font-family: f.$serif-font;
-    font-size: f.$header-font-size;
-    text-transform: uppercase;
-    border: none;
-    transition-duration: 0.3s;
-    &:hover{
-        color: c.$light-gold;
-        text-decoration: underline;
-    }
-}
-
 /** Anchor Elements **/
 a{
     cursor: pointer;

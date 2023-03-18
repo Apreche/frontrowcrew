@@ -1,26 +1,57 @@
- header {                                                                                                          
-     background-color: c.$black;
-     height: 130px;
-     font-weight: bold;
-     padding: 10px 50px;
-     border-bottom: 1px solid c.$gold;
+@use "breakpoints.scss" as bp;
+@use "colours" as c;
+@use "fonts" as f;
+@use "mixins" as m;
+
+%header-subnav-font-styles {
+    color: c.$gold;
+    font-family: f.$serif-font;
+    text-transform: uppercase;
+    font-size: f.$header-subnav-font-size;
 }
-nav {
+
+header{                                                                                                          
+    background-color: c.$black;
+    height: 130px;
+    font-weight: bold;
+    padding: 10px 50px;
+    border-bottom: 1px solid c.$gold;
+}
+
+nav{
     height: 100%;
     background-color: c.$black;
     text-transform: uppercase;
-    form.uk-search{
-        background-color: c.$black;
-        color: c.$gold;
-        border: 1px solid c.$gold;
-        margin: 5px 10px;
-        padding: 5px 10px;
-        span{
-            padding-left: 5px;
-            svg{
-                color: c.$gold;
-            }
+}
+
+form.uk-search{
+    background-color: c.$black;
+    color: c.$gold;
+    border: 1px solid c.$gold;
+    margin: 5px 10px;
+    padding: 5px 10px;
+    span{
+        padding-left: 5px;
+        svg{
+            color: c.$gold;
         }
+    }
+    input.uk-search-input{
+        &::placeholder{
+        }
+    }
+    @media(min-width: bp.$s){
+        border: none;
+        span{
+            border: 1px solid;
+        }
+        &::placeholder{
+        }
+    }
+    @media(min-width: bp.$m){
+
+    }
+    @media(min-width: bp.$l){
         input.uk-search-input,
         %search-input{
             background-color: c.$black;
@@ -31,55 +62,112 @@ nav {
             &::placeholder{
                 @extend %search-input;
                 padding-left: 0;
-            }
+            }            
         }
     }
+}
+
+.uk-navbar-center,
+.uk-navbar-center-left,
+.uk-navbar-center-right{
+    height: 100%;
+    display: flex;
+}
+
+.header-button{
+    background-color: c.$black;
+    color: c.$gold;
+    font-weight: bold;
+    font-family: f.$serif-font;
+    font-size: f.$header-font-size;
+    text-transform: uppercase;
+    border: none;
+    transition-duration: 0.3s;
+    &:hover{
+        color: c.$light-gold;
+        text-decoration: underline;
+    }
+}
+
+.header-logo{
+    height: 100%;
+}
+
+img.uk-logo,{
+    max-height: 100%;
+    cursor: pointer;
+}
+
+.burger{
+    width: 35px;
+    height: auto;
+    color: c.$gold;
+}
+
+.header-dropdown-box{
+    @include m.dropdowns;
+}
+
+.mobile-burger-dropbar{
+    @include m.dropdowns;
+    @extend %header-subnav-font-styles;
+    padding: 15px 0px;
     .header-dropdown-box{
-        @include m.dropdowns;
-    }
-    .header-subnav-ul{
-        li{
-            margin: 0 -15px;
-            @include m.header-subnav-font-styles;
-            &:not(.subnav-header-line){
-                &:hover{
-                    color: c.$black;
-                    background-color: c.$gold;
-                }
-                >a{
-                    color: inherit;
-                    justify-content: center;
-                }
-            }
-            &.subnav-header-line{
-                color: c.$light-gold;
-                font-size: calc(f.$header-subnav-font-size + 4px);
-                font-family: f.$serif-font;
-                &:not(:first-child){
-                    margin-top: 0;
-                }
-            }
-            &.subnav-divider{
-                margin: 10px 0;
-                border-top: 1px solid c.$gold;
-            }
+        width: 100vw !important;
+        left: -9vw !important;
+        top: 59px !important;
+        border-left: none;
+        border-right: none;
+        >div>div{
+            display: flex;
+            @extend .flex-center;
         }
     }
-    .uk-navbar-center,
-    .uk-navbar-center-left,
-    .uk-navbar-center-right{
-        height: 100%;
-        display: flex;
+}
+
+.burger-drop{
+    display: flex;
+    @extend .flex-center;
+    >div{
+        @extend .grid-center;
+        width: 50%;       
     }
-    .header-logo{
-        height: 100%;
-    }
-    img.uk-logo,{
-        max-height: 100%;
-        cursor: pointer;
-    }
-    .burger{
-        width: 35px;
-        height: auto;
+}
+
+.burger-sub-drop{
+    display: block;
+}
+
+.burger-dropdown-wrapper{
+    width: 80vw;
+}
+
+.header-subnav-ul{
+    li{
+        margin: 0 -15px;
+        padding: 0 5px;
+        @extend %header-subnav-font-styles;
+        &:not(.subnav-header-line){
+            &:hover{
+                color: c.$black;
+                background-color: c.$gold;
+            }
+            >a{
+                color: inherit;
+                justify-content: center;
+            }
+        }
+        &.subnav-header-line{
+            color: c.$light-gold;
+            font-size: calc(f.$header-subnav-font-size + 4px);
+            font-family: f.$serif-font;
+            &:not(:first-child){
+                margin-top: 0;
+            }
+        }
+        &.subnav-divider{
+            margin: 10px 0;
+            border-top: 1px solid c.$gold;
+        }
     }
 }
