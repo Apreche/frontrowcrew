@@ -43,8 +43,11 @@
                         </li>
                     </ul>
                 </div>
-                <a class="header-logo" href="{% url 'homepage' %}">
-                    <img class="uk-navbar-item uk-logo" src="{% static "src/img/logo_thick_lines.png" alt="GeekNights Logo" %}"></li>
+                <a class="header-logo-large uk-visible@m" href="{% url 'homepage' %}">
+                    <img class="uk-navbar-item uk-logo" src="{% static "src/img/large_logo.svg" alt="GeekNights Logo" %}" uk-svg></li>
+                </a>
+                <a class="header-logo uk-hidden@m" href="{% url 'homepage' %}">
+                    <img class="uk-navbar-item uk-logo" src="{% static "src/img/med_logo.svg" alt="GeekNights Logo" %}" uk-svg>
                 </a>
                 <div class="nav-community uk-navbar-center-right uk-visible@s">
                     <ul class="uk-navbar-nav">
@@ -84,33 +87,22 @@
                             Burger Community
                         {% endcomment %}
                         <div><button type="button" class="header-button">Community</button>
-                                <div class="header-dropdown-box" uk-dropdown="mode:click">
-                                    <div class="uk-child-width-1-2" uk-grid>
-                                        <div>
-                                            <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
-                                                <li><a href="#">Forum</a></li>
-                                                <li><a href="#">Book Club</a></li>
-                                                <li><a href="#">Newsletter</a></li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
-                                                <li><a href="#">Things of the Day</a></li>
-                                                <li><a href="#">Shownotes</a></li>
-                                            </ul>
-                                        </div>
+                            <div class="header-dropdown-box" uk-dropdown="mode:click">
+                                <div class="uk-child-width-1-2" uk-grid>
+                                    <div>
+                                        <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
+                                            <li><a href="#">Forum</a></li>
+                                            <li><a href="#">Book Club</a></li>
+                                            <li><a href="#">Newsletter</a></li>
+                                        </ul>
                                     </div>
-{% comment %}
-                                    <ul class="uk-nav uk-dropdown-nav header-subnav-ul burger-sub-drop">
-                                        <li><a href="#">Forum</a></li>
-                                        <li><a href="#">Book Club</a></li>
-                                        <li><a href="#">Newsletter</a></li>
-                                        <li class="subnav-divider"></li>
-                                        <li class="uk-nav-header subnav-header-line">Open Bounties</li>
-                                        <li><a href="#">Things of the Day</a></li>
-                                        <li><a href="#">Shownotes</a></li>
-                                    </ul>
-{% endcomment %}
+                                    <div>
+                                        <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
+                                            <li><a href="#">Things of the Day</a></li>
+                                            <li><a href="#">Shownotes</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

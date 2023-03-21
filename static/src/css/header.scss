@@ -89,13 +89,27 @@ form.uk-search{
     }
 }
 
-.header-logo{
+%header-logo{
     height: 100%;
+    svg{
+        max-height: 100%;
+        color: c.$gold;
+    }
+}
+
+.header-logo{
+    @extend %header-logo;
+}
+
+.header-logo-large{
+    @extend %header-logo;
+    width: 200px;
 }
 
 img.uk-logo,{
     max-height: 100%;
     cursor: pointer;
+    max-width: 50vw;
 }
 
 .burger{
