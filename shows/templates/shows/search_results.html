@@ -10,13 +10,14 @@
                 <button class="card-title-wrapper card-title-btn">
                     <a href ="{% url "content-detail" content.show.slug content.catalog_number content.slug %}">
                         <h4 class="card-title">{{ content.title }}</h4>
-                        <h5 class="card-date"><i>{{ content.show.title }}</i></h4>
+                        <h5 class="card-date"><i>{{ content.show.title }}</i></h5>
+                        <span class="font-sm uk-hidden@s">{{ content.creation_time|date:"F j Y" }}</span>
                     </a>
                 </button>
             </div>
             <div class="result-info uk-width-3-4@s">
-                <p class="font-sm">{{ content.creation_time|date:"F j Y" }}</p>
-                <p>{{ content.rendered_html|truncatewords_html:40|striptags }}</p>
+                <p class="font-sm uk-visible@s">{{ content.creation_time|date:"F j Y" }}</p>
+                <p class="uk-visible@s">{{ content.rendered_html|truncatewords_html:40|striptags }}</p>
                 {% if content.tags.all %}
                 <ul class="result-tags-list">
                     {% for tag in content.tags.all %}

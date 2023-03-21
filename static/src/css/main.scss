@@ -3,6 +3,7 @@
 @use "fonts.scss" as f;
 @use "headings.scss" as h;
 @use "buttons.scss" as b;
+@use "breakpoints.scss" as bp;
 @import "../../vendor/css/uikit/mixins.scss";
 @import "../../vendor/css/uikit/variables.scss";
 @import "../../vendor/css/uikit/uikit.scss";

@@ -1,22 +1,37 @@
-@use "colours.scss" as c;
-@use "mixins.scss" as m;
-
 .result-title{
     @extend .card-title-container;
     border: none;
+    span{
+        color: c.$gold;
+        font-weight: 400;
+    }
 }
 
 .result-info{
     padding: 15px;
     border-left: none;
-    p{
+    @media(max-width: bp.$s){
+        display: flex;
+        justify-content: center;
+        padding-top: 0px;
+        p{
+            width: 50vw;
+            &:first-child{
+                text-align: right;
+            }
+            &:nth-child(n+2):nth-child(n-1){
+                display: none;
+            }
+        }
+    }
+    @media(min-width: bp.$s){
         &:first-child{
             margin-bottom: 5px;
         }
         &:nth-child(n+2):nth-child(n-1){
             margin-top: 5px;
             margin-bottom: 5px;
-        }
+        }     
     }
 }
 
@@ -24,5 +39,7 @@
     @extend .tags-list;
     @extend .font-sm;
     margin-left: unset;
-    text-align: left;
+    @media(min-width: bp.$s){
+        text-align: left;
+    }
 }

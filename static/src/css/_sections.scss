@@ -23,20 +23,36 @@
     margin-top: 0px;
     list-style:none;
     &:first-of-type{
-        .result-title{
-            @include m.corner-brackets($top: true, $left: true, $background: c.$blue);
+        @media(max-width: bp.$s){
+            .result-title{
+                @include m.corner-brackets($top: true, $v-length: 25px, $background: c.$blue);
+            }    
         }
-        .result-info{
+        @media(min-width: bp.$s){
+            .result-title{
+                @include m.corner-brackets($top: true, $left: true, $background: c.$blue);
+            }        
+            .result-info{
             @include m.corner-brackets($top: true, $right: true, $background: c.$darkest-blue);
+            }
         }
+
     }
     &:last-of-type{
-        .result-title{
-            @include m.corner-brackets($bottom: true, $left: true, $background: c.$blue);
+        @media(max-width: bp.$s){
+            .result-info{
+                @include  m.corner-brackets($bottom: true, $v-length: 25px, $background: c.$darkest-blue);
+            }
         }
-        .result-info{
-            @include m.corner-brackets($bottom: true, $right: true, $background: c.$darkest-blue);
+        @media(min-width: bp.$s){
+            .result-title{
+                @include m.corner-brackets($bottom: true, $left: true, $background: c.$blue);
+            }
+            .result-info{
+                @include m.corner-brackets($bottom: true, $right: true, $background: c.$darkest-blue);
+            }
         }
+
     }
     &:not(:first-child){
         margin-top: 0px;
@@ -49,8 +65,10 @@
             width: 90%;
             left: 5%;
             background-color: c.$darkest-blue;
-            border-bottom: 1px solid;
             z-index: 1;
+            @media(min-width: bp.$s){
+                border-bottom: 1px solid;
+            }
         }
     }
 }
