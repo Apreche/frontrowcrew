@@ -30,7 +30,7 @@
                 </form>
             </div>
             <div class="uk-navbar-center nav-center uk-width-3-5@s">
-                <div class="nav-shows uk-navbar-center-left uk-visible@s">
+                <div class="nav-shows uk-navbar-center-left uk-visible@m">
                     <ul class="uk-navbar-nav">
                         <li><button type="button" class="header-button">Shows</button>
                             <div class="header-dropdown-box" uk-dropdown="pos:bottom-justify; offset: 32; mode:click">
@@ -49,7 +49,7 @@
                 <a class="header-logo uk-hidden@m" href="{% url 'homepage' %}">
                     <img class="uk-navbar-item uk-logo" src="{% static "src/img/med_logo.svg" alt="GeekNights Logo" %}" uk-svg>
                 </a>
-                <div class="nav-community uk-navbar-center-right uk-visible@s">
+                <div class="nav-community uk-navbar-center-right uk-visible@m">
                     <ul class="uk-navbar-nav">
                         <li><button type="button" class="header-button">Community</button>
                             <div class="header-dropdown-box" uk-dropdown="pos: bottom-justify; offset: 32; mode:click">
@@ -68,7 +68,7 @@
                 </div>
             </div>
             {% comment %}Burger menu for mobile {% endcomment %}
-            <div class="uk-navbar-right uk-hidden@s">
+            <div class="uk-navbar-right uk-hidden@m">
                 <a class="uk-navbar-toggle" href="#">
                     <img class="burger" src="{% static "src/icons/menu.svg" %}" uk-svg>
                 </a>

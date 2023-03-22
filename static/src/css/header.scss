@@ -74,6 +74,16 @@ form.uk-search{
     display: flex;
 }
 
+.uk-navbar-center.nav-center{
+    @media(max-width: bp.$m){
+        position: relative;
+        order: -1;
+        top: unset;
+        left: unset;
+        transform: unset;
+    }
+}
+
 .header-button{
     background-color: c.$black;
     color: c.$gold;
@@ -90,7 +100,6 @@ form.uk-search{
 }
 
 %header-logo{
-    height: 100%;
     svg{
         max-height: 100%;
         color: c.$gold;
@@ -103,6 +112,7 @@ form.uk-search{
 
 .header-logo-large{
     @extend %header-logo;
+    height: 100%;
     width: 200px;
 }
 
