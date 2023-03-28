@@ -11427,7 +11427,7 @@ header nav .burger {
   margin-right: auto;
 }
 
-.flex-center {
+.flex-center, .card-title-btn a {
   justify-content: center;
   align-items: center;
 }
@@ -11501,6 +11501,21 @@ footer #license {
   text-align: center;
 }
 
+.card-title {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 1.25rem;
+}
+
+.card-date {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.tags-list.card-meta, .card-meta.result-tags-list {
+  font-size: 16px;
+}
+
 .card-title-btn {
   border: none;
   align-items: center;
@@ -11530,20 +11545,15 @@ footer #license {
   cursor: not-allowed;
   opacity: 0.7;
 }
-
-.card-title {
-  margin-top: auto;
-  margin-bottom: auto;
-  font-size: 1.25rem;
+.card-title-btn a {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
-
-.card-date {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.tags-list.card-meta, .card-meta.result-tags-list {
-  font-size: 16px;
+.card-title-btn a .card-title {
+  margin-top: unset;
+  margin-bottom: unset;
 }
 
 .uk-card-body {

@@ -4,9 +4,9 @@
 @use "headings.scss" as h;
 @use "buttons.scss" as b;
 @use "breakpoints.scss" as bp;
-@import "../../vendor/css/uikit/mixins.scss";
-@import "../../vendor/css/uikit/variables.scss";
-@import "../../vendor/css/uikit/uikit.scss";
+@import "../../static/vendor/css/uikit/mixins.scss";
+@import "../../static/vendor/css/uikit/variables.scss";
+@import "../../static/vendor/css/uikit/uikit.scss";
 
 
 body {
