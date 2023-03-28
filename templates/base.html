@@ -12,22 +12,27 @@
   </head>
   <body>
     {% block body %}
-    <header id="gn-header" class="uk-width-1-1 uk-sticky nav-drop-boundary">
+    <header id="gn-header" class="uk-width-1-1 uk-sticky">
         <nav class="uk-navbar" uk-navbar>
             <div class="uk-navbar-left uk-width-1-4@m">
-                <form id="site-search" class="uk-search" role="search" method="get" action="/search/">
-                    <span uk-search-icon></span>
-                    <input
-                        type="search"
-                        id="site-search-input"
-                        class="uk-search-input"
-                        name="q"
-                        spellcheck="false"
-                        placeholder="Search"
-                        aria-label="Site Search"
-                        required
-                    />
-                </form>
+                <div class="search-wrapper">
+                    <a class="uk-navbar-toggle search-toggle uk-hidden@s" uk-search-icon href="#"></a>
+                    <div class="uk-drop search-drop" uk-drop="mode: click;">
+                        <form id="site-search" class="uk-search" role="search" method="get" action="/search/" autocomplete="off">
+                            <span class="uk-visible@s" uk-search-icon></span>
+                            <input
+                                type="search"
+                                id="site-search-input"
+                                class="uk-search-input"
+                                name="q"
+                                spellcheck="false"
+                                placeholder="Search"
+                                aria-label="Site Search"
+                                required
+                            />
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="uk-navbar-center nav-center uk-width-3-5@s">
                 <div class="nav-shows uk-navbar-center-left uk-visible@m">
@@ -72,10 +77,10 @@
                 <a class="uk-navbar-toggle" href="#">
                     <img class="burger" src="{% static "src/icons/menu.svg" %}" uk-svg>
                 </a>
-                <div class="mobile-burger-dropbar uk-width-1-1" uk-drop="pos: bottom-center; offset: 24; boundary: .nav-drop-boundary; stretch: x">
+                <div class="mobile-burger-dropbar" uk-drop="pos: bottom-center; stretch: x">
                     <div class="uk-dropdown-nav burger-drop">
                         <div><button type="button" class="header-button">Shows</button>
-                            <div class="header-dropdown-box" uk-dropdown="pos:bottom-justify; offset: 24; mode:click">
+                            <div class="header-dropdown-box" uk-dropdown="mode:click">
                                 <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
                                     {% for nav_show in nav_shows %}
                                     <li><a href="{% url 'show-detail' nav_show.slug %}">{{ nav_show.title }}</a></li>
@@ -88,7 +93,7 @@
                         {% endcomment %}
                         <div><button type="button" class="header-button">Community</button>
                             <div class="header-dropdown-box" uk-dropdown="mode:click">
-                                <div class="uk-child-width-1-2" uk-grid>
+                                <div class="uk-child-width-1-2@s" uk-grid>
                                     <div>
                                         <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
                                             <li><a href="#">Forum</a></li>
