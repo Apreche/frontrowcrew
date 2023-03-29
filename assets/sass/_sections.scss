@@ -1,0 +1,90 @@
+.section{
+    background-color: c.$dark-blue;
+    width: 80%;
+    @extend .grid-center;
+}
+
+.primary-section{
+    @extend .section;
+    @include m.corner-brackets;
+}
+
+.list-section{
+    @extend .grid-center;
+    background-color: c.$darkest-blue;
+    padding-left: 0px;
+}
+
+.list-subsection{
+    @extend .list-section;
+    @extend .uk-grid;
+    width: 100%;
+    position: relative;
+    margin-top: 0px;
+    list-style:none;
+    &:first-of-type{
+        @media(max-width: bp.$s){
+            .result-title{
+                @include m.corner-brackets($top: true, $v-length: 25px, $background: c.$blue);
+            }    
+        }
+        @media(min-width: bp.$s){
+            .result-title{
+                @include m.corner-brackets($top: true, $left: true, $background: c.$blue);
+            }        
+            .result-info{
+            @include m.corner-brackets($top: true, $right: true, $background: c.$darkest-blue);
+            }
+        }
+
+    }
+    &:last-of-type{
+        @media(max-width: bp.$s){
+            .result-info{
+                @include  m.corner-brackets($bottom: true, $v-length: 25px, $background: c.$darkest-blue);
+            }
+        }
+        @media(min-width: bp.$s){
+            .result-title{
+                @include m.corner-brackets($bottom: true, $left: true, $background: c.$blue);
+            }
+            .result-info{
+                @include m.corner-brackets($bottom: true, $right: true, $background: c.$darkest-blue);
+            }
+        }
+
+    }
+    &:not(:first-child){
+        margin-top: 0px;
+    }
+    &:not(:last-child){
+        &::before{
+            content:"";
+            position: absolute;
+            bottom: 0px;
+            width: 90%;
+            left: 5%;
+            background-color: c.$darkest-blue;
+            z-index: 1;
+            @media(min-width: bp.$s){
+                border-bottom: 1px solid;
+            }
+        }
+    }
+}
+
+/** Landing Page Shows Section **/
+.subsection{
+    padding-top: 0;
+    padding-bottom: 0;
+    &:not(:last-child){
+        .landing-shows-content{
+            border-bottom: 1px solid c.$gold;
+        }
+    }
+    &:not(:first-child){
+        .landing-shows-title{
+            border-top: 0;
+        }
+    }
+}

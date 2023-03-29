@@ -3,9 +3,10 @@
 @use "fonts.scss" as f;
 @use "headings.scss" as h;
 @use "buttons.scss" as b;
-@import "uikit/mixins.scss";
-@import "uikit/variables.scss";
-@import "uikit/uikit.scss";
+@use "breakpoints.scss" as bp;
+@import "../../static/vendor/css/uikit/mixins.scss";
+@import "../../static/vendor/css/uikit/variables.scss";
+@import "../../static/vendor/css/uikit/uikit.scss";
 
 
 body {
@@ -40,6 +41,19 @@ h4{
 
 h5{
     @include h.h5;
+}
+
+/** Fonts **/
+.font-sm{
+    font-size: f.$sm;
+}
+
+.font-m{
+    font-size: f.$m;
+}
+
+.font-m{
+    font-size: f.$l
 }
 
 /** Buttons **/
@@ -180,7 +194,7 @@ header {
         .header-logo{
             height: 100%;
         }
-        img.uk-logo,{
+        img.uk-logo{
             max-height: 100%;
             cursor: pointer;
         }
@@ -198,23 +212,6 @@ header {
     margin-top: 50px;
     margin-bottom: 50px;
 }
-
-/** Landing Page Shows Section **/
-.subsection{
-    padding-top: 0;
-    padding-bottom: 0;
-    &:not(:last-child){
-        .landing-shows-content{
-            border-bottom: 1px solid c.$gold;
-        }
-    }
-    &:not(:first-child){
-        .landing-shows-title{
-            border-top: 0;
-        }
-    }
-}
-
 
 .landing-shows{                     // This is the .uk-container div
     color: c.$light-gold;
@@ -271,15 +268,6 @@ header {
     &:last-child{
         margin-top: 0;
     }
-}
-
-/** Primary Section **/
-.primary-section{
-    background-color: c.$dark-blue;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    @include m.corner-brackets;
 }
 
 /** Classes for Offset Grid Elements **/
@@ -371,6 +359,8 @@ footer {
     }
 }
 
+@import "cards.scss";
+@import "_sections.scss";
 @import "content_details.scss";
 @import "show_details.scss";
-@import "cards.scss";
+@import "search_results.scss"
