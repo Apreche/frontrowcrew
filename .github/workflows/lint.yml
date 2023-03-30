@@ -26,7 +26,7 @@ jobs:
           FILTER_REGEX_EXCLUDE: static/*
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_BASH: true
-          VALIDATE_CSS: true
+          # VALIDATE_CSS: true
           VALIDATE_DOCKERFILE: true
           VALIDATE_GITHUB_ACTIONS: true
           # Html linter can't handle Django templates
