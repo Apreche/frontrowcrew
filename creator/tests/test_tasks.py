@@ -19,6 +19,12 @@ from creator import tasks
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "CreatorTaskTest",
+        }
+    },
 )
 class CreatorTaskTest(utils.FRCTestCase):
 

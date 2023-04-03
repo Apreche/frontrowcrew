@@ -1,6 +1,7 @@
 import logging
 
 from django import test
+from django.core.cache import cache
 
 
 class FRCTestCase(test.TestCase):
@@ -12,3 +13,4 @@ class FRCTestCase(test.TestCase):
     def tearDown(self):
         logger = logging.getLogger("django.request")
         logger.setLevel(self.previous_level)
+        cache.clear()

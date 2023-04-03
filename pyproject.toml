@@ -39,6 +39,9 @@ ipdb = "^0.13.9"
 Werkzeug = "^2.2.3"
 coverage = "^7.0.5"
 
+[tool.poetry.group.test.dependencies]
+tblib = "^1.7.0"
+
 [build-system]
 requires = ["poetry-core>=1.3t.0"]
 build-backend = "poetry.core.masonry.api"
