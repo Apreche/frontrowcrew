@@ -27,7 +27,7 @@
   become: yes
 
 - name: "Install frontend dependencies"
-  ansible.community.npm:
+  community.general.npm:
     path: "{{ project_source_dir }}"
     state: latest
 
