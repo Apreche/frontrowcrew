@@ -32,7 +32,7 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/frontend.Dockerfile
-    command: npx sass -w assets/sass/main.scss static/main.css
+    command: npx sass -w assets/sass/main.scss static/css/main.css
     volumes:
       - ..:/workspace:cached
 
