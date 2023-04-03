@@ -75,8 +75,6 @@ jobs:
           python-version: '3.11'
           cache: 'poetry'
       - run: poetry install
-      # Add this for tracebacks
-      - run: poetry add tblib
       - name: Check for Django Migrations
         run: |
           poetry run python manage.py makemigrations --check --dry-run
