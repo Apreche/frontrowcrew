@@ -147,3 +147,4 @@ static/css/uikit/
 .envrc
 
 .docker/
+node_modules/
