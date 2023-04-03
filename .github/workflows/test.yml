@@ -63,7 +63,7 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v3
       - name: Compile SASS to CSS
-        uses: gha-utilities/sass-build@v.0.5.1
+        uses: gha-utilities/sass-build@v0.5.1
         with:
           source: assets/sass/main.scss
           destination: static/css/main.css
