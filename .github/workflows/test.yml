@@ -14,7 +14,6 @@ jobs:
       BETAFRONTROWCREW_DB_PASSWORD: test
       BETAFRONTROWCREW_DB_HOST: 127.0.0.1
       BETAFRONTROWCREW_DB_PORT: 5432
-      BETAFRONTROWCREW_MEMCACHED_SOCKET: 127.0.0.1:11211
       BETAFRONTROWCREW_CELERY_USER: test
       BETAFRONTROWCREW_CELERY_PASSWORD: test
       BETAFRONTROWCREW_CELERY_HOST: 127.0.0.1
@@ -30,15 +29,6 @@ jobs:
           - 5432:5432
         options: >-
           --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-      memcached:
-        image: memcached:latest
-        ports:
-          - 11211:11211
-        options: >-
-          --health-cmd "timeout 5 bash -c 'cat < /dev/null > /dev/udp/127.0.0.1/11211'"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -59,7 +49,7 @@ jobs:
       - name: Install prerequisites
         run: |
           sudo apt-get update
-          sudo apt-get install libmemcached-dev libexempi8
+          sudo apt-get install libexempi8
       - name: Checkout Source
         uses: actions/checkout@v3
       - name: Compile SASS to CSS

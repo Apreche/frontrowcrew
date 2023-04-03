@@ -59,7 +59,7 @@ class ShowFactory(PublishableFactory):
         factory.django.ImageField(width=3000, height=3000),
         "",
     )
-    display_in_nav = False
+    display_in_nav = factory.Faker("boolean")
 
     is_podcast = factory.Faker("boolean")
     podcast = factory.Maybe(

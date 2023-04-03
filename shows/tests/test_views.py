@@ -4,7 +4,6 @@ import tempfile
 
 from http import HTTPStatus
 from django import test, urls
-from django.core.cache import cache
 from django.utils import timezone
 from betafrontrowcrew.tests import utils
 
@@ -17,6 +16,12 @@ from shows import factories, models
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "HomepageTest",
+        }
+    },
 )
 class HomepageTests(utils.FRCTestCase):
     def setUp(self):
@@ -35,15 +40,17 @@ class HomepageTests(utils.FRCTestCase):
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "DisplayInNavTest",
+        }
+    },
 )
 class DisplayInNavTests(utils.FRCTestCase):
     def setUp(self):
         super().setUp()
         self.client = test.Client()
-        cache.clear()
-
-    def tearDown(self):
-        cache.clear()
 
     def test_nav_show_list(self):
         good_show = factories.ShowFactory.create(display_in_nav=True, is_published=True)
@@ -51,9 +58,25 @@ class DisplayInNavTests(utils.FRCTestCase):
         url = urls.reverse("homepage")
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertIn("nav_shows", response.context)
-        self.assertIn(good_show, response.context["nav_shows"])
-        self.assertNotIn(bad_show, response.context["nav_shows"])
+        found_shows = response.context.get("nav_shows", None)
+        self.assertIsNotNone(found_shows)
+
+        if good_show not in found_shows:
+            print(
+                f"Good Show {good_show} not found\n"
+                f"published: {good_show.is_published}\n"
+                f"pub_time: {good_show.pub_time}\n"
+                f"found shows: {found_shows}\n"
+            )
+        if bad_show in found_shows:
+            print(
+                f"Bad Show {good_show} found\n"
+                f"published: {good_show.is_published}\n"
+                f"pub_time: {good_show.pub_time}\n"
+                f"found shows: {found_shows}\n"
+            )
+        self.assertIn(good_show, found_shows)
+        self.assertNotIn(bad_show, found_shows)
 
     def test_nav_show_list_not_admin(self):
         factories.ShowFactory.create(display_in_nav=True, is_published=True)
@@ -69,15 +92,17 @@ class DisplayInNavTests(utils.FRCTestCase):
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "ShowDetailTest",
+        }
+    },
 )
 class ShowDetailTests(utils.FRCTestCase):
     def setUp(self):
         super().setUp()
         self.client = test.Client()
-        cache.clear()
-
-    def tearDown(self):
-        cache.clear()
 
     def test_show_detail(self):
         content = factories.ContentFactory(is_published=True, show__is_published=True)
@@ -222,15 +247,17 @@ class ShowDetailTests(utils.FRCTestCase):
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "ContentDetailTest",
+        }
+    },
 )
 class ContentDetailTests(utils.FRCTestCase):
     def setUp(self):
         super().setUp()
         self.client = test.Client()
-        cache.clear()
-
-    def tearDown(self):
-        cache.clear()
 
     def test_content_detail(self):
         content = factories.ContentFactory(is_published=True, show__is_published=True)
@@ -448,15 +475,17 @@ class ContentDetailTests(utils.FRCTestCase):
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "TagFilterTest",
+        }
+    },
 )
 class TagFilterTests(utils.FRCTestCase):
     def setUp(self):
         super().setUp()
         self.client = test.Client()
-        cache.clear()
-
-    def tearDown(self):
-        cache.clear()
 
     def test_tag_filter(self):
         tag = "bikes"
