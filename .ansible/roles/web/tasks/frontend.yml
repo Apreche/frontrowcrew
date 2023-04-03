@@ -3,11 +3,13 @@
   ansible.builtin.get_url:
     url: "{{ nodejs_key_url }}"
     dest: "{{ nodejs_key_path }}"
+    mode: '0644'
+    force: true
   become: yes
 
 - name: "Add nodejs apt repo"
   ansible.builtin.apt_repository:
-    repo: "deb {{ nodejs_repo_url}} {{ ubuntu_release }} main"
+    repo: "deb {{ nodejs_repo_url }} {{ ubuntu_release }} main"
     state: present
     update_cache: yes
   become: yes
