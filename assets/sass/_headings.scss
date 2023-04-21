@@ -11,14 +11,12 @@ $latest-h2-margin: 5px;
     color: c.$gold;
     text-align: center;
     font-family: f.$serif-font;
-//    font-size: 3.3rem;
 }
 
 @mixin h2{
     color: c.$gold;
     text-align: center;
     font-family: f.$serif-font;
-//    font-size: 2em;
     font-weight: 600;
     text-transform: uppercase;
 }

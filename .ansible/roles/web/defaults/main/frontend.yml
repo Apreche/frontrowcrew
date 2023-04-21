@@ -1,0 +1,8 @@
+---
+nodejs_key_url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+nodejs_key_path: "/etc/apt/trusted.gpg.d/nodesource.asc"
+nodejs_version: "18"
+nodejs_repo_url: "https://deb.nodesource.com/node_{{ nodejs_version }}.x"
+main_sass_path: "{{ project_source_dir }}/assets/sass/main.scss"
+main_css_path: "{{ project_source_dir }}/static/css/main.css"
+...

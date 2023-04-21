@@ -15,6 +15,12 @@ from shows import factories, models
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "PublishableShowTest",
+        }
+    },
 )
 class PublishableShowTests(utils.FRCTestCase):
     def setUp(self):
@@ -75,6 +81,12 @@ class PublishableShowTests(utils.FRCTestCase):
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "PublishableContentTest",
+        }
+    },
 )
 class PublishableContentTests(utils.FRCTestCase):
     def setUp(self):

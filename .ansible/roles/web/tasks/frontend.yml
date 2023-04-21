@@ -1,0 +1,47 @@
+---
+- name: "Add nodejs apt key"
+  ansible.builtin.get_url:
+    url: "{{ nodejs_key_url }}"
+    dest: "{{ nodejs_key_path }}"
+    mode: '0644'
+    force: true
+  become: yes
+
+- name: "Add nodejs apt repo"
+  ansible.builtin.apt_repository:
+    repo: "deb {{ nodejs_repo_url }} {{ ubuntu_release }} main"
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: "Install nodejs"
+  ansible.builtin.apt:
+    name: nodejs
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: "Update npm with npm"
+  community.general.npm:
+    global: yes
+    name: npm
+    state: latest
+  become: yes
+
+- name: "Install frontend dependencies"
+  community.general.npm:
+    path: "{{ project_source_dir }}"
+    state: latest
+
+- name: "Compile css from sass"
+  ansible.builtin.command:
+    argv:
+      - npx
+      - sass
+      - -q
+      - --style=compressed
+      - --no-source-map
+      - "{{ main_sass_path }}"
+      - "{{ main_css_path }}"
+    chdir: "{{ project_source_dir }}"
+...

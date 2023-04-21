@@ -8,6 +8,7 @@ from xml import etree
 from django import test, urls
 from django.contrib.sites.models import Site
 
+from betafrontrowcrew.tests import utils
 from podcasts.tests.utils import skip_if_invalid_rss_xml
 from .. import factories
 from .. import urls as podcast_urls
@@ -20,8 +21,14 @@ from .. import urls as podcast_urls
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
     ROOT_URLCONF=podcast_urls,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "PodcastsFeedTest",
+        }
+    },
 )
-class PodcastsFeedTests(test.TestCase):
+class PodcastsFeedTests(utils.FRCTestCase):
 
     @classmethod
     def setUpTestData(cls):
@@ -42,6 +49,7 @@ class PodcastsFeedTests(test.TestCase):
         }
 
     def setUp(self):
+        super().setUp()
         self.response = self.client.get(self.url)
         if self.response.status_code == HTTPStatus.OK:
             try:

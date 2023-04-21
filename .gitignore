@@ -152,3 +152,4 @@ static/css/*.map
 .envrc
 
 .docker/
+node_modules/

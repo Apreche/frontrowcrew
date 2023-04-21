@@ -9,6 +9,19 @@ from django import test
 from .. import factories, models
 
 
+@test.override_settings(
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
+    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    CELERY_TASK_ALWAYS_EAGER=True,
+    CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "PodcastsFactoryTest",
+        }
+    },
+)
 class FactoryExistenceTests(test.TestCase):
     def setUp(self):
         self.models = {
@@ -45,19 +58,41 @@ class FactoryFunctionTestMeta(type):
     @classmethod
     def gen_factory_test(cls, factory):
         def fn(self):
-            return self._run_factory_test(factory)
+            return test.override_settings(
+                STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
+                DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+                MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+                CELERY_TASK_ALWAYS_EAGER=True,
+                CELERY_TASK_EAGER_PROPAGATES=True,
+                CACHES={
+                    "default": {
+                        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+                        "LOCATION": "PodcastsFactoryTest",
+                    }
+                },
+            )(
+                self._run_factory_test
+            )(
+                factory
+            )
 
         return fn
 
 
+@test.override_settings(
+    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
+    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    CELERY_TASK_ALWAYS_EAGER=True,
+    CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "PodcastsFactoryTest",
+        }
+    },
+)
 class FactoryFunctionTest(test.TestCase, metaclass=FactoryFunctionTestMeta):
-    @test.override_settings(
-        STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
-        DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
-        MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
-        CELERY_TASK_ALWAYS_EAGER=True,
-        CELERY_TASK_EAGER_PROPAGATES=True,
-    )
     def _run_factory_test(self, factory):
         obj = factory.create()
         self.assertTrue(isinstance(obj, factory._meta.model))

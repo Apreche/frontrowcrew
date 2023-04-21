@@ -16,12 +16,19 @@ from shows import factories
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
+    CACHES={
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "SearchTest",
+        }
+    },
 )
 class SearchTests(utils.FRCTestCase):
     """
     Test the content full text search functionality
     It's hard to test it thoroughly so we just check for the basics
     """
+
     def setUp(self):
         super().setUp()
         self.client = test.Client()
