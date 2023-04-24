@@ -5,7 +5,7 @@
 @use "buttons.scss" as b;
 
 .uk-section.show-hero{
-    margin-top: -20px;
+    padding-top: 0px;
 }
 
 .show-content-grid{
@@ -23,6 +23,12 @@
             justify-content: center;
             text-align: center;
             padding: 5px 15px;
+        }
+    }
+    .rendered-content{
+        padding: 15px 0px;
+        p{
+            padding: unset;
         }
     }
 }
@@ -55,22 +61,30 @@
     text-align: center;
     padding: 0px 20px;
     h4{
-        font-size: 1.7rem;
     }
 }
 
 .latest-content-block{
-    font-size: 18px;
     width: 90%;
     text-align: center;
+   // max-height: 33vh; // Desktop
     .btn-primary{
         max-width: 150px; 
     }
 }
 
 .latest-title{
+    max-height:7vw; // Desktop
+    h1{
+        font-size: h.$latest-h1-size;
+        margin-bottom: h.$latest-h1-margin;
+    }
     h2{
-        font-size: 2.7em;
+        font-size: h.$latest-h2-size;
+        margin-bottom: h.$latest-h2-margin;
+    }
+    h3{
+        font-size: h.$latest-h3-size;
     }
 }
 
@@ -96,17 +110,4 @@
             margin: 0px;
         }
     }
-}
-
-.latest-title{
-    h1{
-        font-size: 2rem;
-    }
-    h2{
-        font-size: 2.3rem;
-    }
-}
-
-.latest-content-block{
-    font-size: 16px;
 }

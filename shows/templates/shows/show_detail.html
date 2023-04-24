@@ -19,8 +19,8 @@
                 {% endif %}
                 {% if show.description %}
                     <p>{{ show.description }}</p>
-                    <button class="uk-button btn-secondary btn-medium">Subscribe:</button>
                 {% endif %}
+                    <button class="uk-button btn-secondary btn-medium">Subscribe:</button>
                 </div>
             </div>
             <div class="show-content-grid uk-grid uk-width-4-5 latest-grid">
@@ -43,7 +43,7 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div>
+                    <div class="rendered-content">
                         {{ content.rendered_html|safe }}
                     </div>
                     <div class="uk-flex flex-center">
