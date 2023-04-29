@@ -8,6 +8,10 @@
 @import "../../static/vendor/css/uikit/variables.scss";
 @import "../../static/vendor/css/uikit/uikit.scss";
 
+html,
+body{
+    overflow-x: hidden;
+}
 
 body {
     background-color: c.$black;
