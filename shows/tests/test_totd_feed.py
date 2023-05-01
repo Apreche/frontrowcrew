@@ -34,7 +34,7 @@ class TotDFeedTests(utils.FRCTestCase):
 
     def test_totd_feed_404(self):
         """ 404 with no items? """
-        url = urls.reverse("totd-list-rss")
+        url = urls.reverse("totd-rss")
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
@@ -44,7 +44,7 @@ class TotDFeedTests(utils.FRCTestCase):
             type_id=models.RelatedLinkType.THING_OF_THE_DAY,
             published=True,
         )
-        url = urls.reverse("totd-list-rss")
+        url = urls.reverse("totd-rss")
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -67,7 +67,7 @@ class TotDFeedTests(utils.FRCTestCase):
             type_id=models.RelatedLinkType.FORUM_THREAD,
             published=True,
         )
-        url = urls.reverse("totd-list-rss")
+        url = urls.reverse("totd-rss")
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -84,7 +84,7 @@ class TotDFeedTests(utils.FRCTestCase):
             has_description=True,
             published=True,
         )
-        url = urls.reverse("totd-list-rss")
+        url = urls.reverse("totd-rss")
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
         items_etree = etree.ElementTree.fromstring(response.content)

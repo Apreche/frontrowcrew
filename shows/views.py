@@ -1,10 +1,11 @@
+import re
+
 from django import http
 from django import shortcuts
 from django.db.models import F
 from django.utils.translation import gettext as _
 from django.contrib.postgres import search
 from django.core.paginator import Paginator
-from django.core import exceptions
 
 from . import models
 
@@ -28,6 +29,7 @@ def show_list(request):
     return shortcuts.render(request, template_name, context)
 
 
+# AKA: content_list
 def show_detail(request, show_slug, tags=None):
     """ The page for a single show with its paginated content """
     ITEMS_PER_PAGE = 10
@@ -40,16 +42,20 @@ def show_detail(request, show_slug, tags=None):
         for tag in tag_list:
             content = content.filter(tags__slug__in=[tag])
         context.update({"tags": tag_list})
+
+    # query parameter year month filter
+    year = request.GET.get("year", None)
+    if year is not None and re.match(r"^\d{4}$", year):
+        content = content.filter(pub_time__year=year)
+    month = request.GET.get("month", None)
+    if month is not None and re.match(r"^(0?[1-9]|1[012])$", month):
+        content = content.filter(pub_time__month=month)
+
     paginator = Paginator(
         content,
         ITEMS_PER_PAGE,
-        allow_empty_first_page=False,
     )
-    if paginator.count == 0:
-        raise http.Http404(_("Show has no content."))
     page_number = request.GET.get("page", "1")
-    if not page_number.isnumeric():
-        raise exceptions.BadRequest(_("Invalid Page Number"))
     page = paginator.get_page(
         int(page_number)
     )
@@ -110,13 +116,8 @@ def tag_filter(request, tags):
     paginator = Paginator(
         content,
         ITEMS_PER_PAGE,
-        allow_empty_first_page=False,
     )
-    if paginator.count == 0:
-        raise http.Http404(_("No content found with chosen tags."))
     page_number = request.GET.get("page", "1")
-    if not page_number.isnumeric():
-        raise exceptions.BadRequest(_("Invalid Page Number"))
     page = paginator.get_page(
         int(page_number)
     )
@@ -145,11 +146,8 @@ def content_search(request):
     paginator = Paginator(
         results,
         ITEMS_PER_PAGE,
-        allow_empty_first_page=True,
     )
     page_number = request.GET.get("page", "1")
-    if not page_number.isnumeric():
-        raise exceptions.BadRequest(_("Invalid Page Number"))
     page = paginator.get_page(page_number)
     context = {
         "query": query_string,

@@ -35,6 +35,7 @@ urlpatterns = [
         "robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
     ),
+    path("", include("legacy_redirects.urls")),
     path("", include("shows.urls")),
 ] + static(
     getattr(settings, "MEDIA_URL", "/media/"),

@@ -102,7 +102,7 @@ class TotDFeed(syndication_views.Feed):
         return urls.reverse("totd-list")
 
     def feed_url(self):
-        return urls.reverse("totd-list-rss")
+        return urls.reverse("totd-rss")
 
     # Item level
     def items(self):
