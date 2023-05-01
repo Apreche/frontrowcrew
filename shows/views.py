@@ -1,37 +1,34 @@
 import re
 
-from django import http
-from django import shortcuts
-from django.db.models import F
-from django.utils.translation import gettext as _
+from django import http, shortcuts
 from django.contrib.postgres import search
 from django.core.paginator import Paginator
+from django.db.models import F
+from django.utils.translation import gettext as _
 
 from . import models
 
 
 def homepage(request):
-    """ The Homepage """
+    """The Homepage"""
     template_name = "shows/homepage.html"
     context = {}
     return shortcuts.render(request, template_name, context)
 
 
 def show_list(request):
-    """ A page that lists all the published shows """
+    """A page that lists all the published shows"""
     template_name = "shows/show_list.html"
     shows = models.Show.published.all()
     if not shows:
         raise http.Http404(_("No published shows."))
-    context = {
-        "shows": shows
-    }
+    context = {"shows": shows}
     return shortcuts.render(request, template_name, context)
 
 
 # AKA: content_list
 def show_detail(request, show_slug, tags=None):
-    """ The page for a single show with its paginated content """
+    """The page for a single show with its paginated content"""
     ITEMS_PER_PAGE = 10
     template_name = "shows/show_detail.html"
     context = {}
@@ -56,9 +53,7 @@ def show_detail(request, show_slug, tags=None):
         ITEMS_PER_PAGE,
     )
     page_number = request.GET.get("page", "1")
-    page = paginator.get_page(
-        int(page_number)
-    )
+    page = paginator.get_page(int(page_number))
     context.update(
         {
             "show": show,
@@ -69,12 +64,11 @@ def show_detail(request, show_slug, tags=None):
 
 
 def content_detail(request, show_slug, catalog_number, content_slug=None):
-    """ The page for a single content item """
+    """The page for a single content item"""
     template_name = "shows/content_detail.html"
     show = shortcuts.get_object_or_404(models.Show.published, slug=show_slug)
     content = shortcuts.get_object_or_404(
-        show.published_content,
-        catalog_number=catalog_number
+        show.published_content, catalog_number=catalog_number
     )
     if (content.slug != content_slug) or (show != content.show):
         return shortcuts.redirect(content, permanent=True)
@@ -90,7 +84,7 @@ def content_detail(request, show_slug, catalog_number, content_slug=None):
 
 
 def totd_list(request):
-    """ A list of all the things of the day """
+    """A list of all the things of the day"""
     template_name = "shows/totd_list.html"
     things_of_the_day = models.RelatedLink.published.filter(
         type_id=models.RelatedLinkType.THING_OF_THE_DAY
@@ -104,7 +98,7 @@ def totd_list(request):
 
 
 def tag_filter(request, tags):
-    """ Filter content by tag across all shows """
+    """Filter content by tag across all shows"""
     ITEMS_PER_PAGE = 10
     template_name = "shows/tag_filter.html"
     context = {}
@@ -118,9 +112,7 @@ def tag_filter(request, tags):
         ITEMS_PER_PAGE,
     )
     page_number = request.GET.get("page", "1")
-    page = paginator.get_page(
-        int(page_number)
-    )
+    page = paginator.get_page(int(page_number))
     context.update(
         {
             "page": page,
@@ -134,15 +126,14 @@ def content_search(request):
     template_name = "shows/search_results.html"
     query_string = request.GET.get("q", "")
     query = search.SearchQuery(query_string, search_type="websearch")
-    results = models.Content.published.select_related(
-        "show",
-    ).annotate(
-        search_rank=search.SearchRank(
-            F("search_vector"), query
+    results = (
+        models.Content.published.select_related(
+            "show",
         )
-    ).filter(
-        search_vector=query
-    ).order_by("-search_rank")
+        .annotate(search_rank=search.SearchRank(F("search_vector"), query))
+        .filter(search_vector=query)
+        .order_by("-search_rank")
+    )
     paginator = Paginator(
         results,
         ITEMS_PER_PAGE,

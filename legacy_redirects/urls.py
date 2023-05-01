@@ -1,8 +1,7 @@
 from django.urls import path, register_converter
 from django.views.generic import base
 
-from . import url_converters
-from . import views
+from . import url_converters, views
 
 register_converter(url_converters.FourDigitYearConverter, "yyyy")
 register_converter(url_converters.TwoDigitMonthConverter, "mm")
@@ -16,9 +15,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        {
-            "show_slug": "geeknights"
-        },
+        {"show_slug": "geeknights"},
         name="legacy-episodes",
     ),
     path(
@@ -27,7 +24,7 @@ urlpatterns = [
             url="/geeknights/?year=%(year)s",
             permanent=True,
         ),
-        name="legacy-redirect-episodes-year"
+        name="legacy-redirect-episodes-year",
     ),
     path(
         "episodes/<yyyy:year>/<mm:month>/",
@@ -35,17 +32,17 @@ urlpatterns = [
             url="/geeknights/?year=%(year)s&month=%(month)s",
             permanent=True,
         ),
-        name="legacy-redirect-episodes-year-month"
+        name="legacy-redirect-episodes-year-month",
     ),
     path(
         "episodes/<yyyy:year>/<mm:month>/<dd:day>/<slug:slug>/",
         views.geeknights_episode_detail_redirect,
-        name="legacy-redirect-episodes-detail-date-slug"
+        name="legacy-redirect-episodes-detail-date-slug",
     ),
     path(
         "episodes/<yyyy:year>/<mm:month>/<dd:day>/",
         views.geeknights_episode_detail_redirect,
-        name="legacy-redirect-episodes-detail-date"
+        name="legacy-redirect-episodes-detail-date",
     ),
     path(
         "episodes/<str:category>/",
@@ -68,7 +65,7 @@ urlpatterns = [
             pattern_name="homepage",
             permanent=True,
         ),
-        name="legacy-redirect-php-homepage"
+        name="legacy-redirect-php-homepage",
     ),
     path(
         "forum/",
@@ -77,7 +74,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        name="legacy-redirect-old-forum"
+        name="legacy-redirect-old-forum",
     ),
     path(
         "forum/<path:forumpath>",
@@ -86,7 +83,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        name="legacy-redirect-old-forum-deep"
+        name="legacy-redirect-old-forum-deep",
     ),
     path(
         "archive/",
@@ -94,7 +91,7 @@ urlpatterns = [
             pattern_name="show-list",
             permanent=True,
         ),
-        name="legacy-redirect-archive"
+        name="legacy-redirect-archive",
     ),
     path(
         "bookclub/",
@@ -106,7 +103,7 @@ urlpatterns = [
         {
             "show_slug": "book-club",
         },
-        name="legacy-redirect-bookclub"
+        name="legacy-redirect-bookclub",
     ),
     path(
         "bookclub/feed/",
@@ -117,7 +114,7 @@ urlpatterns = [
         {
             "show_slug": "book-club",
         },
-        name="legacy-redirect-bookclub-feed"
+        name="legacy-redirect-bookclub-feed",
     ),
     path(
         "bookclub/<catalog_number>/<slug:content_slug>/",
@@ -128,7 +125,7 @@ urlpatterns = [
         {
             "show_slug": "book-club",
         },
-        name="legacy-redirect-bookclub-detail"
+        name="legacy-redirect-bookclub-detail",
     ),
     path(
         "geeknights/monday/",
@@ -137,9 +134,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        {
-            "show_slug": "monday"
-        },
+        {"show_slug": "monday"},
         name="legacy-geeknights-show-monday",
     ),
     path(
@@ -149,9 +144,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        {
-            "show_slug": "tuesday"
-        },
+        {"show_slug": "tuesday"},
         name="legacy-geeknights-show-tuesday",
     ),
     path(
@@ -161,9 +154,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        {
-            "show_slug": "wednesday"
-        },
+        {"show_slug": "wednesday"},
         name="legacy-geeknights-show-wednesday",
     ),
     path(
@@ -173,9 +164,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        {
-            "show_slug": "thursday"
-        },
+        {"show_slug": "thursday"},
         name="legacy-geeknights-show-thursday",
     ),
     path(
@@ -185,9 +174,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        {
-            "show_slug": "special"
-        },
+        {"show_slug": "special"},
         name="legacy-geeknights-show-special",
     ),
     path(
@@ -197,9 +184,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        {
-            "show_slug": "book-club"
-        },
+        {"show_slug": "book-club"},
         name="legacy-geeknights-show-book-club",
     ),
     path(
@@ -209,9 +194,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        {
-            "show_slug": "experimental"
-        },
+        {"show_slug": "experimental"},
         name="legacy-geeknights-show-experimental",
     ),
     path(
@@ -220,7 +203,7 @@ urlpatterns = [
             url="/geeknights/?year=%(year)s",
             permanent=True,
         ),
-        name="legacy-redirect-geeknights-year"
+        name="legacy-redirect-geeknights-year",
     ),
     path(
         "geeknights/<yyyy:year>/<mm:month>/",
@@ -228,7 +211,7 @@ urlpatterns = [
             url="/geeknights/?year=%(year)s&month=%(month)s",
             permanent=True,
         ),
-        name="legacy-redirect-geeknights-year-month"
+        name="legacy-redirect-geeknights-year-month",
     ),
     path(
         "geeknights/feed/",
@@ -239,7 +222,7 @@ urlpatterns = [
         {
             "show_slug": "geeknights",
         },
-        name="legacy-redirect-geeknights-feed"
+        name="legacy-redirect-geeknights-feed",
     ),
     path(
         "geeknights/feed/total/",
@@ -250,7 +233,7 @@ urlpatterns = [
         {
             "show_slug": "geeknights",
         },
-        name="legacy-redirect-geeknights-feed-total"
+        name="legacy-redirect-geeknights-feed-total",
     ),
     path(
         "geeknights/feed/legacy/",
@@ -261,7 +244,7 @@ urlpatterns = [
         {
             "show_slug": "geeknights",
         },
-        name="legacy-redirect-geeknights-feed-legacy"
+        name="legacy-redirect-geeknights-feed-legacy",
     ),
     path(
         "geeknights/feed/monday/",
@@ -272,7 +255,7 @@ urlpatterns = [
         {
             "show_slug": "monday",
         },
-        name="legacy-redirect-monday-feed"
+        name="legacy-redirect-monday-feed",
     ),
     path(
         "geeknights/feed/tuesday/",
@@ -283,7 +266,7 @@ urlpatterns = [
         {
             "show_slug": "tuesday",
         },
-        name="legacy-redirect-tuesday-feed"
+        name="legacy-redirect-tuesday-feed",
     ),
     path(
         "geeknights/feed/wednesday/",
@@ -294,7 +277,7 @@ urlpatterns = [
         {
             "show_slug": "wednesday",
         },
-        name="legacy-redirect-wednesday-feed"
+        name="legacy-redirect-wednesday-feed",
     ),
     path(
         "geeknights/feed/thursday/",
@@ -305,7 +288,7 @@ urlpatterns = [
         {
             "show_slug": "thursday",
         },
-        name="legacy-redirect-thursday-feed"
+        name="legacy-redirect-thursday-feed",
     ),
     path(
         "geeknights/feed/book-club/",
@@ -316,18 +299,18 @@ urlpatterns = [
         {
             "show_slug": "book-club",
         },
-        name="legacy-redirect-book-club-feed"
+        name="legacy-redirect-book-club-feed",
     ),
     path(
-        "geeknights/feed/book-club/",
+        "geeknights/feed/experimental/",
         base.RedirectView.as_view(
             pattern_name="show-podcast-rss",
             permanent=True,
         ),
         {
-            "show_slug": "book-club",
+            "show_slug": "experimental",
         },
-        name="legacy-redirect-bookclub-feed"
+        name="legacy-redirect-experimental-feed",
     ),
     path(
         "geeknights/feed/special/",
@@ -338,7 +321,7 @@ urlpatterns = [
         {
             "show_slug": "special",
         },
-        name="legacy-redirect-special-feed"
+        name="legacy-redirect-special-feed",
     ),
     path(
         "news/<yyyy:year>/",
@@ -346,7 +329,7 @@ urlpatterns = [
             url="/news/?year=%(year)s",
             permanent=True,
         ),
-        name="legacy-redirect-news-year"
+        name="legacy-redirect-news-year",
     ),
     path(
         "news/<yyyy:year>/<mm:month>/",
@@ -354,12 +337,12 @@ urlpatterns = [
             url="/news/?year=%(year)s&month=%(month)s",
             permanent=True,
         ),
-        name="legacy-redirect-news-year-month"
+        name="legacy-redirect-news-year-month",
     ),
     path(
         "news/<yyyy:year>/<mm:month>/<dd:day>/<slug:slug>",
         views.news_detail_redirect,
-        name="legacy-redirect-news-detail-date-slug"
+        name="legacy-redirect-news-detail-date-slug",
     ),
     path(
         "news/feed/",
@@ -370,7 +353,7 @@ urlpatterns = [
         {
             "show_slug": "news",
         },
-        name="legacy-redirect-news-feed"
+        name="legacy-redirect-news-feed",
     ),
     path(
         "things/feed/",
@@ -378,7 +361,7 @@ urlpatterns = [
             pattern_name="totd-rss",
             permanent=True,
         ),
-        name="legacy-redirect-totd-feed"
+        name="legacy-redirect-totd-feed",
     ),
     path(
         "things/feed/legacy/",
@@ -386,7 +369,7 @@ urlpatterns = [
             pattern_name="totd-rss",
             permanent=True,
         ),
-        name="legacy-redirect-totd-feed-legacy"
+        name="legacy-redirect-totd-feed-legacy",
     ),
     path(
         "videos/",
@@ -394,7 +377,7 @@ urlpatterns = [
             pattern_name="show-list",
             permanent=True,
         ),
-        name="legacy-redirect-videos"
+        name="legacy-redirect-videos",
     ),
     path(
         "videos/<slug:show_slug>/",
@@ -403,7 +386,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        name="legacy-redirect-videos-show-list"
+        name="legacy-redirect-videos-show-list",
     ),
     path(
         "videos/<slug:show_slug>/<catalog_number>/<slug:content_slug>/",
@@ -411,7 +394,7 @@ urlpatterns = [
             pattern_name="content-detail",
             permanent=True,
         ),
-        name="legacy-redirect-videos-detail"
+        name="legacy-redirect-videos-detail",
     ),
     path(
         "videos/tags/<str:tags>/",
@@ -420,7 +403,7 @@ urlpatterns = [
             permanent=True,
             query_string=True,
         ),
-        name="legacy-redirect-videos-tags"
+        name="legacy-redirect-videos-tags",
     ),
     path(
         "feeds/news/",
@@ -431,7 +414,7 @@ urlpatterns = [
         {
             "show_slug": "news",
         },
-        name="legacy-redirect-feed-news"
+        name="legacy-redirect-feed-news",
     ),
     path(
         "feeds/totd/",
@@ -439,7 +422,7 @@ urlpatterns = [
             pattern_name="totd-rss",
             permanent=True,
         ),
-        name="legacy-redirect-feed-totd"
+        name="legacy-redirect-feed-totd",
     ),
     path(
         "feeds/all/",
@@ -450,7 +433,7 @@ urlpatterns = [
         {
             "show_slug": "geeknights",
         },
-        name="legacy-redirect-feeds-geeknights"
+        name="legacy-redirect-feeds-geeknights",
     ),
     path(
         "feeds/monday/",
@@ -461,7 +444,7 @@ urlpatterns = [
         {
             "show_slug": "monday",
         },
-        name="legacy-redirect-feeds-monday"
+        name="legacy-redirect-feeds-monday",
     ),
     path(
         "feeds/tuesday/",
@@ -472,7 +455,7 @@ urlpatterns = [
         {
             "show_slug": "tuesday",
         },
-        name="legacy-redirect-feeds-tuesday"
+        name="legacy-redirect-feeds-tuesday",
     ),
     path(
         "feeds/wednesday/",
@@ -483,7 +466,7 @@ urlpatterns = [
         {
             "show_slug": "wednesday",
         },
-        name="legacy-redirect-feeds-wednesday"
+        name="legacy-redirect-feeds-wednesday",
     ),
     path(
         "feeds/thursday/",
@@ -494,7 +477,7 @@ urlpatterns = [
         {
             "show_slug": "thursday",
         },
-        name="legacy-redirect-feeds-thursday"
+        name="legacy-redirect-feeds-thursday",
     ),
     path(
         "feeds/experimental/",
@@ -505,7 +488,7 @@ urlpatterns = [
         {
             "show_slug": "experimental",
         },
-        name="legacy-redirect-feeds-experimental"
+        name="legacy-redirect-feeds-experimental",
     ),
     path(
         "feeds/special/",
@@ -516,7 +499,7 @@ urlpatterns = [
         {
             "show_slug": "special",
         },
-        name="legacy-redirect-feeds-special"
+        name="legacy-redirect-feeds-special",
     ),
     path(
         "feeds/category/news/",
@@ -527,7 +510,7 @@ urlpatterns = [
         {
             "show_slug": "news",
         },
-        name="legacy-redirect-feed-category-news"
+        name="legacy-redirect-feed-category-news",
     ),
     path(
         "feeds/category/totd/",
@@ -535,7 +518,7 @@ urlpatterns = [
             pattern_name="totd-rss",
             permanent=True,
         ),
-        name="legacy-redirect-feed-category/totd"
+        name="legacy-redirect-feed-category/totd",
     ),
     path(
         "feeds/category/all/",
@@ -546,7 +529,7 @@ urlpatterns = [
         {
             "show_slug": "geeknights",
         },
-        name="legacy-redirect-feeds-category/geeknights"
+        name="legacy-redirect-feeds-category/geeknights",
     ),
     path(
         "feeds/category/monday/",
@@ -557,7 +540,7 @@ urlpatterns = [
         {
             "show_slug": "monday",
         },
-        name="legacy-redirect-feeds-category-monday"
+        name="legacy-redirect-feeds-category-monday",
     ),
     path(
         "feeds/category/tuesday/",
@@ -568,7 +551,7 @@ urlpatterns = [
         {
             "show_slug": "tuesday",
         },
-        name="legacy-redirect-feeds-category/tuesday"
+        name="legacy-redirect-feeds-category/tuesday",
     ),
     path(
         "feeds/category/wednesday/",
@@ -579,7 +562,7 @@ urlpatterns = [
         {
             "show_slug": "wednesday",
         },
-        name="legacy-redirect-feeds-category/wednesday"
+        name="legacy-redirect-feeds-category/wednesday",
     ),
     path(
         "feeds/category/thursday/",
@@ -590,7 +573,7 @@ urlpatterns = [
         {
             "show_slug": "thursday",
         },
-        name="legacy-redirect-feeds-category-thursday"
+        name="legacy-redirect-feeds-category-thursday",
     ),
     path(
         "feeds/category/experimental/",
@@ -601,7 +584,7 @@ urlpatterns = [
         {
             "show_slug": "experimental",
         },
-        name="legacy-redirect-feeds-category-experimental"
+        name="legacy-redirect-feeds-category-experimental",
     ),
     path(
         "feeds/category/special/",
@@ -612,21 +595,21 @@ urlpatterns = [
         {
             "show_slug": "special",
         },
-        name="legacy-redirect-feeds-category-special"
+        name="legacy-redirect-feeds-category-special",
     ),
     path(
         "<yyyy:year>/<mm:month>/<dd:day>/<slug:slug>",
         views.geeknights_episode_detail_redirect,
-        name="legacy-redirect-episode-detail-date-slug"
+        name="legacy-redirect-episode-detail-date-slug",
     ),
     path(
         "<yyyy:year>/<mm:month>/<dd:day>/",
         views.geeknights_episode_detail_redirect,
-        name="legacy-redirect-episode-detail-date"
+        name="legacy-redirect-episode-detail-date",
     ),
     path(
         "<yyyy:year>/<mm:month>/<dd:day>/geeknights-<slug:slug>/",
         views.geeknights_episode_detail_redirect,
-        name="legacy-redirect-episode-detail-date-geeknights-slug"
+        name="legacy-redirect-episode-detail-date-geeknights-slug",
     ),
 ]
