@@ -16,6 +16,18 @@ def homepage(request):
     return shortcuts.render(request, template_name, context)
 
 
+def show_list(request):
+    """ A page that lists all the published shows """
+    template_name = "shows/show_list.html"
+    shows = models.Show.published.all()
+    if not shows:
+        raise http.Http404(_("No published shows."))
+    context = {
+        "shows": shows
+    }
+    return shortcuts.render(request, template_name, context)
+
+
 def show_detail(request, show_slug, tags=None):
     """ The page for a single show with its paginated content """
     ITEMS_PER_PAGE = 10

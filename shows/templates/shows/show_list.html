@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ show.title }}{% endblock title %}
+{% block extrahead %}
+{% comment "TODO" %}
+<link rel="canonical" href="{% url "show-list" %}" />
+{% endcomment %}
+{% endblock extrahead %}
+
+{% block content %}
+<h1>All Shows</h1>
+<ul>
+    {% for show in shows %}
+    <li><a href="{% url "show-detail" show.slug %}">{{ show.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock content %}
