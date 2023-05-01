@@ -1,7 +1,7 @@
-import factory
-import markdown
 import random
 
+import factory
+import markdown
 from django.utils import text
 from mdgen import MarkdownPostProvider
 
@@ -18,14 +18,8 @@ class PublishableFactory(factory.django.DjangoModelFactory):
     is_published = factory.Faker("boolean")
     pub_time = factory.Maybe(
         "is_published",
-        factory.Faker(
-            "past_datetime",
-            tzinfo=factory.Faker("pytimezone")
-        ),
-        factory.Faker(
-            "future_datetime",
-            tzinfo=factory.Faker("pytimezone")
-        )
+        factory.Faker("past_datetime", tzinfo=factory.Faker("pytimezone")),
+        factory.Faker("future_datetime", tzinfo=factory.Faker("pytimezone")),
     )
 
 
@@ -81,9 +75,7 @@ class ContentFactory(PublishableFactory):
         )
 
     class Params:
-        parent_is_podcast = factory.LazyAttribute(
-            lambda o: o.show.podcast is not None
-        )
+        parent_is_podcast = factory.LazyAttribute(lambda o: o.show.podcast is not None)
         podcast = factory.Trait(
             is_podcast=True,
             show=factory.SubFactory(
@@ -113,15 +105,13 @@ class ContentFactory(PublishableFactory):
     original_content = factory.Maybe(
         "is_markdown",
         factory.SelfAttribute("raw_content"),
-        factory.LazyAttribute(
-            lambda o: markdown.markdown(o.raw_content)
-        )
+        factory.LazyAttribute(lambda o: markdown.markdown(o.raw_content)),
     )
     podcast_episode = factory.Maybe(
         "is_podcast",
         factory.SubFactory(
             "podcasts.factories.PodcastEpisodeFactory",
-            podcast=factory.SelfAttribute("..show.podcast")
+            podcast=factory.SelfAttribute("..show.podcast"),
         ),
         None,
     )
@@ -141,13 +131,13 @@ class ContentFactory(PublishableFactory):
     related_links = factory.RelatedFactoryList(
         "shows.factories.RelatedLinkFactory",
         factory_related_name="content",
-        size=lambda: random.randint(0, 4)
+        size=lambda: random.randint(0, 4),
     )
 
     meta_data = factory.RelatedFactoryList(
         "shows.factories.MetaDataFactory",
         factory_related_name="content",
-        size=lambda: random.randint(0, 4)
+        size=lambda: random.randint(0, 4),
     )
 
     @factory.post_generation
@@ -180,9 +170,7 @@ class RelatedLinkTypeFactory(factory.django.DjangoModelFactory):
 class RelatedLinkFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.RelatedLink
-        exclude = (
-            "has_description",
-        )
+        exclude = ("has_description",)
 
     class Params:
         # Never set published and unpublished together
@@ -204,14 +192,10 @@ class RelatedLinkFactory(factory.django.DjangoModelFactory):
                 related_links=[],
             )
         )
-        use_new_type = factory.Trait(
-            type=factory.SubFactory(RelatedLinkTypeFactory)
-        )
+        use_new_type = factory.Trait(type=factory.SubFactory(RelatedLinkTypeFactory))
 
     content = factory.SubFactory(ContentFactory, related_links=[])
-    type = factory.Iterator(
-        models.RelatedLinkType.objects.all()
-    )
+    type = factory.Iterator(models.RelatedLinkType.objects.all())
     title = factory.Faker("sentence", nb_words=4)
     has_description = factory.Faker("boolean")
     description = factory.Maybe(
@@ -249,9 +233,7 @@ class MetaDataFactory(factory.django.DjangoModelFactory):
         model = models.MetaData
 
     class Params:
-        use_new_type = factory.Trait(
-            type=factory.SubFactory(MetaDataTypeFactory)
-        )
+        use_new_type = factory.Trait(type=factory.SubFactory(MetaDataTypeFactory))
 
     content = factory.SubFactory(ContentFactory, meta_data=[])
     type = factory.Iterator(models.MetaDataType.objects.all())

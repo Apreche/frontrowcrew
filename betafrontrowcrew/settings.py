@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "etl",
     "media",
     "podcasts",
+    "legacy_redirects",
     "shows",
 ]
 
@@ -218,13 +219,12 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # Media files (User Uploads)
 # https://docs.djangoproject.com/en/3.2/topics/files/
 
+MEDIA_URL = os.environ.get("BETAFRONTROWCREW_MEDIA_URL", "/media/")
+MEDIA_ROOT = os.environ.get("BETAFRONTROWCREW_MEDIA_ROOT", "/tmp/media/")
 AWS_STORAGE_BUCKET_NAME = os.environ.get(
     "BETAFRONTROWCREW_AWS_STORAGE_BUCKET_NAME", None
 )
-if AWS_STORAGE_BUCKET_NAME is None:
-    MEDIA_URL = os.environ.get("BETAFRONTROWCREW_MEDIA_URL", "/media/")
-    MEDIA_ROOT = os.environ.get("BETAFRONTROWCREW_MEDIA_ROOT", "/tmp/media/")
-else:
+if AWS_STORAGE_BUCKET_NAME is not None:
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_FILE_OVERWRITE = False
