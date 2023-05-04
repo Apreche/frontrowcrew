@@ -1,0 +1,55 @@
+---
+- name: Ensure flower config directory exists
+  ansible.builtin.file:
+    path: "{{ flower_config_dir }}"
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Install flower env file
+  ansible.builtin.template:
+    src: templates/flower_env.j2
+    dest: "{{ flower_env_config_path }}"
+    owner: root
+    group: www-data
+    mode: '0640'
+  become: yes
+  notify: "restart flower workers"
+
+- name: Install flower config file
+  ansible.builtin.template:
+    src: templates/flower_config.j2
+    dest: "{{ flower_config_path }}"
+    owner: root
+    group: www-data
+    mode: '0640'
+  become: yes
+  notify: "restart flower workers"
+
+- name: Install flower systemd service config
+  ansible.builtin.template:
+    src: templates/systemd_flower.j2
+    dest: "{{ systemd_config_dir }}/{{ flower_service_name }}.service"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  notify: "restart flower workers"
+
+- name: Install flower logrotate config file
+  ansible.builtin.template:
+    src: templates/flower_logrotate.j2
+    dest: /etc/logrotate.d/flower
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Enable and start flower
+  ansible.builtin.systemd:
+    name: "{{ flower_service_name }}.service"
+    enabled: yes
+    state: restarted
+    daemon_reload: yes
+  become: yes
+...

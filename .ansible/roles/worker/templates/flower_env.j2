@@ -1,0 +1,16 @@
+{# Python environment variables #}
+{% for key, value in env_vars.items() %}
+{{ key }}="{{ value }}"
+{% endfor %}
+
+{# AWS environment variables #}
+AWS_ACCESS_KEY_ID="{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+AWS_SECRET_ACCESS_KEY="{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+
+{# Celery systemd environment variables #}
+CELERY_BIN="{{ flower_celery_binary }}"
+CELERY_APP="{{ project_name }}"
+FLOWER_CONFIG_FILE="{{ flower_config_path }}"
+FLOWER_PID_FILE="{{ flower_runtime_dir }}/%n.pid"
+FLOWER_LOG_FILE="{{ flower_log_dir }}/%n%I.log"
+FLOWER_LOG_LEVEL="{{ flower_log_level }}"
