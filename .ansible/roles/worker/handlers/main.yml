@@ -17,6 +17,6 @@
   ansible.builtin.service:
     name: "{{ flower_service_name }}"
     state: restarted
-  listen: "restart celery workers"
+  listen: "restart flower workers"
   become: yes
 ...
