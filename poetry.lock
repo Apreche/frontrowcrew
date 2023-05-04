@@ -714,6 +714,25 @@ files = [
 python-dateutil = ">=2.4"
 
 [[package]]
+name = "flower"
+version = "1.2.0"
+description = "Celery Flower"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "flower-1.2.0-py2.py3-none-any.whl", hash = "sha256:ae2977cf7343c526cf44def8c7e7173db8dedb8249b91ba4b88cfd18e7a2d486"},
+    {file = "flower-1.2.0.tar.gz", hash = "sha256:46493c7e8d9ca2167e8a46eb97ae8d280997cb40a81993230124d74f0fe40bac"},
+]
+
+[package.dependencies]
+celery = ">=5.0.5"
+humanize = "*"
+prometheus-client = ">=0.8.0"
+pytz = "*"
+tornado = ">=5.0.0,<7.0.0"
+
+[[package]]
 name = "gunicorn"
 version = "20.1.0"
 description = "WSGI HTTP Server for UNIX"
@@ -733,6 +752,21 @@ eventlet = ["eventlet (>=0.24.1)"]
 gevent = ["gevent (>=1.4.0)"]
 setproctitle = ["setproctitle"]
 tornado = ["tornado (>=0.2)"]
+
+[[package]]
+name = "humanize"
+version = "4.6.0"
+description = "Python humanize utilities"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "humanize-4.6.0-py3-none-any.whl", hash = "sha256:401201aca462749773f02920139f302450cb548b70489b9b4b92be39fe3c3c50"},
+    {file = "humanize-4.6.0.tar.gz", hash = "sha256:5f1f22bc65911eb1a6ffe7659bd6598e33dcfeeb904eb16ee1e705a09bf75916"},
+]
+
+[package.extras]
+tests = ["freezegun", "pytest", "pytest-cov"]
 
 [[package]]
 name = "idna"
@@ -1106,6 +1140,21 @@ docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-inline
 tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
 
 [[package]]
+name = "prometheus-client"
+version = "0.16.0"
+description = "Python client for the Prometheus monitoring system."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "prometheus_client-0.16.0-py3-none-any.whl", hash = "sha256:0836af6eb2c8f4fed712b2f279f6c0a8bbab29f9f4aa15276b91c7cb0d1616ab"},
+    {file = "prometheus_client-0.16.0.tar.gz", hash = "sha256:a03e35b359f14dd1630898543e2120addfdeacd1a6069c1367ae90fd93ad3f48"},
+]
+
+[package.extras]
+twisted = ["twisted"]
+
+[[package]]
 name = "prompt-toolkit"
 version = "3.0.38"
 description = "Library for building powerful interactive command lines in Python"
@@ -1409,6 +1458,27 @@ files = [
 ]
 
 [[package]]
+name = "tornado"
+version = "6.3.1"
+description = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."
+category = "main"
+optional = false
+python-versions = ">= 3.8"
+files = [
+    {file = "tornado-6.3.1-cp38-abi3-macosx_10_9_universal2.whl", hash = "sha256:db181eb3df8738613ff0a26f49e1b394aade05034b01200a63e9662f347d4415"},
+    {file = "tornado-6.3.1-cp38-abi3-macosx_10_9_x86_64.whl", hash = "sha256:b4e7b956f9b5e6f9feb643ea04f07e7c6b49301e03e0023eedb01fa8cf52f579"},
+    {file = "tornado-6.3.1-cp38-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9661aa8bc0e9d83d757cd95b6f6d1ece8ca9fd1ccdd34db2de381e25bf818233"},
+    {file = "tornado-6.3.1-cp38-abi3-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:81c17e0cc396908a5e25dc8e9c5e4936e6dfd544c9290be48bd054c79bcad51e"},
+    {file = "tornado-6.3.1-cp38-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a27a1cfa9997923f80bdd962b3aab048ac486ad8cfb2f237964f8ab7f7eb824b"},
+    {file = "tornado-6.3.1-cp38-abi3-musllinux_1_1_aarch64.whl", hash = "sha256:d7117f3c7ba5d05813b17a1f04efc8e108a1b811ccfddd9134cc68553c414864"},
+    {file = "tornado-6.3.1-cp38-abi3-musllinux_1_1_i686.whl", hash = "sha256:ffdce65a281fd708da5a9def3bfb8f364766847fa7ed806821a69094c9629e8a"},
+    {file = "tornado-6.3.1-cp38-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:90f569a35a8ec19bde53aa596952071f445da678ec8596af763b9b9ce07605e6"},
+    {file = "tornado-6.3.1-cp38-abi3-win32.whl", hash = "sha256:3455133b9ff262fd0a75630af0a8ee13564f25fb4fd3d9ce239b8a7d3d027bf8"},
+    {file = "tornado-6.3.1-cp38-abi3-win_amd64.whl", hash = "sha256:1285f0691143f7ab97150831455d4db17a267b59649f7bd9700282cba3d5e771"},
+    {file = "tornado-6.3.1.tar.gz", hash = "sha256:5e2f49ad371595957c50e42dd7e5c14d64a6843a3cf27352b69c706d1b5918af"},
+]
+
+[[package]]
 name = "tqdm"
 version = "4.65.0"
 description = "Fast, Extensible Progress Meter"
@@ -1519,4 +1589,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "34338e74c9a90c20e62ed9dd2149c598e34328660c840a4c6d2d81d700352e3d"
+content-hash = "ad91c9b96cd81b335586f979bea878fbc0144ebcffb1fb19fe4b505fc8e78716"
