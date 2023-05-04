@@ -33,4 +33,5 @@
   community.rabbitmq.rabbitmq_plugin:
     names: rabbitmq_management
     state: enabled
+  become: yes
 ...
