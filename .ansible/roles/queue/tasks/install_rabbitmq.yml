@@ -30,7 +30,7 @@
   become: yes
 
 - name: Enable rabbitmq management plugin
-  community.rabbitmq.plugin:
+  community.rabbitmq.rabbitmq_plugin:
     names: rabbitmq_management
     state: enabled
 ...
