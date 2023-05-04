@@ -17,7 +17,7 @@ ExecStart=/bin/sh -c '${CELERY_BIN} -A $CELERY_APP \
     --pidfile=${FLOWER_PID_FILE} \
     --logfile=${FLOWER_LOG_FILE} \
     --loglevel=${FLOWER_LOG_LEVEL} \
-    flower --conf=${FLOWER_CONFIG_PATH}
+    flower --conf=${FLOWER_CONFIG_PATH}'
 Restart=on-failure
 
 [Install]
