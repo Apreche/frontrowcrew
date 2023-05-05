@@ -21,4 +21,14 @@ python_environment:
     celery_vhost: "{{ rabbitmq_vhost }}"
     aws_storage_bucket_name: "{{ lookup('env', 'AWS_STORAGE_BUCKET_NAME') }}"
     aws_s3_custom_domain: "{{ lookup('env', 'AWS_S3_CUSTOM_DOMAIN') }}"
+    # Django email settings
+    admin_email: "{{ lookup('env', 'ADMIN_EMAIL') }}"
+    server_email: "{{ lookup('env', 'SERVER_EMAIL') }}"
+    default_from_email: "{{ lookup('env', 'DEFAULT_FROM_EMAIL') }}"
+    email_subject_prefix: "{{ lookup('env', 'EMAIL_SUBJECT_PREFIX') }}"
+    email_host: "{{ lookup('env', 'EMAIL_HOST') }}"
+    email_host_password: "{{ lookup('env', 'EMAIL_HOST_PASSWORD') }}"
+    email_host_user: "{{ lookup('env', 'EMAIL_HOST_USER') }}"
+    email_port: "{{ lookup('env', 'EMAIL_PORT') }}"
+    email_use_tls: "{{ lookup('env', 'EMAIL_USE_TLS') }}"
 ...

@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.sites",
     "django.contrib.staticfiles",
-
     # Third party apps
     "django_celery_beat",
     "django_celery_results",
@@ -64,7 +63,6 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "pagedown",  # The StackOverflow WYSIWYG Editor
     "taggit",
-
     # First party apps
     "creator",
     "embeds",
@@ -186,12 +184,12 @@ if DEBUG:
     AUTH_PASSWORD_VALIDATORS = []
 
 PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.ScryptPasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-    'django.contrib.auth.hashers.ScryptPasswordHasher'
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
 ]
 
 # Internationalization
@@ -229,32 +227,53 @@ if AWS_STORAGE_BUCKET_NAME is not None:
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_FILE_OVERWRITE = False
     AWS_S3_VERIFY = True
-    AWS_S3_ENDPOINT_URL = os.environ.get(
-        "BETAFRONTROWCREW_AWS_S3_ENDPOINT_URL", None
-    )
+    AWS_S3_ENDPOINT_URL = os.environ.get("BETAFRONTROWCREW_AWS_S3_ENDPOINT_URL", None)
     AWS_S3_URL_PROTOCOL = os.environ.get(
         "BETAFRONTROWCREW_AWS_S3_URL_PROTOCOL", "https:"
     )
-    custom_domain = os.environ.get(
-        "BETAFRONTROWCREW_AWS_S3_CUSTOM_DOMAIN", None
-    )
+    custom_domain = os.environ.get("BETAFRONTROWCREW_AWS_S3_CUSTOM_DOMAIN", None)
     if custom_domain is not None:
         AWS_S3_CUSTOM_DOMAIN = custom_domain
 
 # Logging
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
         },
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'WARNING',
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
     },
 }
+
+# Django Email
+admin_email = os.environ.get("BETAFRONTROWCREW_ADMIN_EMAIL", "")
+if admin_email:
+    ADMINS = [("FRC Admin", admin_email)]
+SERVER_EMAIL = os.environ.get("BETAFRONTROWCREW_SERVER_EMAIL", "root@localhost")
+DEFAULT_FROM_EMAIL = os.environ.get(
+    "BETAFRONTROWCREW_DEFAULT_FROM_EMAIL", "webmaster@localhost"
+)
+EMAIL_HOST = os.environ.get("BETAFRONTROWCREW_EMAIL_HOST", "localhost")
+EMAIL_HOST_PASSWORD = os.environ.get("BETAFRONTROWCREW_EMAIL_HOST_PASSWORD", "")
+EMAIL_HOST_USER = os.environ.get("BETAFRONTROWCREW_EMAIL_HOST_USER", "")
+EMAIL_PORT = int(os.environ.get("BETAFRONTROWCREW_EMAIL_PORT", "25"))
+EMAIL_SUBJECT_PREFIX = os.environ.get(
+    "BETAFRONTROWCREW_EMAIL_SUBJECT_PREFIX", "[Django]"
+)
+EMAIL_USE_TLS = utils.str_to_bool(
+    os.environ.get("BETAFRONTROWCREW_EMAIL_USE_TLS", "False")
+)
+EMAIL_USE_SSL = utils.str_to_bool(
+    os.environ.get("BETAFRONTROWCREW_EMAIL_USE_SSL", "False")
+)
+EMAIL_SSL_CERTFILE = os.environ.get("BETAFRONTROWCREW_EMAIL_SSL_CERTFILE", None)
+EMAIL_SSL_KEYFILE = os.environ.get("BETAFRONTROWCREW_EMAIL_SSL_KEYFILE", None)
+
 
 # Celery
 CELERY_TASK_ALWAYS_EAGER = DEBUG
@@ -295,5 +314,5 @@ IPYTHON_ARGUMENTS = [
     "--ext=autoreload",
     "-c=%autoreload 2",
     "-i",
-    "--"
+    "--",
 ]
