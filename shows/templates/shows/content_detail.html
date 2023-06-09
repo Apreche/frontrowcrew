@@ -65,7 +65,34 @@
             <li><div class="dropdown-link-wrapper"><a href="">iTunes</div></a></li>
             <li><div class="dropdown-link-wrapper"><a href="">YouTube</div></a></li>
     </div>
-    <button class="uk-button btn-primary primary-right">See Forum Discussion</button>
+    {% if content.forum_threads %}
+    <button class="uk-button btn-primary primary-right btn-forum-link">
+        {% if content.forum_threads|length == 1 %}
+            {% with content.forum_threads|first as thread %}
+            <a href="{{ thread.url }}" alt="{{ thread.description }}" title="{{ thread.description }}"
+                {% if thread.error %}class="thread-error">(Broken Link)
+                {% else %}>
+                {% endif %}
+            See Forum Discussion</a>
+            </button>
+            {% endwith %}
+        {% else %}
+            See Forum Discussions</button>
+            <div class="forum-dropdown" uk-dropdown="post: bottom-center">
+                <ul>
+                    {% for thread in content.forum_threads %}
+                    <li><div class="dropdown-link-wrapper">
+                        <a href="{{ thread.url }}" alt="{{ thread.description }}"
+                        {% if thread.error %}class="thread-error">(Broken Link)
+                        {% else %}>
+                        {% endif %}
+                        {{ thread.description }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endif %}
 </div>
 {% if similar_content %}
 <div class="uk-section">
