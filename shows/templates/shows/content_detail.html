@@ -54,7 +54,7 @@
             </div>
         {% endif %}
         {% if content.purchase_links %}
-            <ul>
+            <ul class="purchase-links">
                 {% for link in content.purchase_links %}
                 <li><a href="{{ link.url }}" alt="{{ link.description }}"
                     {% if link.error %}class="link-error">(Broken Link)
@@ -69,7 +69,7 @@
 <div class="uk-section uk-flex flex-center content-details-cta">
     <button class="uk-button btn-primary primary-left">Contribute Show Notes</button>
     <button class="uk-button btn-secondary btn-content-available">Available Here:</button>
-    <div class="cta-dropdown" uk-dropdown="pos: bottom-center">
+    <div class="cta-dropdown" uk-dropdown="pos: bottom-center; mode: click">
         <ul>
             <li><div class="dropdown-link-wrapper"><a href="">Download mp3</div></a></li>
             <li><div class="dropdown-link-wrapper"><a href="">Spotify</div></a></li>
@@ -89,7 +89,7 @@
             {% endwith %}
         {% else %}
             See Forum Discussions</button>
-            <div class="forum-dropdown" uk-dropdown="post: bottom-center">
+            <div class="forum-dropdown" uk-dropdown="post: bottom-center; mode: click">
                 <ul>
                     {% for thread in content.forum_threads %}
                     <li><div class="dropdown-link-wrapper">

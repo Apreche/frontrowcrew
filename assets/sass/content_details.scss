@@ -84,7 +84,11 @@ h3{
     }
 }
 
-.totd-error{
+.purchase-links{
+    text-align: center;
+}
+
+.totd-error, .thread-error, .link-error{
     &:hover{
         color: c.$red;
         opacity: 0.8;
@@ -97,8 +101,13 @@ h3{
         max-width: 170px;
     }
     .cta-dropdown{
-        @include m.dropdowns;
+        @include m.dropdowns($background-color-hvr: c.$gold);
     }
+}
+
+.forum-dropdown{
+    @extend .cta-dropdown;
+    max-width: 400px;
 }
 
 .a-btn-similar{
