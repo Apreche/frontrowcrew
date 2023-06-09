@@ -5,19 +5,26 @@
  /** Primary Button **/
 @mixin btn-primary($outline-width: 1px){                                                                          
     background-color: c.$black;
-    color: c.$gold;
     text-align: center;
     font-family: f.$serif-font;
     border: 2px solid c.$black;
     outline: $outline-width solid c.$gold;
     transition-duration: 0.3s;
     line-height: normal;
+    a{
+        color: c.$gold;
+        font-weight: unset;
+    }
     &:hover:not([aria-disabled="true"]),
     &:focus:not([aria-disabled="true"]){
         background-color: c.$gold;
         color: c.$black;
         outline-color: c.$gold;
         border-color: c.$blue;
+        a{
+            color: c.$black;
+            text-decoration: none;
+        }
     }
     &:active{
         outline: none;
