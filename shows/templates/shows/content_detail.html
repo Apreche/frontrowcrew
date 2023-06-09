@@ -53,6 +53,17 @@
                 </ul>
             </div>
         {% endif %}
+        {% if content.purchase_links %}
+            <ul>
+                {% for link in content.purchase_links %}
+                <li><a href="{{ link.url }}" alt="{{ link.description }}"
+                    {% if link.error %}class="link-error">(Broken Link)
+                    {% else %}>
+                    {% endif %}
+                    {{ link.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
 </div>
 <div class="uk-section uk-flex flex-center content-details-cta">
@@ -69,7 +80,7 @@
     <button class="uk-button btn-primary primary-right btn-forum-link">
         {% if content.forum_threads|length == 1 %}
             {% with content.forum_threads|first as thread %}
-            <a href="{{ thread.url }}" alt="{{ thread.description }}" title="{{ thread.description }}"
+            <a href="{{ thread.url }}" alt="{{ thread.description }}"
                 {% if thread.error %}class="thread-error">(Broken Link)
                 {% else %}>
                 {% endif %}
