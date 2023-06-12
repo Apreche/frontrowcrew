@@ -36,7 +36,7 @@ flower = "^1.2.0"
 [tool.poetry.dev-dependencies]
 ipython = "^8.3.0"
 ipdb = "^0.13.9"
-Werkzeug = "^2.2.3"
+Werkzeug = "^2.3.6"
 coverage = "^7.0.5"
 
 [tool.poetry.group.test.dependencies]
