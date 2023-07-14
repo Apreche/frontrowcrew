@@ -65,7 +65,10 @@
                             </ul>
                         </div>
                         {% endif %}
-                        <button class="uk-button btn-primary primary-right">See Forum Discussion</button>
+                        {% if content.forum_threads %}
+                            <button class="uk-button btn-primary primary-right">
+                            {% include "./partials/_forum_threads.html" %}
+                        {% endif %}
                     </div>
                 </div>
             {% endif %}
