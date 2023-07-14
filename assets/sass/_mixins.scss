@@ -102,7 +102,15 @@
         }
         li{
             transition-duration: 0.2s;
-            cursor: pointer;
+            &:has(:not(.thread-error)){
+                cursor: pointer;
+            }
+            &:has(.thread-error){
+                cursor: not-allowed;
+                a{
+                    cursor: inherit;
+                }
+            }
             a{
                 color: $color;
                 font-weight: unset;
@@ -119,7 +127,6 @@
             }
             &:hover{
                 .dropdown-link-wrapper{
-                    background-color: $background-color-hvr;
                     margin-left: -15px;
                     padding-left: calc(((100% - $width) / 2) + 14.5px);
                     padding-right: calc(((100% - $width) / 2) + 14px);
@@ -133,6 +140,17 @@
                 a{
                     color: $color-hvr;  
                     text-decoration: none;
+                }
+                &:has(:not(.thread-error)){
+                    .dropdown-link-wrapper{
+                        background-color: $background-color-hvr;
+                    }
+                }
+                &:has(.thread-error){
+                    .dropdown-link-wrapper{
+                        background-color: c.$red;
+                        opacity: 0.8;
+                    }
                 }
             }
         }
