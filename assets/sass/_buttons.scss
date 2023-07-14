@@ -25,6 +25,11 @@
             color: c.$black;
             text-decoration: none;
         }
+        &:has(.totd-error, .thread-error, .link-error){
+            background-color: c.$red;
+            opacity: 0.8;
+            cursor: not-allowed;
+        }
     }
     &:active{
         outline: none;
@@ -79,4 +84,6 @@
         opacity: 0.7;
     }
 }
+
+
 
