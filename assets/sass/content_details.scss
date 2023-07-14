@@ -88,13 +88,6 @@ h3{
     text-align: center;
 }
 
-.totd-error, .thread-error, .link-error{
-    &:hover{
-        color: c.$red;
-        opacity: 0.8;
-    }
-}
-
 .content-details-cta{
     .btn-primary{
         width: 17%;
@@ -103,11 +96,6 @@ h3{
     .cta-dropdown{
         @include m.dropdowns($background-color-hvr: c.$gold);
     }
-}
-
-.forum-dropdown{
-    @extend .cta-dropdown;
-    max-width: 400px;
 }
 
 .a-btn-similar{

@@ -146,6 +146,21 @@ ul{
     }
 }
 
+/** Dropdowns **/
+.forum-dropdown{
+    @include m.dropdowns($background-color-hvr: c.$gold);
+    max-width: 400px;
+}
+
+/** Link Errors **/
+.totd-error, .thread-error, .link-error{
+    &:hover{
+        color: c.$red;
+        opacity: 0.8;
+        cursor: not-allowed;
+    }
+}
+
 /** Landing Page Community Section **/
 .landing-community{             // .uk-grid div
     margin-left: auto;
