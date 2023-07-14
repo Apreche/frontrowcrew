@@ -23,7 +23,7 @@
                        ){
     position: relative;
     border: $line-width solid $color;
-    z-index: 0;
+    z-index: 1;
     @if $top{
         &::after{
             top: $v-length;
