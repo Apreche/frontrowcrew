@@ -45,6 +45,17 @@
                     </div>
                     <div class="rendered-content">
                         {{ content.rendered_html|safe }}
+                        {% if content.purchase_links %}
+                        <ul class="purchase-links">
+                            {% for link in content.purchase_links %}
+                            <li><a href="{{ link.url }}" alt="{{ link.description }}"
+                                {% if link.error %}class="link-error">(Broken Link)
+                                {% else %}>
+                                {% endif %}
+                                {{ link.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
                     </div>
                     <div class="uk-flex flex-center">
                         <button class="uk-button btn-primary primary-left">See Show Notes</button>
