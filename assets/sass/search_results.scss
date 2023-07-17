@@ -39,7 +39,26 @@
     @extend .tags-list;
     @extend .font-sm;
     margin-left: unset;
+    width: 100%;
     @media(min-width: bp.$s){
+        width: unset;
+        display: inline;
+        float: left;
         text-align: left;
+    }
+}
+
+.search-forum-link{
+    display: block;
+    @media(min-width: bp.$s){
+        float: right;
+        &.search-forum-link-s + .forum-dropdown{
+            display: none;
+        }
+    }
+    @media(max-width: bp.$s){
+        &:not(.search-forum-link-s) + .forum-dropdown{
+            display: none;
+        }
     }
 }

@@ -84,11 +84,9 @@ h3{
     }
 }
 
-.totd-error{
-    &:hover{
-        color: c.$red;
-        opacity: 0.8;
-    }
+.purchase-links{
+    text-align: center;
+    padding-left: 0px;
 }
 
 .content-details-cta{
@@ -97,7 +95,7 @@ h3{
         max-width: 170px;
     }
     .cta-dropdown{
-        @include m.dropdowns;
+        @include m.dropdowns($background-color-hvr: c.$gold);
     }
 }
 

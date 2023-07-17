@@ -1,0 +1,34 @@
+{# include with left or right as True to change alignment #}
+{% if content.forum_threads|length == 1 %}
+{% with content.forum_threads|first as thread %}
+<a href="{{ thread.url }}" alt="{{ thread.description }}"
+    {% if thread.error %}class="thread-error">(Broken Link)
+    {% else %}>
+    {% endif %}
+See Forum Discussion</a>
+</button>
+{% endwith %}
+{% else %}
+See Forum Discussions</button>
+<div class="forum-dropdown" 
+    {% if left %}
+        uk-dropdown="pos: bottom-left; mode: click;"
+    {% elif right %}
+        uk-dropdown="pos: bottom-right; mode: click;"
+    {% else %}
+        uk-dropdown="pos: bottom-center; mode: click;"
+    {% endif %}
+    ">
+    <ul>
+        {% for thread in content.forum_threads %}
+        <li><div class="dropdown-link-wrapper">
+            <a href="{{ thread.url }}" alt="{{ thread.description }}"
+            {% if thread.error %}class="thread-error">(Broken Link)
+            {% else %}>
+            {% endif %}
+            {{ thread.description }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
