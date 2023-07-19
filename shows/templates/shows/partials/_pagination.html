@@ -9,12 +9,12 @@
             " uk-icon="chevron-double-left"></span>
         </li>
         <li>
-            <button class="uk-button btn-primary btn-page btn-page-s">
+            <button class="uk-button btn-primary btn-page btn-page-s" type="button">
                 <a href="?q={{ query }}&page=1">First</a>
             </button>
         </li>
         <li>
-            <button class="uk-button btn-primary btn-page btn-page-l">
+            <button class="uk-button btn-primary btn-page btn-page-l" type="button">
                 <a href="?q={{ query }}&page={{ page.previous_page_number }}">Previous</a>
             </button>
         </li>
@@ -29,12 +29,12 @@
     {% if page.has_next %}
     <div class="page-right">
         <li>
-            <button class="uk-button btn-primary btn-page btn-page-l">
+            <button class="uk-button btn-primary btn-page btn-page-l" type="button">
                 <a href="?q={{ query }}&page={{ page.next_page_number }}">Next</a>
             </button>
         </li>
         <li>
-            <button class="uk-button btn-primary btn-page btn-page-s">
+            <button class="uk-button btn-primary btn-page btn-page-s" type="button">
                 <a href="?q={{ query }}&page={{ page.paginator.num_pages }}">Last</a>
             </button>
         </li>
