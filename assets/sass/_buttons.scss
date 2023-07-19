@@ -58,6 +58,7 @@
     }
 }
 
+/** Secondary Button **/
 @mixin btn-secondary($outline-width: 1px){
     background-color: c.$gold;
     color: c.$black;
