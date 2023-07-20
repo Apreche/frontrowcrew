@@ -9,7 +9,6 @@
 }
 
 .show-content-grid{
-    .show-title,
     .latest-title{
         position:relative;
         background-color: c.$transparent-blue; 
@@ -35,10 +34,18 @@
 
 .show-title{
     display: flex;
-    align-items: center;
-    .show-logo{
-        padding: 15px;
-    }
+    justify-content: center;
+    gap: 10px;
+}
+
+.show-logo-archive{
+    max-height: 130px;
+    max-width: 27vw;
+}
+
+.show-title-archive{
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .show-content-block{
@@ -110,4 +117,8 @@
             margin: 0px;
         }
     }
+}
+
+.show-archive-list{
+    padding-top: 20px;
 }
