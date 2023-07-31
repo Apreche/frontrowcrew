@@ -693,13 +693,13 @@ python-dateutil = ">=2.4"
 
 [[package]]
 name = "flower"
-version = "1.2.0"
+version = "2.0.0"
 description = "Celery Flower"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 files = [
-    {file = "flower-1.2.0-py2.py3-none-any.whl", hash = "sha256:ae2977cf7343c526cf44def8c7e7173db8dedb8249b91ba4b88cfd18e7a2d486"},
-    {file = "flower-1.2.0.tar.gz", hash = "sha256:46493c7e8d9ca2167e8a46eb97ae8d280997cb40a81993230124d74f0fe40bac"},
+    {file = "flower-2.0.0-py2.py3-none-any.whl", hash = "sha256:571f9ed1c57a622e862de35eceb8a4244f023fbcfb7175f53e45ebe679f46d90"},
+    {file = "flower-2.0.0.tar.gz", hash = "sha256:5657785d728a54914256c34fd0551fe2d7152aab08062ebc645bf86b97b8aec5"},
 ]
 
 [package.dependencies]
@@ -1524,4 +1524,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "6f193e31f9a8860d791496bd411520a4fe59e0d9fa4b4a496efd00009183bd1c"
+content-hash = "1dc7659ccc81df4dd0e23b53410e9400d3900b7d3bf377153fde3bf061d6590a"
