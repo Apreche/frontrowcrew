@@ -3,32 +3,78 @@
 @use "fonts.scss" as f;
 @use "headings.scss" as h;
 @use "buttons.scss" as b;
+@use "breakpoints.scss" as bp;
+
+main.container:has(.show-hero-container){
+    @media(max-width: bp.$s){
+        padding-top: 0px;
+    }
+}
 
 .uk-section.show-hero{
     padding-top: 0px;
 }
 
-.show-content-grid{
-    .latest-title{
-        position:relative;
-        background-color: c.$transparent-blue; 
-        padding: 20px;
-        border: 2px solid;
-        .padded-border-wrapper{
-            background-color: c.$dark-blue;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-            padding: 5px 15px;
+.show-title-content-block{
+    text-align: center;
+    p{
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 20px 0px;
+    }
+}
+
+.show-hero-container{
+    width: 100%;
+    >.uk-grid{
+        margin-left: 0px;
+        >.uk-grid{
+            margin: 0px;
         }
     }
-    .rendered-content{
+    @media(max-width: bp.$m){
+        padding: 0px 15px;
+        margin: unset;
+        width: calc(100% - 30px);
+    }
+    @media(min-width: bp.$m){
+        max-width: 90vw;
+    }
+}
+
+.content-block{
+    padding: 30px;
+    p{
         padding: 15px 0px;
-        p{
+    }
+}
+
+.show-title-grid{
+    height:fit-content;
+    box-sizing: border-box;
+    padding: unset;
+    margin-top: auto;
+    margin-bottom: auto;
+    @media(max-width: bp.$m){
+        flex-basis: fit-content;
+        margin: auto;
+        .show-title-content-block{
             padding: unset;
+            width: 43vw;
+            max-width: 185px; 
         }
+    }
+    @media(min-width: bp.$s){
+        max-width: 25%;
+    }
+    @media(max-height: bp.$ls){
+        margin-top: 0px;
+    }
+    @media(min-width: bp.$m){
+
+    }
+    @media(min-width: bp.$l){
+        width: 20%;
     }
 }
 
@@ -36,6 +82,12 @@
     display: flex;
     justify-content: center;
     gap: 10px;
+}
+
+.btn-show-subscribe{
+    width: 45%;
+    font-size: 1.6rem;
+    padding: 5px;
 }
 
 .show-logo-archive{
@@ -48,40 +100,53 @@
     margin-bottom: auto;
 }
 
-.show-content-block{
-    text-align: center;
-    p{
-        margin-top: auto;
-        margin-bottom: auto;
-        padding: 20px 0px;
+.latest-grid{
+    margin-top: 0px;
+    box-sizing: border-box;
+    width: 100%;
+    @media(max-width: bp.$s){
+        padding-left: 0px;
+        margin-top: 20px;
     }
-}
-
-.content-block{
-    padding: 30px;
-    p{
-        padding: 15px 0px;
+    @media(min-width: bp.$s){
+        max-width: calc(100% - 200px);
+        padding-left: 15px;
     }
-}
+    @media(min-width: bp.$m){
+        width: 75%;
 
-.show-view-totd{
-    text-align: center;
-    padding: 0px 20px;
-    h4{
+    }
+    @media(min-width: bp.$l){
+        width: 80%;
     }
 }
 
 .latest-content-block{
-    width: 90%;
+    width: auto;
     text-align: center;
    // max-height: 33vh; // Desktop
     .btn-primary{
         max-width: 150px; 
     }
+    @media(min-width: bp.$m){
+        width: 90%;
+    }
 }
 
 .latest-title{
-    max-height:7vw; // Desktop
+    position:relative;
+    background-color: c.$transparent-blue; 
+    padding: 20px;
+    border: 2px solid;
+    .padded-border-wrapper{
+        background-color: c.$dark-blue;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 5px 15px;
+    }
     h1{
         font-size: h.$latest-h1-size;
         margin-bottom: h.$latest-h1-margin;
@@ -95,27 +160,39 @@
     }
 }
 
-.btn-show-subscribe{
-    width: 45%;
-    font-size: 1.6rem;
-    padding: 5px;
+.rendered-content{
+    padding: 15px 0px;
+    p{
+        padding: unset;
+    }
 }
 
-.latest-grid{
-    margin-top: 0px;
+.latest-bottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    @media(min-width: bp.$m){
+        flex-wrap: nowrap;
+    }
 }
 
-.show-grid{
-    height:fit-content;
+.show-view-totd{
+    text-align: center;
+    padding: 0px 20px;
+    @media(max-width: bp.$m){
+        order: -1;
+        width: 100%;
+    }
 }
 
-.show-hero-container{
-    max-width: 90vw;
-    >.uk-grid{
-        margin-left: 0px;
-        >.uk-grid{
-            margin: 0px;
-        }
+.totd-title{
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    h4{
+        margin-top: auto;
+        margin-bottom: auto;
     }
 }
 
