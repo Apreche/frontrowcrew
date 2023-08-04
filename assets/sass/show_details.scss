@@ -150,6 +150,9 @@ main.container:has(.show-hero-container){
     h1{
         font-size: h.$latest-h1-size;
         margin-bottom: h.$latest-h1-margin;
+        &:hover{
+            color: c.$light-gold;
+        }
     }
     h2{
         font-size: h.$latest-h2-size;
