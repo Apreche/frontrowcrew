@@ -2,7 +2,7 @@
 
 /** Firefox **/
 @supports(-moz-appearance:none){
-    .btn-primary,{
+    .btn-primary{
         font-size: f.$moz-sm;
     }
     /** Show Detail View **/
