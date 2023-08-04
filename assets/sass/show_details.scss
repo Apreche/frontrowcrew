@@ -178,6 +178,13 @@ main.container:has(.show-hero-container){
     @media(min-width: bp.$m){
         flex-wrap: nowrap;
     }
+    &:not(:has(.btn-forum)){
+        flex-wrap: wrap;
+        .show-view-totd{
+            order: -1;
+            width: 100%;
+        }
+    }
 }
 
 .show-view-totd{
