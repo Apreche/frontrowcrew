@@ -17,6 +17,14 @@
     display: flex;
 }
 
+/** Buttons **/
+.btn-page{
+    padding: unset;
+    a{
+        display: block;
+    }
+}
+
 /** First and Last **/
 .btn-page-s{
     padding: 0px;
