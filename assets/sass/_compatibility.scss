@@ -1,0 +1,15 @@
+@use "fonts.scss" as f;
+
+/** Firefox **/
+@supports(-moz-appearance:none){
+    .btn-primary,{
+        font-size: f.$moz-sm;
+    }
+    /** Show Detail View **/
+    .a-btn-similar{
+        font-size: f.$moz-l;
+    }
+    .card-date{
+        font-size: f.$moz-m;
+    }
+}
