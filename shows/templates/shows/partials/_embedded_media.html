@@ -1,0 +1,9 @@
+<div class="embedded-media">
+    <ul>
+    {% for media in content.embedded_media.all %}
+        <li class="media-wrapper">
+            {{ media.embed_code|safe }}
+        </li>
+    {% endfor %}
+    </ul>
+</div>
