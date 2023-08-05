@@ -37,6 +37,9 @@
     <div class="content-view-content uk-container content-view-container">
         <div class="rendered-content">
         {{ content.rendered_html|safe }}
+        {% if content.embedded_media.all %}
+            {% include "./partials/_embedded_media.html" %}
+        {% endif %}
         </div>
         {% if content.things_of_the_day %}
             <div class="content-view-totd">
