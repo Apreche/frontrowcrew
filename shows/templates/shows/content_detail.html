@@ -38,7 +38,7 @@
         <div class="rendered-content">
         {{ content.rendered_html|safe }}
         {% if content.embedded_media.all %}
-            {% include "./partials/_embedded_media.html" %}
+            {% include "./partials/_embedded_video.html" %}
         {% endif %}
         </div>
         {% if content.things_of_the_day %}
