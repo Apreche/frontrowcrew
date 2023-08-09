@@ -1,0 +1,49 @@
+<ul class="pagination">
+    {% if page.has_previous %}
+    <div class="page-left">
+        <li>
+            <span class="uk-icon page-icon page-icon-left 
+            {% if page.has_next == False %}
+                last-page
+            {% endif %}
+            " uk-icon="chevron-double-left"></span>
+        </li>
+        <li>
+            <button class="uk-button btn-primary btn-page btn-page-s" type="button">
+                <a href="?q={{ query }}&page=1">First</a>
+            </button>
+        </li>
+        <li>
+            <button class="uk-button btn-primary btn-page btn-page-l" type="button">
+                <a href="?q={{ query }}&page={{ page.previous_page_number }}">Previous</a>
+            </button>
+        </li>
+    </div>
+        {% if page.has_next == False %}
+        <div class="flex-break-xs"></div>
+        {% endif %}
+    {% endif %}
+    <div class="page-center">
+        <li><span>Page {{ page.number }} of {{ page.paginator.num_pages }}</span></li>
+    </div>
+    {% if page.has_next %}
+    <div class="page-right">
+        <li>
+            <button class="uk-button btn-primary btn-page btn-page-l" type="button">
+                <a href="?q={{ query }}&page={{ page.next_page_number }}">Next</a>
+            </button>
+        </li>
+        <li>
+            <button class="uk-button btn-primary btn-page btn-page-s" type="button">
+                <a href="?q={{ query }}&page={{ page.paginator.num_pages }}">Last</a>
+            </button>
+        </li>
+        <li><span class="uk-icon page-icon page-icon-right
+            {% if page.has_previous == False %}
+                 first-page
+            {% endif %}
+            " uk-icon="chevron-double-right"></span></li>
+    </div>
+    <div class="flex-break-s"></div>
+    {% endif %}
+</ul>
