@@ -2,7 +2,7 @@
     <ul>
     {% for media in content.embedded_media.all %}
         <li class="media-wrapper">
-            {{ media.embed_code|safe }}
+            {{ media.embed_code|safe }}</iframe>
         </li>
     {% endfor %}
     </ul>
