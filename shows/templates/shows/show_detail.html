@@ -58,6 +58,9 @@
                         </ul>
                         {% endif %}
                     </div>
+                    {% if content.embedded_media.all %}
+                        {% include "./partials/_embedded_media.html" %}
+                    {% endif %}
                     <div class="latest-bottom">
                         <button class="uk-button btn-primary" type="button">See Show Notes</button>
                         {% if content.things_of_the_day %}
