@@ -39,15 +39,5 @@
         </li>
         {% endfor %}
 </ul>
-<ul>
-    {% if page.has_previous %}
-    <li><a href="?q={{ query }}&page=1">first</a></li>
-    <li><a href="?q={{ query }}&page={{ page.previous_page_number }}">previous</a></li>
-    {% endif %}
-    <li>Page {{ page.number }} of {{ page.paginator.num_pages }}</li>
-    {% if page.has_next %}
-    <li><a href="?q={{ query }}&page={{ page.next_page_number }}">next</a></li>
-    <li><a href="?q={{ query }}&page={{ page.paginator.num_pages }}">last</a></li>
-    {% endif %}
-</ul>
+{% include "./partials/_pagination.html" %}
 {% endblock content %}

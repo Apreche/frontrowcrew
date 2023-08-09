@@ -1,0 +1,86 @@
+.pagination{
+    padding-left: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    li{
+        display: inline;
+        padding: 0px;
+        position: relative;
+        @media(min-width: bp.$s){
+            padding: 0px 5px;
+        }
+    }
+}
+
+.page-left, .page-right{
+    display: flex;
+}
+
+/** Buttons **/
+.btn-page{
+    padding: unset;
+    a{
+        display: block;
+    }
+}
+
+/** First and Last **/
+.btn-page-s{
+    padding: 0px;
+    width: 50px;
+}
+
+/** Current **/
+.page-center{
+    @media(max-width: bp.$s){
+        order: 1;
+    }
+    @media(min-width: bp.$l){
+        padding: 0px 15px;
+    }
+}
+
+/** Previous and Next **/
+.btn-page-l{
+    padding: 0px;
+    width: 100px;
+    @media(max-width: bp.$xs){
+        width: 80px;
+    }
+}
+
+/** Flex Breaks for Small Screens **/
+.flex-break-xs{
+    flex-basis: 100%;
+    width: 0px;
+    display: none;
+    @media(max-width: bp.$s){
+        display: block;
+    }
+}
+
+.flex-break-s{
+    flex-basis: 100%;
+    width: 0px;
+    @media(min-width: bp.$s){
+        display: none;
+    }
+}
+
+/** Icons **/
+.page-icon.last-page{
+    @media(max-width: bp.$s){
+        position: absolute;
+        left: -30px;
+        top: 2.2px;
+    }
+}
+
+.page-icon.first-page{
+    @media(max-width: bp.$s){
+        position: absolute;
+        right: -30px;
+        top: 2.2px;
+    }
+}
