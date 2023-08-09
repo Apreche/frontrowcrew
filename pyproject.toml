@@ -9,9 +9,9 @@ python = "^3.11"
 Django = "^4.0"
 django-extensions = "^3.1.5"
 celery = "^5.2.1"
-gunicorn = "^20.1.0"
-Pillow = "^9.0.0"
-docutils = "^0.19"
+gunicorn = "^21.2.0"
+Pillow = "^10.0.0"
+docutils = "^0.20"
 psycopg2 = "^2.9.2"
 pylibmc = "^1.6.1"
 django-storages = "^1.12.3"
@@ -31,7 +31,7 @@ python-magic = "^0.4.27"
 django-celery-beat = "^2.4.0"
 requests = "^2.28.2"
 tqdm = "^4.64.1"
-flower = "^1.2.0"
+flower = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 ipython = "^8.3.0"
@@ -40,7 +40,7 @@ Werkzeug = "^2.2.3"
 coverage = "^7.0.5"
 
 [tool.poetry.group.test.dependencies]
-tblib = "^1.7.0"
+tblib = "^2.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
