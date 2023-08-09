@@ -1,5 +1,6 @@
 @use "colours.scss" as c;
 @use "fonts.scss" as f;
+@use "breakpoints.scss" as bp;
 
 
  /** Primary Button **/
@@ -69,6 +70,7 @@
     outline: $outline-width solid c.$gold;
     transition-duration: 0.3s;
     line-height: normal;
+    max-width: 100%;
     &:hover:not([aria-disabled="true"]),
     &:focus:not([aria-disabled="true"]){
         background-color: c.$dark-blue;
@@ -83,6 +85,9 @@
     &[aria-disabled="true"]{
         cursor: not-allowed;    
         opacity: 0.7;
+    }
+    @media(max-width: bp.$xs){
+        font-size: 4vw;
     }
 }
 
