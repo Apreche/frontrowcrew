@@ -145,6 +145,7 @@ static/css/uikit/
 
 # Dev bundled assets and maps
 static/css/main.css
+static/js
 assets/sass/*.map
 static/css/*.map
 
