@@ -1,0 +1,21 @@
+{% load static %}
+<div class="embedded-audio">
+    <audio id="podcast-audio"
+        src="{{ podcast.enclosure }}"
+        preload="metadata"
+        >
+    </audio>
+    <div class="audio-controls">
+        <button id="play-button" class="audio-ctrl-btn" type="button">
+            <img id="play-icon" src="{% static "icons/play.svg" %}" uk-svg>
+        </button>
+        <span id="current-time" class="time">0:00</span>
+        <input id="audio-seek" class="uk-range" type="range" max="100" value="0">
+        <span id="duration" class="time">0:00</span>
+        <output id="current-volume">100</output>
+        <input id="volume-slider" class="uk-range" type="range" max="100" value="100">
+        <button id="mute-button" class="audio-ctrl-btn" type="button">
+            <img id="mute-icon" src="{% static "icons/volume.svg" %}" uk-svg>
+        </button>
+    </div>
+</div>
