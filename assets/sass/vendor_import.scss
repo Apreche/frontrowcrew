@@ -1,0 +1,10 @@
+/** Import UIkit with custom variables **/
+@use "_colours.scss" as c;
+$global-background: c.$black;
+$global-muted-background: c.$transparent-blue;
+$global-border: c.$black;
+
+
+@import "../../static/vendor/css/uikit/variables.scss";
+@import "../../static/vendor/css/uikit/mixins.scss";
+@import "../../static/vendor/css/uikit/uikit.scss";
