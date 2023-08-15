@@ -194,19 +194,3 @@ input[type="range"]{
         }
     }
 }
-
-/** Microsoft **/
-input[type="range"]{
-    &::-ms-track{
-
-    }
-    &::-ms-fill-lower{
-
-    }
-    &::-ms-fill-upper{
-
-    }
-    &::-ms-thumb{
-
-    }
-}
