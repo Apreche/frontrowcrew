@@ -43,6 +43,10 @@
     align-items: center;
 }
 
+#audio-seek::before{
+    width: var(--seek-before-width);
+}
+
 .audio-ctrl-btn{
     @include b.btn-primary($border-color-hvr: c.$black);
     color: c.$gold;
@@ -123,7 +127,6 @@ input[type="range"]{
     cursor: pointer;
     appearance: auto;
     -webkit-appearance: none;
-    -moz-appearance: none;
     &::before{
         content: "";
         position: absolute;
@@ -132,8 +135,18 @@ input[type="range"]{
         top: 12.5px;
         background-color: c.$black;
     }
-    &#audio-seek::before{
-        width: var(--seek-before-width);
+}
+
+/** Webkit **/
+input[type="range"]{
+    &::-webkit-slider-thumb{
+        background: c.$black;
+        margin-top: -7px;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        appearance: auto;
+        -webkit-appearance: none;
     }
     &::-webkit-slider-runnable-track{
         width: 100%;
@@ -146,15 +159,54 @@ input[type="range"]{
     }
 }
 
+/** Mozilla **/
 input[type="range"]{
-    &::-webkit-slider-thumb{
+    &::-moz-range-progress{
+        background: c.$black;
+    }
+    &::-moz-range-track{
+        width: 100%;
+        height: 3px;
+    }
+    &::-moz-range-thumb{
         background: c.$black;
         margin-top: -7px;
         height: 15px;
         width: 15px;
-        border-radius: 500px;
-        appearance: auto;
-        -webkit-appearance: none;
-        -moz-appearance: none;
+        border-radius: 50%;
+        border-color: c.$black;
+    }
+    &#audio-seek{
+        &::-moz-range-track{
+            background: linear-gradient(
+                to right, 
+                c.$blue var(--buffered-width), 
+                c.$transparent-blue var(--buffered-width)
+            );
+        }
+        &::-moz-range-progress{
+            width: var(--seek-before-width);
+        }
+    }
+    &#volume-slider{
+        &::-moz-range-progress{
+            width: var(--volume-before-width);
+        }
+    }
+}
+
+/** Microsoft **/
+input[type="range"]{
+    &::-ms-track{
+
+    }
+    &::-ms-fill-lower{
+
+    }
+    &::-ms-fill-upper{
+
+    }
+    &::-ms-thumb{
+
     }
 }
