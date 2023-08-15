@@ -1,7 +1,10 @@
 .section{
     background-color: c.$dark-blue;
-    width: 80%;
     @extend .grid-center;
+    width: calc(100% - 30px);
+    @media(min-width: bp.$m){
+        width: 80%;
+    }
 }
 
 .primary-section{
