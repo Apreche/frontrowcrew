@@ -4,24 +4,30 @@
 
 
  /** Primary Button **/
-@mixin btn-primary($outline-width: 1px){                                                                          
+@mixin btn-primary($outline-width: 1px,
+        $border-color: c.$black,
+        $border-color-hvr: c.$blue,
+        $outline-color: c.$gold,
+        $outline-color-hvr: c.$gold
+    ){                                                                          
     background-color: c.$black;
     text-align: center;
     font-family: f.$serif-font;
-    border: 2px solid c.$black;
-    outline: $outline-width solid c.$gold;
+    border: 2px solid $border-color;
+    outline: $outline-width solid $outline-color;
     transition-duration: 0.3s;
     line-height: normal;
+    text-transform: capitalize;
     a{
         color: c.$gold;
         font-weight: unset;
     }
     &:hover:not([aria-disabled="true"]),
-    &:focus:not([aria-disabled="true"]){
+    &:focus-visible:not([aria-disabled="true"]){
         background-color: c.$gold;
         color: c.$black;
-        outline-color: c.$gold;
-        border-color: c.$blue;
+        outline-color: $outline-color-hvr;
+        border-color: $border-color-hvr;
         a{
             color: c.$black;
             text-decoration: none;
