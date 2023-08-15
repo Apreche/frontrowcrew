@@ -44,6 +44,9 @@
                             {% endif %}
                         </div>
                     </div>
+                    {% if content.podcast_episode %}
+                        {% include "./partials/_embedded_audio.html" with podcast=content.podcast_episode %}
+                    {% endif %}
                     <div class="rendered-content">
                         {{ content.rendered_html|safe }}
                         {% if content.purchase_links %}
