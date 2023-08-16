@@ -125,7 +125,7 @@ img, svg{
     margin-bottom: 50px;
 }
 
-.landing-shows{                     // This is the .uk-container div
+.landing-shows{
     color: c.$light-gold;
     margin-left: auto;
     margin-right: auto;
@@ -166,66 +166,7 @@ img, svg{
     }
 }
 
-/** Landing Page Community Section **/
-.landing-community{             // .uk-grid div
-    margin-left: auto;
-    margin-right: auto;
-    height: 250px;
-    h2,
-    %h2{
-        @extend %h2;
-        font-size: 1.7em;
-    }
-    .border-wrapper{
-        border: 1px solid c.$gold;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        background-color: c.$dark-grey;
-        width: 100%;
-        &:hover{
-            background-color: c.$black;
-            h2{
-                color: c.$light-gold;
-                text-decoration: underline;
-            }
-        }
-    }
-    &:last-child{
-        margin-top: 0;
-    }
-}
-
-/** Classes for Offset Grid Elements **/
-.offset-border-left{
-    border: 2px solid;
-}
-
-.offset-border-right{
-    border: 2px solid;
-    border-left: none;
-}
-
-.offset-grid{
-    &:first-child{
-        margin-bottom: 0px;
-        padding-bottom: 0px;
-    }
-    + .offset-grid{
-        margin-top: 0px;
-        padding-top: 0px;
-        .offset-border-left,
-        .offset-border-right{
-            border-top: none;
-        }
-    }
-}
-
 /** Other Helpers **/
-.padded-border-wrapper{
-  //  padding: 20px;
-}
 
 .grid-center{
     margin-left: auto;
@@ -291,7 +232,8 @@ footer {
 @import "_sections.scss";
 @import "_pagination.scss";
 @import "_embeds.scss";
+@import "_compatibility.scss";
+@import "homepage.scss";
 @import "content_details.scss";
 @import "show_details.scss";
 @import "search_results.scss";
-@import "_compatibility.scss";
