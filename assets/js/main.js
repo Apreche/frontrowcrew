@@ -3,7 +3,6 @@ const controlContainer = document.getElementById("audio-controls");
 const playButton = document.getElementById("play-button");
 const playIcon = document.getElementById("play-icon");
 const muteButton = document.getElementById("mute-button");
-const muteIcon = document.getElementById("mute-icon");
 const currentTime = document.getElementById("current-time");
 const duration = document.getElementById("duration");
 const progress = document.getElementById("audio-seek");
@@ -12,6 +11,28 @@ const currentVol = document.getElementById("current-volume");
 
 let raf = null;     // requestAnimationFrame request id
 
+/* Time Display Functions */
+function formatTime(time){
+    const secs = Math.floor(time % 60);
+    const mins = Math.floor((time / 60) % 60);
+    const hours = Math.floor(time / 3600);
+    const formattedSecs = secs < 10 ? `0${secs}` : `${secs}`;
+    return `${ hours < 1 ? "" : hours+":" }${mins}:${formattedSecs}`;
+}
+
+/* 
+    Updates while the player is running
+    1. Match the progress slider to current time 
+    2. Update the current time display
+    3. Update the pseudo element that displays progress on the slider
+    4. Make sure the thumb progresses across the slider
+*/
+function whilePlaying(){
+    progress.value = Math.floor(player.currentTime);        
+    currentTime.textContent = formatTime(progress.value);   
+    controlContainer.style.setProperty("--seek-before-width", `${(progress.value / progress.max) * 100}%`);
+    raf = requestAnimationFrame(whilePlaying);             
+}
 
 /* Play/Pause Button */
 let playState = "play";
@@ -50,15 +71,6 @@ function muteButtonClick(state){
     return state;
 }
 
-/* Time Display Functions */
-function formatTime(time){
-    const secs = Math.floor(time % 60);
-    const mins = Math.floor((time / 60) % 60);
-    const hours = Math.floor(time / 3600);
-    const formattedSecs = secs < 10 ? `0${secs}` : `${secs}`;
-    return `${ hours < 1 ? "" : hours+":" }${mins}:${formattedSecs}`;
-}
-
 function displayAudioDuration(){
     duration.textContent = formatTime(player.duration);
 }
@@ -70,22 +82,15 @@ function progressMax(){
 
 function displayBufferedAmt(){
     const bufferedAmt = Math.floor(player.buffered.end(player.buffered.length - 1));
-    const bufferWidth = `${bufferedAmt / progress.max * 100}%`;
+    const bufferWidth = `${(bufferedAmt / progress.max) * 100}%`;
     controlContainer.style.setProperty("--buffered-width", bufferWidth);
-}
-
-function whilePlaying(){
-    progress.value = Math.floor(player.currentTime);        // Match progress bar to time
-    currentTime.textContent = formatTime(progress.value);   // Update displayed time
-    controlContainer.style.setProperty("--seek-before-width", `${progress.value / progress.max * 100}%`);
-    raf = requestAnimationFrame(whilePlaying);              // Update displayed progress bar
 }
 
 function showSliderBefore(range){
     if(range === progress){
-        controlContainer.style.setProperty("--seek-before-width", range.value / range.max * 100 + "%");
+        controlContainer.style.setProperty("--seek-before-width", (range.value / range.max) * 100 + "%");
     } else if(range === volSlider){
-        controlContainer.style.setProperty("--volume-before-width", range.value / range.max * 100 + "%");
+        controlContainer.style.setProperty("--volume-before-width", (range.value / range.max) * 100 + "%");
     }
 }
 
@@ -106,7 +111,7 @@ function volControl(ev){
 }
 
 /* Implement Initial Functions */
-if(player.readyState > 0){
+if(player.readyState === true && player.readyState > 0){
     displayAudioDuration();
     progressMax();
     displayBufferedAmt();
