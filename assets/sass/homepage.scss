@@ -1,22 +1,20 @@
+/** Hero section **/
+.hero{
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 
-/** Landing Page Community Section **/
-.landing-community{             // .uk-grid div
+.landing-shows{
+    color: c.$light-gold;
     margin-left: auto;
     margin-right: auto;
-    height: 250px;
-    h2,
-    %h2{
-        @extend %h2;
-        font-size: 1.7em;
-    }
-    .border-wrapper{
-        border: 1px solid c.$gold;
+    .landing-shows-title{
+        background-color: c.$dark-grey;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
-        background-color: c.$dark-grey;
-        width: 100%;
         &:hover{
             background-color: c.$black;
             h2{
@@ -25,31 +23,71 @@
             }
         }
     }
-    &:last-child{
-        margin-top: 0;
+    &:not(.landing-shows-title){
+        background-color: c.$darkest-grey;
+    }
+    p{
+        font-size: 1em;
+        @media(min-width: bp.$m){
+            font-size: 1.4em;
+        }
     }
 }
 
-/** Classes for Offset Grid Elements **/
-.offset-border-left{
-    border: 2px solid;
+.landing-shows-title,
+.landing-shows-content{
+    border: 2px solid c.$gold;
+    box-sizing: border-box;
 }
 
-.offset-border-right{
-    border: 2px solid;
-    border-left: none;
-}
-
-.offset-grid{
-    &:first-child{
-        margin-bottom: 0px;
-        padding-bottom: 0px;
+.landing-shows-title{
+    width: 42%;
+    @media(min-width: 400px){
+        width: 35%;
     }
-    + .offset-grid{
-        margin-top: 0px;
-        padding-top: 0px;
-        .offset-border-left,
-        .offset-border-right{
+    @media(min-width: bp.$s){
+        width: 25%;
+    }
+    h2{
+        font-size: 1.1rem;
+        @media(min-width: bp.$s){
+            font-size: 1.3rem;
+        }
+        @media(min-width: bp.$m){
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.landing-shows-content{
+    width: 58%;
+    @media(min-width: 400px){
+        width: 65%;
+    }
+    @media(min-width: bp.$s){
+        width: 75%;
+    }
+    &:nth-child(odd){
+        border-right: none;
+    }
+    &:nth-child(even){
+        border-left: none;
+    }
+}
+
+/** Landing Page Shows Section **/
+.subsection{
+    padding-top: 0;
+    padding-bottom: 0;
+    &:not(:last-child){
+        .landing-shows-title,
+        .landing-shows-content{
+            border-bottom: 2px solid c.$gold;
+        }
+    }
+    &:not(:first-child){
+        .landing-shows-title, 
+        .landing-shows-content{
             border-top: none;
         }
     }

@@ -117,40 +117,6 @@ img, svg{
     max-height: 100%;
 }
 
-/** Hero section **/
-.hero{
-    font-size: 2.5em;
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-.landing-shows{
-    color: c.$light-gold;
-    margin-left: auto;
-    margin-right: auto;
-    .landing-shows-title{
-        background-color: c.$dark-grey;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid c.$gold;
-        &:hover{
-            background-color: c.$black;
-            h2{
-                color: c.$light-gold;
-                text-decoration: underline;
-            }
-        }
-    }
-    &:not(.landing-shows-title){
-        background-color: c.$darkest-grey;
-    }
-    p{
-        font-size: 1.4em;
-    }
-}
-
 /** Dropdowns **/
 .forum-dropdown{
     @include m.dropdowns($background-color-hvr: c.$gold);
