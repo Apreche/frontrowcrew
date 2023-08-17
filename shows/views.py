@@ -13,13 +13,12 @@ def homepage(request):
     """The Homepage"""
     template_name = "shows/homepage.html"
     latest_content = models.Content.published.latest()
-    book_club = shortcuts.get_object_or_404(models.Show.published, slug="book-club")
-    latest_book = book_club.published_content.latest()
-    news = shortcuts.get_object_or_404(models.Show.published, slug="news")
-    latest_news = news.published_content.latest()
+    latest_book_club = models.Content.published.filter(
+        show__slug="book-club").filter(podcast_episode__isnull=True).latest()
+    latest_news = models.Content.published.filter(show__slug="news").latest()
     context = {
         "latest_content": latest_content,
-        "latest_book": latest_book,
+        "latest_book": latest_book_club,
         "latest_news": latest_news,
     }
     return shortcuts.render(request, template_name, context)
