@@ -1,55 +1,46 @@
 /** Hero section **/
 .hero{
-    font-size: 2.5em;
     text-align: center;
-    margin-top: 50px;
     margin-bottom: 50px;
+    >p{
+        font-size: 2.5em;
+    }
+}
+
+.latest-home{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .landing-shows{
     color: c.$light-gold;
     margin-left: auto;
     margin-right: auto;
-    .landing-shows-title{
-        background-color: c.$dark-grey;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        &:hover{
-            background-color: c.$black;
-            h2{
-                color: c.$light-gold;
-                text-decoration: underline;
-            }
-        }
-    }
     &:not(.landing-shows-title){
-        background-color: c.$darkest-grey;
+        background-color: c.$darkest-blue;
     }
     p{
         font-size: 1em;
         @media(min-width: bp.$m){
-            font-size: 1.4em;
+            font-size: 1.25em;
         }
     }
 }
 
 .landing-shows-title,
 .landing-shows-content{
-    border: 2px solid c.$gold;
     box-sizing: border-box;
 }
 
 .landing-shows-title{
+    @extend .result-title;
+    border-color: c.$gold;
+    background-color: c.$med-grey;
     width: 42%;
-    @media(min-width: 400px){
-        width: 35%;
-    }
-    @media(min-width: bp.$s){
-        width: 25%;
-    }
+    transition-duration: 0.3s;
     h2{
         font-size: 1.1rem;
+        margin-bottom: 0;
         @media(min-width: bp.$s){
             font-size: 1.3rem;
         }
@@ -57,10 +48,25 @@
             font-size: 1.5rem;
         }
     }
+    &>button{
+        @extend .card-title-wrapper;
+        @extend .card-title-btn;
+    }
+    &:has(button:hover){
+        background-color: c.$darkest-blue;
+    }
+    @media(min-width: 400px){
+        width: 35%;
+    }
+    @media(min-width: bp.$s){
+        width: 25%;
+    }
 }
 
 .landing-shows-content{
     width: 58%;
+    border: 2px solid c.$gold;
+    padding: 5px 20px;
     @media(min-width: 400px){
         width: 65%;
     }
@@ -75,7 +81,6 @@
     }
 }
 
-/** Landing Page Shows Section **/
 .subsection{
     padding-top: 0;
     padding-bottom: 0;

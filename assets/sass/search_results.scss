@@ -1,9 +1,11 @@
 .result-title{
     @extend .card-title-container;
-    border: none;
     span{
         color: c.$gold;
         font-weight: 400;
+    }
+    &:not(.landing-shows-title){
+        border: none;
     }
 }
 
