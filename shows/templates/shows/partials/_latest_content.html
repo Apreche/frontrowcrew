@@ -1,7 +1,5 @@
-<div class="latest-grid">
+<div class="latest-grid{% if home == true %} latest-home{% endif %}">
     <div class="latest-content-block content-block primary-section">
-    {% for content in page.object_list %}
-    {% if forloop.first %}
         <div class="latest-title">
             <div class="padded-border-wrapper">
                 <h2>Latest Content:</h2>
@@ -61,6 +59,4 @@
             {% endif %}
         </div>
     </div>
-{% endif %}
-{% endfor %}
 </div>

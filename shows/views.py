@@ -12,7 +12,8 @@ from . import models
 def homepage(request):
     """The Homepage"""
     template_name = "shows/homepage.html"
-    context = {}
+    latest_content = models.Content.published.latest()
+    context = {"latest_content": latest_content}
     return shortcuts.render(request, template_name, context)
 
 

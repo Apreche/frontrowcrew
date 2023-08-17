@@ -2,15 +2,18 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-<div class="hero uk-container">
-        <p>GeekNights is a podcast, a lecture series, and an online community for hobbyists, tinkerers, and geeks of all kinds.</p>
-    </div>
+<div class="hero">
+    <p>GeekNights is a podcast, a lecture series, and an online community for hobbyists, tinkerers, and geeks of all kinds.</p>
+    {% include "./partials/_latest_content.html" with content=latest_content show=latest_content.show %}
+</div>
 <div class="uk-section shows-section">
     <div class="uk-section subsection">
         <div class="uk-container landing-shows uk-grid">
-            <button class="uk-card uk-card-body landing-shows-title">
-                <h2>Podcasts</h2>
-            </button>
+            <div class="landing-shows-title">
+                <button class="uk-card uk-card-body" type="button">
+                    <a href=""><h2>Podcasts</h2></a>
+                </button>
+            </div>
             <div class="landing-shows-content">
                 <p>Hosts Rym and Scott delve into topics ranging from computer science to Eurogaming, anime to fantasy fiction, indie comics to gadgetry, two nights a week for your listening pleasure.</p>
             </div>
@@ -21,16 +24,20 @@
             <div class="uk-card landing-shows-content">
                 <p>If you want to dive into game design and strategy (or just want to learn how to win at board games), Rym and Scott have you covered with their series of convention panels and lectures.</p>
             </div>
-            <button class="uk-card uk-card-body landing-shows-title">
-                <h2>Lectures</h2>
-            </button>
+            <div class="landing-shows-title">
+                <button class="uk-card uk-card-body" type="button">
+                    <a href=""><h2>Lectures</h2></a>
+                </button>
+            </div>
         </div>
     </div>
     <div class="uk-section subsection">
         <div class="uk-container landing-shows uk-grid">
-            <button class="uk-card uk-card-body landing-shows-title">
-                <h2>Book Club</h2>
-            </button>
+            <div class="landing-shows-title">
+                <button class="uk-card uk-card-body" type="button">
+                    <a href=""><h2>Book Club</h2></a>
+                </button>
+            </div>
             <div class="landing-shows-content">
                 <p></p>
             </div>
@@ -41,16 +48,20 @@
             <div class="landing-shows-content">
                 <p></p>
             </div>
-            <button class="uk-card uk-card-body landing-shows-title">
-                <h2>Forum</h2>
-            </button>
+            <div class="landing-shows-title">
+                <button class="uk-card uk-card-body" type="button">
+                    <a href=""><h2>Forum</h2></a>
+                </button>
+            </div>    
         </div>
     </div>
     <div class="uk-section subsection">
         <div class="uk-container landing-shows uk-grid">
-            <button class="uk-card uk-card-body landing-shows-title">
-                <h2>News</h2>
-            </button>
+            <div class="landing-shows-title">
+                <button class="uk-card uk-card-body" type="button">
+                    <a href=""><h2>News</h2></a>
+                </button>
+            </div>
             <div class="landing-shows-content">
                 <p></p>
             </div>
@@ -61,16 +72,20 @@
             <div class="landing-shows-content">
                 <p></p>
             </div>
-            <button class="uk-card uk-card-body landing-shows-title">
-                <h2>Newsletter</h2>
-            </button>
+            <div class="landing-shows-title">
+                <button class="uk-card uk-card-body" type="button">
+                    <a href=""><h2>Newsletter</h2></a>
+                </button>
+            </div>
         </div>
     </div>
     <div class="uk-section subsection">
         <div class="uk-container landing-shows uk-grid">
-            <button class="uk-card uk-card-body landing-shows-title">
-                <h2>Bounties</h2>
-            </button>
+            <div class="landing-shows-title">
+                <button class="uk-card uk-card-body" type="button">
+                    <a href=""><h2>Bounties</h2></a>
+                </button>
+            </div>
             <div class="landing-shows-content">
                 <p></p>
             </div>
