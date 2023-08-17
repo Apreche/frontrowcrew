@@ -3,6 +3,7 @@
 @use "fonts.scss" as f;
 @use "headings.scss" as h;
 @use "buttons.scss" as b;
+@use "breakpoints.scss" as bp;
 
 /** Buttons **/
 .btn-content-available{
@@ -69,11 +70,13 @@ h3{
 
 .content-view-content{
     font-size: 1.2rem;
-    padding-left: 30px;
-    padding-right: 30px;
-        div{
-            margin-top: 40px;
-        }
+    padding: 0px 15px;
+    >div:not(.embedded-media){
+        margin-top: 40px;
+    }
+    @media(min-width: bp.$s){
+        padding: 0px 30px;
+    }
 }
 
 .content-view-totd{

@@ -44,6 +44,9 @@
                             {% endif %}
                         </div>
                     </div>
+                    {% if content.podcast_episode %}
+                        {% include "./partials/_embedded_audio.html" with podcast=content.podcast_episode %}
+                    {% endif %}
                     <div class="rendered-content">
                         {{ content.rendered_html|safe }}
                         {% if content.purchase_links %}
@@ -58,6 +61,9 @@
                         </ul>
                         {% endif %}
                     </div>
+                    {% if content.embedded_media.all %}
+                        {% include "./partials/_embedded_video.html" %}
+                    {% endif %}
                     <div class="latest-bottom">
                         <button class="uk-button btn-primary" type="button">See Show Notes</button>
                         {% if content.things_of_the_day %}

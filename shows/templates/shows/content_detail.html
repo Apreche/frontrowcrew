@@ -35,9 +35,15 @@
         </div>
     </div>
     <div class="content-view-content uk-container content-view-container">
+        {% if content.podcast_episode %}
+            {% include "./partials/_embedded_audio.html" with podcast=content.podcast_episode %}
+        {% endif %}
         <div class="rendered-content">
-        {{ content.rendered_html|safe }}
+            {{ content.rendered_html|safe }}
         </div>
+        {% if content.embedded_media.all %}
+            {% include "./partials/_embedded_video.html" %}
+        {% endif %}
         {% if content.things_of_the_day %}
             <div class="content-view-totd">
                 <h3>&mdash; Things of the Day &mdash;</h3>

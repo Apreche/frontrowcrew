@@ -138,6 +138,7 @@ main.container:has(.show-hero-container){
     background-color: c.$transparent-blue; 
     padding: 20px;
     border: 2px solid;
+    border-bottom: none;
     .padded-border-wrapper{
         background-color: c.$dark-blue;
         height: 100%;
