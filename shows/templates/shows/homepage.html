@@ -4,9 +4,47 @@
 {% block content %}
 <div class="hero">
     <p>GeekNights is a podcast, a lecture series, and an online community for hobbyists, tinkerers, and geeks of all kinds.</p>
+    {% comment %}
     {% include "./partials/_latest_content.html" with content=latest_content show=latest_content.show %}
+    {% endcomment %}
 </div>
-<div class="uk-section shows-section">
+<div class="home-latest uk-section">
+    <div class="uk-section subsection">
+        {# Latest Content#}
+        <div class="uk-container landing-shows uk-grid">
+            <div class="landing-shows-title">
+                {% include "./partials/_latest_content_title.html" with content=latest_content title="Latest Content" %}
+            </div>
+            <div class="landing-shows-content">
+                {% include "./partials/_latest_content_content.html" with content=latest_content %}
+            </div>
+        </div>
+    </div>
+    <div class="uk-section subsection">
+        {# Current Book Club Book #}
+        <div class="uk-container landing-shows uk-grid">
+            <div class="landing-shows-content">
+                {% include "./partials/_latest_content_content.html" with content=latest_book %}
+            </div>
+            <div class="landing-shows-title">
+                {% include "./partials/_latest_content_title.html" with content=latest_book title="Current Book Club" %}
+            </div>
+        </div>
+    </div>
+    <div class="uk-section subsection">
+        {# Latest News #}
+        <div class="uk-container landing-shows uk-grid">
+            <div class="landing-shows-title">
+                {% include "./partials/_latest_content_title.html" with content=latest_news title="Latest News" %}
+            </div>
+            <div class="landing-shows-content">
+                {% include "./partials/_latest_content_content.html" with content=latest_news %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-section">
+    {% comment %}
     <div class="uk-section subsection">
         <div class="uk-container landing-shows uk-grid">
             <div class="landing-shows-title">
@@ -31,37 +69,14 @@
             </div>
         </div>
     </div>
+    {% endcomment %}
     <div class="uk-section subsection">
         <div class="uk-container landing-shows uk-grid">
-            <div class="landing-shows-title">
-                <button class="uk-card uk-card-body" type="button">
-                    <a href=""><h2>Book Club</h2></a>
-                </button>
-            </div>
-            <div class="landing-shows-content">
-                <p></p>
-            </div>
-        </div>
-    </div>
-    <div class="uk-section subsection">
-        <div class="uk-container landing-shows uk-grid">
-            <div class="landing-shows-content">
-                <p></p>
-            </div>
             <div class="landing-shows-title">
                 <button class="uk-card uk-card-body" type="button">
                     <a href=""><h2>Forum</h2></a>
                 </button>
             </div>    
-        </div>
-    </div>
-    <div class="uk-section subsection">
-        <div class="uk-container landing-shows uk-grid">
-            <div class="landing-shows-title">
-                <button class="uk-card uk-card-body" type="button">
-                    <a href=""><h2>News</h2></a>
-                </button>
-            </div>
             <div class="landing-shows-content">
                 <p></p>
             </div>
