@@ -83,7 +83,8 @@ nav{
     text-transform: uppercase;
     border: none;
     transition-duration: 0.3s;
-    &:hover{
+    &:hover,
+    &:focus{
         color: c.$light-gold;
         text-decoration: underline;
     }
@@ -91,9 +92,15 @@ nav{
 
 /** SVGs and Logos **/
 %header-logo{
+    box-sizing: border-box;
+    transition-duration: 0.1s;
     svg{
         max-height: 100%;
         color: c.$gold;
+        &:hover,
+        &:focus{
+            color: c.$light-gold;
+        }
     }
 }
 
@@ -105,6 +112,10 @@ nav{
     @extend %header-logo;
     height: 100%;
     width: 200px;
+    &:hover,
+    &:focus{
+        border-bottom: 2px solid c.$light-gold;
+    }
 }
 
 img.uk-logo{
