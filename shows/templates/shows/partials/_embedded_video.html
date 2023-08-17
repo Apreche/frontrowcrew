@@ -1,8 +1,10 @@
 <div class="embedded-media">
     <ul>
     {% for media in content.embedded_media.all %}
-        <li class="media-wrapper">
-            {{ media.embed_code|safe }}</iframe>
+        <li class="media-li">
+            <div class="media-wrapper">
+                {{ media.embed_code|safe }}</iframe>
+            </div>
         </li>
     {% endfor %}
     </ul>

@@ -40,10 +40,10 @@
         {% endif %}
         <div class="rendered-content">
             {{ content.rendered_html|safe }}
-            {% if content.embedded_media.all %}
-                {% include "./partials/_embedded_video.html" %}
-            {% endif %}
         </div>
+        {% if content.embedded_media.all %}
+            {% include "./partials/_embedded_video.html" %}
+        {% endif %}
         {% if content.things_of_the_day %}
             <div class="content-view-totd">
                 <h3>&mdash; Things of the Day &mdash;</h3>
