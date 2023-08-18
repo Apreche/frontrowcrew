@@ -65,7 +65,7 @@ nav{
 }
 
 .uk-navbar-center.nav-center{
-    @media(max-width: bp.$m){
+    @media(max-width: calc(bp.$m - 1px)){
         position: relative;
         order: -1;
         top: unset;
@@ -165,7 +165,7 @@ form.uk-search{
         &::placeholder{
             color: inherit;
             @media(min-width: bp.$s){
-                @media(max-width: bp.$m){
+                @media(max-width: calc(bp.$m - 1px)){
                     color: c.$black;
                 }
             }
@@ -177,6 +177,7 @@ form.uk-search{
     @media(min-width: bp.$s){
         border: none;
         input.uk-search-input{
+            width: 95%;
             text-indent: 25px;
             &:active,
             &:focus,
@@ -185,7 +186,7 @@ form.uk-search{
             }
         }
         span{
-            @media(max-width: bp.$m){
+            @media(max-width: calc(bp.$m - 1px)){
                 top: -1px !important;
             }
         }
@@ -218,7 +219,7 @@ form.uk-search{
     @media(min-width: bp.$s){
         top: calc($header-height-md - 11px) !important;
     }
-    @media(max-width: bp.$m){
+    @media(max-width: calc(bp.$m - 1px)){
         width: 100vw;
     }    
 }
@@ -249,7 +250,7 @@ form.uk-search{
     }
     
     .uk-navbar-center.nav-center{
-        @media(max-width: bp.$m){
+        @media(max-width: calc(bp.$m - 1px)){
             position: relative;
             order: -1;
             top: unset;
