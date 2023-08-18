@@ -144,56 +144,8 @@ img, svg{
     align-items: center;
 }
 
-/** footer **/
-footer {
-    flex-shrink: 0;
-    background-color: c.$darkest-grey;
-    padding-bottom: 20px;
-    .uk-grid-small{
-        margin: 0;
-    }
-    a{
-        font-size: f.$footer-font-size;
-        font-family: f.$serif-font;
-        text-transform: uppercase;
-        color: c.$gold;
-        font-weight: 400;
-        &:hover{
-            color: c.$light-gold;
-        }
-    }
-    ul.social-icons{
-        margin-top: 0;
-        >li{
-            display: inline;
-            .uk-icon{
-                color: c.$gold;
-            }
-        }
-    }
-    .footer-left{
-        text-align: left;
-    }
-    .footer-center{
-        text-align: center;
-    }
-    .footer-social{
-        text-align: right;
-        font-family: f.$serif-font;
-    }
-    .footer{
-        padding: 30px;
-        font-size: f.$footer-font-size;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    #license{
-        text-align: center;
-    }
-}
-
 @import "header.scss";
+@import "footer.scss";
 @import "cards.scss";
 @import "_sections.scss";
 @import "_pagination.scss";
