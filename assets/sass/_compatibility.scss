@@ -1,9 +1,34 @@
 @use "fonts.scss" as f;
+@use "_breakpoints.scss" as bp;
 
 /** Firefox **/
 @supports(-moz-appearance:none){
     .btn-primary{
         font-size: f.$moz-sm;
+    }
+    /** Homepage **/
+    .home-community,
+    .home-latest{
+        h2{
+            font-size: f.$moz-h2-sm;
+            @media(min-width: bp.$s){
+                font-size: f.$moz-h2-m;
+            }
+        }
+    }
+    .home-community{
+        h3{
+            font-size: f.$moz-sm;
+            @media(min-width: bp.$s){
+                font-size: f.$moz-m;
+            }
+        }
+    }
+    h1.card-title{
+        font-size: f.$moz-h1;
+        @media(min-width: bp.$l){
+            font-size: f.$moz-h1-l;
+        }
     }
     /** Show Detail View **/
     .a-btn-similar{

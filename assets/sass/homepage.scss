@@ -1,27 +1,88 @@
 .hero{
     text-align: center;
-    margin: 50px 0px;
+    margin: 0px auto;
     >p{
-        font-size: 2.5em;
+        font-size: 1.3em;
+        @media(min-width: bp.$s){
+            font-size: 1.9em;
+        }
+        @media(min-width: bp.$m){
+            font-size: 2.2em;
+        }
+        @media(min-width: bp.$l){
+            font-size: 2.5em;
+        }
     }
     width: 97%;
     @media(min-width: bp.$s){
+        margin: 15px auto;
+    }
+    @media(min-width: bp.$m){
         width: 100%;
+        margin: 50px auto;
     }
 }
 
-.hero,
-.home-latest{
+.home-latest,
+.home-community{
     margin-left: auto;
     margin-right: auto;
 }
 
-.home-latest{
-    padding-top: 20px;
+.home-latest,
+.home-community{
     width: 97%;
     @media(min-width: bp.$s){
         width: 90%;
     }
+}
+
+.home-latest{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    @media(min-width: bp.$s){
+        padding-top: 15px;
+    }
+    @media(min-width: bp.$m){
+        padding-top: 20px;
+    }
+}
+
+.home-community{
+    padding-top: 0px;
+    h3{
+        font-size: 0.8em;
+        @media(min-width: bp.$xs){
+            font-size: 1em;
+        }
+        @media(min-width: bp.$l){
+            font-size: 1.3em;
+        }
+    }
+}
+
+.connector{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 26px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.connector-middle{
+    width: 0;
+    height: 100%;
+    border: 1px solid c.$gold;
+}
+
+.connector-outer{
+    height: 35px;
+    width: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid c.$gold;
 }
 
 .landing-shows{
@@ -54,8 +115,11 @@
     width: 42%;
     transition-duration: 0.3s;
     h2{
-        font-size: 1.1rem;
+        font-size: 0.8rem;
         margin-bottom: 0;
+        @media(min-width: bp.$xs){
+            font-size: 1rem;
+        }
         @media(min-width: bp.$s){
             font-size: 1.3rem;
         }
@@ -78,10 +142,32 @@
     }
 }
 
+.home-latest{
+    @media(max-width: bp.$s){
+        .landing-shows-title{
+            width: 35%;
+        }
+        .landing-shows-content{
+            width: 65%;
+        }
+    }
+}
+
+.home-community{
+    @media(min-width: bp.$s) and (max-width: 800px){
+        .landing-shows-title{
+            width: 35%;
+        }
+        .landing-shows-content{
+            width: 65%;
+        }
+    }
+}
+
 .landing-shows-content{
     width: 58%;
     border: 2px solid c.$gold;
-    padding: 30px 20px;
+    padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -99,6 +185,7 @@
     }
     @media(min-width: bp.$s){
         width: 75%;
+        padding: 30px 20px;
     }
 }
 
@@ -108,7 +195,7 @@
     flex-direction: column;
     justify-content: center;
     h1{
-        font-size: 3em;
+        font-size: 1.2em;
         transition-duration: 0.3s;
         &:hover{
             color: c.$light-gold;
@@ -116,7 +203,36 @@
     }
     span{
         text-align: center;
-        font-size: 1.4em;
+        font-size: 0.8em;
+    }
+    @media(min-width: bp.$xs){
+        h1{
+            font-size: 1.5em;
+        }
+        span{
+            font-size: 1em;
+        }
+    }
+    @media(min-width: bp.$s){
+        h1{
+            font-size:2.2em;
+        }
+        span{
+            font-size: 1.4em;
+        }
+    }
+    @media(min-width: bp.$m){
+        h1{
+            font-size: 2.5em;
+        }
+    }
+    @media(min-width: bp.$l){
+        h1{
+            font-size: 3em;
+        }
+        span{
+            font-size: 1.4em;
+        }
     }
 }
 

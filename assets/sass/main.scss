@@ -21,7 +21,16 @@ body {
 
 main {
     flex: 1 0 auto;
-    padding: 20px 0px 140px 0px;
+    padding: 20px 0px;
+    @media(min-width: bp.$s){
+        padding: 15px 0px 30px 0px;
+    }
+    @media(min-width: bp.$m){
+        padding-top: 20px;
+    }
+    @media(min-width: bp.$l){
+        padding-bottom: 70px;
+    }
 }
 
 /** Headings **/
@@ -150,8 +159,9 @@ img, svg{
 @import "_sections.scss";
 @import "_pagination.scss";
 @import "_embeds.scss";
-@import "_compatibility.scss";
 @import "homepage.scss";
 @import "content_details.scss";
 @import "show_details.scss";
 @import "search_results.scss";
+/** Leave compatibility styles at the bottom **/
+@import "_compatibility.scss";
