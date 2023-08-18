@@ -4,9 +4,6 @@
 {% block content %}
 <div class="hero">
     <p>GeekNights is a podcast, a lecture series, and an online community for hobbyists, tinkerers, and geeks of all kinds.</p>
-    {% comment %}
-    {% include "./partials/_latest_content.html" with content=latest_content show=latest_content.show %}
-    {% endcomment %}
 </div>
 <div class="home-latest uk-section">
     <div class="uk-section subsection">
@@ -16,7 +13,7 @@
                 {% include "./partials/_latest_content_title.html" with content=latest_content title="Latest Content" %}
             </div>
             <div class="landing-shows-content">
-                {% include "./partials/_latest_content_content.html" with content=latest_content %}
+                {% include "./partials/_latest_content_content.html" with content=latest_content align="left" main="main" %}
             </div>
         </div>
     </div>
@@ -24,7 +21,7 @@
         {# Current Book Club Book #}
         <div class="uk-container landing-shows uk-grid">
             <div class="landing-shows-content">
-                {% include "./partials/_latest_content_content.html" with content=latest_book %}
+                {% include "./partials/_latest_content_content.html" with content=latest_book align="right" %}
             </div>
             <div class="landing-shows-title">
                 {% include "./partials/_latest_content_title.html" with content=latest_book title="Current Book Club" %}
@@ -38,38 +35,12 @@
                 {% include "./partials/_latest_content_title.html" with content=latest_news title="Latest News" %}
             </div>
             <div class="landing-shows-content">
-                {% include "./partials/_latest_content_content.html" with content=latest_news %}
+                {% include "./partials/_latest_content_content.html" with content=latest_news align="left" %}
             </div>
         </div>
     </div>
 </div>
 <div class="uk-section">
-    {% comment %}
-    <div class="uk-section subsection">
-        <div class="uk-container landing-shows uk-grid">
-            <div class="landing-shows-title">
-                <button class="uk-card uk-card-body" type="button">
-                    <a href=""><h2>Podcasts</h2></a>
-                </button>
-            </div>
-            <div class="landing-shows-content">
-                <p>Hosts Rym and Scott delve into topics ranging from computer science to Eurogaming, anime to fantasy fiction, indie comics to gadgetry, two nights a week for your listening pleasure.</p>
-            </div>
-        </div>
-    </div>
-    <div class="uk-section subsection">
-        <div class="uk-container landing-shows uk-grid">
-            <div class="uk-card landing-shows-content">
-                <p>If you want to dive into game design and strategy (or just want to learn how to win at board games), Rym and Scott have you covered with their series of convention panels and lectures.</p>
-            </div>
-            <div class="landing-shows-title">
-                <button class="uk-card uk-card-body" type="button">
-                    <a href=""><h2>Lectures</h2></a>
-                </button>
-            </div>
-        </div>
-    </div>
-    {% endcomment %}
     <div class="uk-section subsection">
         <div class="uk-container landing-shows uk-grid">
             <div class="landing-shows-title">

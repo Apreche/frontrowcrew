@@ -1,8 +1,5 @@
 <button class="uk-card uk-card-body" type="button">
     <a href ="{% url "content-detail" content.show.slug content.catalog_number content.slug %}">
         <h2>{{ title }}</h2>
-        <h4 class="card-title">{{ content.title }}</h4>
-        <h5 class="card-date"><i>{{ content.show.title }}</i></h5>
-        <span class="font-sm uk-hidden@s">{{ content.creation_time|date:"F j Y" }}</span>
     </a>    
 </button>

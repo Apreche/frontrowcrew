@@ -1,19 +1,12 @@
-<p class="font-sm uk-visible@s">{{ content.creation_time|date:"F j Y" }}</p>
-<p class="uk-visible@s">{{ content.rendered_html|truncatewords_html:40|striptags }}</p>
-{% if content.tags or content.forum_threads %}
-<div class="search-related-links">
-    {% if content.tags.all %}
-    <ul class="result-tags-list">
-        {% for tag in content.tags.all %}
-        <li><a class="tag" href="{% url "tag-filter" tag.slug %}">#{{ tag.name }}</a></li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% if content.forum_threads %}
-        <button class="uk-button btn-primary search-forum-link uk-hidden@s search-forum-link-s">
-        {% include "./_forum_threads.html" %}
-        <button class="uk-button btn-primary search-forum-link uk-visible@s">
-        {% include "./_forum_threads.html" with right=True %}                       
+<div class="landing-content-wrapper">
+    <a href="{% url "content-detail" content.show.slug content.catalog_number content.slug %}">
+        <h1 class="card-title">{{ content.title }}</h1>
+    </a>
+    <span class="font-sm">{{ content.creation_time|date:"F j Y" }}</span>
+    {% if main == "main" %}
+    <p class="uk-visible@s">{{ content.rendered_html|truncatewords_html:30|striptags }}</p>
+        {% if content.podcast_episode %}
+            {% include "./_embedded_audio.html" with podcast=content.podcast_episode %}
+        {% endif %}
     {% endif %}
 </div>
-{% endif %}
