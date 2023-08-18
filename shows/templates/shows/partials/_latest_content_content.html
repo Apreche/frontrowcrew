@@ -4,7 +4,23 @@
     </a>
     <span class="font-sm">{{ content.creation_time|date:"F j Y" }}</span>
     {% if main == "main" %}
-    <p class="uk-visible@s">{{ content.rendered_html|truncatewords_html:30|striptags }}</p>
+        {% if content.embedded_media.all %}
+        <p class="latest-video-text">{{ content.rendered_html|truncatewords_html:15|striptags }}</p>
+        {% else %}
+        <p>{{ content.rendered_html|truncatewords_html:30|striptags }}</p>
+        {% endif %}
+        {% if content.embedded_media.all %}
+            {% with media=content.embedded_media.all|first %}
+            <div class="home-embedded-media">
+                <div class="media-wrapper">
+                    {{ media.embed_code|safe }}</iframe>
+                </div>
+                {% if content.embedded_media.all|length > 1%}
+                <p>...</p>
+            {% endif %}
+            </div>
+            {% endwith %}
+        {% endif %}
         {% if content.podcast_episode %}
             {% include "./_embedded_audio.html" with podcast=content.podcast_episode %}
         {% endif %}
