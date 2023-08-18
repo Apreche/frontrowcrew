@@ -43,9 +43,12 @@ main.container:has(.show-hero-container){
 }
 
 .content-block{
-    padding: 30px;
+    padding: 30px 15px;
     p{
         padding: 15px 0px;
+    }
+    @media(min-width: bp.$s){
+        padding: 30px;
     }
 }
 
