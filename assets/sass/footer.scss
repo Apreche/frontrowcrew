@@ -26,7 +26,7 @@ footer {
 .footer-block{
     width: calc(33.33% - 20px);
     padding: 30px 10px;
-    font-size: 16px;
+    font-size: 14px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,9 +39,9 @@ footer {
             color: c.$light-gold;
             text-decoration: underline;
         }
-        @media(min-width: bp.$s){
-            font-size: 20px;
-        }
+    }
+    @media(min-width: bp.$xs){
+        font-size: 16px;
     }
     @media(min-width: 450px){
         font-size: 18px;
@@ -72,6 +72,12 @@ footer {
         display: inline;
         .uk-icon{
             color: c.$gold;
+        }
+    }
+    svg{
+        width: 20px;
+        @media(min-width: bp.$s){
+            width: auto;
         }
     }
 }
