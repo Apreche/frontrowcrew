@@ -25,7 +25,10 @@
         }
     }
     h1.card-title{
-        font-size: f.$moz-h1;
+        font-size: f.$moz-h1-sm;
+        @media(min-width: bp.$s){
+            font-size: f.$moz-h1-m;
+        }
         @media(min-width: bp.$l){
             font-size: f.$moz-h1-l;
         }
