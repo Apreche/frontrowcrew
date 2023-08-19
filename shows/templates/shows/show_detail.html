@@ -114,35 +114,7 @@
         <ul class="uk-container uk-child-width-1-3@m uk-flex-center" uk-grid uk-height-match="target: .card-title-container-top">
         {% for content in page.object_list %}
         {% if not forloop.first %}
-            <li>
-                <div class="uk-card similar-content-card">
-                    <div class="card-title-container-top">
-                        <div class="card-title-wrapper">
-                            <h4 class="card-title">{{ content.title }}</h4>
-                            <h4 class="card-date"><i>{{ content.creation_time|date:"F j Y" }}</i></h4>
-                            {% if content.tags.all %}
-                                <ul class="tags-list card-meta">
-                                    {% for tag in content.tags.all %}
-                                    <li><a class="tag" href="{% url "show-tag-filter" content.show.slug tag.slug %}">#{{ tag.name }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="uk-card-body">
-                        <div class="card-wrapper">
-                            <div class="card-wrapper-inner">
-                                <p>{{ content.rendered_html|truncatewords_html:15|striptags }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="uk-card-footer">
-                        <button class="uk-button btn-primary">
-                            <a class="a-btn a-btn-similar" href="{% url "content-detail" show.slug content.catalog_number content.slug %}">Check it Out</a>
-                        </button>
-                    </div>
-                </div>
-            </li>
+            {% include "./partials/_content_cards.html" with content=content show=show %}
         {% endif %}
         {% endfor %}
         </ul>
