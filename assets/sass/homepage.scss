@@ -99,9 +99,9 @@
         }
         &.latest-video-text{
             text-align: center;
-            font-size: f.$sm;
+            font-size: f.$xs;
             @media(min-width: bp.$s){
-                font-size: f.$m;
+                font-size: f.$sm;
             }
         }
     }

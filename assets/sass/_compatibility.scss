@@ -33,6 +33,12 @@
             font-size: f.$moz-h1-l;
         }
     }
+    .latest-video-text{
+        font-size: f.$moz-sm;
+        @media(min-width: bp.$s){
+            font-size: f.$moz-m;
+        }
+    }
     /** Show Detail View **/
     .a-btn-similar{
         font-size: f.$moz-l;
