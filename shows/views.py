@@ -12,10 +12,24 @@ from . import models
 def homepage(request):
     """The Homepage"""
     template_name = "shows/homepage.html"
-    latest_content = models.Content.published.latest()
-    latest_book_club = models.Content.published.filter(
-        show__slug="book-club").filter(podcast_episode__isnull=True).latest()
-    latest_news = models.Content.published.filter(show__slug="news").latest()
+    try:
+        latest_content = models.Content.published.latest()
+    except models.Content.DoesNotExist:
+        latest_content = None
+    try:
+        latest_book_club = models.Content.published.filter(
+            show__slug="book-club"
+        ).filter(
+            podcast_episode__isnull=True
+        ).latest()
+    except models.Content.DoesNotExist:
+        latest_book_club = None
+    try:
+        latest_news = models.Content.published.filter(
+            show__slug="news"
+        ).latest()
+    except models.Content.DoesNotExist:
+        latest_news = None
     context = {
         "latest_content": latest_content,
         "latest_book": latest_book_club,
