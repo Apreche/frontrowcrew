@@ -23,7 +23,7 @@
         height: 100%;
         top: 0;
         left: 0;
-    }    
+    }
 }
 
 /** Audio **/
@@ -56,11 +56,17 @@
     @include b.btn-primary($border-color-hvr: c.$black);
     color: c.$gold;
     width: 32px;
-    height: 26px;
+    height: 22px;
     margin-top: auto;
     margin-bottom: auto;
+    padding: 1px;
+    @media(min-width: 400px){
+        height: 26px;
+    }
     @media(min-width: bp.$s){
         width: 40px;
+    }
+    svg{
     }
 }
 
@@ -75,10 +81,14 @@
 }
 
 div.time{
-    width: 72px;
-    font-size: f.$sm;
+    width: 48px;
+    font-size: f.$xs;
     @media(min-width: bp.$s){
-    font-size: f.$m;
+        font-size: f.$sm;
+    }
+    @media(min-width: bp.$s){
+        width: 72px;
+        font-size: f.$m;
     }
 }
 
@@ -124,7 +134,7 @@ div.time{
 
 input[type="range"]{
     position: relative;
-    height: 28px;
+    height: 26px;
     box-sizing: border-box;
     margin: 0px;
     width: 100%;
@@ -137,8 +147,14 @@ input[type="range"]{
         position: absolute;
         height: 3px;
         left: 0;
-        top: 12.5px;
+        top: 12px;
         background-color: c.$black;
+    }
+    @media(min-width: 400px){
+        height: 28px;
+        &::before{
+            top: 12.5px;
+        }
     }
 }
 

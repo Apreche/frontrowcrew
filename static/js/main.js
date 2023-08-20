@@ -17,7 +17,8 @@ function formatTime (time) {
   const mins = Math.floor((time / 60) % 60)
   const hours = Math.floor(time / 3600)
   const formattedSecs = secs < 10 ? `0${secs}` : `${secs}`
-  return `${hours < 1 ? '' : hours + ':'}${mins}:${formattedSecs}`
+  const formattedMins = (hours >= 1 && mins < 10) ? `0${mins}` : `${mins}`
+  return `${hours < 1 ? '' : hours + ':'}${formattedMins}:${formattedSecs}`
 }
 
 /*

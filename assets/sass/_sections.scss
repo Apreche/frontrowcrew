@@ -74,19 +74,3 @@
         }
     }
 }
-
-/** Landing Page Shows Section **/
-.subsection{
-    padding-top: 0;
-    padding-bottom: 0;
-    &:not(:last-child){
-        .landing-shows-content{
-            border-bottom: 1px solid c.$gold;
-        }
-    }
-    &:not(:first-child){
-        .landing-shows-title{
-            border-top: 0;
-        }
-    }
-}

@@ -21,7 +21,16 @@ body {
 
 main {
     flex: 1 0 auto;
-    padding: 20px 0px 140px 0px;
+    padding: 20px 0px;
+    @media(min-width: bp.$s){
+        padding: 15px 0px 30px 0px;
+    }
+    @media(min-width: bp.$m){
+        padding-top: 20px;
+    }
+    @media(min-width: bp.$l){
+        padding-bottom: 70px;
+    }
 }
 
 /** Headings **/
@@ -117,40 +126,6 @@ img, svg{
     max-height: 100%;
 }
 
-/** Hero section **/
-.hero{
-    font-size: 2.5em;
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-.landing-shows{                     // This is the .uk-container div
-    color: c.$light-gold;
-    margin-left: auto;
-    margin-right: auto;
-    .landing-shows-title{
-        background-color: c.$dark-grey;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid c.$gold;
-        &:hover{
-            background-color: c.$black;
-            h2{
-                color: c.$light-gold;
-                text-decoration: underline;
-            }
-        }
-    }
-    &:not(.landing-shows-title){
-        background-color: c.$darkest-grey;
-    }
-    p{
-        font-size: 1.4em;
-    }
-}
-
 /** Dropdowns **/
 .forum-dropdown{
     @include m.dropdowns($background-color-hvr: c.$gold);
@@ -166,66 +141,7 @@ img, svg{
     }
 }
 
-/** Landing Page Community Section **/
-.landing-community{             // .uk-grid div
-    margin-left: auto;
-    margin-right: auto;
-    height: 250px;
-    h2,
-    %h2{
-        @extend %h2;
-        font-size: 1.7em;
-    }
-    .border-wrapper{
-        border: 1px solid c.$gold;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        background-color: c.$dark-grey;
-        width: 100%;
-        &:hover{
-            background-color: c.$black;
-            h2{
-                color: c.$light-gold;
-                text-decoration: underline;
-            }
-        }
-    }
-    &:last-child{
-        margin-top: 0;
-    }
-}
-
-/** Classes for Offset Grid Elements **/
-.offset-border-left{
-    border: 2px solid;
-}
-
-.offset-border-right{
-    border: 2px solid;
-    border-left: none;
-}
-
-.offset-grid{
-    &:first-child{
-        margin-bottom: 0px;
-        padding-bottom: 0px;
-    }
-    + .offset-grid{
-        margin-top: 0px;
-        padding-top: 0px;
-        .offset-border-left,
-        .offset-border-right{
-            border-top: none;
-        }
-    }
-}
-
 /** Other Helpers **/
-.padded-border-wrapper{
-  //  padding: 20px;
-}
 
 .grid-center{
     margin-left: auto;
@@ -237,61 +153,15 @@ img, svg{
     align-items: center;
 }
 
-/** footer **/
-footer {
-    flex-shrink: 0;
-    background-color: c.$darkest-grey;
-    padding-bottom: 20px;
-    .uk-grid-small{
-        margin: 0;
-    }
-    a{
-        font-size: f.$footer-font-size;
-        font-family: f.$serif-font;
-        text-transform: uppercase;
-        color: c.$gold;
-        font-weight: 400;
-        &:hover{
-            color: c.$light-gold;
-        }
-    }
-    ul.social-icons{
-        margin-top: 0;
-        >li{
-            display: inline;
-            .uk-icon{
-                color: c.$gold;
-            }
-        }
-    }
-    .footer-left{
-        text-align: left;
-    }
-    .footer-center{
-        text-align: center;
-    }
-    .footer-social{
-        text-align: right;
-        font-family: f.$serif-font;
-    }
-    .footer{
-        padding: 30px;
-        font-size: f.$footer-font-size;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    #license{
-        text-align: center;
-    }
-}
-
 @import "header.scss";
+@import "footer.scss";
 @import "cards.scss";
 @import "_sections.scss";
 @import "_pagination.scss";
 @import "_embeds.scss";
+@import "homepage.scss";
 @import "content_details.scss";
 @import "show_details.scss";
 @import "search_results.scss";
+/** Leave compatibility styles at the bottom **/
 @import "_compatibility.scss";

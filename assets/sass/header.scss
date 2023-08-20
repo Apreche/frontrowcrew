@@ -65,7 +65,7 @@ nav{
 }
 
 .uk-navbar-center.nav-center{
-    @media(max-width: bp.$m){
+    @media(max-width: calc(bp.$m - 1px)){
         position: relative;
         order: -1;
         top: unset;
@@ -83,7 +83,8 @@ nav{
     text-transform: uppercase;
     border: none;
     transition-duration: 0.3s;
-    &:hover{
+    &:hover,
+    &:focus{
         color: c.$light-gold;
         text-decoration: underline;
     }
@@ -91,9 +92,15 @@ nav{
 
 /** SVGs and Logos **/
 %header-logo{
+    box-sizing: border-box;
+    transition-duration: 0.1s;
     svg{
         max-height: 100%;
         color: c.$gold;
+        &:hover,
+        &:focus{
+            color: c.$light-gold;
+        }
     }
 }
 
@@ -105,6 +112,10 @@ nav{
     @extend %header-logo;
     height: 100%;
     width: 200px;
+    &:hover,
+    &:focus{
+        border-bottom: 2px solid c.$light-gold;
+    }
 }
 
 img.uk-logo{
@@ -154,7 +165,7 @@ form.uk-search{
         &::placeholder{
             color: inherit;
             @media(min-width: bp.$s){
-                @media(max-width: bp.$m){
+                @media(max-width: calc(bp.$m - 1px)){
                     color: c.$black;
                 }
             }
@@ -166,6 +177,7 @@ form.uk-search{
     @media(min-width: bp.$s){
         border: none;
         input.uk-search-input{
+            width: 95%;
             text-indent: 25px;
             &:active,
             &:focus,
@@ -174,7 +186,7 @@ form.uk-search{
             }
         }
         span{
-            @media(max-width: bp.$m){
+            @media(max-width: calc(bp.$m - 1px)){
                 top: -1px !important;
             }
         }
@@ -207,7 +219,7 @@ form.uk-search{
     @media(min-width: bp.$s){
         top: calc($header-height-md - 11px) !important;
     }
-    @media(max-width: bp.$m){
+    @media(max-width: calc(bp.$m - 1px)){
         width: 100vw;
     }    
 }
@@ -238,7 +250,7 @@ form.uk-search{
     }
     
     .uk-navbar-center.nav-center{
-        @media(max-width: bp.$m){
+        @media(max-width: calc(bp.$m - 1px)){
             position: relative;
             order: -1;
             top: unset;
