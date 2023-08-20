@@ -111,7 +111,7 @@
 <div class="uk-section show-archive-list">
     {% if tags %}<h2>Content tagged with {{ tags|join:", " }}</h2>{% endif %}
     <div class="uk-flex uk-flex-center">
-        <ul class="uk-container uk-child-width-1-3@m uk-flex-center" uk-grid uk-height-match="target: .card-title-container-top">
+        <ul class="uk-container uk-flex-center" uk-grid uk-height-match="target: .card-title-container-top">
         {% for content in page.object_list %}
         {% if not forloop.first %}
             {% include "./partials/_content_cards.html" with content=content show=show %}

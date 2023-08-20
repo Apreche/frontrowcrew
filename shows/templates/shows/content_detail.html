@@ -91,7 +91,7 @@
 <div class="uk-section">
     <h1>More Like This</h1>
     <div class="uk-container">
-        <ul class="uk-child-width-1-3@m" uk-grid uk-height-match="target: .card-wrapper">
+        <ul class="uk-container uk-flex-center" uk-grid uk-height-match="target: .card-title-container-top">
         {% for similar_content in similar_content|slice:"3"%}
             {% include "./partials/_content_cards.html" with content=similar_content %}
         {% endfor %}
