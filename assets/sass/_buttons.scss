@@ -80,7 +80,7 @@
     padding: 15px 5px;
     font-size: 0.9rem;
     &:hover:not([aria-disabled="true"]),
-    &:focus:not([aria-disabled="true"]){
+    &:focus-within:not([aria-disabled="true"]){
         background-color: c.$dark-blue;
         color: c.$gold;
         border-color: c.$dark-blue;

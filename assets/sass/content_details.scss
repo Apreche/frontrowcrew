@@ -6,13 +6,10 @@
 @use "breakpoints.scss" as bp;
 
 /** Buttons **/
-.btn-available-wrapper{
+#btn-available-wrapper{
     order: -1;
     flex-basis: 80%;
     text-align: center;
-    @media(min-width: bp.$xs){
-
-    }
     @media(min-width: bp.$s){
         order: 0;
         flex-basis: unset;
