@@ -5,7 +5,9 @@
 <div class="hero">
     <p>GeekNights is a podcast, a lecture series, and an online community for hobbyists, tinkerers, and geeks of all kinds.</p>
 </div>
+{% if latest_content or latest_book or latest_news %}
 <div class="home-latest uk-section">
+    {% if latest_content %}
     <div class="uk-section subsection">
         {# Latest Content#}
         <div class="uk-container landing-shows uk-grid">
@@ -17,6 +19,8 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% if latest_book %}
     <div class="uk-section subsection">
         {# Current Book Club Book #}
         <div class="uk-container landing-shows uk-grid">
@@ -28,6 +32,8 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% if latest_news %}
     <div class="uk-section subsection">
         {# Latest News #}
         <div class="uk-container landing-shows uk-grid">
@@ -39,12 +45,14 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 <div class="connector">
     <div class="connector-outer"></div>
     <div class="connector-middle"></div>
     <div class="connector-outer"></div>
 </div>
+{% endif %}
 <div class="home-community uk-section">
     <div class="uk-section subsection">
         <div class="uk-container landing-shows uk-grid">
