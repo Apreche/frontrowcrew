@@ -196,3 +196,11 @@ abw.addEventListener(
     aBtn.setAttribute('click-state', clickState)
   }
 )
+
+abw.addEventListener(
+  'focusout',
+  function () {
+    clickState = 'false'
+    aBtn.setAttribute('click-state', 'false')
+  }
+)
