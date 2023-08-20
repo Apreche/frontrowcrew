@@ -83,25 +83,11 @@
         {% endif %}
     </div>
 </div>
-<div class="uk-section uk-flex flex-center content-details-cta">
-    <button class="uk-button btn-primary primary-left">Contribute Show Notes</button>
-    <div id="btn-available-wrapper">
-        <button id="btn-content-available" class="uk-button btn-secondary btn-content-available">Available Here <span uk-icon="chevron-down"></span></button>
-    </div>
-    <div id="cta-dropdown" class="cta-dropdown" uk-dropdown="pos: bottom-center; mode: click">
-        <ul>
-            {% if content.podcast_episode %}
-            <li><div class="dropdown-link-wrapper"><a href="{{ content.podcast_episode.enclosure.url }}" download>Download mp3</div></a></li>
-            {% endif %}
-            <li><div class="dropdown-link-wrapper"><a href="">Spotify</div></a></li>
-            <li><div class="dropdown-link-wrapper"><a href="">iTunes</div></a></li>
-            <li><div class="dropdown-link-wrapper"><a href="">YouTube</div></a></li>
-    </div>
-    {% if content.forum_threads %}
-    <button class="uk-button btn-primary primary-right btn-forum-link">
-        {% include "./partials/_forum_threads.html" %}
-    {% endif %}
-</div>
+{% if content.forum_threads %}
+    {% include "./partials/_cta.html" with content=content forum="true" %}
+{% else %}
+    {% include "./partials/_cta.html" with content=content %}
+{% endif %}
 {% if similar_content %}
 <div class="uk-section">
     <h1>More Like This</h1>

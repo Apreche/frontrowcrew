@@ -10,10 +10,6 @@
     order: -1;
     flex-basis: 80%;
     text-align: center;
-    @media(min-width: bp.$s){
-        order: 0;
-        flex-basis: unset;
-    }
 }
 
 .btn-content-available{
@@ -51,7 +47,53 @@
         @include m.dropdowns($background-color-hvr: c.$gold);
     }
     @media(min-width: bp.$s){
-        flex-wrap: nowrap;
+        &:has(.btn-forum-link){
+            flex-wrap: nowrap;
+        }
+    }
+}
+
+.cta-forum{
+    #btn-available-wrapper{
+        order: -1;
+        flex-basis: 80%;
+        text-align: center;
+        @media(min-width: bp.$s){
+            order: 0;
+            flex-basis: unset;
+        }
+    }
+}
+
+.cta-no-forum{
+    .btn-primary{
+        order: -1;
+        top: -1px;
+        padding: 3px 10px;
+        @media(min-width: 400px){
+            flex-basis: 25%;
+        }
+        @media(min-width: bp.$s){
+            flex-basis: 50%;
+        }
+    }
+    @media(min-width: bp.$s){
+        width: 45%;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 400px;
+    }
+    #btn-available-wrapper{
+        @media(min-width: bp.$s){
+            flex-basis: 100%;
+            .btn-content-available{
+                font-size: 20px;
+                padding: 15px;
+            }
+        }
+        @media(min-width: bp.$m){
+            flex-basis: 75%;
+        }
     }
 }
 
