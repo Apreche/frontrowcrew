@@ -126,6 +126,10 @@ img, svg{
     max-height: 100%;
 }
 
+img{
+    color: c.$gold;
+}
+
 /** Dropdowns **/
 .forum-dropdown{
     @include m.dropdowns($background-color-hvr: c.$gold);
@@ -160,8 +164,8 @@ img, svg{
 @import "_pagination.scss";
 @import "_embeds.scss";
 @import "homepage.scss";
-@import "content_details.scss";
 @import "show_details.scss";
+@import "content_details.scss";
 @import "search_results.scss";
 /** Leave compatibility styles at the bottom **/
 @import "_compatibility.scss";

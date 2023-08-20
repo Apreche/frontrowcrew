@@ -77,6 +77,8 @@
     transition-duration: 0.3s;
     line-height: normal;
     max-width: 100%;
+    padding: 15px 5px;
+    font-size: 0.9rem;
     &:hover:not([aria-disabled="true"]),
     &:focus:not([aria-disabled="true"]){
         background-color: c.$dark-blue;
@@ -92,8 +94,9 @@
         cursor: not-allowed;    
         opacity: 0.7;
     }
-    @media(max-width: bp.$xs){
-        font-size: 4vw;
+    @media(min-width: bp.$m){
+        font-size: 22px;
+        padding: 30px 10px;
     }
 }
 

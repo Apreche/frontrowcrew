@@ -6,33 +6,127 @@
 @use "breakpoints.scss" as bp;
 
 /** Buttons **/
+.btn-available-wrapper{
+    order: -1;
+    flex-basis: 80%;
+    text-align: center;
+    @media(min-width: bp.$xs){
+
+    }
+    @media(min-width: bp.$s){
+        order: 0;
+        flex-basis: unset;
+    }
+}
+
 .btn-content-available{
-    padding: 30px 10px;
-    font-size: 22px;
+    width: 80%;
+    @media(min-width: bp.$xs){
+        width: 60%;
+    }
+    @media(min-width: 400px){
+        width: 50%;
+    }
+    @media(min-width: bp.$s){
+        width: 100%;
+        padding: 25px 15px;
+    }
+}
+
+.content-details-cta{
+    flex-wrap: wrap;
+    .btn-primary{
+        flex-basis: 35%;
+        font-size: f.$sm;
+        padding: 0px 15px;
+        @media(min-width: bp.$xs){
+            flex-basis: 30%;
+            padding: 0px 5%;
+        }
+        @media(min-width: bp.$s){
+            width: 17%;
+            max-width: 170px;
+            font-size: 1rem;
+            padding: 0px 30px;
+        }
+    }
+    .cta-dropdown{
+        @include m.dropdowns($background-color-hvr: c.$gold);
+    }
+    @media(min-width: bp.$s){
+        flex-wrap: nowrap;
+    }
+}
+
+/** Archive Button **/
+.archive-btn-container{
+    text-align: center;
+}
+
+.btn-content-archive{
+    h2{
+        margin: 0px;
+        padding: 10px;
+        text-transform: capitalize;
+        font-weight: 500;
+    }
+    &:hover:not([aria-disabled="true"]),
+    &:focus:not([aria-disabled="true"]){
+        h2{
+            color: c.$black;
+        }
+    }
 }
 
 /** Headings **/
 h3{
     margin-top: 0px;
     margin-bottom: 0px;
-    &.sub-show-name{
+    &.show-name{
         font-family: f.$serif-font;
         font-size: 2rem;
     }
 }
 
+/** Content Section **/ 
 .content-view-title-container{
     padding-bottom: 40px;
 }
 
+/** Show Info **/
 .content-view-show-info{
     padding: 0px 4%;
     text-align: center;
-    height: 250px;
+}
+
+.show-logo-wrapper{
+    max-height: 270px;
 }
 
 .content-view-show-logo{
     object-fit: contain;
+    color: c.$gold;
+    transition-duration: 0.3s;
+}
+
+.show-logo-link{
+    display: flex;
+    flex-direction: column;
+    &:hover,
+    &:focus-within{
+        .show-name,
+        .content-view-show-logo{
+            color: c.$light-gold;
+        }
+    }
+}
+
+.show-name{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    place-content: flex-end;
+    transition-duration: 0.3s;
 }
 
 .no-logo{
@@ -41,6 +135,7 @@ h3{
     padding-bottom: 10px;
 }
 
+/** Content **/ 
 .content-info-wrapper{
     border: 2px solid c.$gold;
     padding: 20px;
@@ -90,39 +185,4 @@ h3{
 .purchase-links{
     text-align: center;
     padding-left: 0px;
-}
-
-.content-details-cta{
-    .btn-primary{
-        width: 17%;
-        max-width: 170px;
-    }
-    .cta-dropdown{
-        @include m.dropdowns($background-color-hvr: c.$gold);
-    }
-}
-
-.a-btn-similar{
-    display: block;
-    padding: 15px 30px;
-    font-size: 24px;
-}
-
-/** Archive Button **/
-.archive-btn-container{
-    text-align: center;
-}
-.btn-content-archive{
-    h2{
-        margin: 0px;
-        padding: 10px;
-        text-transform: capitalize;
-        font-weight: 500;
-    }
-    &:hover,
-    &:focus{
-        h2{
-            color: c.$black;
-        }
-    }
 }
