@@ -39,6 +39,35 @@
             font-size: f.$moz-m;
         }
     }
+    /** Content Detail View **/
+    .content-view-container{
+        h1{
+            font-size: f.$moz-h1-xs;
+            @media(min-width: bp.$s){
+                font-size: f.$moz-h1-sm;
+            }
+            @media(min-width: bp.$l){
+                font-size: f.$moz-h1-m;
+            }
+        }
+        h3{
+            font-size: f.$moz-h3-sm;
+            @media(min-width: bp.$s){
+                font-size: f.$moz-h3-m;
+            }
+        }
+    }
+    .cta-forum{
+        .btn-primary{
+            font-size: f.$moz-btn-sm;
+            @media(min-width: bp.$s){
+                font-size: f.$moz-btn-m;
+            }
+        }
+    }
+    .btn-content-archive{
+        font-size: f.$moz-btn-l;
+    }
     /** Show Detail View **/
     .a-btn-similar{
         font-size: f.$moz-l;

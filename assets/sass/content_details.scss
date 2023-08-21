@@ -23,6 +23,15 @@
     }
 }
 
+.primary-section:has(.content-view-container){
+    @media(min-width: bp.$l){
+        width: 75%;
+    }
+    @media(min-width: bp.$xl){
+        width: 70%;
+    }
+}
+
 .content-wrapper{
     display: flex;
     flex-wrap: wrap;
@@ -62,6 +71,7 @@
     object-fit: contain;
     color: c.$gold;
     transition-duration: 0.3s;
+    max-height: 170px;
 }
 
 .show-logo-link{
@@ -69,7 +79,8 @@
     &:hover,
     &:focus-within{
         .show-name,
-        .content-view-show-logo{
+        .content-view-show-logo,
+        h3{
             color: c.$light-gold;
         }
     }
@@ -102,10 +113,38 @@
     }
 }
 
-.no-logo{
-    width: 100%;
-    padding-left: 0px;
-    padding-bottom: 10px;
+/** Show Info Styles When No Logo is Present **/
+div.no-logo{
+    .content-view-show-info{
+        padding: 0px;
+    }
+    .show-logo-link{
+        padding: 5px;
+        margin-top: -1px;
+        &:hover,
+        &:focus-within{
+            h3{
+                color: c.$light-gold;
+            }
+        }
+    }
+    @media(min-width: bp.$s){
+        .show-logo-link h3{
+            font-size: 1.2rem;
+        }
+    }
+    @media(min-width: bp.$m){
+        flex-wrap: wrap;
+        .content-view-show-info{
+            flex-basis: 100%;
+            order: 1;
+            padding: 0 25%;
+        }
+        .content-wrapper-lg{
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
 }
 
 /** Content **/
@@ -277,6 +316,7 @@
 }
 
 .btn-content-archive{
+    max-width: 400px;
     h2{
         margin: 0px;
         padding: 10px;
@@ -289,6 +329,9 @@
         h2{
             color: c.$black;
         }
+    }
+    @media(min-width: bp.$m){
+        max-width: 600px;
     }
 }
 
@@ -314,10 +357,13 @@
     h3{
         margin-top: 0px;
         margin-bottom: 0px;
-        font-size: 1.3rem;
-        &.show-name{
+        font-size: 1.2rem;
+        @media(max-width: bp.$m){
+            font-style: italic;
+        }
+        &.no-logo{
             font-family: f.$serif-font;
-            font-size: 2rem;
+            font-style: italic;
         }
     }
 }

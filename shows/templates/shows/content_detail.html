@@ -9,9 +9,9 @@
 {% block content %}
 <div class="uk-section primary-section">
     <div class="content-view-container content-view-title-container">
-        <div class="content-wrapper">
-            {% if content.show.logo %}
+        <div class="content-wrapper{% if content.show.logo %}">{% else %} no-logo">{% endif %}
             <div class="content-view-show-info">
+                {% if content.show.logo %}
                 <a href="{% url "show-detail" content.show.slug %}" class="show-logo-link">
                     <div class="show-logo-wrapper">
                         <img class="uk-logo content-view-show-logo" 
@@ -25,15 +25,15 @@
                         {% if content.show.parent_show %}
                         <h3 class="content-view-parent-title">{{ content.show.parent_show.title }}: </h3>
                         {% endif %}
-                        <h3 class=>{{ content.show.title }}</h3>
+                        <h3>{{ content.show.title }}</h3>
                     </div>
                 </a>
-            </div>
             {% else %}
-            <a href="{% url "show-detail" content.show.slug %}" class="show-logo-link">
-                <h1 class="no-logo">{{ content.show.title }}</h1>
-            </a>
+                <a href="{% url "show-detail" content.show.slug %}" class="show-logo-link">
+                    <h3 class="no-logo">{{ content.show.title }}</h3>
+                </a>
             {% endif %}
+            </div>
             <div class="content-wrapper-lg">
                 <div class="content-info-wrapper">
                     <div class="content-view-content-info">
@@ -99,7 +99,7 @@
 <div class="uk-section">
     <h1>More Like This</h1>
     <div class="uk-container">
-        <ul class="uk-container uk-flex-center" uk-grid uk-height-match="target: .card-title-container-top">
+        <ul class="uk-container uk-flex-center card-ul" uk-grid uk-height-match="target: .card-title-container-top">
         {% for similar_content in similar_content|slice:"3"%}
             {% include "./partials/_content_cards.html" with content=similar_content %}
         {% endfor %}

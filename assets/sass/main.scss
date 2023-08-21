@@ -31,6 +31,10 @@ main {
     @media(min-width: bp.$l){
         padding-bottom: 70px;
     }
+    @media(min-width: bp.$xl){
+        padding-left: 7%;
+        padding-right: 7%;
+    }
 }
 
 /** Headings **/
