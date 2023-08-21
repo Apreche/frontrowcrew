@@ -5,6 +5,180 @@
 @use "buttons.scss" as b;
 @use "breakpoints.scss" as bp;
 
+/** Content Section **/ 
+.content-view-title-container{
+    @media(max-width: bp.$m){
+        >.uk-grid{
+            margin: 0px;
+        }
+        .content-view-show-info{
+            order: 1;
+            display: flex;
+            flex-basis: 100%;
+            justify-content: center;
+        }
+    }
+    @media(min-width: bp.$m){
+        padding-bottom: 40px;
+    }
+}
+
+.content-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    margin-top: -40px;
+    @media(min-width: bp.$s){
+        margin-top: -20px;
+    }
+    @media(min-width: bp.$m){
+        flex-wrap: nowrap;
+        padding: 0% 2%;
+    }
+}
+
+/** Show Info **/
+.content-view-show-info{
+    padding: 5px;
+    text-align: center;
+    @extend .show-title-grid;
+    max-width: 100%;
+    @media(min-width: bp.$s){
+    }
+    @media(min-width: bp.$m){
+        flex-basis: 25%;
+    }
+}
+
+.show-logo-wrapper{
+    max-height: 270px;
+    display: none;
+    @media(min-width: bp.$m){
+        display: block;
+    }
+}
+
+.content-view-show-logo{
+    object-fit: contain;
+    color: c.$gold;
+    transition-duration: 0.3s;
+}
+
+.show-logo-link{
+    display: flex;
+    &:hover,
+    &:focus-within{
+        .show-name,
+        .content-view-show-logo{
+            color: c.$light-gold;
+        }
+    }
+    @media(min-width: bp.$m){
+        flex-direction: column;
+    }
+}
+
+.content-view-parent-title{
+    @media(min-width: bp.$m){
+        display: none;
+    }
+}
+
+.show-name{
+    transition-duration: 0.3s;
+    h3{
+        font-family: f.$serif-font;
+        font-size: 2rem;
+        display: inline;
+    }
+    @media(min-width: bp.$m){
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        place-content: flex-end;
+        h3{
+            display: block;
+        }
+    }
+}
+
+.no-logo{
+    width: 100%;
+    padding-left: 0px;
+    padding-bottom: 10px;
+}
+
+/** Content **/
+.content-wrapper-lg{
+    flex-basis: 100%;
+    @media(min-width: bp.$s){
+        flex-basis: calc(100% - 40px);
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media(min-width: bp.$m){
+        flex-basis: 75%;
+        margin: unset;
+    }
+} 
+
+.content-info-wrapper{
+    border: 2px solid c.$gold;
+    padding: 20px;
+}
+
+.content-view-content-info{
+    background-color: c.$blue; 
+    padding: 5px 10px;
+    h1{
+        margin-bottom: 0px;
+    }
+    @media(min-width: bp.$xs){
+        padding: 20px 15px;
+    }
+    @media(min-width: bp.$s){
+        padding: 30px 15px;
+    }
+}
+
+.tags-list{
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+    width: 80%;
+    margin-left: 10%;
+    li{
+        display: inline-block;
+        padding: 0px 2px;
+    }
+}
+
+.content-view-content{
+    padding: 0px 15px;
+    @media(min-width: bp.$s){
+        padding: 0px 30px;
+    }
+    @media(min-width: bp.$m){
+        >div{
+            margin-top: 40px;
+        }
+    }
+}
+
+.content-view-totd{
+    text-align: center;
+    h3{
+        font-family: serif;
+        font-size: 2.7rem;
+    }
+}
+
+.purchase-links{
+    text-align: center;
+    padding-left: 0px;
+}
+
 /** Buttons **/
 #btn-available-wrapper{
     order: -1;
@@ -108,6 +282,7 @@
         padding: 10px;
         text-transform: capitalize;
         font-weight: 500;
+        font-size: 1.5rem;
     }
     &:hover:not([aria-disabled="true"]),
     &:focus:not([aria-disabled="true"]){
@@ -117,111 +292,46 @@
     }
 }
 
-/** Headings **/
-h3{
-    margin-top: 0px;
-    margin-bottom: 0px;
-    &.show-name{
-        font-family: f.$serif-font;
-        font-size: 2rem;
+/** Responsive Text **/
+.content-view-container{
+    h1{
+        font-size: 1.5rem;
     }
-}
-
-/** Content Section **/ 
-.content-view-title-container{
-    padding-bottom: 40px;
-}
-
-/** Show Info **/
-.content-view-show-info{
-    padding: 0px 4%;
-    text-align: center;
-}
-
-.show-logo-wrapper{
-    max-height: 270px;
-}
-
-.content-view-show-logo{
-    object-fit: contain;
-    color: c.$gold;
-    transition-duration: 0.3s;
-}
-
-.show-logo-link{
-    display: flex;
-    flex-direction: column;
-    &:hover,
-    &:focus-within{
-        .show-name,
-        .content-view-show-logo{
-            color: c.$light-gold;
+    @media(min-width: bp.$s){
+        h1{
+            font-size: 1.8rem;
+        }
+    }
+    @media(min-width: bp.$l){
+        h1{
+            font-size: 2.8rem;
         }
     }
 }
 
-.show-name{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    place-content: flex-end;
-    transition-duration: 0.3s;
-}
-
-.no-logo{
-    width: 100%;
-    padding-left: 0px;
-    padding-bottom: 10px;
-}
-
-/** Content **/ 
-.content-info-wrapper{
-    border: 2px solid c.$gold;
-    padding: 20px;
-}
-
-.content-view-content-info{
-    background-color: c.$blue; 
-    padding: 30px 20px;
-    h1{
+.content-view-content,
+.content-view-show-info{
+    h3{
+        margin-top: 0px;
         margin-bottom: 0px;
-        font-size: 3.3rem;
+        font-size: 1.3rem;
+        &.show-name{
+            font-family: f.$serif-font;
+            font-size: 2rem;
+        }
     }
 }
 
 .tags-list{
-    text-align: center;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-left: 0px;
-    width: 80%;
-    margin-left: 10%;
-    li{
-        display: inline-block;
-        padding: 0px 2px;
-    }
+    font-size: 0.8rem;
 }
 
 .content-view-content{
-    font-size: 1.2rem;
-    padding: 0px 15px;
-    >div:not(.embedded-media){
-        margin-top: 40px;
-    }
+    font-size: 0.9rem;
     @media(min-width: bp.$s){
-        padding: 0px 30px;
+        font-size: 1rem;
     }
-}
-
-.content-view-totd{
-    text-align: center;
-    h3{
-        font-family: serif;
-        font-size: 2.7rem;
+    @media(min-width: bp.$m){
+        font-size: 1.2rem;
     }
-}
-
-.purchase-links{
-    text-align: center;
-    padding-left: 0px;
 }
