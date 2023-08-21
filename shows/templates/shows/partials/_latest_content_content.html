@@ -15,9 +15,6 @@
                 <div class="media-wrapper">
                     {{ media.embed_code|safe }}</iframe>
                 </div>
-                {% if content.embedded_media.all|length > 1%}
-                <p>...</p>
-            {% endif %}
             </div>
             {% endwith %}
         {% endif %}
