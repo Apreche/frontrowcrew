@@ -1,0 +1,24 @@
+
+{% if forum == "true" %}
+<div class="uk-section uk-flex flex-center content-details-cta cta-forum">
+{% else %} 
+<div class="uk-section uk-flex flex-center content-details-cta cta-no-forum">
+{% endif %}
+    <button class="uk-button btn-primary primary-left">Contribute Show Notes</button>
+    <div id="btn-available-wrapper">
+        <button id="btn-content-available" class="uk-button btn-secondary btn-content-available">Available Here <span uk-icon="chevron-down"></span></button>
+    </div>
+    <div id="cta-dropdown" class="cta-dropdown" uk-dropdown="pos: bottom-center; mode: click">
+        <ul>
+            {% if content.podcast_episode %}
+            <li><div class="dropdown-link-wrapper"><a href="{{ content.podcast_episode.enclosure.url }}" download>Download mp3</div></a></li>
+            {% endif %}
+            <li><div class="dropdown-link-wrapper"><a href="">Spotify</div></a></li>
+            <li><div class="dropdown-link-wrapper"><a href="">iTunes</div></a></li>
+            <li><div class="dropdown-link-wrapper"><a href="">YouTube</div></a></li>
+    </div>
+    {% if forum == "true" %}
+    <button class="uk-button btn-primary primary-right btn-forum-link">
+        {% include "./_forum_threads.html" %}
+    {% endif %}
+</div>

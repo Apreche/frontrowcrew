@@ -118,10 +118,12 @@ nav{
     }
 }
 
-img.uk-logo{
-    max-height: 100%;
-    cursor: pointer;
-    max-width: 50vw;
+header{
+    img.uk-logo{
+        max-height: 100%;
+        cursor: pointer;
+        max-width: 50vw;
+    }
 }
 
 .burger{
@@ -146,11 +148,12 @@ img.uk-logo{
 }
 
 /** Search form **/
-form.uk-search{
+#site-search{
     color: c.$gold;
     border: 1px solid c.$gold;
-    width: 100%;
+    width: calc(100% - 2px);
     font-family: f.$serif-font;
+    padding: 3px 0px;
     span{
         padding-left: 5px;
         svg{

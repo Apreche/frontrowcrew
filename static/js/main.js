@@ -176,3 +176,31 @@ volSlider.addEventListener('input', function (ev) {
   volControl(ev)
   showSliderBefore(ev.target)
 })
+
+/* Fix for Available Button */
+const abw = document.getElementById('btn-available-wrapper')
+const aBtn = document.getElementById('btn-content-available')
+let clickState = 'false';
+aBtn.setAttribute('click-state', clickState)
+
+abw.addEventListener(
+  'click',
+  function () {
+    if (clickState === 'false') {
+      clickState = 'true'
+    }
+    else {
+      aBtn.blur()
+      clickState = 'false'
+    }
+    aBtn.setAttribute('click-state', clickState)
+  }
+)
+
+abw.addEventListener(
+  'focusout',
+  function () {
+    clickState = 'false'
+    aBtn.setAttribute('click-state', 'false')
+  }
+)

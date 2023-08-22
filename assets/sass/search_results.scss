@@ -9,6 +9,10 @@
     }
 }
 
+.search-show-name{
+    margin: 0px;
+}
+
 .result-info{
     padding: 15px;
     border-left: none;
@@ -27,13 +31,27 @@
         }
     }
     @media(min-width: bp.$s){
-        &:first-child{
-            margin-bottom: 5px;
-        }
         &:nth-child(n+2):nth-child(n-1){
             margin-top: 5px;
             margin-bottom: 5px;
         }     
+    }
+}
+
+.list-subsection:first-child{
+    @media(min-width: bp.$s){
+        margin-bottom: 1px;
+        .result-title{
+            margin-bottom: -1px;
+            padding-bottom: 11px;
+        }
+        .result-info{
+            margin-top: 0px;
+            margin-bottom: 1px;
+        }
+        &::before{
+            z-index: 2;
+        }
     }
 }
 
@@ -52,6 +70,8 @@
 
 .search-forum-link{
     display: block;
+    margin-left: auto;
+    margin-right: auto;
     @media(min-width: bp.$s){
         float: right;
         &.search-forum-link-s + .forum-dropdown{
