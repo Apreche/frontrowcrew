@@ -86,18 +86,18 @@ files = [
 
 [[package]]
 name = "boto3"
-version = "1.28.29"
+version = "1.28.32"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.7"
 files = [
-    {file = "boto3-1.28.29-py3-none-any.whl", hash = "sha256:7b8e7deee9f665612b3cd7412989aaab0337d8006a0490a188c814af137bd32d"},
-    {file = "boto3-1.28.29.tar.gz", hash = "sha256:1ab375c231547db4c9ce760e29cbe90d0341fe44910571b1bc4967a72fd8276f"},
+    {file = "boto3-1.28.32-py3-none-any.whl", hash = "sha256:ed787f250ce2562c7744395bdf32b5a7bc9184126ef50a75e97bcb66043dccf3"},
+    {file = "boto3-1.28.32.tar.gz", hash = "sha256:b505faa126db84e226f6f8d242a798fae30a725f0cac8a76c6aca9ace4e8eb28"},
 ]
 
 [package.dependencies]
-botocore = ">=1.31.29,<1.32.0"
+botocore = ">=1.31.32,<1.32.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.6.0,<0.7.0"
 
@@ -106,14 +106,14 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.31.29"
+version = "1.31.32"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
 python-versions = ">= 3.7"
 files = [
-    {file = "botocore-1.31.29-py3-none-any.whl", hash = "sha256:d3dc422491b3a30667f188f3434541a1dd86d6f8ed7f98ca26e056ae7d912c85"},
-    {file = "botocore-1.31.29.tar.gz", hash = "sha256:71b335a47ee061994ac12f15ffe63c5c783cb055dc48079b7d755a46b9c1918c"},
+    {file = "botocore-1.31.32-py3-none-any.whl", hash = "sha256:8992ac186988c4b4cc168e8e479e9472da1442b193c1bf7c9dcd1877ec62d23c"},
+    {file = "botocore-1.31.32.tar.gz", hash = "sha256:7a07d8dc8cc47bf23af39409ada81f388eb78233e1bb2cde0c415756da753664"},
 ]
 
 [package.dependencies]
@@ -643,19 +643,18 @@ Django = ">=3.2"
 
 [[package]]
 name = "django-timezone-field"
-version = "5.1"
+version = "6.0"
 description = "A Django app providing DB, form, and REST framework fields for zoneinfo and pytz timezone objects."
 category = "main"
 optional = false
-python-versions = ">=3.7,<4.0"
+python-versions = ">=3.8,<4.0"
 files = [
-    {file = "django_timezone_field-5.1-py3-none-any.whl", hash = "sha256:16ca9955a4e16064e32168b1a0d1cdb2839679c6cb56856c1f49f506e2ca4281"},
-    {file = "django_timezone_field-5.1.tar.gz", hash = "sha256:73fc49519273cd5da1c7f16abc04a4bcad87b00cc02968d0d384c0fecf9a8a86"},
+    {file = "django_timezone_field-6.0-py3-none-any.whl", hash = "sha256:49f62f90f44e93043c5fdb1d3c45847f688c308aeaa93d61595ba38ec1cd8b59"},
+    {file = "django_timezone_field-6.0.tar.gz", hash = "sha256:b0c6faf495cc22b5a8367250b9a13929c9149273e42ae8ae04e5f6e4245d488f"},
 ]
 
 [package.dependencies]
-Django = ">=2.2,<3.0.0 || >=3.2.0,<5.0"
-pytz = "*"
+Django = ">=3.2,<5.0"
 
 [[package]]
 name = "docutils"
