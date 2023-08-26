@@ -33,6 +33,33 @@ class HomepageTests(utils.FRCTestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
+    def test_homepage_content(self):
+        url = urls.reverse("homepage")
+        expected_latest_book_club = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            show__slug="book-club"
+        )
+        expected_latest_news = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            show__slug="news"
+        )
+        expected_latest_content = factories.ContentFactory(
+            is_published=True,
+            show__is_published=True,
+            show__slug="geeknights"
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+        result_latest_book_club = response.context.get("latest_book", None)
+        self.assertEqual(expected_latest_book_club, result_latest_book_club)
+        result_latest_news = response.context.get("latest_news", None)
+        self.assertEqual(expected_latest_news, result_latest_news)
+        result_latest_content = response.context.get("latest_content", None)
+        self.assertEqual(expected_latest_content, result_latest_content)
+
 
 @test.override_settings(
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",

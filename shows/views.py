@@ -12,10 +12,7 @@ from . import models
 def homepage(request):
     """The Homepage"""
     template_name = "shows/homepage.html"
-    try:
-        latest_content = models.Content.published.latest()
-    except models.Content.DoesNotExist:
-        latest_content = None
+
     try:
         latest_book_club = models.Content.published.filter(
             show__slug="book-club"
@@ -24,12 +21,24 @@ def homepage(request):
         ).latest()
     except models.Content.DoesNotExist:
         latest_book_club = None
+
     try:
         latest_news = models.Content.published.filter(
             show__slug="news"
         ).latest()
     except models.Content.DoesNotExist:
         latest_news = None
+
+    try:
+        latest_contents = models.Content.published.all()
+        if latest_book_club:
+            latest_contents = latest_contents.exclude(id=latest_book_club.id)
+        if latest_news:
+            latest_contents = latest_contents.exclude(id=latest_news.id)
+        latest_content = latest_contents.latest()
+    except models.Content.DoesNotExist:
+        latest_content = None
+
     context = {
         "latest_content": latest_content,
         "latest_book": latest_book_club,
