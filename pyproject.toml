@@ -34,7 +34,7 @@ tqdm = "^4.64.1"
 flower = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
-ipython = "^8.3.0"
+ipython = "^8.15.0"
 ipdb = "^0.13.9"
 Werkzeug = "^2.2.3"
 coverage = "^7.0.5"
