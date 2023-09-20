@@ -7,7 +7,6 @@
         }
     },
     "terminal.integrated.defaultProfile.linux": "bash",
-    "python.terminal.activateEnvironment": true,
     "terminal.integrated.profiles.linux": {
         "django": {
             "path": "poetry",
