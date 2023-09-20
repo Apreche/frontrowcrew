@@ -7,8 +7,9 @@ from media import models as media_models
 
 
 class Command(BaseCommand):
+    help = "Make sure all the podcast enclosure MP3s are backed up"
+
     def handle(self, *args, **options) -> None:
-        help = "Make sure all the podcast enclosure MP3s are backed up"
 
         enclosures = podcast_models.PodcastEnclosure.objects.filter(
             type=podcast_models.PodcastEnclosure.EnclosureType.MP3,
