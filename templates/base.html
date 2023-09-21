@@ -9,6 +9,11 @@
     <script src="{% static "vendor/js/uikit-core.min.js" %}"></script>
     <script src="{% static "vendor/js/uikit-icons.min.js" %}"></script>
     {% block extrahead %}{% endblock extrahead %}
+    {% block opengraph %}
+    <meta property="og:site_name" content="Front Row Crew" />
+    <meta property="og:type" content="website" />
+    {% block opengraphextra %}{% endblock opengraphextra %}
+    {% endblock opengraph %}
   </head>
   <body>
     {% block body %}
