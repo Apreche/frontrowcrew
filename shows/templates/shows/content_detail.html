@@ -3,7 +3,7 @@
 {% block title %}{{ content.title }} | {{ show.title }}{% endblock title %}
 {% block opengraphextra %}
     <meta property="og:title" content="{{ content.title }}" />
-    <meta property="og:description" content="{{ content.rendered_html|striptags }}"
+    <meta property="og:description" content="{{ content.rendered_html|striptags }}" />
     {% if content.image %}
         <meta property="og:image" content="{{ content.image.url }}" />
     {% elif content.show.logo %}
