@@ -12,6 +12,7 @@
     {% block opengraph %}
     <meta property="og:site_name" content="Front Row Crew" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
     {% block opengraphextra %}{% endblock opengraphextra %}
     {% endblock opengraph %}
   </head>
