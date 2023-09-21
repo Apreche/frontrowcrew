@@ -3,7 +3,7 @@
 {% block title %}Homepage{% endblock %}
 {% block opengraphextra %}
 <meta property="og:title" content="Homepage" />
-<meta property="og:image" content="{% static "img/large_logo.svg" %}" />
+<meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static "img/large_logo.svg" %}" />
 {% endblock opengraphextra %}
 
 {% block content %}
