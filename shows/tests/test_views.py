@@ -38,7 +38,8 @@ class HomepageTests(utils.FRCTestCase):
         expected_latest_book_club = factories.ContentFactory(
             is_published=True,
             show__is_published=True,
-            show__slug="book-club"
+            show__slug="book-club",
+            podcast_episode=None,
         )
         expected_latest_news = factories.ContentFactory(
             is_published=True,
