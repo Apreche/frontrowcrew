@@ -1,8 +1,16 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}{{ content.title }} | {{ show.title }}{% endblock title %}
 {% block opengraphextra %}
     <meta property="og:title" content="{{ content.title }}" />
     <meta property="og:description" content="{{ content.rendered_html|striptags }}"
+    {% if content.image %}
+        <meta property="og:image" content="{{ content.image.url }}" />
+    {% elif content.show.logo %}
+        <meta property="og:image" content="{{ content.show.logo.url }}" />
+    {% else %}
+        <meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static "img/large_logo.svg" %}" />
+    {% endif %}
 {% endblock opengraphextra %}
 {% block extrahead %}
 {% comment "TODO" %}
