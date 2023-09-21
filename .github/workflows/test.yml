@@ -71,3 +71,6 @@ jobs:
       - name: Run Django tests
         run: |
           poetry run python manage.py test --shuffle --parallel auto
+      - name: Verify collectstatic is working
+        run: |
+          poetry run python manage.py collectstatic -v3 --noinput
