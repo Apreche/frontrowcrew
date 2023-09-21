@@ -1,5 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Homepage{% endblock %}
+{% block opengraphextra %}
+<meta property="og:title" content="Homepage" />
+<meta property="og:image" content="{% static "img/large_logo.svg" %}" />
+{% endblock opengraphextra %}
 
 {% block content %}
 <div class="hero">
