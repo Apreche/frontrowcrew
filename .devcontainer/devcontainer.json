@@ -15,7 +15,12 @@
 		"BETAFRONTROWCREW_DB_NAME": "betafrc",
 		"BETAFRONTROWCREW_DB_USER": "betafrc",
 		"BETAFRONTROWCREW_DB_PASSWORD": "betafrc",
-		"BETAFRONTROWCREW_MEMCACHED_SOCKET": "memcached:11211"
+		"BETAFRONTROWCREW_MEMCACHED_SOCKET": "memcached:11211",
+		"PGHOST": "db",
+		"PGDATABASE": "betafrc",
+		"PGUSER": "betafrc",
+		"PGPASSWORD": "betafrc",
+		"PGPORT": "5432"
 	},
 	"postCreateCommand": "poetry install --no-ansi --no-root",
 	"customizations": {
