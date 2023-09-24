@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block title %}{{ show.title }}{% endblock title %}
+{% block opengraphextra %}
+    <meta property="og:title" content="{{ show.title }}" />
+    {% if show.description %}
+    <meta property="og:description" content="{{ show.description }}" />
+    {% endif %}
+    {% if show.logo %}
+    <meta property="og:image" content="{{ show.logo.url }}" />
+    {% endif %}
+{% endblock opengraphextra %}
 {% block extrahead %}
 {% comment "TODO" %}
 <link rel="canonical" href="{% url "show-detail" show.slug %}" />
