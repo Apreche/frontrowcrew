@@ -1,4 +1,5 @@
 import requests
+import tqdm
 from http import HTTPStatus
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
@@ -17,7 +18,7 @@ class Command(BaseCommand):
 
         upload_to = media_models.MP3.file.field.upload_to
 
-        for enclosure in enclosures:
+        for enclosure in tqdm.tqdm(enclosures):
             filename = requests.utils.urlparse(
                 enclosure.url
             ).path.split("/").pop()
