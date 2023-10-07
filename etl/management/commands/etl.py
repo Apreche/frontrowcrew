@@ -10,7 +10,7 @@ from django.core.management.base import BaseCommand
 from django.db import connection as django_db_connection
 from django.db import models as django_models
 
-from betafrontrowcrew.utils import db as db_utils
+from frontrowcrew.utils import db as db_utils
 from etl import py_steps
 from etl import utils as etl_utils
 

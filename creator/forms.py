@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 from pagedown.widgets import PagedownWidget
 from taggit import utils as taggit_utils
 
-from betafrontrowcrew import utils
+from frontrowcrew import utils
 from media import models as media_models
 from shows import models as show_models
 from podcasts import models as podcast_models

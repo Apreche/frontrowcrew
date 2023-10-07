@@ -1,8 +1,8 @@
-# betafrontrowcrew
+# frontrowcrew
 
-[![GitHub Super-Linter](https://github.com/Apreche/betafrontrowcrew/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![GitHub Super-Linter](https://github.com/Apreche/frontrowcrew/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
-This is the source code for the site [beta.frontrowcrew.com](https://beta.frontrowcrew.com). At some point it will be swapped over to [frontrowcrew.com](http://frontrowcrew.com).
+This is the source code for the site [frontrowcrew.com](https://frontrowcrew.com). At some point it will be swapped over to [frontrowcrew.com](http://frontrowcrew.com).
 
 ## Local Development
 
@@ -53,7 +53,3 @@ One of the configured CI steps is [GitHub Super-Linter](https://github.com/githu
 ### Testing
 
 The django tests will be run on every pull request. If any tests fail, the pull request will not be merged. If a pull request contains new Python/Django code that is not covered by at least minimal testing, it will not be merged.
-
-### Deployment
-
-Because we are still in the beta/development phase of the project, all pull requests that are merged into the main branch will immediately and automatically be deployed to [beta.frontrowcrew.com](https://beta.frontrowcrew.com). Once the project is live on frontrowcrew.com, this may change such that deployments only occurr when a new tagged release is created.

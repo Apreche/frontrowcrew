@@ -2,7 +2,7 @@ import celery
 from django import utils as django_utils
 from django import urls
 
-from betafrontrowcrew.utils import sites
+from frontrowcrew.utils import sites
 from creator import models
 
 

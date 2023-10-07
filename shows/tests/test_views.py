@@ -6,14 +6,14 @@ from http import HTTPStatus
 from django import test, urls
 from django.utils import timezone
 
-from betafrontrowcrew.tests import utils
+from frontrowcrew.tests import utils
 from shows import factories, models
 
 
 @test.override_settings(
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
-    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
@@ -65,7 +65,7 @@ class HomepageTests(utils.FRCTestCase):
 @test.override_settings(
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
-    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
@@ -117,7 +117,7 @@ class DisplayInNavTests(utils.FRCTestCase):
 @test.override_settings(
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
-    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
@@ -249,7 +249,7 @@ class ShowDetailTests(utils.FRCTestCase):
 @test.override_settings(
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
-    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
@@ -472,7 +472,7 @@ class ContentDetailTests(utils.FRCTestCase):
 @test.override_settings(
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
-    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
