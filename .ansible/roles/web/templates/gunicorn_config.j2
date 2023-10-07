@@ -1,8 +1,7 @@
 import multiprocessing
 
-worker_class = 'gthread'
-workers = multiprocessing.cpu_count() * 2 + 1
-threads = multiprocessing.cpu_count() * 2 + 1
+worker_class = 'sync'
+workers = (multiprocessing.cpu_count() * 2) + 1
 
 bind = ['unix:{{ gunicorn_socket }}']
 timeout = "{{ gunicorn_timeout }}"
