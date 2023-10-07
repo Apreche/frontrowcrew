@@ -65,13 +65,14 @@
                         <li><button type="button" class="header-button">Community</button>
                             <div class="header-dropdown-box" uk-dropdown="pos: bottom-justify; offset: 32; mode:click">
                                 <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
-                                    <li><a href="#">Forum</a></li>
-                                    <li><a href="#">Book Club</a></li>
-                                    <li><a href="#">Newsletter</a></li>
+                                    <li><a href="https://community.frontrowcrew.com">Forum</a></li>
+                                    <li><a href="https://newsletter.frontrowcrew.com">Newsletter</a></li>
+                                    <li><a href="mailto:geeknights@frontrowcrew.com">Email</a><li>
+                                    <li><a href="https://discord.gg/mAZbNh4kAr">Discord</a></li>
+                                    {% comment %}
                                     <li class="subnav-divider"></li>
                                     <li class="uk-nav-header subnav-header-line">Open Bounties</li>
-                                    <li><a href="#">Things of the Day</a></li>
-                                    <li><a href="#">Shownotes</a></li>
+                                    {% endcomment %}
                                 </ul>
                             </div>
                         </li>
@@ -102,15 +103,14 @@
                                 <div class="uk-child-width-1-2@s" uk-grid>
                                     <div>
                                         <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
-                                            <li><a href="#">Forum</a></li>
-                                            <li><a href="#">Book Club</a></li>
-                                            <li><a href="#">Newsletter</a></li>
+                                            <li><a href="https://community.frontrowcrew.com">Forum</a></li>
+                                            <li><a href="https://newsletter.frontrowcrew.com">Newsletter</a></li>
                                         </ul>
                                     </div>
                                     <div>
                                         <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
-                                            <li><a href="#">Things of the Day</a></li>
-                                            <li><a href="#">Shownotes</a></li>
+                                            <li><a href="mailto:geeknights@frontrowcrew.com">Email</a></li>
+                                            <li><a href="https://discord.gg/mAZbNh4kAr">Discord</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -127,39 +127,46 @@
     <footer>
         <div class="footer-wrapper">
             <ul class="uk-list uk-list-large footer-block footer-left">
-                <li><a href="#">Book Club</a></li>
-                <li><a href="#">Things of the Day</a></li>
-                <li><a href="#">Shownotes</a></li>
-                <li><a href="#">Newsletter</a></li>
+                <!--<li><a href="{% url "show-list" %}">All Shows</a></li>-->
             </ul>
             <ul class="uk-list uk-list-large footer-block footer-center">
-                <li><a href="#">Shows</a></li>
-                <li><a href="#">Forum</a></li>
-                <li><a href="#">News</a></li>
             </ul>
             <div class="footer-block footer-social">
+                {% comment %}
                 <text>Contact</text>
                     <ul class="social-icons">
                         <li><a href="#"><img src="{% static "icons/gmail.svg" %}" uk-svg></a></li>
                         <li><a href="#"><img src="{% static "icons/facebook.svg" %}" uk-svg></a></li>
                         <li><a href="#"><img src="{% static "icons/twitter.svg" %}" uk-svg></a></li>
                     </ul>
+                {% endcomment %}
+
+                </ul>
 
                 <text>Subscribe</text>
                     <ul class="social-icons">
-                        <li><a href="#"><img src="{% static "icons/spotify.svg" %}" uk-svg></a></li>
-                        <li><a href="#"><img src="{% static "icons/rss.svg" %}" uk-svg></a></li>
-                        <li><a href="#"><img src="{% static "icons/youtube.svg" %}" uk-svg></a></li>
-                        <li><a href="#"><img src="{% static "icons/apple.svg" %}" uk-svg></a></li>
+                        <li><a href="{% url "show-podcast-rss" "geeknights"%}"><img src="{% static "icons/rss.svg" %}" uk-svg></a></li>
+                        <li><a href="https://www.patreon.com/GeekNights"><img src="{% static "icons/patreon.svg" %}" uk-svg></a></li>
+                        <li><a href="https://podcasts.apple.com/us/podcast/geeknights-with-rym-scott/id92729687"><img src="{% static "icons/apple.svg" %}" uk-svg></a></li>
+                        <li><a href="https://www.youtube.com/user/geeknightsrym"><img src="{% static "icons/youtube.svg" %}" uk-svg></a></li>
+                        <li><a href="https://open.spotify.com/show/32un3FYm8N8yGgWDTlOUvN?si=d1e8c8cb6ea64260"><img src="{% static "icons/spotify.svg" %}" uk-svg></a></li>
+                        {% comment %}
                         <li><a href="#"><img src="{% static "icons/instagram.svg" %}" uk-svg></a></li>
+                        {% endcomment %}
                     </ul>
+                    {% comment %}
                 <text>Support</text>
                     <ul class="social-icons">
-                        <li><a href="#"><img src="{% static "icons/patreon.svg" %}" uk-svg></a></li>
                     </ul>
+                    {% endcomment %}
             </div>
         </div>
-        <div id="license"><span><img src="{% static "icons/creative-commons.svg" %}" uk-svg>3.0</span></div>
+        <div id="license" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+        <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1"
+    target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            <span><img src="{% static "icons/creative-commons.svg" %}" uk-svg>BY 4.0</span>
+        </a>
+        </div>
     </footer>
     {% endblock body %}
     <script src="{% static "js/main.js" %}"></script>
