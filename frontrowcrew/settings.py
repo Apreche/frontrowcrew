@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = utils.str_to_bool(os.environ.get("FRONTROWCREW_DEBUG", "True"))
+DEBUG = utils.str_to_bool(os.environ.get("FRONTROWCREW_DEBUG", "False"))
 
 
 ALLOWED_HOSTS = []

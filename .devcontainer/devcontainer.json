@@ -1,65 +1,66 @@
 {
-	"name": "Django Dev",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
-	"workspaceFolder": "/workspace",
-	"remoteEnv": {
-		"VIRTUAL_ENV_DISABLE_PROMPT": "1",
-		"AWS_ACCESS_KEY_ID": "minioadmin",
-		"AWS_SECRET_ACCESS_KEY": "minioadminpass",
-		"FRONTROWCREW_AWS_S3_ENDPOINT_URL": "http://minio:9000",
-		"FRONTROWCREW_AWS_S3_CUSTOM_DOMAIN": "localhost:9000/frcdevbucket",
-		"FRONTROWCREW_AWS_S3_URL_PROTOCOL": "http:",
-		"FRONTROWCREW_AWS_STORAGE_BUCKET_NAME": "frcdevbucket",
-		"FRONTROWCREW_DB_HOST": "db",
-		"FRONTROWCREW_DB_NAME": "frc",
-		"FRONTROWCREW_DB_USER": "frc",
-		"FRONTROWCREW_DB_PASSWORD": "frc",
-		"FRONTROWCREW_MEMCACHED_SOCKET": "memcached:11211",
-		"PGHOST": "db",
-		"PGDATABASE": "frc",
-		"PGUSER": "frc",
-		"PGPASSWORD": "frc",
-		"PGPORT": "5432"
-	},
-	"postCreateCommand": "poetry install --no-ansi --no-root",
-	"customizations": {
-		"vscode": {
-			"settings": {
-				"python.defaultInterpreterPath": "/usr/local/bin/python"
-			},
-			"extensions": [
-				"ms-python.python",
-				"ms-python.flake8",
-				"ms-python.autopep8",
-				"ms-python.vscode-pylance",
-				"batisteo.vscode-django"
-			]
-		}
-	},
-	"forwardPorts": [
-		8000,
-		"db:5432",
-		"minio:9000",
-		"minio:9001"
-	],
-	"portsAttributes": {
-		"8000": {
-			"label": "Django Dev Server",
-			"onAutoForward": "notify"
-		},
-		"db:5432": {
-			"label": "Postgres Dev Server",
-			"onAutoForward": "notify"
-		},
-		"minio:9000": {
-			"label": "Minio Dev API",
-			"onAutoForward": "notify"
-		},
-		"minio:9001": {
-			"label": "Minio Dev Console",
-			"onAutoForward": "notify"
-		}
-	},
-	"remoteUser": "vscode"
+    "name": "Django Dev",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "remoteEnv": {
+        "VIRTUAL_ENV_DISABLE_PROMPT": "1",
+        "AWS_ACCESS_KEY_ID": "minioadmin",
+        "AWS_SECRET_ACCESS_KEY": "minioadminpass",
+        "FRONTROWCREW_AWS_S3_ENDPOINT_URL": "http://minio:9000",
+        "FRONTROWCREW_AWS_S3_CUSTOM_DOMAIN": "localhost:9000/frcdevbucket",
+        "FRONTROWCREW_AWS_S3_URL_PROTOCOL": "http:",
+        "FRONTROWCREW_AWS_STORAGE_BUCKET_NAME": "frcdevbucket",
+        "FRONTROWCREW_DB_HOST": "db",
+        "FRONTROWCREW_DB_NAME": "frc",
+        "FRONTROWCREW_DB_USER": "frc",
+        "FRONTROWCREW_DB_PASSWORD": "frc",
+        "FRONTROWCREW_MEMCACHED_SOCKET": "memcached:11211",
+        "FRONTROWCREW_DEBUG": "true",
+        "PGHOST": "db",
+        "PGDATABASE": "frc",
+        "PGUSER": "frc",
+        "PGPASSWORD": "frc",
+        "PGPORT": "5432"
+    },
+    "postCreateCommand": "poetry install --no-ansi --no-root",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.flake8",
+                "ms-python.autopep8",
+                "ms-python.vscode-pylance",
+                "batisteo.vscode-django"
+            ]
+        }
+    },
+    "forwardPorts": [
+        8000,
+        "db:5432",
+        "minio:9000",
+        "minio:9001"
+    ],
+    "portsAttributes": {
+        "8000": {
+            "label": "Django Dev Server",
+            "onAutoForward": "notify"
+        },
+        "db:5432": {
+            "label": "Postgres Dev Server",
+            "onAutoForward": "notify"
+        },
+        "minio:9000": {
+            "label": "Minio Dev API",
+            "onAutoForward": "notify"
+        },
+        "minio:9001": {
+            "label": "Minio Dev Console",
+            "onAutoForward": "notify"
+        }
+    },
+    "remoteUser": "vscode"
 }
