@@ -69,3 +69,8 @@ WHERE id NOT IN (
 
 -- delete bad tags entirely
 DELETE from taggit_tag WHERE slug like '%_1';
+
+-- Set times on news to '20:00' if they are '00:00'
+UPDATE news_news
+SET pub_date = substr(pub_date, 0, 12) || '20:00:00'
+WHERE substr(pub_date,12) = '00:00:00';
