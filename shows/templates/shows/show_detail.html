@@ -10,6 +10,11 @@
     {% endif %}
 {% endblock opengraphextra %}
 {% block extrahead %}
+{% if show.podcast %}
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for {{show.title}}" href="{% url "show-podcast-rss" show.slug %}"
+{% else %}
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for {{show.title}}" href="{% url "show-rss" show.slug %}"
+{% endif %}
 {% comment "TODO" %}
 <link rel="canonical" href="{% url "show-detail" show.slug %}" />
 {% endcomment %}
