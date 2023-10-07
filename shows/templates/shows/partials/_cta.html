@@ -4,8 +4,19 @@
 {% else %} 
 <div class="uk-section uk-flex flex-center content-details-cta cta-no-forum">
 {% endif %}
+    {% comment %}
     <button class="uk-button btn-primary primary-left">Contribute Show Notes</button>
+    {% endcomment %}
+    {% if content.podcast_episode %}
     <div id="btn-available-wrapper">
+        <a href="{{ content.podcast_episode.enclosure.url }}" download="{{ content.podcast_episode.enclosure.filename }}">
+            <button id="btn-content-available" class="uk-button btn-secondary btn-content-available">Download MP3</button>
+        </a>
+    </div>
+    {% endif %}
+    {% comment %}
+    <div id="btn-available-wrapper">
+
         <button id="btn-content-available" class="uk-button btn-secondary btn-content-available">Available Here <span uk-icon="chevron-down"></span></button>
     </div>
     <div id="cta-dropdown" class="cta-dropdown" uk-dropdown="pos: bottom-center; mode: click">
@@ -17,6 +28,7 @@
             <li><div class="dropdown-link-wrapper"><a href="">iTunes</div></a></li>
             <li><div class="dropdown-link-wrapper"><a href="">YouTube</div></a></li>
     </div>
+    {% endcomment %}
     {% if forum == "true" %}
     <button class="uk-button btn-primary primary-right btn-forum-link">
         {% include "./_forum_threads.html" %}

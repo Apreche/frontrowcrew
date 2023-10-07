@@ -1,3 +1,4 @@
+from urllib import parse as urllib_parse
 from django import urls
 from django.core import exceptions
 from django.utils.translation import gettext_lazy as _
@@ -163,6 +164,11 @@ class PodcastEnclosure(models.Model):
         choices=EnclosureType.choices,
         default=EnclosureType.MP3,
     )
+
+    @property
+    def filename(self):
+        url_path = urllib_parse.urlparse(self.url).path
+        return url_path.rpartition("/")[-1]
 
     def __str__(self):
         return self.url
