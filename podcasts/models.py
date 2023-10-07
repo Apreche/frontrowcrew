@@ -71,8 +71,8 @@ class Podcast(models.Model):
         height_field="itunes_image_height",
         width_field="itunes_image_width",
     )
-    itunes_image_height = models.PositiveIntegerField()
-    itunes_image_width = models.PositiveIntegerField()
+    itunes_image_height = models.PositiveIntegerField(blank=True, null=True, default=None)
+    itunes_image_width = models.PositiveIntegerField(blank=True, null=True, default=None)
     itunes_primary_category = models.ForeignKey(
         iTunesCategory, on_delete=models.PROTECT,
         related_name="+",
