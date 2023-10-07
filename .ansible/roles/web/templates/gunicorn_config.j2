@@ -1,12 +1,9 @@
 import multiprocessing
-
 worker_class = 'sync'
 workers = (multiprocessing.cpu_count() * 2) + 1
 
 bind = ['unix:{{ gunicorn_socket }}']
 timeout = "{{ gunicorn_timeout }}"
-graceful_timeout = "{{ gunicorn_timeout }}"
-keepalive = "{{ gunicorn_keepalive }}"
 capture_ouput = True
 
 chdir = "{{ project_source_dir }}"

@@ -8,6 +8,5 @@ gunicorn_error_log: "{{ gunicorn_log_dir }}/gunicorn_error.log"
 gunicorn_pid_file: "{{ project_runtime_dir }}/gunicorn/gunicorn.pid"
 gunicorn_socket: "{{ project_runtime_dir }}/gunicorn.sock"
 gunicorn_capture_output: True
-gunicorn_timeout: 30
-gunicorn_keepalive: 10
+gunicorn_timeout: 120
 ...
