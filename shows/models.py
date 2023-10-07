@@ -284,7 +284,7 @@ class RelatedLink(models.Model):
     title = models.TextField()
     description = models.TextField(blank=True, default="")
     url = models.URLField()
-    author = models.TextField()
+    author = models.TextField(blank=True, default="")
     error = models.BooleanField(default=False)
 
     def get_absolute_url(self):
