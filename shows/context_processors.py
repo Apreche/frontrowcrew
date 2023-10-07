@@ -14,7 +14,7 @@ def navigation(request):
 
     global_nav_shows_list = cache.get_or_set(
         'global_nav_show_list',
-        models.Show.published.filter(display_in_nav=True)
+        models.Show.published.filter(display_in_nav=True).order_by("-priority")
     )
     return {
         "nav_shows": global_nav_shows_list,

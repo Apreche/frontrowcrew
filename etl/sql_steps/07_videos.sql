@@ -13,7 +13,7 @@ WITH video_show_map AS (
         vv.id AS old_id,
         trim(vv.title) AS title,
         trim(vv.slug) AS slug,
-        (vv.pub_date + interval '1' day) at time zone 'utc' AS pub_date,
+        (vv.pub_date + interval '20 hours') AT TIME ZONE 'America/New_York' AS pub_date,
         vsm.new_id AS show_id,
         trim(vv.description) AS description,
         trim(vv._description_rendered) AS rendered_description,

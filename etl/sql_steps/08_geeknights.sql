@@ -7,7 +7,7 @@ WITH old_podcast_episodes AS (
         op.id AS old_podcast_episode_id,
         trim(op.title) AS title,
         trim(op.slug) AS slug,
-        (op.pub_date + interval '1' day) at time zone 'utc' AS pub_date,
+        (op.pub_date + interval '20 hours') AT TIME ZONE 'America/New_York' AS pub_date,
         op.showid AS catalog_number,
         op.show_id AS show_id,
         trim(op.body) AS original_content,
