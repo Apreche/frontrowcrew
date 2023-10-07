@@ -127,9 +127,15 @@
     <footer>
         <div class="footer-wrapper">
             <ul class="uk-list uk-list-large footer-block footer-left">
-                <!--<li><a href="{% url "show-list" %}">All Shows</a></li>-->
+                {% for nav_show in nav_shows %}
+                <li><a href="{% url 'show-detail' nav_show.slug %}">{{ nav_show.title }}</a></li>
+                {% endfor %}
             </ul>
             <ul class="uk-list uk-list-large footer-block footer-center">
+                <li><a href="https://community.frontrowcrew.com">Forum</a></li>
+                <li><a href="https://newsletter.frontrowcrew.com">Newsletter</a></li>
+                <li><a href="mailto:geeknights@frontrowcrew.com">Email</a><li>
+                <li><a href="https://discord.gg/mAZbNh4kAr">Discord</a></li>
             </ul>
             <div class="footer-block footer-social">
                 {% comment %}
@@ -140,8 +146,6 @@
                         <li><a href="#"><img src="{% static "icons/twitter.svg" %}" uk-svg></a></li>
                     </ul>
                 {% endcomment %}
-
-                </ul>
 
                 <text>Subscribe</text>
                     <ul class="social-icons">
