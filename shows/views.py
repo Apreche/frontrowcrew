@@ -104,12 +104,12 @@ def content_detail(request, show_slug, catalog_number, content_slug=None):
     if (content.slug != content_slug) or (show != content.show):
         return shortcuts.redirect(content, permanent=True)
     # Do not show similar content that is unpublished
-    similar_content = models.Content.published.filter(
-        id__in=[sc.id for sc in content.tags.similar_objects()]
-    )
+    # similar_content = models.Content.published.filter(
+    #     id__in=[sc.id for sc in content.tags.similar_objects()]
+    # )
     context = {
         "content": content,
-        "similar_content": similar_content,
+        # "similar_content": similar_content,
     }
     return shortcuts.render(request, template_name, context)
 
