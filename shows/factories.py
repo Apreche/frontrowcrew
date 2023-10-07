@@ -30,11 +30,17 @@ class ShowFactory(PublishableFactory):
             "has_description",
             "has_logo",
             "has_thumbnail",
+            "has_priority",
             "is_podcast",
         )
 
     title = factory.Faker("sentence", nb_words=4)
     slug = factory.LazyAttribute(lambda o: text.slugify(o.title)[:255])
+    has_priority = factory.Faker("boolean")
+    priority = factory.Maybe(
+        "has_priority",
+        factory.Faker("random_int", min=0, max=10)
+    )
     has_description = factory.Faker("boolean")
     description = factory.Maybe(
         "has_description",

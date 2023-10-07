@@ -42,6 +42,7 @@ class Show(Publishable):
     title = models.TextField()
     slug = models.SlugField(max_length=255)
     description = models.TextField(blank=True, default="")
+    priority = models.IntegerField(default=None, null=True, blank=True)
     logo = models.ImageField(
         upload_to="shows/logo/",
         height_field="logo_height",
