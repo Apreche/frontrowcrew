@@ -4,7 +4,7 @@ from django.core import exceptions
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models import Q, constraints
-from betafrontrowcrew import utils
+from frontrowcrew import utils
 
 
 class iTunesCategory(models.Model):

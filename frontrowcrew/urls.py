@@ -1,4 +1,4 @@
-"""betafrontrowcrew URL Configuration
+"""frontrowcrew URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -39,7 +39,7 @@ urlpatterns = [
     path("", include("shows.urls")),
 ] + static(
     getattr(settings, "MEDIA_URL", "/media/"),
-    document_root=getattr(settings, "MEDIA_ROOT", "/var/www/betafrontrowcrew/media/"),
+    document_root=getattr(settings, "MEDIA_ROOT", "/var/www/frontrowcrew/media/"),
 )
 
 if settings.DEBUG:

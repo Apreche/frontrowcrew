@@ -1,4 +1,4 @@
-"""global utils for betafrontrowcrew"""
+"""global utils for frontrowcrew"""
 from django.contrib.sites import models as sites_models
 from django.conf import settings
 

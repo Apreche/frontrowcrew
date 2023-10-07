@@ -9,7 +9,7 @@ from django.contrib.auth import models as auth_models
 from mutagen.mp3 import MP3 as mutagen_mp3
 from unittest import mock
 
-from betafrontrowcrew.tests import utils
+from frontrowcrew.tests import utils
 from creator import models as creator_models
 from creator import views as creator_views
 from media import factories as media_factories
@@ -22,7 +22,7 @@ from shows import models as show_models
 @test.override_settings(
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
-    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={

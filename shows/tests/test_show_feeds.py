@@ -6,7 +6,7 @@ from xml import etree
 
 from django import test, urls
 
-from betafrontrowcrew.tests import utils
+from frontrowcrew.tests import utils
 from podcasts.tests.utils import skip_if_invalid_rss_xml
 from .. import factories
 
@@ -14,7 +14,7 @@ from .. import factories
 @test.override_settings(
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
-    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={

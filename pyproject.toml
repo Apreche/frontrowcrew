@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "betafrontrowcrew"
+name = "frontrowcrew"
 version = "0.1.0"
 description = ""
 authors = ["Scott Rubin <apreche@frontrowcrew.com>"]

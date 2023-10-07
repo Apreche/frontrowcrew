@@ -7,8 +7,8 @@ from mutagen import mp3 as mutagen_mp3
 from django import test, urls
 from django import utils as django_utils
 
-from betafrontrowcrew import utils as frc_utils
-from betafrontrowcrew.tests import utils
+from frontrowcrew import utils as frc_utils
+from frontrowcrew.tests import utils
 from creator import factories
 from creator import tasks
 
@@ -16,7 +16,7 @@ from creator import tasks
 @test.override_settings(
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
-    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "betafrc_test_media"),
+    MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CELERY_TASK_ALWAYS_EAGER=True,
     CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={

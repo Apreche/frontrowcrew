@@ -1,4 +1,4 @@
-"""global utils for betafrontrowcrew"""
+"""global utils for frontrowcrew"""
 import uuid
 import http
 from django.http import response
