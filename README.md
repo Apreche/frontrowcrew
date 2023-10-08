@@ -2,54 +2,36 @@
 
 [![GitHub Super-Linter](https://github.com/Apreche/frontrowcrew/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
-This is the source code for the site [frontrowcrew.com](https://frontrowcrew.com). At some point it will be swapped over to [frontrowcrew.com](http://frontrowcrew.com).
+This is the source code for the site [frontrowcrew.com](https://frontrowcrew.com).
 
 ## Local Development
 
-To perform development tasks on this project there are a few possible dev environment setups possible. More may be added in the future.
+The architecture of this site is not too complex, but is comprised of quite a few components. The officially supported local development setup involves using [Docker](https://www.docker.com/), [VSCode](https://code.visualstudio.com/), and [Development Containers](https://containers.dev/).
 
-### Linux
-
-If coding in a plain old *nix environment, working on this project is not too difficult. First, make sure that a Python 3.8+ interpreter is installed and working. Make sure that [poetry](https://python-poetry.org/) has been installed using that Python interpreter. Then change to the directory where the project exists and run `poetry install`.
-
-That's it. The project should be ready to roll using an sqlite database locally. To enable the dev server or perform other Django tasks use commands such as
-
-```Python
-poetry run python manage.py runserver
-```
-
-To make life a little bit easier, there is a script in `bin/manage` that can be used as follows:
-
-```shell
-./bin/manage runserver
-```
+If you would like to work on this site with a different environment, then take a look inside the `.devcontainer` directory. Try your best to replicate the environment defined therein using the tools you prefer.
 
 ### VSCode
 
-This repository contains a [remote dev container](https://code.visualstudio.com/blogs/2020/07/01/containers-wsl) Docker configuration for VSCode.
+If you wish to use VSCode as suggested, development on this project is very easy. First, make sure that Docker is installed and functioning. Then install the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension in VSCode.
 
-To use this setup, first install [Docker Desktop](https://www.docker.com/products/docker-desktop), [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install), and [VSCode](https://code.visualstudio.com/).
+Once those are installed, open this project in VSCode. A prompt will appear asking if you would like to reopen the project in a container. Say yes. If the prompt does not appear you can go to the command palette and choose the option `Dev Containers: Rebuild and Reopen in Container`.
 
-Once all those things are installed, simply opening this project in VSCode should automatically bring up some prompts to install any required VSCode extensions.
+Once the container is successfully built, you are ready to get to work. The integrated VSCode terminal will automatically have the Python environment activated. That is the primary means of working with the project. [pgcli](https://www.pgcli.com/) is pre-configured. If you run it from the terminal, it will be automatically connected to the development database.
 
-Now there should be three options available under "Run and Debug". The first option will launch the django local development server. The second will execute the Django test framework. The third option will perform database migrations.
-
-That's all there is to it. Just start coding and use the three options as necessary.
+There are also two predefined launch profiles for the VSCode debugger. One of them will run a local web server. The other will run all of the Django unit tests.
 
 ## CI/CD
 
 This project is configured using [Djangogoboot](https://github.com/apreche/djangogoboot). This means it has a complete CI/CD pipeline powered by GitHub actions.
 
-For the most part, developers don't have to think about it since it is already setup and working. Just submit all new work as a pull request to the main branch, and the rest will take care of itself. There are, however, just a few things to be aware of.
+For the most part, developers don't have to think about it since it is already setup and working. Just submit all new work as a pull request to the main branch, and the rest will take care of itself. All code is tested and linted before it is merged. Any code that is merged is automatically deployed.
 
 ### Linting
 
-One of the configured CI steps is [GitHub Super-Linter](https://github.com/github/super-linter). Any pull request must pass the linter without error, or it will not be merged. It is highly recommended to run the Linter locally and fix all errors before submitting or updating a pull request. To do so, there is a handy script. This script requires docker to be setup and working properly.
+One of the configured CI steps is [GitHub Super-Linter](https://github.com/github/super-linter). Any pull request must pass the linter without error, or it will not be merged. It is highly recommended to incorporate equivalent linters into your programming environment to avoid a hassle.
 
-```shell
-./bin/lint
-```
+The default VSCode dev container configuration automatically enables an extension to use the [Ruff](https://github.com/astral-sh/ruff) Python linter. This guaratees that at least all the Python code is compliant.
 
 ### Testing
 
-The django tests will be run on every pull request. If any tests fail, the pull request will not be merged. If a pull request contains new Python/Django code that is not covered by at least minimal testing, it will not be merged.
+The django tests will be run on every pull request. If any tests fail, the pull request will not be merged. Bugfix patches should always have at least one test to guard against regression. New features should have at least a few basic tests to ensure they at least don't crash horribly.
