@@ -33,7 +33,17 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path(
         "robots.txt",
-        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
+        TemplateView.as_view(
+            template_name="robots.txt",
+            content_type="text/plain"
+        ),
+    ),
+    path(
+        "manifest.webmanifest",
+        TemplateView.as_view(
+            template_name="robots.txt",
+            content_type="application/manifest+json"
+        ),
     ),
     path("", include("legacy_redirects.urls")),
     path("", include("shows.urls")),
