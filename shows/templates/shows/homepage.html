@@ -3,10 +3,10 @@
 {% block title %}Homepage{% endblock %}
 {% block opengraphextra %}
 <meta property="og:title" content="Homepage" />
-<meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static "img/large_logo.svg" %}" />
+<meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static "img/logo.png" %}" />
 {% endblock opengraphextra %}
 {% block extrahead %}
-<link rel="alternate" type="application/rss+xml" title="RSS Feed for GeekNights" href="{% url "show-podcast-rss" "geeknights" %}"
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for GeekNights" href="{% url "show-podcast-rss" "geeknights" %}">
 {% endblock extrahead %}
 
 {% block content %}
