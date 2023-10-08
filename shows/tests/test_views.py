@@ -1,4 +1,5 @@
 import datetime
+import unittest
 import os
 import tempfile
 from http import HTTPStatus
@@ -421,6 +422,7 @@ class ContentDetailTests(utils.FRCTestCase):
         self.assertEqual(len(thing_response), 1)
         self.assertIn(thing, thing_response)
 
+    @unittest.skip("Similar content disabled until performance is improved")
     def test_similar_content(self):
         tech_anime_content = factories.ContentFactory(
             is_published=True,
