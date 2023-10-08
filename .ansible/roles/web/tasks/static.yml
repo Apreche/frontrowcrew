@@ -13,4 +13,22 @@
     cmd: "{{ virtualenv_python_bin }} {{ project_source_dir }}/manage.py collectstatic --noinput"
   environment: "{{ env_vars }}"
   become: yes
+
+- name: Collect icon and manifest files
+  ansible.builtin.copy:
+    src: :"{{ item }}"
+    dest: "{{ project_www_dir }}"
+    remote_src: true
+    owner: root
+    group: www-data
+    mode: '0664'
+  loop:
+    - "{{ project_source_dir }}/templates/robots.txt"
+    - "{{ project_source_dir }}/templates/manifest.webmanifest"
+    - "{{ project_source_dir }}/static/img/favicon.ico"
+    - "{{ project_source_dir }}/static/img/apple-touch-icon.png"
+    - "{{ project_source_dir }}/static/img/icon-192.png"
+    - "{{ project_source_dir }}/static/img/icon-512.png"
+    - "{{ project_source_dir }}/static/img/icon.svg"
+  become: yes
 ...
