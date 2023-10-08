@@ -9,7 +9,7 @@
     {% elif content.show.logo %}
     <meta property="og:image" content="{{ content.show.logo.url }}" />
     {% else %}
-    <meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static "img/large_logo.svg" %}" />
+    <meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static "img/logo.png" %}" />
     {% endif %}
     <meta name="publish_date" property="og:publish_date" content="{{ content.pub_time|date:"Y-m-d"  }}T{{content.pub_time|time:"H:i:sO"}}" />
 {% endblock opengraphextra %}
