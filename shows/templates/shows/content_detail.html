@@ -6,8 +6,8 @@
     <meta property="og:description" content="{{ content.rendered_html|striptags }}" />
     {% if content.image %}
     <meta property="og:image" content="{{ content.image.url }}" />
-    {% elif content.show.logo %}
-    <meta property="og:image" content="{{ content.show.logo.url }}" />
+    {% elif show.logo %}
+    <meta property="og:image" content="{{ show.logo.url }}" />
     {% else %}
     <meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static "img/logo.png" %}" />
     {% endif %}
@@ -15,35 +15,35 @@
 {% endblock opengraphextra %}
 {% block extrahead %}
 {% comment "TODO" %}
-<link rel="canonical" href="{% url "content-detail" content.show.slug content.catalog_number content.slug %}" />
+<link rel="canonical" href="{% url "content-detail" show.slug content.catalog_number content.slug %}" />
 {% endcomment %}
 {% endblock extrahead %}
 
 {% block content %}
 <div class="uk-section primary-section">
     <div class="content-view-container content-view-title-container">
-        <div class="content-wrapper{% if content.show.logo %}">{% else %} no-logo">{% endif %}
+        <div class="content-wrapper{% if show.logo %}">{% else %} no-logo">{% endif %}
             <div class="content-view-show-info">
-                {% if content.show.logo %}
-                <a href="{% url "show-detail" content.show.slug %}" class="show-logo-link">
+                {% if show.logo %}
+                <a href="{% url "show-detail" show.slug %}" class="show-logo-link">
                     <div class="show-logo-wrapper">
                         <img class="uk-logo content-view-show-logo" 
-                            src="{{ content.show.logo.url }}" 
-                            alt="{{ content.show.title }} Logo" 
-                            title="{{ content.show.title }}"
+                            src="{{ show.logo.url }}" 
+                            alt="creation_time{{ show.title }} Logo" 
+                            title="{{ show.title }}"
                             uk-svg
                         >
                     </div>
                     <div class="show-name">
-                        {% if content.show.parent_show %}
-                        <h3 class="content-view-parent-title">{{ content.show.parent_show.title }}: </h3>
+                        {% if show.parent_show %}
+                        <h3 class="content-view-parent-title">{{ show.parent_show.title }}: </h3>
                         {% endif %}
-                        <h3>{{ content.show.title }}</h3>
+                        <h3>{{ show.title }}</h3>
                     </div>
                 </a>
             {% else %}
-                <a href="{% url "show-detail" content.show.slug %}" class="show-logo-link">
-                    <h3 class="no-logo">{{ content.show.title }}</h3>
+                <a href="{% url "show-detail" show.slug %}" class="show-logo-link">
+                    <h3 class="no-logo">{{ show.title }}</h3>
                 </a>
             {% endif %}
             </div>
@@ -51,11 +51,11 @@
                 <div class="content-info-wrapper">
                     <div class="content-view-content-info">
                         <h1>{{ content.title }}</h1>
-                        <h3 class="card-date">{{ content.creation_time|date:"F j Y" }}</h3>
+                        <h3 class="card-date">{{ content.pub_time|date:"F j Y" }}</h3>
                         {% if content.tags.all %}
                         <ul class="tags-list">
                         {% for tag in content.tags.all %}
-                            <li><a class="tag" href="{% url "show-tag-filter" content.show.slug tag.slug %}">#{{ tag.name }}</a></li>
+                            <li><a class="tag" href="{% url "show-tag-filter" show.slug tag.slug %}">#{{ tag.name }}</a></li>
                         {% endfor %}
                         </ul>
                         {% endif %}
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 {% if content.podcast_episode %}
-                    {% include "./partials/_embedded_audio.html" with podcast=content.podcast_episode %}
+                    {% include "./partials/_embedded_audio.html" with audio_url=content.podcast_episode.enclosure.url %}
                 {% endif %}
             </div>
         </div>
@@ -75,11 +75,11 @@
         {% if content.embedded_media.all %}
             {% include "./partials/_embedded_video.html" %}
         {% endif %}
-        {% if content.things_of_the_day %}
+        {% if things_of_the_day %}
             <div class="content-view-totd">
                 <h3>&mdash; Things of the Day &mdash;</h3>
                 <ul class="uk-list">
-                    {% for thing in content.things_of_the_day %}
+                    {% for thing in things_of_the_day %}
                     <li>{{ thing.author }}:
                         <a href="{{ thing.url }}" alt="{{ thing.description }}"
                             {% if thing.error %}class="totd-error">(Broken Link)
@@ -90,9 +90,9 @@
                 </ul>
             </div>
         {% endif %}
-        {% if content.purchase_links %}
+        {% if purchase_links %}
             <ul class="purchase-links">
-                {% for link in content.purchase_links %}
+                {% for link in purchase_links %}
                 <li><a href="{{ link.url }}" alt="{{ link.description }}"
                     {% if link.error %}class="link-error">(Broken Link)
                     {% else %}>
@@ -103,7 +103,7 @@
         {% endif %}
     </div>
 </div>
-{% if content.forum_threads %}
+{% if forum_threads %}
     {% include "./partials/_cta.html" with content=content forum="true" %}
 {% else %}
     {% include "./partials/_cta.html" with content=content %}
@@ -122,7 +122,7 @@
 {% endif %}
 <div class="uk-container uk-text-center">
     <button class="uk-button btn-primary btn-content-archive">
-        <a class = "a-btn" href="{% url "show-detail" content.show.slug %}"><h2>Full {{ content.show.title }} Archive</h2></a>
+        <a class = "a-btn" href="{% url "show-detail" show.slug %}"><h2>Full {{ show.title }} Archive</h2></a>
     </button>
 </div>
 

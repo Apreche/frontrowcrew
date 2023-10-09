@@ -174,9 +174,8 @@ class ShowDetailTests(utils.FRCTestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         # published content should be in result
         self.assertIn("page", response.context)
-        page = response.context.get("page")
-        objects = page.object_list
-        self.assertIn(content, objects)
+        self.assertIn("latest_content", response.context)
+        self.assertEqual(content, response.context.get("latest_content"))
         # unpublish the content
         tomorrow = timezone.now() + datetime.timedelta(days=1)
         content.pub_time = tomorrow
@@ -184,16 +183,20 @@ class ShowDetailTests(utils.FRCTestCase):
         # unpublishec content should no longer be in result
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        page = response.context.get("page")
-        objects = page.object_list
-        self.assertNotIn(content, objects)
+        self.assertNotEqual(content, response.context.get("latest_content"))
+        self.assertIsNone(response.context.get("latest_content"))
 
     def test_child_show_detail(self):
         """
         Child show content should appear on list page of immediate parent show
         """
-        content = factories.ContentFactory(is_published=True, show__is_published=True)
-        child_show = content.show
+        latest_content = factories.ContentFactory(is_published=True, show__is_published=True)
+        child_show = latest_content.show
+        other_content = factories.ContentFactory(
+            is_published=True,
+            show=child_show,
+            pub_time=latest_content.pub_time - datetime.timedelta(days=1)
+        )
         show = factories.ShowFactory(is_published=True)
         child_show.parent_show = show
         child_show.save()
@@ -203,7 +206,8 @@ class ShowDetailTests(utils.FRCTestCase):
         self.assertIn("page", response.context)
         page = response.context.get("page")
         objects = page.object_list
-        self.assertIn(content, objects)
+        self.assertEqual(latest_content, response.context["latest_content"])
+        self.assertIn(other_content, objects)
 
     def test_show_detail_tagged(self):
         techanime_content = factories.ContentFactory(
@@ -240,11 +244,20 @@ class ShowDetailTests(utils.FRCTestCase):
             for tag in tags.split("+"):
                 self.assertIn(tag, tag_context)
             page = response.context.get("page")
+            latest_content = response.context.get("latest_content")
             content_context = page.object_list
             self.assertNotIn(notag_content, content_context)
-            self.assertEqual(len(contents), len(content_context))
+            # subtract 1 for the latest content which is removed
+            self.assertEqual(len(contents) - 1, len(content_context))
             for content in contents:
-                self.assertIn(content, content_context)
+                self.assertTrue(
+                    any(
+                        [
+                            content in content_context,
+                            content == latest_content,
+                        ]
+                    )
+                )
 
 
 @test.override_settings(
@@ -282,7 +295,7 @@ class ContentDetailTests(utils.FRCTestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertIn("content", response.context)
         self.assertEqual(response.context["content"], content)
-        things = response.context["content"].things_of_the_day
+        things = response.context["things_of_the_day"]
         self.assertIn(thing, things)
 
     def test_content_detail_404(self):

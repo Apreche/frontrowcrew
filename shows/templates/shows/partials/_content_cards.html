@@ -3,7 +3,7 @@
         <div class="card-title-container-top">
             <div class="card-title-wrapper">
                 <h4 class="card-title">{{ content.title }}</h4>
-                <h4 class="card-date">{{ content.creation_time|date:"F j Y" }}</h4>
+                <h4 class="card-date">{{ content.pub_time|date:"F j Y" }}</h4>
                 {% if content.tags.all %}
                     <ul class="tags-list card-meta">
                         {% for tag in content.tags.all %}
