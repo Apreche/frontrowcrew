@@ -11,12 +11,12 @@
                     <a href ="{% url "content-detail" content.show.slug content.catalog_number content.slug %}">
                         <h4 class="card-title">{{ content.title }}</h4>
                         <h5 class="search-show-name"><i>{{ content.show.title }}</i></h5>
-                        <span class="font-sm uk-hidden@s">{{ content.creation_time|date:"F j Y" }}</span>
+                        <span class="font-sm uk-hidden@s">{{ content.pub_time|date:"F j Y" }}</span>
                     </a>
                 </button>
             </div>
             <div class="result-info uk-width-3-4@s">
-                <p class="font-sm uk-visible@s">{{ content.creation_time|date:"F j Y" }}</p>
+                <p class="font-sm uk-visible@s">{{ content.pub_time|date:"F j Y" }}</p>
                 <p class="uk-visible@s">{{ content.rendered_html|truncatewords_html:40|striptags }}</p>
                 {% if content.tags or content.forum_threads %}
                 <div class="search-related-links">

@@ -15,10 +15,10 @@
 {% for thing in things_of_the_day %}
     <tr>
         <td><a href="{{ thing.url }}">{{ thing.title }}</a></td>
-        <td>
+        {% comment %} <td>
             <a href="{% url "content-detail" thing.content.show.slug thing.content.catalog_number thing.content.slug %}">{{ thing.content.title }}</a>
         </td>
-        <td>{{ thing.content.pub_time|date:"Ymd" }}</td>
+        <td>{{ thing.content.pub_time|date:"Ymd" }}</td> {% endcomment %}
         <td>{{ thing.author }}</td>
         <td>{% if thing.error %}❌{% else %}✅{% endif %}</td>
         <td>{{ thing.description }}</td>

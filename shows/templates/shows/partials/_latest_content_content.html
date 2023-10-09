@@ -2,7 +2,7 @@
     <a href="{% url "content-detail" content.show.slug content.catalog_number content.slug %}">
         <h1 class="card-title">{{ content.title }}</h1>
     </a>
-    <span class="font-sm">{{ content.creation_time|date:"F j Y" }}</span>
+    <span class="font-sm">{{ content.pub_time|date:"F j Y" }}</span>
     {% if main == "main" %}
         {% if content.embedded_media.all %}
         <p class="latest-video-text">{{ content.rendered_html|truncatewords_html:15|striptags }}</p>
@@ -19,7 +19,7 @@
             {% endwith %}
         {% endif %}
         {% if content.podcast_episode %}
-            {% include "./_embedded_audio.html" with podcast=content.podcast_episode %}
+            {% include "./_embedded_audio.html" with audio_url=content.podcast_episode.enclosure.url %}
         {% endif %}
     {% endif %}
 </div>

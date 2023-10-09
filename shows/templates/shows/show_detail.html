@@ -21,7 +21,7 @@
 {% endblock extrahead %}
 
 {% block content %}
-{% if page.has_previous == False %}
+{% if latest_content %}
 <div class="uk-section show-hero">
     <div class="uk-container show-hero-container">
         <div class="uk-grid">
@@ -35,37 +35,37 @@
                 {% if show.description %}
                     <p>{{ show.description }}</p>
                 {% endif %}
+                    {% comment %}
                     <button class="uk-button btn-secondary btn-medium">Subscribe:</button>
+                    {% endcomment %}
                 </div>
             </div>
             <div class="latest-grid">
                 <div class="latest-content-block content-block primary-section">
-                {% for content in page.object_list %}
-                {% if forloop.first %}
                     <div class="latest-title">
                         <div class="padded-border-wrapper">
                             <h2>Latest Content:</h2>
-                            <a href="{% url "content-detail" show.slug content.catalog_number content.slug %}">
-                                <h1>{{ content.title }}</h1>
+                            <a href="{% url "content-detail" show.slug latest_content.catalog_number latest_content.slug %}">
+                                <h1>{{ latest_content.title }}</h1>
                             </a>
-                            <h3><i>{{ content.creation_time|date:"F j Y" }}</i></h3>
+                            <h3><i>{{ latest_content.pub_time|date:"F j Y" }}</i></h3>
                             {% if content.tags.all %}
                                 <ul class="tags-list">
                                     {% for tag in content.tags.all %}
-                                    <li><a class="tag" href="{% url "show-tag-filter" content.show.slug tag.slug %}">#{{ tag.name }}</a></li>
+                                    <li><a class="tag" href="{% url "show-tag-filter" latest_content.show.slug tag.slug %}">#{{ tag.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                             {% endif %}
                         </div>
                     </div>
-                    {% if content.podcast_episode %}
-                        {% include "./partials/_embedded_audio.html" with podcast=content.podcast_episode %}
+                    {% if latest_content.podcast_episode %}
+                        {% include "./partials/_embedded_audio.html" with audio_url=latest_content.podcast_episode.enclosure.url %}
                     {% endif %}
                     <div class="rendered-content">
-                        {{ content.rendered_html|safe }}
-                        {% if content.purchase_links %}
+                        {{ latest_content.rendered_html|safe }}
+                        {% if latest_purchase_links %}
                         <ul class="purchase-links">
-                            {% for link in content.purchase_links %}
+                            {% for link in latest_purchase_links %}
                             <li><a href="{{ link.url }}" alt="{{ link.description }}"
                                 {% if link.error %}class="link-error">(Broken Link)
                                 {% else %}>
@@ -75,12 +75,14 @@
                         </ul>
                         {% endif %}
                     </div>
-                    {% if content.embedded_media.all %}
+                    {% if latest_content.embedded_media.all %}
                         {% include "./partials/_embedded_video.html" %}
                     {% endif %}
                     <div class="latest-bottom">
+                        {% comment %}
                         <button class="uk-button btn-primary" type="button">See Show Notes</button>
-                        {% if content.things_of_the_day %}
+                        {% endcomment %}
+                        {% if latest_things_of_the_day %}
                         <div class="show-view-totd uk-width-2-5">
                             <div class="totd-title">
                                 <h4>&mdash;</h4>
@@ -88,7 +90,7 @@
                                 <h4>&mdash;</h4>
                             </div>
                             <ul class="uk-list">
-                                {% for thing in content.things_of_the_day %}
+                                {% for thing in latest_things_of_the_day %}
                                 <li>{{ thing.author }}:
                                     <a href="{{ thing.url }}" alt="{{ thing.description }}"
                                         {% if thing.error %}class="totd-error">(Broken Link)
@@ -101,14 +103,12 @@
                             </ul>
                         </div>
                         {% endif %}
-                        {% if content.forum_threads %}
+                        {% if latest_forum_threads %}
                             <button class="uk-button btn-primary btn-forum" type="button"> 
-                            {% include "./partials/_forum_threads.html" %}
+                            {% include "./partials/_forum_threads.html" with content=latest_content %}
                         {% endif %}
                     </div>
                 </div>
-            {% endif %}
-            {% endfor %}
             </div>
         </div>
     </div>
@@ -127,9 +127,7 @@
     <div class="uk-flex uk-flex-center">
         <ul class="uk-container uk-flex-center card-ul" uk-grid uk-height-match="target: .card-title-container-top">
         {% for content in page.object_list %}
-        {% if not forloop.first %}
             {% include "./partials/_content_cards.html" with content=content show=show %}
-        {% endif %}
         {% endfor %}
         </ul>
     </div>

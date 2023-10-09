@@ -6,7 +6,7 @@
                 <a href="{% url "content-detail" show.slug content.catalog_number content.slug %}">
                     <h1>{{ content.title }}</h1>
                 </a>
-                <h3><i>{{ content.creation_time|date:"F j Y" }}</i></h3>
+                <h3><i>{{ content.pub_time|date:"F j Y" }}</i></h3>
                 {% if content.tags.all %}
                     <ul class="tags-list">
                         {% for tag in content.tags.all %}
