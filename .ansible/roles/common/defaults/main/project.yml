@@ -3,6 +3,7 @@ project_name: "{{ lookup('env', 'GITHUB_REPOSITORY').split('/')[1] | lower }}"
 owner: "{{ lookup('env', 'GITHUB_REPOSITORY').split('/')[0] | lower }}"
 email_address: "{{ lookup('env', 'EMAIL_ADDRESS') }}"
 web_domain: "{{ lookup('env', 'WEB_DOMAIN') | default(inventory_hostname, true) }}"
+web_domain_alias: "www.{{ web_domain }}"
 
 git_repo: "git@github.com:{{ lookup('env', 'GITHUB_REPOSITORY') }}.git"
 git_version: "{{ lookup('env', 'GITHUB_SHA') | default(lookup('env', 'GITHUB_REF_NAME'), True) }}"
