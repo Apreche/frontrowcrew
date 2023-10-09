@@ -33,6 +33,7 @@
       - "--no-eff-email"
       - "-m {{ email_address }}"
       - "-d {{ web_domain }}"
+      - "-d {{ web_domain_alias }}"
     creates: "{{ certbot_key_dir }}/fullchain.pem"
   become: yes
 ...
