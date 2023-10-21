@@ -152,7 +152,7 @@ class MP3Test(utils.FRCTestCase):
         )
         test_chapter_image_description = "test chapter image"
         with open(chapter_image_path, "rb") as test_chapter_image_file:
-            test_file_field = type("",(object,),{"file": test_chapter_image_file})()
+            test_file_field = type("", (object,), {"file": test_chapter_image_file})()
             test_chapters = [
                 {
                     "name": "First Chapter",

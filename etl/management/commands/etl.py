@@ -1,8 +1,8 @@
-import tqdm
-import typing
 import os
 import sqlite3
+import typing
 
+import tqdm
 from django.apps import apps as django_apps
 from django.conf import settings
 from django.core import management as django_management
@@ -10,9 +10,8 @@ from django.core.management.base import BaseCommand
 from django.db import connection as django_db_connection
 from django.db import models as django_models
 
-from frontrowcrew.utils import db as db_utils
 from etl import py_steps
-from etl import utils as etl_utils
+from frontrowcrew.utils import db as db_utils
 
 
 class Command(BaseCommand):
