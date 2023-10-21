@@ -54,8 +54,6 @@ class RedirectTests(utils.FRCTestCase):
             testreader = csv.reader(testfile, delimiter=",", quotechar='"')
             for from_url, to_url in testreader:
                 response = self.client.get(from_url)
-                if response.status_code == HTTPStatus.NOT_FOUND:
-                    breakpoint()
                 self.assertEqual(
                     response.status_code,
                     HTTPStatus.MOVED_PERMANENTLY,

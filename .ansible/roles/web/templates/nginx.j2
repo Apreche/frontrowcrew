@@ -4,21 +4,28 @@ upstream {{ project_name }} {
 
 server {
     listen 80 default_server;
+    listen [::]:80 default_server;
     server_name {{ web_domain }} {{ web_domain_alias }};
     return 301 https://{{ web_domain }}$request_uri;
 }
 
 server {
-    listen 443 ssl;
+    listen 443 http2 ssl;
+    listen [::]:443 http2 ssl;
+    server_name {{ web_domain_alias }};
+
     ssl_certificate {{ certbot_key_dir }}/fullchain.pem;
     ssl_certificate_key {{ certbot_key_dir }}/privkey.pem;
-    server_name {{ web_domain_alias }};
+    include {{ certbot_conf_dir }}/options-ssl-nginx.conf;
+    ssl_dhparam {{ certbot_conf_dir }}/ssl-dhparams.pem;
+
     return 301 https://{{ web_domain }}$request_uri;
 }
 
 server {
 
-    listen 443 ssl default_server;
+    listen 443 http2 ssl default_server;
+    listen [::]:443 http2 ssl default_server;
     server_name {{ web_domain }};
 
     ssl_certificate {{ certbot_key_dir }}/fullchain.pem;

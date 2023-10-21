@@ -1,13 +1,11 @@
+import io
 import os
-import PIL
-import tempfile
 
+import magic
+import mutagen
 from django.utils import timezone
-
-from mutagen import (
-    mp3 as mutagen_mp3,
-    id3 as mutagen_id3
-)
+from mutagen import id3 as mutagen_id3
+from mutagen import mp3 as mutagen_mp3
 
 
 def get_info(mp3_file):
@@ -79,22 +77,23 @@ def set_id3(
             )
 
     # APIC frame
-    permitted_image_formats = {
-        "JPEG": "image/jpeg",
-        "PNG": "image/png",
-    }
+    permitted_image_formats = [
+        "image/jpeg",
+        "image/png",
+    ]
     if album_image:
-        image = PIL.Image.open(album_image)
-        mime_type = permitted_image_formats.get(image.format, None)
-        if mime_type is not None:
-            image.seek(0)
-            APIC_frame = mutagen_id3.APIC(
-                mime=mime_type,
-                data=image.fp.read(),
+        image_data = album_image.file.read()
+        mime_checker = magic.Magic(mime=True)
+        image_mime = mime_checker.from_buffer(image_data)
+        if image_mime in permitted_image_formats:
+            apic_frame = mutagen_id3.APIC(
+                type=mutagen.id3.PictureType.COVER_FRONT,
+                mime=image_mime,
+                data=image_data,
             )
             if album_image_description:
-                APIC_frame.desc = album_image_description
-            frames.append(APIC_frame)
+                apic_frame.desc = album_image_description
+            frames.append(apic_frame)
 
     # Chapter frames
     if chapters:
@@ -122,19 +121,23 @@ def set_id3(
                 chapter_sub_frames.append(chapter_url_frame)
 
             chapter_image = chapter.get("image", None)
+
             if chapter_image:
-                chapter_image = PIL.Image.open(chapter_image)
-                mime_type = permitted_image_formats.get(chapter_image.format, None)
-                if mime_type is not None:
-                    chapter_image.seek(0)
-                    APIC_frame = mutagen_id3.APIC(
-                        mime=mime_type,
-                        data=chapter_image.fp.read(),
+                image_data = chapter_image.file.read()
+                # The same image might get used on many chapters, so reset it
+                chapter_image.file.seek(0)
+                mime_checker = magic.Magic(mime=True)
+                image_mime = mime_checker.from_buffer(image_data)
+                if image_mime in permitted_image_formats:
+                    apic_frame = mutagen_id3.APIC(
+                        type=mutagen.id3.PictureType.COVER_FRONT,
+                        mime=image_mime,
+                        data=image_data,
                     )
                     image_description = chapter.get("image_description", None)
                     if image_description:
-                        APIC_frame.desc = image_description
-                    chapter_sub_frames.append(APIC_frame)
+                        apic_frame.desc = image_description
+                    chapter_sub_frames.append(apic_frame)
 
             chapter_id = f"ch{number:02}"
             chapter_ids.append(chapter_id)
@@ -165,11 +168,13 @@ def set_id3(
         )
 
     # Write frames to file
-    with tempfile.NamedTemporaryFile() as temp3:
-        temp3.write(mp3_file.read())
-        tags = mutagen_mp3.MP3(temp3).tags
-        for frame in frames:
-            tags.add(frame)
-        tags.save(temp3, v1=mutagen_id3.ID3v1SaveOptions.CREATE)
-        mp3_basename = os.path.basename(mp3_file.name)
-        mp3_file.save(mp3_basename, temp3)
+    ramfile = io.BytesIO(mp3_file.read())
+    mp3_data = mutagen_mp3.MP3(ramfile)
+    mp3_data.delete(ramfile)
+    mp3_data.save(ramfile)
+    tags = mp3_data.tags
+    for frame in frames:
+        tags.add(frame)
+    tags.save(ramfile, v1=mutagen_id3.ID3v1SaveOptions.CREATE)
+    mp3_basename = os.path.basename(mp3_file.name)
+    mp3_file.save(mp3_basename, ramfile)

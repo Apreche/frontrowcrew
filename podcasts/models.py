@@ -44,7 +44,7 @@ class iTunesOwner(models.Model):
 
 class Podcast(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField(max_length=4000)
+    description = models.TextField(max_length=4000, default="", blank=True)
     custom_public_feed_url = models.URLField(
         blank=True,
         default="",
@@ -56,7 +56,7 @@ class Podcast(models.Model):
     )
     managing_editor = models.EmailField(blank=True, default="")
     web_master = models.EmailField(blank=True, default="")
-    ttl = models.PositiveIntegerField(null=True, default=None)
+    ttl = models.PositiveIntegerField(null=True, default=None, blank=True)
     image = models.ImageField(
         upload_to="podcasts/podcast/image/",
         height_field="image_height",
@@ -70,6 +70,7 @@ class Podcast(models.Model):
         upload_to="podcasts/podcast/itunes_image/",
         height_field="itunes_image_height",
         width_field="itunes_image_width",
+        blank=True, default="",
     )
     itunes_image_height = models.PositiveIntegerField(blank=True, null=True, default=None)
     itunes_image_width = models.PositiveIntegerField(blank=True, null=True, default=None)

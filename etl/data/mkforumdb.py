@@ -63,9 +63,6 @@ def load_csv(csv_name: str):
             username = row[4]
             category_id = row[5]
             category_name = row[6]
-            if not category_id.isnumeric():
-                breakpoint()
-                print(row)
             csv_data.append(
                 (
                     id,

@@ -53,12 +53,12 @@ def get_xmp_chapters(mp3_file):
         chapters.append(
             {
                 "title": chapter_title,
-                "time": chapter_start_time,
+                "start_time": chapter_start_time,
             }
         )
         marker_number += 1
     sorted_chapters = sorted(
         chapters,
-        key=lambda d: d.get("time", None)
+        key=lambda d: d.get("start_time", None)
     )
     return sorted_chapters

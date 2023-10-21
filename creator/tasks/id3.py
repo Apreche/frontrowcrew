@@ -1,9 +1,9 @@
 import celery
-from django import utils as django_utils
 from django import urls
+from django import utils as django_utils
 
-from frontrowcrew.utils import sites
 from creator import models
+from frontrowcrew.utils import sites
 
 
 @celery.shared_task
@@ -55,9 +55,9 @@ def apply_id3_tags(
     album_image = None
     album_image_data = episode.image
     if album_image_data:
-        album_image = album_image_data.open("rb")
+        album_image = album_image_data.file
     elif podcast.image:
-        album_image = podcast.image.open("rb")
+        album_image = podcast.image.file
 
     id3_data["album_image"] = album_image
 
@@ -79,8 +79,5 @@ def apply_id3_tags(
         id3_data["chapters"] = chapters
 
     mp3.set_id3(**id3_data)
-
-    if album_image:
-        album_image.close()
 
     return mp3.id

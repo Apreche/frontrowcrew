@@ -148,9 +148,6 @@ def run() -> None:
                 url=good_result["url"],
                 author="",
             )
-        elif len(resultset) > 0:
-            breakpoint()
-            print(resultset)
 
     # Remove repeats
     repeats = show_models.RelatedLink.objects.filter(

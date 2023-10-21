@@ -32,11 +32,13 @@ def create_podcast_for_show(
 ) -> None:
     """ Create a podcast for a show using the given data """
     show = show_models.Show.objects.get(slug=show_slug)
-    logo_file_name = os.path.basename(show.logo.name)
-    logo_file = django_files_base.ContentFile(
-        show.logo.read(),
-        name=logo_file_name,
-    )
+    logo_file = ""
+    if show.logo:
+        logo_file_name = os.path.basename(show.logo.name)
+        logo_file = django_files_base.ContentFile(
+            show.logo.read(),
+            name=logo_file_name,
+        )
     podcast = podcast_models.Podcast(
         title=show.title,
         description=show.description,

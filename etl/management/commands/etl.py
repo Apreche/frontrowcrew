@@ -1,8 +1,8 @@
-import tqdm
-import typing
 import os
 import sqlite3
+import typing
 
+import tqdm
 from django.apps import apps as django_apps
 from django.conf import settings
 from django.core import management as django_management
@@ -10,9 +10,8 @@ from django.core.management.base import BaseCommand
 from django.db import connection as django_db_connection
 from django.db import models as django_models
 
-from frontrowcrew.utils import db as db_utils
 from etl import py_steps
-from etl import utils as etl_utils
+from frontrowcrew.utils import db as db_utils
 
 
 class Command(BaseCommand):
@@ -86,12 +85,13 @@ class Command(BaseCommand):
         results = db_utils.namedtuplefetchall(self.postgres_cursor)
         for result in results:
             old_path = getattr(result, db_column_name, "")
-            new_base_path = getattr(field, "upload_to")
+            # new_base_path = getattr(field, "upload_to")
             if old_path:
-                new_path = etl_utils.download_to_default_storage(
-                    old_path=old_path,
-                    new_base_path=new_base_path,
-                )
+                # new_path = etl_utils.download_to_default_storage(
+                #     old_path=old_path,
+                #     new_base_path=new_base_path,
+                # )
+                new_path = ""
                 update_media_query = f"UPDATE {db_table_name} SET {db_column_name} = %s WHERE id = %s;"
                 self.postgres_cursor.execute(update_media_query, [new_path, result.id])
 
@@ -168,9 +168,9 @@ class Command(BaseCommand):
                 "method": self._execute_sql_file,
                 "kwargs": {"filename": "07_videos.sql"},
             },
-            {
-                "method": py_steps.video_thumbnails.run,
-            },
+            # {
+            #     "method": py_steps.video_thumbnails.run,
+            # },
             {
                 "method": self._execute_sql_file,
                 "kwargs": {"filename": "08_geeknights.sql"},

@@ -21,6 +21,7 @@ ENV APP_ENV=${APP_ENV} \
 RUN apt-get update \
     && apt-get --no-install-recommends -y install \
     bash-completion \
+    ftp \
     libexempi8 \
     libmemcached-dev \
     postgresql-client \
