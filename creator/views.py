@@ -1,16 +1,14 @@
 import http
-from django import forms
+
+from django import forms, shortcuts, urls
 from django import http as django_http
-from django import shortcuts
-from django import urls
-from django.views.decorators import vary as vary_decorators
 from django.contrib.auth import decorators as auth_decorators
+from django.views.decorators import vary as vary_decorators
 
 from media import models as media_models
 
 from . import forms as creator_forms
-from . import models
-from . import utils
+from . import models, utils
 
 
 @auth_decorators.login_required
