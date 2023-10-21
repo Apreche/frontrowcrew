@@ -124,6 +124,8 @@ def set_id3(
 
             if chapter_image:
                 image_data = chapter_image.file.read()
+                # The same image might get used on many chapters, so reset it
+                chapter_image.file.seek(0)
                 mime_checker = magic.Magic(mime=True)
                 image_mime = mime_checker.from_buffer(image_data)
                 if image_mime in permitted_image_formats:
