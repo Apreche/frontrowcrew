@@ -1,6 +1,6 @@
 from typing import Any, Dict
-from django.utils import feedgenerator
-from django.utils import xmlutils
+
+from django.utils import feedgenerator, xmlutils
 
 from podcasts import utils
 
@@ -199,7 +199,7 @@ class PodcastFeed(feedgenerator.Rss201rev2Feed):
             for chapter in chapters:
                 chapter_attrs = {}
                 start_time = utils.seconds_to_timespan(chapter.start_time)
-                chapter_attrs["start_time"] = start_time
+                chapter_attrs["start"] = start_time
                 chapter_attrs["title"] = chapter.title
                 url = getattr(chapter, "url", None)
                 if url:
