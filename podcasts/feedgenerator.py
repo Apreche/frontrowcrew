@@ -198,7 +198,7 @@ class PodcastFeed(feedgenerator.Rss201rev2Feed):
             )
             for chapter in chapters:
                 chapter_attrs = {}
-                start_time = utils.seconds_to_timespan(chapter.start_time)
+                start_time = utils.milliseconds_to_timespan(chapter.start_time)
                 chapter_attrs["start"] = start_time
                 chapter_attrs["title"] = chapter.title
                 url = getattr(chapter, "url", None)

@@ -21,3 +21,23 @@ class PodcastsUtilsTests(TestCase):
                 utils.seconds_to_timespan(seconds),
                 npt
             )
+
+    def test_milliseconds_to_timespan(self):
+        test_values = [
+            (3499, "03"),
+            (3501, "04"),
+            (5000, "05"),
+            (37000, "37"),
+            (61000, "01:01"),
+            (468000, "07:48"),
+            (3540000, "59:00"),
+            (5752000, "1:35:52"),
+            (48430000, "13:27:10"),
+            (48430900, "13:27:11"),
+            (360000000, "100:00:00"),
+        ]
+        for milliseconds, npt in test_values:
+            self.assertEqual(
+                utils.milliseconds_to_timespan(milliseconds),
+                npt
+            )
