@@ -213,7 +213,6 @@ class CreateTest(utils.FRCTestCase):
         podcast_episode_properties = {
             "podcast": episode.show.podcast,
             "title": episode.title,
-            "description": episode.description,
             "author_name": episode.author_name,
             "author_email": episode.author_email,
             "image_description": episode.image_description,
@@ -234,6 +233,16 @@ class CreateTest(utils.FRCTestCase):
             self.assertEqual(podcast_episode.itunes_image, episode.itunes_image)
         else:
             self.assertFalse(episode.itunes_image)
+
+        if podcast_episode.content:
+            self.assertEqual(
+                podcast_episode.description,
+                content.rendered_html_with_related_links,
+            )
+        else:
+            self.assertEqual(
+                podcast_episode.description, episode.description
+            )
 
         self.assertEqual(
             episode.chapters.all().count(),

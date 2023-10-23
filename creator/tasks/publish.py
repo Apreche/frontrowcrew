@@ -31,12 +31,43 @@ def publish_podcast_episode(episode_id):
         url_prefix = creator_episode.destination.url_prefix
         filename = f"{creator_episode.catalog_number}.mp3"
         url = f"{url_prefix}{filename}"
+
+        # 1. Create show content without episode
+        content = show_models.Content.objects.create(
+            pub_time=creator_episode.pub_time,
+            is_published=True,
+            title=creator_episode.title,
+            show=creator_episode.show,
+            image=creator_episode.image,
+            image_description=creator_episode.image_description,
+            slug=text_utils.slugify(creator_episode.title),
+            catalog_number=creator_episode.catalog_number,
+            original_content=creator_episode.body,
+            # podcast_episode=episode,
+        )
+
+        # 2. Apply tags
+        for tag in creator_episode.tags.names():
+            content.tags.add(tag)
+
+        # 3. Create related links
+        for related_link in creator_episode.related_links.all():
+            show_models.RelatedLink.objects.create(
+                content=content,
+                type_id=show_models.RelatedLinkType.THING_OF_THE_DAY,
+                title=related_link.title,
+                description=related_link.description,
+                url=related_link.url,
+                author=related_link.author,
+            )
+
         # 4. Create podcast enclosure
         enclosure = podcast_models.PodcastEnclosure.objects.create(
             url=url,
             length=creator_episode.mp3.file.size,
             type=podcast_models.PodcastEnclosure.EnclosureType.MP3,
         )
+
         # 5. Create podcast episode
         mp3_info = creator_episode.mp3.get_info()
         duration = datetime.timedelta(seconds=mp3_info.length)
@@ -45,7 +76,7 @@ def publish_podcast_episode(episode_id):
             title=creator_episode.title,
             enclosure=enclosure,
             pub_date=creator_episode.pub_time,
-            description=creator_episode.description,
+            description=content.rendered_html_with_related_links,
             duration=duration,
             author_name=creator_episode.author_name,
             author_email=creator_episode.author_email,
@@ -59,6 +90,7 @@ def publish_podcast_episode(episode_id):
             itunes_episode_type=creator_episode.itunes_episode_type,
             itunes_block=creator_episode.itunes_block,
         )
+
         # 6. Create podcast chapters
         for chapter in creator_episode.chapters.all():
             podcast_models.PodcastChapter.objects.create(
@@ -72,29 +104,8 @@ def publish_podcast_episode(episode_id):
                 image=chapter.image,
                 image_description=chapter.image_description,
             )
-        # 7. Create show content
-        content = show_models.Content.objects.create(
-            pub_time=creator_episode.pub_time,
-            is_published=True,
-            title=creator_episode.title,
-            show=creator_episode.show,
-            image=creator_episode.image,
-            image_description=creator_episode.image_description,
-            slug=text_utils.slugify(creator_episode.title),
-            catalog_number=creator_episode.catalog_number,
-            original_content=creator_episode.body,
-            podcast_episode=episode,
-        )
-        for tag in creator_episode.tags.names():
-            content.tags.add(tag)
-        # 8. Create related links
-        for related_link in creator_episode.related_links.all():
-            show_models.RelatedLink.objects.create(
-                content=content,
-                type_id=show_models.RelatedLinkType.THING_OF_THE_DAY,
-                title=related_link.title,
-                description=related_link.description,
-                url=related_link.url,
-                author=related_link.author,
-            )
+
+        # 7. Assign episode to content
+        content.podcast_episode = episode
+        content.save()
         return content.id

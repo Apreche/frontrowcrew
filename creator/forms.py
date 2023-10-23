@@ -61,7 +61,6 @@ class PodcastCreatorForm(forms.Form):
             bootstrap5.FloatingField("pub_time"),
             bootstrap5.FloatingField("title"),
             bootstrap5.FloatingField("tags"),
-            bootstrap5.FloatingField("description"),
             bootstrap5.Field("body"),
             crispy_layout.HTML("<hr />"),
             bootstrap5.BS5Accordion(
@@ -153,10 +152,6 @@ class PodcastCreatorForm(forms.Form):
     tags = forms.CharField(
         label="Tags",
         required=False,
-    )
-    description = forms.CharField(
-        label="Short Description",
-        widget=forms.widgets.Textarea(),
     )
     body = forms.CharField(
         label="Full Web Content",

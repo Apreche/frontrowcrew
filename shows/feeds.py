@@ -1,10 +1,10 @@
-from django import http
-from django import urls
+from django import http, urls
 from django.contrib.syndication import views as syndication_views
 from django.utils.translation import gettext as _
 
 from podcasts import feeds as podcast_feeds
 from podcasts import models as podcasts_models
+
 from . import models
 
 
@@ -45,7 +45,7 @@ class ShowFeed(syndication_views.Feed):
         return item.title
 
     def item_description(self, item):
-        return item.rendered_html
+        return item.rendered_html_with_related_links
 
     def item_pubdate(self, item):
         return item.pub_time
