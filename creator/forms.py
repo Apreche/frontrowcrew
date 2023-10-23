@@ -1,9 +1,8 @@
 import crispy_forms
 import magic
-
-from crispy_forms import layout as crispy_layout
-from crispy_forms import bootstrap
 from crispy_bootstrap5 import bootstrap5
+from crispy_forms import bootstrap
+from crispy_forms import layout as crispy_layout
 from django import forms, urls
 from django.core import exceptions
 from django.utils import timezone
@@ -13,8 +12,8 @@ from taggit import utils as taggit_utils
 
 from frontrowcrew import utils
 from media import models as media_models
-from shows import models as show_models
 from podcasts import models as podcast_models
+from shows import models as show_models
 
 
 class MP3UploadForm(forms.ModelForm):
@@ -131,17 +130,25 @@ class PodcastCreatorForm(forms.Form):
     title = forms.CharField(
         label="Episode Title",
     )
-    catalog_number = forms.CharField(
-        label="Catalog Number",
-        initial=timezone.localtime(
+
+    def generate_catalog_number():
+        return timezone.localtime(
             timezone.now()
         ).strftime("%Y%m%d")
+
+    catalog_number = forms.CharField(
+        label="Catalog Number",
+        initial=generate_catalog_number,
     )
-    pub_time = utils.forms.DateTimeLocalField(
-        label="Publication Time",
-        initial=timezone.localtime(
+
+    def generate_pub_time():
+        return timezone.localtime(
             timezone.now()
         )
+
+    pub_time = utils.forms.DateTimeLocalField(
+        label="Publication Time",
+        initial=generate_pub_time,
     )
     tags = forms.CharField(
         label="Tags",
