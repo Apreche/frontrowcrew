@@ -13,6 +13,7 @@ def seconds_to_timespan(seconds=0):
     output += f"{seconds:02}"
     return output
 
+
 def milliseconds_to_timespan(milliseconds=0):
     seconds = round(milliseconds / 1000)
     return seconds_to_timespan(seconds)
