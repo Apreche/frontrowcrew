@@ -85,6 +85,7 @@ WITH old_podcast_episodes AS (
         pub_time,
         is_published,
         rendered_html,
+        rendered_related_links,
         original_content,
         content_format,
         show_id,
@@ -101,6 +102,7 @@ WITH old_podcast_episodes AS (
         op.pub_date, -- pub_time
         TRUE, -- is_published
         op.rendered_content, -- rendered_html
+        '', -- rendered_related_links
         op.original_content, -- original_content
         'HTML', --content_format
         op.show_id, --show_id

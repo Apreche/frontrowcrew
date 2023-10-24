@@ -2,16 +2,15 @@ import http
 import os
 import random
 import tempfile
-
-from django import test
-from django import urls
-from django.contrib.auth import models as auth_models
-from mutagen.mp3 import MP3 as mutagen_mp3
 from unittest import mock
 
-from frontrowcrew.tests import utils
+from django import test, urls
+from django.contrib.auth import models as auth_models
+from mutagen.mp3 import MP3 as mutagen_mp3
+
 from creator import models as creator_models
 from creator import views as creator_views
+from frontrowcrew.tests import utils
 from media import factories as media_factories
 from podcasts import factories as podcast_factories
 from podcasts import models as podcast_models
@@ -86,7 +85,6 @@ class CreateTest(utils.FRCTestCase):
             "title": content.title,
             "tags": "taga, tagb",
             "body": content.original_content,
-            "description": podcast_episode.description or "",
             "author_name": podcast_episode.author_name or "",
             "author_email": podcast_episode.author_email or "",
             "image_description": podcast_episode.image_description or "",
@@ -236,7 +234,7 @@ class CreateTest(utils.FRCTestCase):
 
         if podcast_episode.content:
             self.assertEqual(
-                podcast_episode.description,
+                content.podcast_episode.description,
                 content.rendered_html_with_related_links,
             )
         else:

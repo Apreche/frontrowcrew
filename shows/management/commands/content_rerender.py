@@ -1,5 +1,6 @@
 import tqdm
 from django.core.management.base import BaseCommand
+
 from shows import models as show_models
 
 
@@ -8,7 +9,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options) -> None:
         for content in tqdm.tqdm(
-            show_models.Content.objects.all()
+            show_models.Content.objects.all(),
+            desc="Content Re-render"
         ):
             # Because of signals, this should be enough to re-render
             content.save()

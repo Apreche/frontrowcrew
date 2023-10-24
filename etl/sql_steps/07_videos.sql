@@ -35,6 +35,7 @@ WITH video_show_map AS (
         creation_time,
         last_modified_time,
         rendered_html,
+        rendered_related_links,
         original_content,
         content_format
     ) SELECT
@@ -50,6 +51,7 @@ WITH video_show_map AS (
         ovv.pub_date, -- creation_time
         CURRENT_TIMESTAMP, -- last_modified_time
         ovv.rendered_description, -- rendered_html
+        '', -- rendered_related_links
         ovv.description, -- original_content
         'HTML' -- content_format
     FROM old_videos_video AS ovv

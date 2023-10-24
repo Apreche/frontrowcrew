@@ -224,7 +224,8 @@ class Content(Publishable):
     def _render_related_links(self):
         template_name = "shows/content_related_links.html"
         context = {"content": self}
-        self.rendered_related_links = render_to_string(template_name, context)
+        related_links_html = render_to_string(template_name, context)
+        self.rendered_related_links = related_links_html.strip()
 
     @property
     def rendered_html_with_related_links(self):

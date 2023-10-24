@@ -26,6 +26,7 @@ new_news AS (
         pub_time,
         is_published,
         rendered_html,
+        rendered_related_links,
         original_content,
         content_format,
         show_id,
@@ -41,6 +42,7 @@ new_news AS (
         odn.pub_date, -- pub_time
         TRUE, -- is_published
         odn.body_rendered, -- rendered_html
+        '',
         odn.body, -- original_content
         'HTML', --content_format
         ns.id, -- show_id
