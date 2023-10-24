@@ -1,0 +1,17 @@
+{% if related_links %}
+<h2>Related Links</h2>
+{% for link_type, links in related_links.items %}
+{% if links|length > 1 %}
+<h3>{{ link_type.plural_description }}</h3>
+{% else %}
+<h3>{{ link_type.description }}</h3>
+{% endif %}
+<ul>
+    {% for link in links %}
+    <li>
+        {% if link.author %}{{ link.author }}&nbsp;-&nbsp;{% endif %}<a href="{{link.url}}">{{ link.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endfor %}
+{% endif %}

@@ -3,6 +3,7 @@ from django import urls
 from django.contrib.postgres import indexes, search
 from django.core import exceptions, validators
 from django.db import models
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from taggit import managers as taggit_managers
@@ -150,6 +151,7 @@ class Content(Publishable):
     last_modified_time = models.DateTimeField(auto_now=True)
 
     rendered_html = models.TextField(blank=True)
+    rendered_related_links = models.TextField(blank=True, default="")
     original_content = models.TextField(blank=True, default="")
     content_format = models.CharField(
         max_length=4,
@@ -219,6 +221,16 @@ class Content(Publishable):
         elif self.content_format == self.Format.MARKDOWN:
             self.rendered_html = markdown.markdown(self.original_content)
 
+    def _render_related_links(self):
+        template_name = "shows/content_related_links.html"
+        context = {"content": self}
+        related_links_html = render_to_string(template_name, context)
+        self.rendered_related_links = related_links_html.strip()
+
+    @property
+    def rendered_html_with_related_links(self):
+        return self.rendered_html + self.rendered_related_links
+
     @property
     def is_live(self):
         """ Content is only published if its parent show is also published """
@@ -228,6 +240,7 @@ class Content(Publishable):
     def save(self, *args, **kwargs):
         """ Render the html when the content is written to the DB """
         self._render_html()
+        self._render_related_links()
         super().save(*args, **kwargs)
 
     class Meta:

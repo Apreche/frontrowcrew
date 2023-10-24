@@ -1,8 +1,7 @@
 from django.contrib.sites import shortcuts as sites_shortcuts
 from django.contrib.syndication import views
 
-from . import models
-from . import feedgenerator
+from . import feedgenerator, models
 
 
 class PodcastFeed(views.Feed):
@@ -74,7 +73,9 @@ class PodcastFeed(views.Feed):
         return obj.itunes_explicit
 
     def itunes_image(self, obj):
-        return obj.itunes_image.url
+        if obj.itunes_image:
+            return obj.itunes_image.url
+        return None
 
     def itunes_new_feed_url(self, obj):
         return obj.itunes_new_feed_url
@@ -119,6 +120,7 @@ class PodcastFeed(views.Feed):
     def items(self, obj):
         return models.PodcastEpisode.objects.select_related(
             "enclosure",
+            "content",
         ).prefetch_related(
             "chapters",
         ).filter(podcast=obj)[:100]
@@ -136,6 +138,8 @@ class PodcastFeed(views.Feed):
         return item.chapters.all()
 
     def item_description(self, item):
+        if content := getattr(item, "content", None):
+            return content.rendered_html_with_related_links
         return item.description
 
     def item_enclosure_url(self, item):

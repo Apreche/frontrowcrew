@@ -216,6 +216,7 @@ class Command(BaseCommand):
                 "kwargs": {"filename": "13_fdw_drop.sql"},
             }
         ]
+        django_management.call_command("content_rerender", "--skip-checks", "-v0")
 
         try:
             for step in tqdm.tqdm(etl_steps, desc="ETL"):

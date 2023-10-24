@@ -30,10 +30,10 @@
                 "python.defaultInterpreterPath": "/usr/local/bin/python"
             },
             "extensions": [
-                "ms-python.python",
-                "ms-python.flake8",
-                "ms-python.autopep8",
                 "ms-python.vscode-pylance",
+                "ms-python.python",
+                "charliermarsh.ruff",
+                "ms-toolsai.jupyter",
                 "batisteo.vscode-django"
             ]
         }

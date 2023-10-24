@@ -34,6 +34,7 @@ new_bookclub_books AS (
         creation_time,
         last_modified_time,
         rendered_html,
+        rendered_related_links,
         original_content,
         content_format
     ) SELECT
@@ -49,6 +50,7 @@ new_bookclub_books AS (
         obb.announce_date, -- creation_time
         CURRENT_TIMESTAMP, -- last_modified_time
         obb.rendered_description, -- rendered_html
+        '', --rendered_related_links
         obb.description, -- original_content
         'HTML' -- content_format
     FROM old_bookclub_books AS obb
