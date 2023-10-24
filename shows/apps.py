@@ -6,4 +6,6 @@ class ShowsConfig(AppConfig):
     name = 'shows'
 
     def ready(self):
-        from . import signals
+        # We're using decorators to connect the signals
+        # But we need to import them
+        from . import signals  # noqa

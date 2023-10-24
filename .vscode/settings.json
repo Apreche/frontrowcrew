@@ -1,11 +1,14 @@
 {
     "[python]": {
         "editor.defaultFormatter": null,
+        "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
             "source.fixAll": true,
             "source.organizeImports": true
         }
     },
+    "python.defaultInterpreterPath": "./.venv/bin/python",
+    "python.terminal.activateEnvironment": true,
     "terminal.integrated.defaultProfile.linux": "bash",
     "terminal.integrated.profiles.linux": {
         "django": {
@@ -24,12 +27,12 @@
         "JavaScript Debug Terminal": null
     },
     "search.exclude": {
-        ".ansible": true,
-        ".devcontainer": true,
-        ".github": true,
-        ".gitignore": true,
-        ".venv": true,
-        ".vscode": true,
+        "**/.devcontainer": true,
+        "**/.git": true,
+        "**/.github": true,
+        "**/.gitignore": true,
+        "**/.venv": true,
+        "**/.vscode": true,
         "static/src/css/main.css.map": true,
         "poetry.lock": true,
         "package-lock.json": true,

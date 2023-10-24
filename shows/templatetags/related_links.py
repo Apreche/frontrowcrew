@@ -4,6 +4,7 @@ from shows import models as show_models
 
 register = template.Library()
 
+
 @register.inclusion_tag("shows/tags/related_links.html")
 def related_links(content):
     all_links = show_models.RelatedLink.published.filter(content=content)
