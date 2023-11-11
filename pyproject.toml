@@ -41,7 +41,7 @@ Werkzeug = "^3.0.0"
 coverage = "^7.0.5"
 
 [tool.poetry.group.test.dependencies]
-tblib = "^2.0.0"
+tblib = "^3.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
