@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "podcasts",
     "legacy_redirects",
     "shows",
+    "syndicators",
 ]
 
 
