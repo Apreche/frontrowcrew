@@ -683,18 +683,18 @@ sftp = ["paramiko (>=1.15)"]
 
 [[package]]
 name = "django-taggit"
-version = "4.0.0"
+version = "5.0.1"
 description = "django-taggit is a reusable Django application for simple tagging."
 category = "main"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.8"
 files = [
-    {file = "django-taggit-4.0.0.tar.gz", hash = "sha256:4d52de9d37245a9b9f98c0ec71fdccf1d2283e38e8866d40a7ae6a3b6787a161"},
-    {file = "django_taggit-4.0.0-py3-none-any.whl", hash = "sha256:eb800dabef5f0a4e047ab0751f82cf805bc4a9e972037ef12bf519f52cd92480"},
+    {file = "django-taggit-5.0.1.tar.gz", hash = "sha256:edcd7db1e0f35c304e082a2f631ddac2e16ef5296029524eb792af7430cab4cc"},
+    {file = "django_taggit-5.0.1-py3-none-any.whl", hash = "sha256:a0ca8a28b03c4b26c2630fd762cb76ec39b5e41abf727a7b66f897a625c5e647"},
 ]
 
 [package.dependencies]
-Django = ">=3.2"
+Django = ">=4.1"
 
 [[package]]
 name = "django-timezone-field"
@@ -1165,14 +1165,14 @@ ptyprocess = ">=0.5"
 
 [[package]]
 name = "pgcli"
-version = "3.5.0"
+version = "4.0.1"
 description = "CLI for Postgres Database. With auto-completion and syntax highlighting."
 category = "dev"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "pgcli-3.5.0-py3-none-any.whl", hash = "sha256:0bcef2c628bae8443822f647e1b67680f219798625adf7ffa0920049056088a1"},
-    {file = "pgcli-3.5.0.tar.gz", hash = "sha256:cc448d95159fc0903d36182992778a096eda5752d660d47671383c8e2bf633f1"},
+    {file = "pgcli-4.0.1-py3-none-any.whl", hash = "sha256:869cab500b55f93fc97d04c946772f646017f724c126697f8db89cd539c6dd13"},
+    {file = "pgcli-4.0.1.tar.gz", hash = "sha256:f2feea2099ce1ad5e8a9d5d93b0edaf60dc61e97b21b75e91d9723939ce53bd2"},
 ]
 
 [package.dependencies]
@@ -1737,14 +1737,14 @@ widechars = ["wcwidth"]
 
 [[package]]
 name = "tblib"
-version = "2.0.0"
+version = "3.0.0"
 description = "Traceback serialization library."
 category = "dev"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "tblib-2.0.0-py3-none-any.whl", hash = "sha256:9100bfa016b047d5b980d66e7efed952fbd20bd85b56110aaf473cb97d18709a"},
-    {file = "tblib-2.0.0.tar.gz", hash = "sha256:a6df30f272c08bf8be66e0775fad862005d950a6b8449b94f7c788731d70ecd7"},
+    {file = "tblib-3.0.0-py3-none-any.whl", hash = "sha256:80a6c77e59b55e83911e1e607c649836a69c103963c5f28a46cbeef44acf8129"},
+    {file = "tblib-3.0.0.tar.gz", hash = "sha256:93622790a0a29e04f0346458face1e144dc4d32f493714c6c3dff82a4adb77e6"},
 ]
 
 [[package]]
@@ -1892,4 +1892,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "44fe55d781a04b26d16e3586a5f09ce1788ccf073c46e807a270d5229300b7de"
+content-hash = "edee93cc017774cd569c125c728239623b799bbda0934721f717d8f034d44aed"
