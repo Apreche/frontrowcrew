@@ -92,36 +92,18 @@
                 </a>
                 <div class="mobile-burger-dropbar" uk-drop="pos: bottom-center; stretch: x">
                     <div class="uk-dropdown-nav burger-drop">
-                        <div><button type="button" class="header-button">Shows</button>
-                            <div class="header-dropdown-box" uk-dropdown="mode:click">
-                                <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
-                                    {% for nav_show in nav_shows %}
-                                    <li><a href="{% url 'show-detail' nav_show.slug %}">{{ nav_show.title }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-                        {% comment %}
-                            Burger Community
-                        {% endcomment %}
-                        <div><button type="button" class="header-button">Community</button>
-                            <div class="header-dropdown-box" uk-dropdown="mode:click">
-                                <div class="uk-child-width-1-2@s" uk-grid>
-                                    <div>
-                                        <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
-                                            <li><a href="https://community.frontrowcrew.com">Forum</a></li>
-                                            <li><a href="https://newsletter.frontrowcrew.com">Newsletter</a></li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
-                                            <li><a href="mailto:geeknights@frontrowcrew.com">Email</a></li>
-                                            <li><a href="https://discord.gg/mAZbNh4kAr">Discord</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <ul class="uk-nav uk-dropdown-nav header-subnav-ul">
+                            <li class="uk-nav-header subnav-header-line">Shows</li>
+                            {% for nav_show in nav_shows %}
+                            <li><a href="{% url 'show-detail' nav_show.slug %}">{{ nav_show.title }}</a></li>
+                            {% endfor %}
+                            <li class="subnav-divider"></li>
+                            <li class="uk-nav-header subnav-header-line">Community</li>
+                            <li><a href="https://community.frontrowcrew.com">Forum</a></li>
+                            <li><a href="https://newsletter.frontrowcrew.com">Newsletter</a></li>
+                            <li><a href="mailto:geeknights@frontrowcrew.com">Email</a></li>
+                            <li><a href="https://discord.gg/mAZbNh4kAr">Discord</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
