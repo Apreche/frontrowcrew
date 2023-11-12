@@ -8,6 +8,8 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from taggit import managers as taggit_managers
 
+from frontrowcrew import utils
+
 from . import managers
 
 
@@ -219,22 +221,22 @@ class Content(Publishable):
     def _render_html(self):
         """Render the final HTML from the source according to the chosen format"""
         if self.content_format == self.Format.HTML:
-            self.rendered_html = self.original_content
+            self.rendered_html = utils.compress_whitespace(self.original_content)
         elif self.content_format == self.Format.MARKDOWN:
-            self.rendered_html = markdown.markdown(self.original_content)
+            self.rendered_html = utils.compress_whitespace(
+                markdown.markdown(self.original_content)
+            )
 
     def _render_related_links(self):
         template_name = "shows/content_related_links.html"
         context = {"content": self}
         related_links_html = render_to_string(template_name, context)
-        self.rendered_related_links = related_links_html.strip()
+        self.rendered_related_links = utils.compress_whitespace(related_links_html)
 
     @property
     def rendered_html_with_related_links(self):
         text = self.rendered_html + self.rendered_related_links
-        return "".join(
-            [line.strip() for line in text.splitlines() if line and not line.isspace()]
-        )
+        return utils.compress_whitespace(text)
 
     @property
     def is_live(self):
@@ -270,6 +272,7 @@ class RelatedLinkType(models.Model):
     THING_OF_THE_DAY = 1
     FORUM_THREAD = 2
     PURCHASE_LINK = 3
+    DISCORD_CHAT = 4
 
     description = models.TextField(unique=True)
     plural_description = models.TextField(unique=True)

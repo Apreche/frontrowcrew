@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from frontrowcrew import utils
+
 
 class Service(models.Model):
     YOUTUBE = 1
@@ -16,7 +18,8 @@ class Service(models.Model):
 class Media(models.Model):
     description = models.TextField(blank=True, default="")
     service = models.ForeignKey(
-        "embeds.Service", on_delete=models.PROTECT,
+        "embeds.Service",
+        on_delete=models.PROTECT,
     )
     media_id = models.TextField()
 
@@ -25,14 +28,14 @@ class Media(models.Model):
 
     @property
     def embed_code(self):
-        return self.service.embed_template.format(
-            media_id=self.media_id
+        return utils.compress_whitespace(
+            self.service.embed_template.format(media_id=self.media_id)
         )
 
     @property
     def external_link(self):
-        return self.service.uri_template.format(
-            media_id=self.media_id
+        return utils.compress_whitespace(
+            self.service.uri_template.format(media_id=self.media_id)
         )
 
     class Meta:

@@ -11,6 +11,9 @@ class Syndicator(models.Model):
 
     shows = models.ManyToManyField("shows.Show", blank=True)
 
+    def format_content(self, content):
+        return content.rendered_html_with_related_links
+
     def post(self, content):
         logger.warning(f"{content} attempted to post with unimplemented method")
 

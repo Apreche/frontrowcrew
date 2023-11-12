@@ -20,12 +20,21 @@ class Discourse(Syndicator):
     def __str__(self) -> str:
         return f"Discourse syndicator for {self.username} @ {self.url}"
 
+    def format_content(self, content):
+        formatted_content = super().format_content(content)
+        embedded_media = content.embedded_media.all()
+        if not embedded_media:
+            return formatted_content
+        for embed in embedded_media:
+            formatted_content += f"\n{embed.external_link}\n"
+        return formatted_content
+
     def post(self, content):
         post_url = f"{self.url}/posts.json"
         headers = {"Api-Key": self.api_key, "Api-Username": self.username}
         payload = {
             "title": f"{content.show.title} - {content.title}",
-            "raw": content.rendered_html_with_related_links,
+            "raw": self.format_content(content),
             "category": self.category_id,
         }
         response = requests.post(
@@ -38,6 +47,7 @@ class Discourse(Syndicator):
                 f"{content} failed to publish to Discourse - {response.status_code} - {response.content}"
             )
             return False
+        logger.info(f"{content} published to Discourse")
         return response.json()
 
     def create_related_link(self, content, post_result):
@@ -51,4 +61,3 @@ class Discourse(Syndicator):
             description=f"Forum discussion for {content.title}",
             url=post_url,
         )
-        logger.info(f"{content} published to Discourse")
