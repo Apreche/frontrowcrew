@@ -47,6 +47,7 @@ class Discourse(Syndicator):
                 f"{content} failed to publish to Discourse - {response.status_code} - {response.content}"
             )
             return False
+        logger.info(f"{content} published to Discourse")
         return response.json()
 
     def create_related_link(self, content, post_result):
@@ -60,4 +61,3 @@ class Discourse(Syndicator):
             description=f"Forum discussion for {content.title}",
             url=post_url,
         )
-        logger.info(f"{content} published to Discourse")

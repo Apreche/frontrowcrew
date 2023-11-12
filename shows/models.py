@@ -272,6 +272,7 @@ class RelatedLinkType(models.Model):
     THING_OF_THE_DAY = 1
     FORUM_THREAD = 2
     PURCHASE_LINK = 3
+    DISCORD_CHAT = 4
 
     description = models.TextField(unique=True)
     plural_description = models.TextField(unique=True)
