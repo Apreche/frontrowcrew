@@ -1,6 +1,6 @@
 {# include with left or right as True to change alignment #}
-{% if content.forum_threads|length == 1 %}
-{% with content.forum_threads|first as thread %}
+{% if forum_threads|length == 1 %}
+{% with forum_threads|first as thread %}
 <a href="{{ thread.url }}" alt="{{ thread.description }}"
     {% if thread.error %}class="thread-error">(Broken Link)
     {% else %}>
@@ -20,7 +20,7 @@ See Forum Discussions</button>
     {% endif %}
     ">
     <ul>
-        {% for thread in content.forum_threads %}
+        {% for thread in forum_threads %}
         <li><div class="dropdown-link-wrapper">
             <a href="{{ thread.url }}" alt="{{ thread.description }}"
             {% if thread.error %}class="thread-error">(Broken Link)

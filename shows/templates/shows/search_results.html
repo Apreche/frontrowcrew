@@ -29,9 +29,9 @@
                     {% endif %}
                     {% if content.forum_threads %}
                         <button class="uk-button btn-primary search-forum-link uk-hidden@s search-forum-link-s">
-                        {% include "./partials/_forum_threads.html" %}
+                        {% include "./partials/_forum_threads.html" with forum_threads=content.forum_threads %}
                         <button class="uk-button btn-primary search-forum-link uk-visible@s">
-                        {% include "./partials/_forum_threads.html" with right=True %}                       
+                        {% include "./partials/_forum_threads.html" with right=True forum_threads=content.forum_threads %}                       
                     {% endif %}
                 </div>
                 {% endif %}

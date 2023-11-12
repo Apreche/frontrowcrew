@@ -14,52 +14,56 @@ def homepage(request):
     template_name = "shows/homepage.html"
 
     try:
-        latest_book_club = models.Content.published.filter(
-            show__slug="book-club"
-        ).filter(
-            podcast_episode__isnull=True
-        ).select_related(
-            "show",
-            "podcast_episode",
-        ).only(
-            "show",
-            "catalog_number",
-            "slug",
-            "title",
-            "pub_time",
-            "rendered_html",
-            "podcast_episode",
-        ).latest()
+        latest_book_club = (
+            models.Content.published.filter(show__slug="book-club")
+            .filter(podcast_episode__isnull=True)
+            .select_related(
+                "show",
+                "podcast_episode",
+            )
+            .only(
+                "show",
+                "catalog_number",
+                "slug",
+                "title",
+                "pub_time",
+                "rendered_html",
+                "podcast_episode",
+            )
+            .latest()
+        )
     except models.Content.DoesNotExist:
         latest_book_club = None
 
     try:
-        latest_news = models.Content.published.filter(
-            show__slug="news"
-        ).select_related(
-            "show",
-            "podcast_episode",
-        ).latest()
+        latest_news = (
+            models.Content.published.filter(show__slug="news")
+            .select_related(
+                "show",
+                "podcast_episode",
+            )
+            .latest()
+        )
     except models.Content.DoesNotExist:
         latest_news = None
 
     try:
         latest_contents = models.Content.published.all()
         if latest_book_club:
-            latest_contents = latest_contents.exclude(
-                id=latest_book_club.id
-            )
+            latest_contents = latest_contents.exclude(id=latest_book_club.id)
         if latest_news:
-            latest_contents = latest_contents.exclude(
-                id=latest_news.id
+            latest_contents = latest_contents.exclude(id=latest_news.id)
+        latest_content = (
+            latest_contents.select_related(
+                "show",
+                "podcast_episode",
+                "podcast_episode__enclosure",
             )
-        latest_content = latest_contents.select_related(
-            "show",
-            "podcast_episode",
-            "podcast_episode__enclosure",
-        ).prefetch_related(
-            "embedded_media",
-        ).latest()
+            .prefetch_related(
+                "embedded_media",
+            )
+            .latest()
+        )
     except models.Content.DoesNotExist:
         latest_content = None
 
@@ -88,10 +92,7 @@ def show_detail(request, show_slug, tags=None):
     template_name = "shows/show_detail.html"
     context = {}
     show = shortcuts.get_object_or_404(
-        models.Show.published.select_related(
-            "podcast"
-        ),
-        slug=show_slug
+        models.Show.published.select_related("podcast"), slug=show_slug
     )
     content = show.published_content.prefetch_related(
         "tags",
@@ -111,31 +112,31 @@ def show_detail(request, show_slug, tags=None):
         content = content.filter(pub_time__month=month)
 
     try:
-        latest_content = content.select_related(
-            "show",
-            "podcast_episode",
-            "podcast_episode__enclosure",
-        ).prefetch_related(
-            "tags",
-            "embedded_media",
-        ).latest()
+        latest_content = (
+            content.select_related(
+                "show",
+                "podcast_episode",
+                "podcast_episode__enclosure",
+            )
+            .prefetch_related(
+                "tags",
+                "embedded_media",
+            )
+            .latest()
+        )
     except models.Content.DoesNotExist:
         latest_content = None
 
     for related_link in models.RelatedLink.published.filter(
         content=latest_content
-    ).select_related(
-        "type"
-    ):
+    ).select_related("type"):
         type_string = f"latest_{related_link.type.plural_slug}"
         context.setdefault(type_string, [])
         context[type_string].append(related_link)
 
     paginated_content = content
     if latest_content:
-        paginated_content = paginated_content.exclude(
-            id=latest_content.id
-        )
+        paginated_content = paginated_content.exclude(id=latest_content.id)
 
     paginator = Paginator(
         paginated_content,
@@ -172,16 +173,14 @@ def content_detail(request, show_slug, catalog_number, content_slug=None):
             "tags",
             "embedded_media",
         ),
-        catalog_number=catalog_number
+        catalog_number=catalog_number,
     )
     if (content.slug != content_slug) or (show != content.show):
         return shortcuts.redirect(content, permanent=True)
 
     for related_link in models.RelatedLink.published.filter(
         content=content
-    ).select_related(
-        "type"
-    ):
+    ).select_related("type"):
         type_string = related_link.type.plural_slug
         context.setdefault(type_string, [])
         context[type_string].append(related_link)
@@ -249,23 +248,18 @@ def content_search(request):
     results = (
         models.Content.published.select_related(
             "show",
-        ).prefetch_related(
+        )
+        .prefetch_related(
             "tags",
             Prefetch(
                 "related_links",
                 queryset=forum_threads,
                 to_attr="forum_threads",
             ),
-        ).annotate(
-            search_rank=search.SearchRank(
-                F("search_vector"),
-                query
-            )
-        ).filter(
-            search_vector=query
-        ).order_by(
-            "-search_rank"
         )
+        .annotate(search_rank=search.SearchRank(F("search_vector"), query))
+        .filter(search_vector=query)
+        .order_by("-search_rank")
     )
     paginator = Paginator(
         results,
