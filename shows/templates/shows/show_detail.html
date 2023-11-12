@@ -105,7 +105,7 @@
                         {% endif %}
                         {% if latest_forum_threads %}
                             <button class="uk-button btn-primary btn-forum" type="button"> 
-                            {% include "./partials/_forum_threads.html" with content=latest_content %}
+                            {% include "./partials/_forum_threads.html" with forum_threads=latest_forum_threads %}
                         {% endif %}
                     </div>
                 </div>
