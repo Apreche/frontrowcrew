@@ -23,7 +23,7 @@
         "PGPASSWORD": "frc",
         "PGPORT": "5432"
     },
-    "postCreateCommand": "poetry install --no-ansi --no-root",
+    "postCreateCommand": "poetry install --no-ansi --no-root && git config --global --add safe.directory ${containerWorkspaceFolder}",
     "customizations": {
         "vscode": {
             "settings": {
