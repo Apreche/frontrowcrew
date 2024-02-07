@@ -47,7 +47,7 @@ tblib = "^3.0.0"
 [tool.poetry.group.dev.dependencies]
 django-debug-toolbar = "^4.0.0"
 pgcli = "^4.0.0"
-setuptools = "^68.2.2"
+setuptools = "^69.0.3"
 
 [build-system]
 requires = ["poetry-core>=1.3t.0"]
