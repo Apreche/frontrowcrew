@@ -71,6 +71,11 @@ h5{
     font-size: f.$l
 }
 
+/** Other Text **/
+em{
+    color: unset;
+}
+
 /** Buttons **/
 button{
     cursor: pointer;
