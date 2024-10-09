@@ -8,5 +8,37 @@ updates:
     schedule:
       interval: "weekly"
     ignore:
-      - dependency-name: "django"
-        verisons: ">=4.3"
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      production-updates:
+        applies-to: version-updates
+        update-types:
+        - "minor"
+        - "patch"
+      security-updates:
+        applies-to: security-updates
+        update-types:
+        - "minor"
+        - "patch"
+  - package-ecosystem: "npm"
+    directory: "/"
+    assignees:
+      - "Apreche"
+    target-branch: "main"
+    schedule:
+      interval: "weekly"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      production-updates:
+        applies-to: version-updates
+        update-types:
+        - "minor"
+        - "patch"
+      security-updates:
+        applies-to: security-updates
+        update-types:
+        - "minor"
+        - "patch"
