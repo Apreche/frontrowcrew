@@ -8,8 +8,8 @@ authors = ["Scott Rubin <apreche@frontrowcrew.com>"]
 python = "^3.11"
 Django = "^4.0"
 django-extensions = "^3.1.5"
-celery = "^5.2.1"
-gunicorn = "^21.2.0"
+celery = "^5.4.0"
+gunicorn = "^23.0.0"
 Pillow = "^10.0.0"
 docutils = "^0.20"
 psycopg2 = "^2.9.2"
@@ -20,34 +20,31 @@ factory-boy = "^3.2.1"
 Markdown = "^3.3.6"
 mdgen = "^0.1.9"
 boto3 = "^1.20.26"
-django-taggit = "^5.0.0"
+django-taggit = "^6.1.0"
 django-readonly-field = "^1.1.1"
 mutagen = "^1.45.1"
 python-xmp-toolkit = "^2.0.1"
 django-pagedown = "^2.2.1"
-django-crispy-forms = "^2.0"
-crispy-bootstrap5 = "^0.7"
+django-crispy-forms = "^2.3"
+crispy-bootstrap5 = "^2024.10"
 python-magic = "^0.4.27"
-django-celery-beat = "^2.4.0"
+django-celery-beat = "^2.7.0"
 requests = "^2.28.2"
 tqdm = "^4.64.1"
 flower = "^2.0.0"
 django-model-utils = "^4.3.1"
 
-[tool.poetry.dev-dependencies]
-ipython = "^8.3.0"
-ipdb = "^0.13.9"
-Werkzeug = "^3.0.0"
-coverage = "^7.0.5"
-
 [tool.poetry.group.test.dependencies]
 tblib = "^3.0.0"
 
-
 [tool.poetry.group.dev.dependencies]
+coverage = "^7.0.5"
 django-debug-toolbar = "^4.0.0"
+ipdb = "^0.13.9"
+ipython = "^8.3.0"
 pgcli = "^4.0.0"
-setuptools = "^68.2.2"
+setuptools = "^75.1.0"
+Werkzeug = "^3.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.3t.0"]

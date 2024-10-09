@@ -7,3 +7,6 @@ updates:
     target-branch: "main"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "django"
+        verisons: ">=4.3"
