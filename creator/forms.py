@@ -1,4 +1,5 @@
-import crispy_forms
+import crispy_forms.helper
+import crispy_forms.layout
 import magic
 from crispy_bootstrap5 import bootstrap5
 from crispy_forms import bootstrap
@@ -17,7 +18,6 @@ from shows import models as show_models
 
 
 class MP3UploadForm(forms.ModelForm):
-
     class Meta:
         model = media_models.MP3
         fields = ("file",)
@@ -38,9 +38,7 @@ class MP3UploadForm(forms.ModelForm):
         file = self.cleaned_data.get("file", False)
         filetype = magic.from_buffer(file.read(2048))
         file.seek(0)  # TODO: Is this necessary?
-        if not filetype.startswith(
-            "Audio file with ID3"
-        ):
+        if not filetype.startswith("Audio file with ID3"):
             raise exceptions.ValidationError(
                 "Uploaded file is not an audio file with ID3"
             )
@@ -93,7 +91,9 @@ class PodcastCreatorForm(forms.Form):
         )
         if conflicting_content:
             raise exceptions.ValidationError(
-                _(f"There is already content for {show} with catalog number {catalog_number}")
+                _(
+                    f"There is already content for {show} with catalog number {catalog_number}"
+                )
             )
 
     # Because of crispy forms tag widget not used
@@ -114,16 +114,12 @@ class PodcastCreatorForm(forms.Form):
     )
     show = forms.ModelChoiceField(
         label="Show",
-        queryset=show_models.Show.objects.filter(
-            podcast__isnull=False
-        ),
+        queryset=show_models.Show.objects.filter(podcast__isnull=False),
     )
 
     def clean_show(self):
         if self.cleaned_data["show"].podcast is None:
-            raise exceptions.ValidationError(
-                _("Selected show must be a podcast.")
-            )
+            raise exceptions.ValidationError(_("Selected show must be a podcast."))
         return self.cleaned_data["show"]
 
     title = forms.CharField(
@@ -131,9 +127,7 @@ class PodcastCreatorForm(forms.Form):
     )
 
     def generate_catalog_number():
-        return timezone.localtime(
-            timezone.now()
-        ).strftime("%Y%m%d")
+        return timezone.localtime(timezone.now()).strftime("%Y%m%d")
 
     catalog_number = forms.CharField(
         label="Catalog Number",
@@ -141,9 +135,7 @@ class PodcastCreatorForm(forms.Form):
     )
 
     def generate_pub_time():
-        return timezone.localtime(
-            timezone.now()
-        )
+        return timezone.localtime(timezone.now())
 
     pub_time = utils.forms.DateTimeLocalField(
         label="Publication Time",
@@ -211,7 +203,6 @@ class PodcastCreatorForm(forms.Form):
 
 
 class RelatedLinkForm(forms.Form):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = crispy_forms.helper.FormHelper()
@@ -250,7 +241,6 @@ class RelatedLinkForm(forms.Form):
 
 
 class ChapterForm(forms.Form):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = crispy_forms.helper.FormHelper()

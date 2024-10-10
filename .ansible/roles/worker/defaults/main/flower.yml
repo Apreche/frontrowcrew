@@ -7,6 +7,6 @@ flower_env_config_path: "{{ flower_config_dir }}/config"
 flower_config_path: "{{ flower_config_dir }}/flowerconfig.py"
 flower_runtime_dir: "{{ project_runtime_dir }}/flower"
 flower_log_dir: "{{ project_log_dir }}/flower"
-flower_log_level: "WARNING"
+flower_log_level: "ERROR"
 flower_state_dir: "{{ project_state_dir }}/flower"
 ...
