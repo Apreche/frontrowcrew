@@ -273,6 +273,7 @@ class RelatedLinkType(models.Model):
     FORUM_THREAD = 2
     PURCHASE_LINK = 3
     DISCORD_CHAT = 4
+    BLUESKY_POST = 5
 
     description = models.TextField(unique=True)
     plural_description = models.TextField(unique=True)
