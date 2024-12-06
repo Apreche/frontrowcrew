@@ -507,6 +507,7 @@ description = "Config file reading, writing and validation."
 optional = false
 python-versions = ">=3.7"
 files = [
+    {file = "configobj-5.0.9-py2.py3-none-any.whl", hash = "sha256:1ba10c5b6ee16229c79a05047aeda2b55eb4e80d7c7d8ecf17ec1ca600c79882"},
     {file = "configobj-5.0.9.tar.gz", hash = "sha256:03c881bbf23aa07bccf1b837005975993c4ab4427ba57f959afdd9d1a2386848"},
 ]
 
@@ -678,13 +679,13 @@ files = [
 
 [[package]]
 name = "django"
-version = "4.2.16"
+version = "4.2.17"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "Django-4.2.16-py3-none-any.whl", hash = "sha256:1ddc333a16fc139fd253035a1606bb24261951bbc3a6ca256717fa06cc41a898"},
-    {file = "Django-4.2.16.tar.gz", hash = "sha256:6f1616c2786c408ce86ab7e10f792b8f15742f7b7b7460243929cb371e7f1dad"},
+    {file = "Django-4.2.17-py3-none-any.whl", hash = "sha256:3a93350214ba25f178d4045c0786c61573e7dbfa3c509b3551374f1e11ba8de0"},
+    {file = "Django-4.2.17.tar.gz", hash = "sha256:6b56d834cc94c8b21a8f4e775064896be3b4a4ca387f2612d4406a5927cd2fdc"},
 ]
 
 [package.dependencies]
@@ -2489,4 +2490,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.14"
-content-hash = "aa23dc9310953d53a6fb07658345405f043ec2baedd0dd76ca017d9cbcf24f2e"
+content-hash = "da2db5a317441054bbf50501d50386e048ddc2e63d9018f5e6b1b63b57beec3c"
