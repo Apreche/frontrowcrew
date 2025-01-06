@@ -6,7 +6,7 @@ authors = ["Scott Rubin <apreche@frontrowcrew.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.14"
-Django = "^4.0"
+Django = "^4.2"
 django-extensions = "^3.1.5"
 celery = "^5.4.0"
 gunicorn = "^23.0.0"
@@ -19,7 +19,7 @@ django-celery-results = "^2.2.0"
 factory-boy = "^3.2.1"
 Markdown = "^3.3.6"
 mdgen = "^0.1.9"
-boto3 = "^1.35.49"
+boto3 = "^1.35.92"
 django-taggit = "^6.1.0"
 django-readonly-field = "^1.1.1"
 mutagen = "^1.45.1"
@@ -30,21 +30,21 @@ crispy-bootstrap5 = "^2024.10"
 python-magic = "^0.4.27"
 django-celery-beat = "^2.7.0"
 requests = "^2.28.2"
-tqdm = "^4.64.1"
+tqdm = "^4.67.1"
 flower = "^2.0.0"
 django-model-utils = "^4.3.1"
-atproto = "^0.0.55"
+atproto = "^0.0.56"
 
 [tool.poetry.group.test.dependencies]
 tblib = "^3.0.0"
 
 [tool.poetry.group.dev.dependencies]
-coverage = "^7.6.4"
+coverage = "^7.6.10"
 django-debug-toolbar = "^4.0.0"
 ipdb = "^0.13.9"
-ipython = "^8.29.0"
+ipython = "^8.31.0"
 pgcli = "^4.0.0"
-setuptools = "^75.2.0"
+setuptools = "^75.7.0"
 Werkzeug = "^3.0.6"
 
 [build-system]
