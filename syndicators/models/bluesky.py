@@ -63,6 +63,7 @@ class Bluesky(Syndicator):
         post_url = f"https://bsky.app/profile/{self.username}/post/{post_id}"
         show_models.RelatedLink.objects.create(
             content=content,
+            description=f"Bluesky post for {content.title}",
             type_id=show_models.RelatedLinkType.BLUESKY_POST,
             title=content.title,
             url=post_url,
