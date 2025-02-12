@@ -13,10 +13,7 @@ ENV APP_ENV=${APP_ENV} \
     PYTHONDONTWRITEBYTECODE=1 \
     # PIP
     PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_NO_CACHE_DIR=off \
-    # Poetry
-    POETRY_VERSION=1.8.3 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1
+    PIP_NO_CACHE_DIR=off
 
 RUN apt-get update \
     && apt-get --no-install-recommends -y install \
@@ -27,7 +24,7 @@ RUN apt-get update \
     postgresql-client \
     sqlite3 \
     && pip${VARIANT} install \
-    "poetry~=${POETRY_VERSION}" \
+    uv \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
