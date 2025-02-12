@@ -21,7 +21,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:17
         env:
           POSTGRES_USER: ${{ env.FRONTROWCREW_DB_USER }}
           POSTGRES_PASSWORD: ${{ env.FRONTROWCREW_DB_PASSWORD }}
@@ -51,26 +51,25 @@ jobs:
           sudo apt-get update
           sudo apt-get install libexempi8
       - name: Checkout Source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Compile SASS to CSS
-        uses: gha-utilities/sass-build@v0.5.1
+        uses: gha-utilities/sass-build@v0.6.0
         with:
           source: assets/sass/main.scss
           destination: static/css/main.css
-      - name: Install poetry
-        run: pipx install poetry
+      - name: Install uv
+        run: pipx install uv
       - name: Install Python Environment
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+      - run: uv sync
       - name: Check for Django Migrations
         run: |
-          poetry run python manage.py makemigrations --check --dry-run
+          uv run python manage.py makemigrations --check --dry-run
       - name: Run Django tests
         run: |
-          poetry run python manage.py test --shuffle --parallel auto
+          uv run python manage.py test --shuffle --parallel auto
       - name: Verify collectstatic is working
         run: |
-          poetry run python manage.py collectstatic -v3 --noinput
+          uv run python manage.py collectstatic -v3 --noinput
