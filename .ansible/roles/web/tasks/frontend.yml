@@ -1,10 +1,8 @@
 ---
 - name: "Add nodejs apt key"
-  ansible.builtin.get_url:
+  ansible.builtin.apt_key:
     url: "{{ nodejs_key_url }}"
-    dest: "{{ nodejs_key_path }}"
-    mode: '0644'
-    force: true
+    state: present
   become: yes
 
 - name: "Add nodejs apt repo"
