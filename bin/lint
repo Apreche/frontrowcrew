@@ -3,8 +3,8 @@ set -euo pipefail
 # Run the Github Super-Linter locally
 
 script_dir=$(
-    cd "$(dirname "${BASH_SOURCE[0]}")"
-    pwd -P
+     cd "$(dirname "${BASH_SOURCE[0]}")"
+     pwd -P
 )
 cd "$script_dir"
 echo "${script_dir}/.."
