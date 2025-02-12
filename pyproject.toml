@@ -1,52 +1,52 @@
-[tool.poetry]
+[project]
+authors = [
+    {name = "Scott Rubin", email = "apreche@frontrowcrew.com"},
+]
+requires-python = "<3.14,>=3.11"
+dependencies = [
+    "Django<5.0,>=4.0",
+    "django-extensions<4.0.0,>=3.1.5",
+    "celery<6.0.0,>=5.4.0",
+    "gunicorn<24.0.0,>=23.0.0",
+    "Pillow<11.0.0,>=10.0.0",
+    "docutils<1.0,>=0.21",
+    "psycopg2<3.0.0,>=2.9.10",
+    "pylibmc<2.0.0,>=1.6.1",
+    "django-storages<2.0.0,>=1.12.3",
+    "django-celery-results<3.0.0,>=2.2.0",
+    "factory-boy<4.0.0,>=3.2.1",
+    "Markdown<4.0.0,>=3.3.6",
+    "mdgen<1.0.0,>=0.1.9",
+    "boto3<2.0.0,>=1.35.49",
+    "django-taggit<7.0.0,>=6.1.0",
+    "django-readonly-field<2.0.0,>=1.1.1",
+    "mutagen<2.0.0,>=1.45.1",
+    "python-xmp-toolkit<3.0.0,>=2.0.1",
+    "django-pagedown<3.0.0,>=2.2.1",
+    "django-crispy-forms<3.0,>=2.3",
+    "crispy-bootstrap5<2025.0,>=2024.10",
+    "python-magic<1.0.0,>=0.4.27",
+    "django-celery-beat<3.0.0,>=2.7.0",
+    "requests<3.0.0,>=2.28.2",
+    "tqdm<5.0.0,>=4.64.1",
+    "flower<3.0.0,>=2.0.0",
+    "django-model-utils<5.0.0,>=4.3.1",
+    "atproto<1.0.0,>=0.0.55",
+]
 name = "frontrowcrew"
 version = "0.1.0"
 description = ""
-authors = ["Scott Rubin <apreche@frontrowcrew.com>"]
 
-[tool.poetry.dependencies]
-python = ">=3.11,<3.14"
-Django = "^4.0"
-django-extensions = "^3.1.5"
-celery = "^5.4.0"
-gunicorn = "^23.0.0"
-Pillow = "^10.0.0"
-docutils = "^0.21"
-psycopg2 = "^2.9.10"
-pylibmc = "^1.6.1"
-django-storages = "^1.12.3"
-django-celery-results = "^2.2.0"
-factory-boy = "^3.2.1"
-Markdown = "^3.3.6"
-mdgen = "^0.1.9"
-boto3 = "^1.35.49"
-django-taggit = "^6.1.0"
-django-readonly-field = "^1.1.1"
-mutagen = "^1.45.1"
-python-xmp-toolkit = "^2.0.1"
-django-pagedown = "^2.2.1"
-django-crispy-forms = "^2.3"
-crispy-bootstrap5 = "^2024.10"
-python-magic = "^0.4.27"
-django-celery-beat = "^2.7.0"
-requests = "^2.28.2"
-tqdm = "^4.64.1"
-flower = "^2.0.0"
-django-model-utils = "^4.3.1"
-atproto = "^0.0.55"
-
-[tool.poetry.group.test.dependencies]
-tblib = "^3.0.0"
-
-[tool.poetry.group.dev.dependencies]
-coverage = "^7.6.4"
-django-debug-toolbar = "^4.0.0"
-ipdb = "^0.13.9"
-ipython = "^8.29.0"
-pgcli = "^4.0.0"
-setuptools = "^75.2.0"
-Werkzeug = "^3.0.6"
-
-[build-system]
-requires = ["poetry-core>=1.3t.0"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+test = [
+    "tblib<4.0.0,>=3.0.0",
+]
+dev = [
+    "coverage<8.0.0,>=7.6.4",
+    "django-debug-toolbar<5.0.0,>=4.0.0",
+    "ipdb<1.0.0,>=0.13.9",
+    "ipython<9.0.0,>=8.29.0",
+    "pgcli<5.0.0,>=4.0.0",
+    "setuptools<76.0.0,>=75.2.0",
+    "Werkzeug<4.0.0,>=3.0.6",
+]
