@@ -4,7 +4,7 @@
     name: "nodesource_{{ nodejs_version }}"
     uris: "{{ nodejs_repo_url }}"
     types: deb
-    architecture: amd64
+    architectures: amd64
     signed_by: "{{ nodejs_key_url }}"
     suites: nodistro
     components: main
