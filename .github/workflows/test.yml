@@ -62,7 +62,7 @@ jobs:
       - name: Install Python Environment
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.13'
       - run: uv sync
       - name: Check for Django Migrations
         run: |
