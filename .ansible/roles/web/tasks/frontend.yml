@@ -1,15 +1,14 @@
 ---
-- name: "Add nodejs apt key"
-  ansible.builtin.apt_key:
-    url: "{{ nodejs_key_url }}"
-    state: present
-  become: yes
-
 - name: "Add nodejs apt repo"
-  ansible.builtin.apt_repository:
-    repo: "deb {{ nodejs_repo_url }} {{ ubuntu_release }} main"
+  ansible.builtin.deb822_repository:
+    name: "nodesource_{{ nodejs_version }}"
+    uris: "{{ nodejs_repo_url }}"
+    types: deb
+    architecture: amd64
+    signed_by: "{{ nodejs_key_url }}"
+    suites: nodistro
+    components: main
     state: present
-    update_cache: yes
   become: yes
 
 - name: "Install nodejs"
