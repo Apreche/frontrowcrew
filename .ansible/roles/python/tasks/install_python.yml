@@ -18,7 +18,6 @@
     - python-is-python3
     - "python{{ python_version }}"
     - "python{{ python_version }}-dev"
-    - "python{{ python_version }}-distutils"
     - "python{{ python_version }}-venv"
     - "python{{ python_version }}-tk"
     state: latest
