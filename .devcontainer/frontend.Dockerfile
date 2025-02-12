@@ -1,4 +1,4 @@
-ARG VARIANT=18-bullseye
+ARG VARIANT=22-bookworm
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 
 RUN apt-get update \

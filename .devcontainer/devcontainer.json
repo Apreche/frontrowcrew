@@ -23,7 +23,7 @@
         "PGPASSWORD": "frc",
         "PGPORT": "5432"
     },
-    "postCreateCommand": "poetry install --no-ansi --no-root && git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "postCreateCommand": "uv sync && git config --global --add safe.directory ${containerWorkspaceFolder}",
     "customizations": {
         "vscode": {
             "settings": {
@@ -34,7 +34,8 @@
                 "ms-python.python",
                 "charliermarsh.ruff",
                 "ms-toolsai.jupyter",
-                "batisteo.vscode-django"
+                "batisteo.vscode-django",
+                "github.vscode-github-actions"
             ]
         }
     },
@@ -62,5 +63,11 @@
             "onAutoForward": "notify"
         }
     },
-    "remoteUser": "vscode"
+    "remoteUser": "vscode",
+    "features": {
+        "ghcr.io/va-h/devcontainers-features/uv:1": {
+            "shellautocompletion": true,
+            "version": "latest"
+        }
+    }
 }

@@ -62,54 +62,21 @@
   vars:
     ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
-- name: Install virtualenv
+- name: Install uv
   ansible.builtin.pip:
     executable: "pip{{ python_version }}"
-    name: virtualenv
+    name: uv
     state: latest
   become: yes
   vars:
     ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
-- name: Install poetry
-  ansible.builtin.pip:
-    executable: "pip{{ python_version }}"
-    name: "poetry~={{ poetry_version }}"
-  vars:
-    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
-
-- name: Set poetry bin and requirements.txt paths
-  ansible.builtin.set_fact:
-    poetry_bin: "{{ ansible_env.HOME }}/.local/bin/poetry"
-    requirements_file: "{{ project_source_dir }}/requirements.txt"
-
-- name: Generate requirements.txt
-  ansible.builtin.command:
-    chdir: "{{ project_source_dir }}"
-    cmd: "{{ poetry_bin }} export --output {{ requirements_file }}"
-
-- name: Check if virtualenv has correct Python version
-  stat:
-    path: "{{ virtualenv_bin_dir }}/python{{ python_version }}"
-  register: virtualenv_data
-
-- name: Delete virtualenv if its Python version is old
-  file:
-    state: absent
-    path: "{{ virtualenv_project_dir }}"
-  when: not virtualenv_data.stat.exists
-
 - name: Install project Python requirements
-  ansible.builtin.pip:
-    requirements: "{{ requirements_file }}"
-    virtualenv: "{{ virtualenv_project_dir }}"
-    virtualenv_python: "python{{ python_version }}"
+  ansible.builtin.shell:
+    cmd: uv sync
+    chdir: "{{ project_source_dir }}"
+  environment:
+    UV_PROJECT_ENVIRONMENT: "{{ virtualenv_project_dir }}"
   notify: "restart web application server"
   vars:
     ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
-
-- name: Remove requirements.txt
-  ansible.builtin.file:
-    path: "{{ requirements_file }}"
-    state: absent
-...

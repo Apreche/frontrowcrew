@@ -10,22 +10,6 @@
     "python.defaultInterpreterPath": "./.venv/bin/python",
     "python.terminal.activateEnvironment": true,
     "terminal.integrated.defaultProfile.linux": "bash",
-    "terminal.integrated.profiles.linux": {
-        "django": {
-            "path": "poetry",
-            "icon": "console",
-            "args": [
-                "run",
-                "/workspace/manage.py",
-                "shell_plus",
-                "--quiet-load",
-                "--print-sql",
-                "--force-color"
-            ]
-        },
-        "zsh": null,
-        "JavaScript Debug Terminal": null
-    },
     "search.exclude": {
         "**/.devcontainer": true,
         "**/.git": true,
@@ -34,7 +18,7 @@
         "**/.venv": true,
         "**/.vscode": true,
         "static/src/css/main.css.map": true,
-        "poetry.lock": true,
+        "uv.lock": true,
         "package-lock.json": true,
         "static/vendor": true,
         "bin": true,
