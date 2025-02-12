@@ -70,6 +70,17 @@
   vars:
     ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
+- name: Ensure virtual environment exists
+  ansible.builtin.shell:
+    cmd: uv venv
+    chdir: "{{ project_source_dir }}"
+  environment:
+    UV_PROJECT_ENVIRONMENT: "{{ virtualenv_project_dir }}"
+  vars:
+    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
+  become: true
+  become_user: frc
+
 - name: Install project Python requirements
   ansible.builtin.shell:
     cmd: uv sync
