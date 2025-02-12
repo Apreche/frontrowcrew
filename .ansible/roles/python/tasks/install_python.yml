@@ -79,3 +79,5 @@
   notify: "restart web application server"
   vars:
     ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
+  become: true
+  become_user: frc
