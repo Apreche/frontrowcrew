@@ -25,8 +25,9 @@ jobs:
       - name: Connect to Tailscale
         uses: tailscale/github-action@v3
         with:
-          authkey: ${{secrets.TAILSCALE_AUTHKEY}}
-          statedir: /tmp/tailscale-state/
+          oauth-client-id: ${{secrets.TAILSCALE_CLIENT_ID}}
+          oauth-secret: ${{secrets.TAILSCALE_CLIENT_SECRET}}
+          tags: tag:github-action
 
       - name: Execute deployment playbook
         uses: dawidd6/action-ansible-playbook@v2
