@@ -6,5 +6,5 @@ script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P)
 cd "$script_dir"
 echo "${script_dir}/.."
 
-docker pull github/super-linter:slim-v4
-docker run --env-file="${script_dir}"/.lintenv -v "${script_dir}"/..:/tmp/lint github/super-linter:slim-v4
+docker pull ghcr.io/super-linter/super-linter:slim-latest
+docker run --env-file="${script_dir}"/.lintenv -v "${script_dir}"/..:/tmp/lint github/super-linter:slim-latest
