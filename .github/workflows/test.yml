@@ -14,10 +14,6 @@ jobs:
       FRONTROWCREW_DB_PASSWORD: test
       FRONTROWCREW_DB_HOST: 127.0.0.1
       FRONTROWCREW_DB_PORT: 5432
-      FRONTROWCREW_CELERY_USER: test
-      FRONTROWCREW_CELERY_PASSWORD: test
-      FRONTROWCREW_CELERY_HOST: 127.0.0.1
-      FRONTROWCREW_CELERY_VHOST: test
 
     services:
       postgres:
@@ -29,19 +25,6 @@ jobs:
           - 5432:5432
         options: >-
           --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-      rabbitmq:
-        image: rabbitmq:latest
-        env:
-          RABBITMQ_DEFAULT_USER: ${{ env.FRONTROWCREW_CELERY_USER }}
-          RABBITMQ_DEFAULT_PASSWORD: ${{ env.FRONTROWCREW_CELERY_PASSWORD }}
-          RABBITMQ_DEFAULT_VHOST: ${{ env.FRONTROWCREW_CELERY_VHOST }}
-        ports:
-          - 5672:5672
-        options: >-
-          --health-cmd "rabbitmqctl node_health_check"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5

@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Django Runserver Plus",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",
             "args": [
@@ -13,7 +13,7 @@
         },
         {
             "name": "Django Tests",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",
             "args": [

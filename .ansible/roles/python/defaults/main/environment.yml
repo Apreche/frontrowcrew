@@ -14,11 +14,6 @@ python_environment:
     static_root: "{{ project_www_dir }}/static/"
     media_url: "/media/"
     media_root: "{{ project_www_dir }}/media/"
-    celery_user: "{{ rabbitmq_user }}"
-    celery_password: "{{ rabbitmq_password }}"
-    celery_host: "{{ rabbitmq_host }}"
-    celery_port: "{{ rabbitmq_port }}"
-    celery_vhost: "{{ rabbitmq_vhost }}"
     aws_storage_bucket_name: "{{ lookup('env', 'AWS_STORAGE_BUCKET_NAME') }}"
     aws_s3_custom_domain: "{{ lookup('env', 'AWS_S3_CUSTOM_DOMAIN') }}"
     # Django email settings

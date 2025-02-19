@@ -1,15 +1,15 @@
-import celery
 from django import urls
 from django import utils as django_utils
+from procrastinate.contrib.django import app as procrastinate_app
 
 from creator import models
 from frontrowcrew.utils import sites
+from frontrowcrew.utils import tasks as task_utils
 
 
-@celery.shared_task
-def apply_id3_tags(
-    episode_id
-):
+@procrastinate_app.task
+@task_utils.plug_psycopg_leak
+def apply_id3_tags(episode_id):
     episode = models.Episode.objects.get(
         id=episode_id,
         processed=False,
@@ -22,10 +22,7 @@ def apply_id3_tags(
         raise Exception("Selected show has no podcast")
 
     content_slug = django_utils.text.slugify(episode.title)
-    default_feed_url = urls.reverse(
-        "show-podcast-rss",
-        args=[show.slug]
-    )
+    default_feed_url = urls.reverse("show-podcast-rss", args=[show.slug])
 
     id3_data = {
         "title": episode.title,
@@ -34,9 +31,9 @@ def apply_id3_tags(
         "content_type": "Podcast",
         "description": episode.description,
         # "recording_time": None,  #  Leave whatever was set by recording app
-        "release_time": episode.pub_time.astimezone(
-            django_utils.timezone.utc
-        ).strftime("%Y-%m-%dT%H:%M"),
+        "release_time": episode.pub_time.astimezone(django_utils.timezone.utc).strftime(
+            "%Y-%m-%dT%H:%M"
+        ),
         "tag_time": django_utils.timezone.now().strftime("%Y-%m-%dT%H:%M"),
         "feed_url": podcast.custom_public_feed_url or default_feed_url,
         "artist_web_page": sites.default_base_url(),
@@ -48,7 +45,7 @@ def apply_id3_tags(
                 show.slug,
                 episode.catalog_number,
                 content_slug,
-            ]
+            ],
         ),
         "album_image_description": episode.image_description,
     }

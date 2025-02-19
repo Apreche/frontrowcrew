@@ -18,8 +18,6 @@ from .. import urls as podcast_urls
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     ROOT_URLCONF=podcast_urls,
     CACHES={
         "default": {
@@ -29,18 +27,12 @@ from .. import urls as podcast_urls
     },
 )
 class PodcastsFeedTests(utils.FRCTestCase):
-
     @classmethod
     def setUpTestData(cls):
         cls.podcast = factories.PodcastFactory.create()
-        cls.url = urls.reverse(
-            "podcast-rss",
-            kwargs={"podcast_id": cls.podcast.id}
-        )
+        cls.url = urls.reverse("podcast-rss", kwargs={"podcast_id": cls.podcast.id})
         for _ in range(random.randint(0, 10)):
-            factories.PodcastEpisodeFactory(
-                podcast=cls.podcast
-            )
+            factories.PodcastEpisodeFactory(podcast=cls.podcast)
         cls.xml_namespaces = {
             "itunes": "http://www.itunes.com/dtds/podcast-1.0.dtd",
             "content": "http://purl.org/rss/1.0/modules/content/",
@@ -95,8 +87,7 @@ class PodcastsFeedTests(utils.FRCTestCase):
         else:
             self.assertIsNotNone(creative_commons_license)
             self.assertEqual(
-                creative_commons_license.text,
-                self.podcast.creative_commons_license
+                creative_commons_license.text, self.podcast.creative_commons_license
             )
 
     @skip_if_invalid_rss_xml
@@ -178,17 +169,13 @@ class PodcastsFeedTests(utils.FRCTestCase):
         ]
         actual_category_data = []
         for category in categories:
-            description = (
-                category.attrib["text"]
-            )
+            description = category.attrib["text"]
             sub_description = ""
             children = list(category)
             if children:
                 self.assertEqual(len(children), 1)
                 sub_description = children[0].attrib["text"]
-            actual_category_data.append(
-                (description, sub_description)
-            )
+            actual_category_data.append((description, sub_description))
         for expected in expected_category_data:
             self.assertIn(expected, actual_category_data)
 
@@ -219,10 +206,7 @@ class PodcastsFeedTests(utils.FRCTestCase):
     def test_items(self):
         channel = self.etree.find("channel")
         self.assertIsNotNone(channel)
-        self.assertEqual(
-            self.podcast.episodes.count(),
-            len(channel.findall("item"))
-        )
+        self.assertEqual(self.podcast.episodes.count(), len(channel.findall("item")))
 
     @skip_if_invalid_rss_xml
     def test_item_titles(self):

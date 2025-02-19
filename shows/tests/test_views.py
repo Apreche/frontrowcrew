@@ -1,7 +1,7 @@
 import datetime
-import unittest
 import os
 import tempfile
+import unittest
 from http import HTTPStatus
 
 from django import test, urls
@@ -15,8 +15,6 @@ from shows import factories, models
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -43,14 +41,10 @@ class HomepageTests(utils.FRCTestCase):
             podcast_episode=None,
         )
         expected_latest_news = factories.ContentFactory(
-            is_published=True,
-            show__is_published=True,
-            show__slug="news"
+            is_published=True, show__is_published=True, show__slug="news"
         )
         expected_latest_content = factories.ContentFactory(
-            is_published=True,
-            show__is_published=True,
-            show__slug="geeknights"
+            is_published=True, show__is_published=True, show__slug="geeknights"
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -67,8 +61,6 @@ class HomepageTests(utils.FRCTestCase):
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -119,8 +111,6 @@ class DisplayInNavTests(utils.FRCTestCase):
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -190,12 +180,14 @@ class ShowDetailTests(utils.FRCTestCase):
         """
         Child show content should appear on list page of immediate parent show
         """
-        latest_content = factories.ContentFactory(is_published=True, show__is_published=True)
+        latest_content = factories.ContentFactory(
+            is_published=True, show__is_published=True
+        )
         child_show = latest_content.show
         other_content = factories.ContentFactory(
             is_published=True,
             show=child_show,
-            pub_time=latest_content.pub_time - datetime.timedelta(days=1)
+            pub_time=latest_content.pub_time - datetime.timedelta(days=1),
         )
         show = factories.ShowFactory(is_published=True)
         child_show.parent_show = show
@@ -264,8 +256,6 @@ class ShowDetailTests(utils.FRCTestCase):
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -488,8 +478,6 @@ class ContentDetailTests(utils.FRCTestCase):
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",

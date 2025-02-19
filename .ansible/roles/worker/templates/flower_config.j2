@@ -1,6 +1,0 @@
-# Celery Flower configuration
-broker_api = 'http://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ rabbitmq_host }}:{{ rabbitmq_management_port }}/api/'
-
-# Listen on all addresses and rely on ufw to limit to internal only
-address = None
-logging = "{{ flower_log_level }}"

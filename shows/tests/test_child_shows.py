@@ -4,6 +4,7 @@ import tempfile
 from django import test
 
 from frontrowcrew.tests import utils
+
 from .. import factories
 
 
@@ -11,8 +12,6 @@ from .. import factories
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -21,7 +20,6 @@ from .. import factories
     },
 )
 class ChildShowTests(utils.FRCTestCase):
-
     def test_child_show_includes(self):
         """
         Test if content of a child-show is included on the parent show
@@ -139,14 +137,10 @@ class ChildShowTests(utils.FRCTestCase):
             is_published=True,
         )
         child_child_show = content.show
-        child_show = factories.ShowFactory(
-            is_published=True
-        )
+        child_show = factories.ShowFactory(is_published=True)
         child_child_show.parent_show = child_show
         child_child_show.save()
-        parent_show = factories.ShowFactory(
-            is_published=True
-        )
+        parent_show = factories.ShowFactory(is_published=True)
         child_show.parent_show = parent_show
         child_show.save()
         self.assertIn(

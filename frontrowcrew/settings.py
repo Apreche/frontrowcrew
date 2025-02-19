@@ -55,13 +55,12 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.staticfiles",
     # Third party apps
-    "django_celery_beat",
-    "django_celery_results",
     "django_extensions",
     "django_readonly_field",
     "crispy_forms",
     "crispy_bootstrap5",
     "pagedown",  # The StackOverflow WYSIWYG Editor
+    "procrastinate.contrib.django",
     "taggit",
     # First party apps
     "creator",
@@ -125,26 +124,16 @@ CSRF_COOKIE_SECURE = not DEBUG
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if DEBUG and (os.environ.get("FRONTROWCREW_DB_NAME", None) is None):
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": "db.sqlite3",
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("FRONTROWCREW_DB_NAME", "frontrowcrew"),
+        "USER": os.environ.get("FRONTROWCREW_DB_USER", "frontrowcrew"),
+        "PASSWORD": os.environ.get("FRONTROWCREW_DB_PASSWORD", "frontrowcrew"),
+        "HOST": os.environ.get("FRONTROWCREW_DB_HOST", "localhost"),
+        "PORT": os.environ.get("FRONTROWCREW_DB_PORT", "5432"),
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.environ.get("FRONTROWCREW_DB_NAME", "frontrowcrew"),
-            "USER": os.environ.get("FRONTROWCREW_DB_USER", "frontrowcrew"),
-            "PASSWORD": os.environ.get(
-                "FRONTROWCREW_DB_PASSWORD", "frontrowcrew"
-            ),
-            "HOST": os.environ.get("FRONTROWCREW_DB_HOST", "localhost"),
-            "PORT": os.environ.get("FRONTROWCREW_DB_PORT", "5432"),
-        }
-    }
+}
 
 # Cache
 if DEBUG and (os.environ.get("FRONTROWCREW_MEMCACHED_SOCKET", None) is None):
@@ -220,18 +209,14 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 MEDIA_URL = os.environ.get("FRONTROWCREW_MEDIA_URL", "/media/")
 MEDIA_ROOT = os.environ.get("FRONTROWCREW_MEDIA_ROOT", "/tmp/media/")
-AWS_STORAGE_BUCKET_NAME = os.environ.get(
-    "FRONTROWCREW_AWS_STORAGE_BUCKET_NAME", None
-)
+AWS_STORAGE_BUCKET_NAME = os.environ.get("FRONTROWCREW_AWS_STORAGE_BUCKET_NAME", None)
 if AWS_STORAGE_BUCKET_NAME is not None:
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_FILE_OVERWRITE = False
     AWS_S3_VERIFY = True
     AWS_S3_ENDPOINT_URL = os.environ.get("FRONTROWCREW_AWS_S3_ENDPOINT_URL", None)
-    AWS_S3_URL_PROTOCOL = os.environ.get(
-        "FRONTROWCREW_AWS_S3_URL_PROTOCOL", "https:"
-    )
+    AWS_S3_URL_PROTOCOL = os.environ.get("FRONTROWCREW_AWS_S3_URL_PROTOCOL", "https:")
     custom_domain = os.environ.get("FRONTROWCREW_AWS_S3_CUSTOM_DOMAIN", None)
     if custom_domain is not None:
         AWS_S3_CUSTOM_DOMAIN = custom_domain
@@ -263,41 +248,11 @@ EMAIL_HOST = os.environ.get("FRONTROWCREW_EMAIL_HOST", "localhost")
 EMAIL_HOST_PASSWORD = os.environ.get("FRONTROWCREW_EMAIL_HOST_PASSWORD", "")
 EMAIL_HOST_USER = os.environ.get("FRONTROWCREW_EMAIL_HOST_USER", "")
 EMAIL_PORT = int(os.environ.get("FRONTROWCREW_EMAIL_PORT", "25"))
-EMAIL_SUBJECT_PREFIX = os.environ.get(
-    "FRONTROWCREW_EMAIL_SUBJECT_PREFIX", "[Django]"
-)
-EMAIL_USE_TLS = utils.str_to_bool(
-    os.environ.get("FRONTROWCREW_EMAIL_USE_TLS", "False")
-)
-EMAIL_USE_SSL = utils.str_to_bool(
-    os.environ.get("FRONTROWCREW_EMAIL_USE_SSL", "False")
-)
+EMAIL_SUBJECT_PREFIX = os.environ.get("FRONTROWCREW_EMAIL_SUBJECT_PREFIX", "[Django]")
+EMAIL_USE_TLS = utils.str_to_bool(os.environ.get("FRONTROWCREW_EMAIL_USE_TLS", "False"))
+EMAIL_USE_SSL = utils.str_to_bool(os.environ.get("FRONTROWCREW_EMAIL_USE_SSL", "False"))
 EMAIL_SSL_CERTFILE = os.environ.get("FRONTROWCREW_EMAIL_SSL_CERTFILE", None)
 EMAIL_SSL_KEYFILE = os.environ.get("FRONTROWCREW_EMAIL_SSL_KEYFILE", None)
-
-
-# Celery
-CELERY_TASK_ALWAYS_EAGER = DEBUG
-CELERY_TASK_EAGER_PROPAGATES = DEBUG
-CELERY_TASK_REMOTE_TRACEBACKS = DEBUG
-CELERY_RESULT_BACKEND = "django-db"
-
-if not DEBUG:
-    celery_user = os.environ.get("FRONTROWCREW_CELERY_USER", None)
-    celery_password = os.environ.get("FRONTROWCREW_CELERY_PASSWORD", None)
-    celery_host = os.environ.get("FRONTROWCREW_CELERY_HOST", "127.0.0.1")
-    celery_port = os.environ.get("FRONTROWCREW_CELERY_PORT", 5672)
-    celery_vhost = os.environ.get("FRONTROWCREW_CELERY_VHOST", None)
-    if not any([var is None for var in (celery_user, celery_password, celery_vhost)]):
-        CELERY_BROKER_URL = (
-            f"amqp://{celery_user}"
-            f":{celery_password}"
-            f"@{celery_host}"
-            f":{celery_port}"
-            f"/{celery_vhost}"
-        )
-
-    CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
 # Taggit
 TAGGIT_CASE_INSENSITIVE = True

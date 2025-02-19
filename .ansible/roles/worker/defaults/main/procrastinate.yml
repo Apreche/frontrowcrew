@@ -1,0 +1,7 @@
+---
+procrastinate_service_name: "{{ project_name }}_procrastinate"
+procrastinate_config_dir: "{{ project_config_dir }}/procrastinate"
+procrastinate_environment_path: "{{ procrastinate_config_dir }}/environment"
+procrastinate_log_dir: "{{ project_log_dir }}/procrastinate"
+procrastinate_error_log: "{{ procrastinate_log_dir }}/procrastinate_error.log"
+...
