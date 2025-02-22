@@ -1,19 +1,23 @@
 import datetime
 
-import celery
 from django.db import transaction
 from django.utils import text as text_utils
+from procrastinate.contrib.django import app as procrastinate_app
 
 from creator import models
+from frontrowcrew.utils import tasks as task_utils
 from podcasts import models as podcast_models
 from shows import models as show_models
+from syndicators import models as syndicator_models
+from syndicators import tasks as syndicator_tasks
 
 
 class ConflictingContentException(Exception):
     pass
 
 
-@celery.shared_task
+@procrastinate_app.task
+@task_utils.plug_psycopg_leak
 def publish_podcast_episode(episode_id):
     with transaction.atomic():
         creator_episode = models.Episode.objects.get(id=episode_id)
@@ -109,4 +113,13 @@ def publish_podcast_episode(episode_id):
         # 7. Assign episode to content
         content.podcast_episode = episode
         content.save()
-        return content.id
+
+        # 8. Syndicate content
+        syndicator_ids = syndicator_models.Syndicator.shows.through.objects.filter(
+            show_id=creator_episode.show.id
+        ).values_list("syndicator_id", flat=True)
+        for syndicator_id in syndicator_ids:
+            syndicator_tasks.syndicate.defer(
+                content_id=content.id,
+                syndicator_id=syndicator_id,
+            )

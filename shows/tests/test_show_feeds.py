@@ -1,6 +1,5 @@
 import os
 import tempfile
-
 from http import HTTPStatus
 from xml import etree
 
@@ -8,6 +7,7 @@ from django import test, urls
 
 from frontrowcrew.tests import utils
 from podcasts.tests.utils import skip_if_invalid_rss_xml
+
 from .. import factories
 
 
@@ -15,8 +15,6 @@ from .. import factories
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -25,7 +23,6 @@ from .. import factories
     },
 )
 class ShowFeedTests(utils.FRCTestCase):
-
     @classmethod
     def setUpTestData(cls) -> None:
         cls.show = factories.ShowFactory(
@@ -71,10 +68,7 @@ class ShowFeedTests(utils.FRCTestCase):
 
     @skip_if_invalid_rss_xml
     def test_items(self):
-        factories.ContentFactory(
-            show=self.show,
-            is_published=True
-        )
+        factories.ContentFactory(show=self.show, is_published=True)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
         items_etree = etree.ElementTree.fromstring(response.content)

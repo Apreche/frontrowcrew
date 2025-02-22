@@ -1,6 +1,5 @@
 import os
 import tempfile
-
 from http import HTTPStatus
 
 from django import test, urls
@@ -14,8 +13,6 @@ from shows import factories
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -34,7 +31,7 @@ class SearchTests(utils.FRCTestCase):
         self.client = test.Client()
 
     def test_no_query_content_search(self):
-        """ If there is no query the search results page should still load """
+        """If there is no query the search results page should still load"""
         url = urls.reverse("content-search")
         response = self.client.get(url)
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -45,7 +42,7 @@ class SearchTests(utils.FRCTestCase):
         self.assertEqual(paginator.count, 0)
 
     def test_content_search(self):
-        """ Test that only the matching content is in the results """
+        """Test that only the matching content is in the results"""
 
         # This content will appear in the search result
         content = factories.ContentFactory(
@@ -53,7 +50,7 @@ class SearchTests(utils.FRCTestCase):
             show__is_published=True,
             is_markdown=False,
             title="Hello",
-            raw_content="<p>Hello</p>"
+            raw_content="<p>Hello</p>",
         )
 
         # These contents should not appear in the search results
@@ -62,14 +59,14 @@ class SearchTests(utils.FRCTestCase):
             show__is_published=True,
             is_markdown=False,
             title="Goodbye",
-            raw_content="<h1>Goodbye</h1>"
+            raw_content="<h1>Goodbye</h1>",
         )
         factories.ContentFactory(
             is_published=False,
             show__is_published=True,
             is_markdown=False,
             title="Hello",
-            raw_content="<div>Hello</div>"
+            raw_content="<div>Hello</div>",
         )
 
         base_url = urls.reverse("content-search")
@@ -86,28 +83,28 @@ class SearchTests(utils.FRCTestCase):
         self.assertIn(content, results)
 
     def test_no_results_content_search(self):
-        """ Test the case where a query has no matches """
+        """Test the case where a query has no matches"""
 
         factories.ContentFactory(
             is_published=True,
             show__is_published=True,
             is_markdown=False,
             title="Hello",
-            raw_content="<p>Hello</p>"
+            raw_content="<p>Hello</p>",
         )
         factories.ContentFactory(
             is_published=True,
             show__is_published=True,
             is_markdown=False,
             title="Goodbye",
-            raw_content="<h1>Goodbye</h1>"
+            raw_content="<h1>Goodbye</h1>",
         )
         factories.ContentFactory(
             is_published=False,
             show__is_published=True,
             is_markdown=False,
             title="Hello",
-            raw_content="<div>Hello</div>"
+            raw_content="<div>Hello</div>",
         )
 
         base_url = urls.reverse("content-search")
@@ -122,28 +119,28 @@ class SearchTests(utils.FRCTestCase):
         self.assertEqual(paginator.count, 0)
 
     def test_search_ranking(self):
-        """ Verify title matches rank higher than body matches """
+        """Verify title matches rank higher than body matches"""
 
         top_content = factories.ContentFactory(
             is_published=True,
             show__is_published=True,
             is_markdown=False,
             title="Hello",
-            raw_content="<p>Hello</p>"
+            raw_content="<p>Hello</p>",
         )
         middle_content = factories.ContentFactory(
             is_published=True,
             show__is_published=True,
             is_markdown=False,
             title="Hello",
-            raw_content="<p>Goodbye</p>"
+            raw_content="<p>Goodbye</p>",
         )
         bottom_content = factories.ContentFactory(
             is_published=True,
             show__is_published=True,
             is_markdown=False,
             title="Goodbye",
-            raw_content="<h1>Hello</h1>"
+            raw_content="<h1>Hello</h1>",
         )
 
         # Content that will not be in the result
@@ -152,14 +149,14 @@ class SearchTests(utils.FRCTestCase):
             show__is_published=True,
             is_markdown=False,
             title="Goodbye",
-            raw_content="<div>Goodbye</div>"
+            raw_content="<div>Goodbye</div>",
         )
         factories.ContentFactory(
             is_published=False,
             show__is_published=True,
             is_markdown=False,
             title="Hello",
-            raw_content="<div>Hello</div>"
+            raw_content="<div>Hello</div>",
         )
 
         base_url = urls.reverse("content-search")

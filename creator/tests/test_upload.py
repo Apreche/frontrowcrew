@@ -2,11 +2,10 @@ import http
 import os
 import tempfile
 
-from django import test
-from django import urls
+from django import test, urls
 from django.contrib.auth import models as auth_models
-from frontrowcrew.tests import utils
 
+from frontrowcrew.tests import utils
 from media import models as media_models
 
 
@@ -14,8 +13,6 @@ from media import models as media_models
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -24,7 +21,6 @@ from media import models as media_models
     },
 )
 class UploadTest(utils.FRCTestCase):
-
     def setUp(self):
         super().setUp()
         self.user = auth_models.User.objects.create_user(
@@ -35,16 +31,18 @@ class UploadTest(utils.FRCTestCase):
         self.client.force_login(user=self.user)
 
     def test_upload_mp3_get(self):
-        """ Test getting the blank mp3 upload form"""
+        """Test getting the blank mp3 upload form"""
         url = urls.reverse("creator-upload")
-        response = self.client.get(path=url,)
+        response = self.client.get(
+            path=url,
+        )
         self.assertEqual(
             response.status_code,
             http.HTTPStatus.OK,
         )
 
     def test_upload_mp3_post(self):
-        """ Test posting to the MP3 upload form """
+        """Test posting to the MP3 upload form"""
         test_data_dir_path = os.path.join(os.path.dirname(__file__), "data")
         test_file_name = "test_podcast.mp3"
         test_file_path = os.path.join(test_data_dir_path, test_file_name)
@@ -52,9 +50,7 @@ class UploadTest(utils.FRCTestCase):
         with open(test_file_path, "rb") as test_file:
             test_data = {"file": test_file}
             response = self.client.post(
-                path=url,
-                data=test_data,
-                HTTP_ACCEPT="text/html"
+                path=url, data=test_data, HTTP_ACCEPT="text/html"
             )
         self.assertEqual(
             response.status_code,
@@ -71,7 +67,7 @@ class UploadTest(utils.FRCTestCase):
         )
 
     def test_upload_mp3_post_json(self):
-        """ Test posting to the MP3 upload form with json response """
+        """Test posting to the MP3 upload form with json response"""
         test_data_dir_path = os.path.join(os.path.dirname(__file__), "data")
         test_file_name = "test_podcast.mp3"
         test_file_path = os.path.join(test_data_dir_path, test_file_name)
@@ -79,9 +75,7 @@ class UploadTest(utils.FRCTestCase):
         with open(test_file_path, "rb") as test_file:
             test_data = {"file": test_file}
             response = self.client.post(
-                path=url,
-                data=test_data,
-                HTTP_ACCEPT="application/json"
+                path=url, data=test_data, HTTP_ACCEPT="application/json"
             )
         self.assertEqual(
             response.status_code,
@@ -100,7 +94,7 @@ class UploadTest(utils.FRCTestCase):
         )
 
     def test_upload_mp3_post_invalid(self):
-        """ Test posting to the MP3 upload form """
+        """Test posting to the MP3 upload form"""
         test_data_dir_path = os.path.join(os.path.dirname(__file__), "data")
         test_file_name = "test_text.txt"
         test_file_path = os.path.join(test_data_dir_path, test_file_name)
@@ -117,5 +111,5 @@ class UploadTest(utils.FRCTestCase):
         )
         self.assertIn(
             "Uploaded file is not an audio file with ID3",
-            response.content.decode("utf-8")
+            response.content.decode("utf-8"),
         )

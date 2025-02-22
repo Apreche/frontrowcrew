@@ -1,0 +1,44 @@
+---
+- name: Ensure procrastinate config directory exists
+  ansible.builtin.file:
+    path: "{{ procrastinate_config_dir }}"
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Install procrastinate environment file
+  ansible.builtin.template:
+    src: templates/procrastinate_environment.j2
+    dest: "{{ procrastinate_environment_path }}"
+    owner: root
+    group: www-data
+    mode: '0640'
+  become: yes
+
+- name: Install procrastinate logrotate config file
+  ansible.builtin.template:
+    src: templates/procrastinate_logrotate.j2
+    dest: /etc/logrotate.d/procrastinate
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Install procrastinate systemd service config
+  ansible.builtin.template:
+    src: templates/systemd_procrastinate.j2
+    dest: "{{ systemd_config_dir }}/{{ procrastinate_service_name }}.service"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  notify: "restart procrastinate worker"
+
+- name: Enable and start procrastinate
+  ansible.builtin.systemd:
+    name: "{{ procrastinate_service_name }}.service"
+    enabled: yes
+    state: restarted
+    daemon_reload: yes
+  become: yes
+...

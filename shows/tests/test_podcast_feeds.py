@@ -1,7 +1,6 @@
 import os
 import random
 import tempfile
-
 from http import HTTPStatus
 from xml import etree
 
@@ -10,6 +9,7 @@ from django.contrib.sites.models import Site
 
 from frontrowcrew.tests import utils
 from podcasts.tests.utils import skip_if_invalid_rss_xml
+
 from .. import factories
 
 
@@ -17,8 +17,6 @@ from .. import factories
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -27,7 +25,6 @@ from .. import factories
     },
 )
 class ShowPodcastFeedTests(utils.FRCTestCase):
-
     @classmethod
     def setUpTestData(cls):
         cls.show = factories.ShowFactory(
@@ -43,10 +40,7 @@ class ShowPodcastFeedTests(utils.FRCTestCase):
             if content.is_live and content.podcast_episode is not None:
                 cls.live_podcast_content.append(content)
 
-        cls.url = urls.reverse(
-            "show-podcast-rss",
-            kwargs={"show_slug": cls.show.slug}
-        )
+        cls.url = urls.reverse("show-podcast-rss", kwargs={"show_slug": cls.show.slug})
         cls.xml_namespaces = {
             "itunes": "http://www.itunes.com/dtds/podcast-1.0.dtd",
             "content": "http://purl.org/rss/1.0/modules/content/",
@@ -73,10 +67,7 @@ class ShowPodcastFeedTests(utils.FRCTestCase):
         self.show.podcast = None
         self.show.save()
         response = self.client.get(self.url)
-        self.assertEqual(
-            response.status_code,
-            HTTPStatus.NOT_FOUND
-        )
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
     def test_etree_ok(self):
         if self.response.status_code != HTTPStatus.OK:
@@ -113,8 +104,7 @@ class ShowPodcastFeedTests(utils.FRCTestCase):
         else:
             self.assertIsNotNone(creative_commons_license)
             self.assertEqual(
-                creative_commons_license.text,
-                self.podcast.creative_commons_license
+                creative_commons_license.text, self.podcast.creative_commons_license
             )
 
     @skip_if_invalid_rss_xml
@@ -196,17 +186,13 @@ class ShowPodcastFeedTests(utils.FRCTestCase):
         ]
         actual_category_data = []
         for category in categories:
-            description = (
-                category.attrib["text"]
-            )
+            description = category.attrib["text"]
             sub_description = ""
             children = list(category)
             if children:
                 self.assertEqual(len(children), 1)
                 sub_description = children[0].attrib["text"]
-            actual_category_data.append(
-                (description, sub_description)
-            )
+            actual_category_data.append((description, sub_description))
         for expected in expected_category_data:
             self.assertIn(expected, actual_category_data)
 
@@ -237,10 +223,7 @@ class ShowPodcastFeedTests(utils.FRCTestCase):
     def test_items(self):
         channel = self.etree.find("channel")
         self.assertIsNotNone(channel)
-        self.assertEqual(
-            len(self.live_podcast_content),
-            len(channel.findall("item"))
-        )
+        self.assertEqual(len(self.live_podcast_content), len(channel.findall("item")))
 
     @skip_if_invalid_rss_xml
     def test_item_titles(self):
@@ -264,14 +247,10 @@ class ShowPodcastFeedTests(utils.FRCTestCase):
         self.show.parent_show = parent_show
         self.show.save()
         parent_url = urls.reverse(
-            "show-podcast-rss",
-            kwargs={"show_slug": parent_show.slug}
+            "show-podcast-rss", kwargs={"show_slug": parent_show.slug}
         )
         response = self.client.get(parent_url)
-        self.assertEqual(
-            response.status_code,
-            HTTPStatus.OK
-        )
+        self.assertEqual(response.status_code, HTTPStatus.OK)
         exception = None
         try:
             parent_etree = etree.ElementTree.fromstring(self.response.content)
@@ -284,10 +263,7 @@ class ShowPodcastFeedTests(utils.FRCTestCase):
             episode = content.podcast_episode
             item = channel.find(f"item[guid='{episode.guid}']")
             self.assertIsNotNone(item)
-            self.assertEqual(
-                item.find("title").text,
-                episode.title
-            )
+            self.assertEqual(item.find("title").text, episode.title)
 
     @skip_if_invalid_rss_xml
     def test_item_enclosure(self):

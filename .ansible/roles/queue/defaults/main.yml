@@ -1,8 +1,0 @@
----
-rabbitmq_vhost: "{{ project_name }}/"
-rabbitmq_user: "{{ project_name }}"
-rabbitmq_password: "{{ project_name }}"
-rabbitmq_host: "localhost"
-rabbitmq_port: "5672"
-rabbitmq_management_port: "15672"
-...

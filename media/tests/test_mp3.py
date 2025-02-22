@@ -12,8 +12,6 @@ from media import factories
     STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
     DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
-    CELERY_TASK_ALWAYS_EAGER=True,
-    CELERY_TASK_EAGER_PROPAGATES=True,
     CACHES={
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -22,7 +20,6 @@ from media import factories
     },
 )
 class MP3Test(utils.FRCTestCase):
-
     def test_get_xmp_chapters(self):
         mp3 = factories.MP3Factory()
         expected_chapters = [
@@ -68,10 +65,7 @@ class MP3Test(utils.FRCTestCase):
     @unittest.skip("album images set from FileFields now")
     def test_set_id3_album_image_path(self):
         mp3 = factories.MP3Factory()
-        album_image_path = os.path.join(
-            os.path.dirname(__file__),
-            "data/TestImage.png"
-        )
+        album_image_path = os.path.join(os.path.dirname(__file__), "data/TestImage.png")
         test_album_image_description = "test album cover"
         mp3.set_id3(
             album_image=album_image_path,
@@ -87,10 +81,7 @@ class MP3Test(utils.FRCTestCase):
     @unittest.skip("album images set from FileFields now")
     def test_set_id3_album_image_fp(self):
         mp3 = factories.MP3Factory()
-        album_image_path = os.path.join(
-            os.path.dirname(__file__),
-            "data/TestImage.png"
-        )
+        album_image_path = os.path.join(os.path.dirname(__file__), "data/TestImage.png")
         test_album_image_description = "test album cover"
         with open(album_image_path, "rb") as album_image_file:
             mp3.set_id3(
@@ -115,12 +106,10 @@ class MP3Test(utils.FRCTestCase):
                 "name": "Second Chapter",
                 "start_time": 1000,
                 "end_time": 2000,
-            }
+            },
         ]
         mp3 = factories.MP3Factory()
-        mp3.set_id3(
-            chapters=test_chapters
-        )
+        mp3.set_id3(chapters=test_chapters)
         id3 = mp3.get_id3()
         ctocs = id3.getall("CTOC")
         self.assertEqual(len(ctocs), 1)
@@ -132,7 +121,8 @@ class MP3Test(utils.FRCTestCase):
 
         chaps = id3.getall("CHAP")
         self.assertEqual(
-            len(chaps), len(test_chapters),
+            len(chaps),
+            len(test_chapters),
         )
         for idx, test_chapter in enumerate(test_chapters):
             chap = chaps[idx]
@@ -141,14 +131,11 @@ class MP3Test(utils.FRCTestCase):
             chap_sub_frames = chap.sub_frames
             chap_tit2 = chap_sub_frames.getall("TIT2")
             self.assertEqual(len(chap_tit2), 1)
-            self.assertEqual(
-                chap_tit2[0].text, [test_chapter["name"]]
-            )
+            self.assertEqual(chap_tit2[0].text, [test_chapter["name"]])
 
     def test_set_id3_advanced_chapters(self):
         chapter_image_path = os.path.join(
-            os.path.dirname(__file__),
-            "data/TestImage.png"
+            os.path.dirname(__file__), "data/TestImage.png"
         )
         test_chapter_image_description = "test chapter image"
         with open(chapter_image_path, "rb") as test_chapter_image_file:
@@ -185,12 +172,10 @@ class MP3Test(utils.FRCTestCase):
                     "start_time": 5000,
                     "end_time": 5001,
                     "image": test_file_field,
-                }
+                },
             ]
             mp3 = factories.MP3Factory()
-            mp3.set_id3(
-                chapters=test_chapters
-            )
+            mp3.set_id3(chapters=test_chapters)
             id3 = mp3.get_id3()
             ctocs = id3.getall("CTOC")
             self.assertEqual(len(ctocs), 1)
@@ -202,7 +187,8 @@ class MP3Test(utils.FRCTestCase):
 
             chaps = id3.getall("CHAP")
             self.assertEqual(
-                len(chaps), len(test_chapters),
+                len(chaps),
+                len(test_chapters),
             )
             chaps.sort(key=lambda x: x.element_id)
             for idx, test_chapter in enumerate(test_chapters):
@@ -213,22 +199,16 @@ class MP3Test(utils.FRCTestCase):
                 chap_tit2s = chap_sub_frames.getall("TIT2")
                 self.assertEqual(len(chap_tit2s), 1)
                 chap_tit2 = chap_tit2s[0]
-                self.assertEqual(
-                    chap_tit2.text, [test_chapter["name"]]
-                )
+                self.assertEqual(chap_tit2.text, [test_chapter["name"]])
                 chap_tit3s = chap_sub_frames.getall("TIT3")
                 self.assertEqual(len(chap_tit3s), 1)
                 chap_tit3 = chap_tit3s[0]
-                self.assertEqual(
-                    chap_tit3.text, [test_chapter["description"]]
-                )
+                self.assertEqual(chap_tit3.text, [test_chapter["description"]])
                 chap_wxxxs = chap_sub_frames.getall("WXXX")
                 if test_chapter.get("url", None) is not None:
                     self.assertEqual(len(chap_wxxxs), 1)
                     chap_wxxx = chap_wxxxs[0]
-                    self.assertEqual(
-                        chap_wxxx.url, test_chapter["url"]
-                    )
+                    self.assertEqual(chap_wxxx.url, test_chapter["url"])
                     self.assertEqual(
                         chap_wxxx.desc, test_chapter.get("url_description", "")
                     )
@@ -241,8 +221,7 @@ class MP3Test(utils.FRCTestCase):
                     chap_apic = chap_apics[0]
                     self.assertEqual(chap_apic.mime, "image/png")
                     self.assertEqual(
-                        chap_apic.desc,
-                        test_chapter.get("image_description", "")
+                        chap_apic.desc, test_chapter.get("image_description", "")
                     )
                 else:
                     self.assertEqual(len(chap_apics), 0)

@@ -1,22 +1,8 @@
 ---
-- name: Restart celery beat
+- name: Restart Procrastinate Worker
   ansible.builtin.service:
-    name: "{{ celery_beat_service_name }}"
+    name: "{{ procrastinate_service_name }}"
     state: restarted
-  listen: "restart celery beat"
-  become: yes
-
-- name: Restart celery workers
-  ansible.builtin.service:
-    name: "{{ celery_service_name }}"
-    state: restarted
-  listen: "restart celery workers"
-  become: yes
-
-- name: Restart flower workers
-  ansible.builtin.service:
-    name: "{{ flower_service_name }}"
-    state: restarted
-  listen: "restart flower workers"
+  listen: "restart procrastinate"
   become: yes
 ...
