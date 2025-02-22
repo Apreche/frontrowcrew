@@ -10,8 +10,8 @@
 
 - name: Collect static files
   ansible.builtin.command:
-    cmd: "PYTHONDONTWRITEBYTECODE=1 {{ virtualenv_python_bin }} {{ project_source_dir }}/manage.py collectstatic --noinput"
-  environment: "{{ env_vars }}"
+    cmd: "{{ virtualenv_python_bin }} {{ project_source_dir }}/manage.py collectstatic --noinput"
+  environment: "{{ env_vars | combine({PYTHONDONTWRITEBYTECODE: 1}) }}"
   become: yes
 
 - name: Collect icon and manifest files
