@@ -10,7 +10,7 @@
 
 - name: Collect static files
   ansible.builtin.command:
-    cmd: "{{ virtualenv_python_bin }} {{ project_source_dir }}/manage.py collectstatic --noinput"
+    cmd: "PYTHONDONTWRITEBYTECODE=1 {{ virtualenv_python_bin }} {{ project_source_dir }}/manage.py collectstatic --noinput"
   environment: "{{ env_vars }}"
   become: yes
 
