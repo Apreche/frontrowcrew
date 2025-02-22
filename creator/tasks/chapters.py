@@ -15,7 +15,8 @@ def sort_chapters(episode_id):
         id=episode_id,
         processed=False,
     )
-    mp3_file = mutagen_mp3.MP3(episode.mp3.file)
+    original_file = episode.mp3.file
+    mp3_file = mutagen_mp3.MP3(original_file)
     mp3_end_time = int(mp3_file.info.length * 1000)
     chapters = models.Chapter.objects.filter(episode=episode).order_by("-start_time")
 
@@ -28,3 +29,4 @@ def sort_chapters(episode_id):
                 chapter.end_time = previous_start_time - 1
             chapter.save()
         previous_start_time = chapter.start_time
+    original_file.close()

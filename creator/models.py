@@ -2,6 +2,7 @@ from django.core import validators
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from taggit import managers as taggit_managers
+
 from podcasts import models as podcast_models
 
 
@@ -12,11 +13,9 @@ class Episode(models.Model):
     Also, the tasks that create the actual episode refer to this
     as the source of original data.
     """
+
     processed = models.BooleanField(default=False)
-    mp3 = models.ForeignKey(
-        "media.MP3",
-        on_delete=models.PROTECT
-    )
+    mp3 = models.ForeignKey("media.MP3", on_delete=models.PROTECT)
     destination = models.ForeignKey(
         "media.FTPDestination",
         on_delete=models.PROTECT,
@@ -31,8 +30,7 @@ class Episode(models.Model):
         max_length=255,
         validators=[
             validators.RegexValidator(
-                r"^\d+$",
-                message=_("Catalog number may only contain digits")
+                r"^\d+$", message=_("Catalog number may only contain digits")
             ),
         ],
     )
@@ -53,7 +51,9 @@ class Episode(models.Model):
     image_height = models.PositiveIntegerField(blank=True, null=True, default=None)
     image_width = models.PositiveIntegerField(blank=True, null=True, default=None)
     itunes_title = models.CharField(
-        max_length=255, blank=True, default="",
+        max_length=255,
+        blank=True,
+        default="",
     )
     itunes_image = models.ImageField(
         upload_to="creator/episode/itunes_image",
@@ -63,13 +63,21 @@ class Episode(models.Model):
         default="",
     )
     itunes_image_description = models.TextField(blank=True, default="")
-    itunes_image_height = models.PositiveIntegerField(blank=True, null=True, default=None)
-    itunes_image_width = models.PositiveIntegerField(blank=True, null=True, default=None)
+    itunes_image_height = models.PositiveIntegerField(
+        blank=True, null=True, default=None
+    )
+    itunes_image_width = models.PositiveIntegerField(
+        blank=True, null=True, default=None
+    )
     itunes_episode_number = models.PositiveIntegerField(
-        blank=True, null=True, default=None,
+        blank=True,
+        null=True,
+        default=None,
     )
     itunes_season_number = models.PositiveIntegerField(
-        blank=True, null=True, default=None,
+        blank=True,
+        null=True,
+        default=None,
     )
     itunes_explicit = models.BooleanField(null=True, default=None)
     itunes_episode_type = models.CharField(

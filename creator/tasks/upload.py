@@ -8,7 +8,9 @@ from frontrowcrew.utils import tasks as task_utils
 @task_utils.plug_psycopg_leak
 def upload_file(episode_id):
     episode = models.Episode.objects.get(id=episode_id)
+    mp3_file = episode.mp3.file
     episode.destination.upload(
-        episode.mp3.file,
+        mp3_file,
         f"{episode.catalog_number}.mp3",
     )
+    mp3_file.close()

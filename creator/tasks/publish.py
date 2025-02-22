@@ -67,11 +67,13 @@ def publish_podcast_episode(episode_id):
             )
 
         # 4. Create podcast enclosure
+        mp3_file = creator_episode.mp3.file
         enclosure = podcast_models.PodcastEnclosure.objects.create(
             url=url,
-            length=creator_episode.mp3.file.size,
+            length=mp3_file.size,
             type=podcast_models.PodcastEnclosure.EnclosureType.MP3,
         )
+        mp3_file.close()
 
         # 5. Create podcast episode
         mp3_info = creator_episode.mp3.get_info()
