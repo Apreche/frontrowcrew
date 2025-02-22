@@ -3,6 +3,6 @@
   ansible.builtin.service:
     name: "{{ procrastinate_service_name }}"
     state: restarted
-  listen: "restart procrastinate"
+  listen: "restart procrastinate worker"
   become: yes
 ...
