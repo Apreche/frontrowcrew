@@ -3,7 +3,7 @@ Description={{ project_name }} procrastinate worker
 After=network.target
 
 [Service]
-Type=notify
+Type=exec
 DynamicUser=yes
 Group=www-data
 ConfigurationDirectory={{ project_name }}/procrastinate
@@ -14,9 +14,9 @@ EnvironmentFile={{ procrastinate_environment_path }}
 ExecStart={{ virtualenv_bin_dir }}/python {{ project_source_dir }}/manage.py procrastinate worker 
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
-TimeoutStopSec=5
+TimeoutStopSec=10
 Restart=on-failure
-RestartSec=3
+RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
