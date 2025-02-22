@@ -3,9 +3,7 @@ import os
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from . import id3
-from . import ftp
-from . import xmp
+from . import ftp, id3, xmp
 
 
 class MP3(models.Model):
@@ -16,18 +14,25 @@ class MP3(models.Model):
         return xmp.get_xmp_chapters(self.file)
 
     def get_info(self):
-        return id3.get_info(self.file)
+        mp3_file = self.file
+        result = id3.get_info(self.file)
+        mp3_file.close()
+        return result
 
     def get_id3(self):
-        return id3.get_id3(self.file)
+        mp3_file = self.file
+        result = id3.get_id3(self.file)
+        mp3_file.close()
+        return result
 
     def set_id3(self, *args, **kwargs):
-        return id3.set_id3(self.file, *args, **kwargs)
+        mp3_file = self.file
+        result = id3.set_id3(self.file, *args, **kwargs)
+        mp3_file.close()
+        return result
 
     def __str__(self):
-        return os.path.basename(
-            self.file.name
-        )
+        return os.path.basename(self.file.name)
 
     class Meta:
         verbose_name = _("MP3")
@@ -44,7 +49,8 @@ class FTPDestination(models.Model):
     custom_timeout = models.SmallIntegerField(blank=True, null=True, default=None)
 
     url_prefix = models.TextField(
-        blank=True, default="",
+        blank=True,
+        default="",
         help_text=_("The URL at which the file will be available after uploading."),
         verbose_name=_("URL Prefix"),
     )
