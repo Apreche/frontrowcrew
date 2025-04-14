@@ -5,7 +5,7 @@ authors = [
 requires-python = "<3.14,>=3.13"
 dependencies = [
     "Django<5.0,>=4.0",
-    "django-extensions<4.0.0,>=3.1.5",
+    "django-extensions>=3.1.5,<5.0.0",
     "gunicorn<24.0.0,>=23.0.0",
     "Pillow>=10.0.0,<12.0.0",
     "docutils<1.0,>=0.21",
