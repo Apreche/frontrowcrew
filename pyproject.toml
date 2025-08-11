@@ -40,7 +40,7 @@ test = [
 ]
 dev = [
     "coverage<8.0.0,>=7.6.4",
-    "django-debug-toolbar>=4.0.0,<6.0.0",
+    "django-debug-toolbar>=4.0.0,<7.0.0",
     "ipdb<1.0.0,>=0.13.9",
     "ipython>=8.29.0,<10.0.0",
     "pgcli<5.0.0,>=4.0.0",
