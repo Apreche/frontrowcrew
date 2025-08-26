@@ -5,7 +5,7 @@ authors = [
 requires-python = "<3.14,>=3.13"
 dependencies = [
     "Django<5.0,>=4.0",
-    "django-extensions<4.0.0,>=3.1.5",
+    "django-extensions>=3.1.5,<5.0.0",
     "gunicorn<24.0.0,>=23.0.0",
     "Pillow>=10.0.0,<12.0.0",
     "docutils<1.0,>=0.21",
@@ -22,7 +22,7 @@ dependencies = [
     "python-xmp-toolkit<3.0.0,>=2.0.1",
     "django-pagedown<3.0.0,>=2.2.1",
     "django-crispy-forms<3.0,>=2.3",
-    "crispy-bootstrap5<2025.0,>=2024.10",
+    "crispy-bootstrap5>=2024.10,<2026.0",
     "python-magic<1.0.0,>=0.4.27",
     "requests<3.0.0,>=2.28.2",
     "tqdm<5.0.0,>=4.64.1",
@@ -40,11 +40,11 @@ test = [
 ]
 dev = [
     "coverage<8.0.0,>=7.6.4",
-    "django-debug-toolbar>=4.0.0,<6.0.0",
+    "django-debug-toolbar>=4.0.0,<7.0.0",
     "ipdb<1.0.0,>=0.13.9",
     "ipython>=8.29.0,<10.0.0",
     "pgcli<5.0.0,>=4.0.0",
     "pympler>=1.1",
-    "setuptools>=75.2.0,<77.0.0",
+    "setuptools>=75.2.0,<78.0.0",
     "Werkzeug<4.0.0,>=3.0.6",
 ]
