@@ -47,19 +47,19 @@
   command: "python{{ python_version }} -m ensurepip --upgrade"
   become: yes
 
-# Can't use ansible.builtin.pip without setuptools
-- name: Ensure setuptools is installed
-  command: "python{{ python_version }} -m pip install setuptools"
-  become: yes
+# # Can't use ansible.builtin.pip without setuptools
+# - name: Ensure setuptools is installed
+#   command: "python{{ python_version }} -m pip install setuptools"
+#   become: yes
 
-- name: Install testresources
-  ansible.builtin.pip:
-    executable: "pip{{ python_version }}"
-    name: testresources
-    state: latest
-  become: yes
-  vars:
-    ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
+# - name: Install testresources
+#   ansible.builtin.pip:
+#     executable: "pip{{ python_version }}"
+#     name: testresources
+#     state: latest
+#   become: yes
+#   vars:
+#     ansible_python_interpreter: "/usr/bin/python{{ python_version }}"
 
 - name: Install uv
   ansible.builtin.pip:
