@@ -1,8 +1,7 @@
 import datetime
-import factory
 import random
 
-from django.utils import timezone
+import factory
 from mdgen import MarkdownPostProvider
 
 from . import models
@@ -55,9 +54,7 @@ class PodcastFactory(factory.django.DjangoModelFactory):
     # TODO: Podcast RSS supports only ISO 639-1 which is 2-character codes
     # This faker returns 3-character codes, so it breaks
     # language = factory.Faker("language_code")
-    language = factory.Faker(
-        "random_element", elements=["en", "fr", "es"]
-    )
+    language = factory.Faker("random_element", elements=["en", "fr", "es"])
     has_managing_editor = factory.Faker("boolean")
     managing_editor = factory.Maybe(
         "has_managing_editor",
@@ -90,15 +87,11 @@ class PodcastFactory(factory.django.DjangoModelFactory):
     )
 
     itunes_image = factory.django.ImageField(width=3000, height=3000)
-    itunes_primary_category = factory.Iterator(
-        models.iTunesCategory.objects.all()
-    )
+    itunes_primary_category = factory.Iterator(models.iTunesCategory.objects.all())
     has_secondary_category = factory.Faker("boolean")
     itunes_secondary_category = factory.Maybe(
         "has_secondary_category",
-        factory.Iterator(
-            models.iTunesCategory.objects.all()
-        ),
+        factory.Iterator(models.iTunesCategory.objects.all()),
         None,
     )
     itunes_explicit = factory.Faker("null_boolean")
@@ -115,9 +108,7 @@ class PodcastFactory(factory.django.DjangoModelFactory):
         factory.Faker("sentence"),
         "",
     )
-    itunes_type = factory.Faker(
-        "random_element", elements=models.Podcast.PodcastType
-    )
+    itunes_type = factory.Faker("random_element", elements=models.Podcast.PodcastType)
     itunes_block = factory.Faker("boolean", chance_of_getting_true=1)
     itunes_complete = factory.Faker("boolean", chance_of_getting_true=1)
     has_copyright = factory.Faker("boolean")
@@ -171,9 +162,7 @@ class PodcastChapterFactory(factory.django.DjangoModelFactory):
             "has_image_description",
         )
 
-    episode = factory.SubFactory(
-        "podcasts.factories.PodcastEpisodeFactory"
-    )
+    episode = factory.SubFactory("podcasts.factories.PodcastEpisodeFactory")
     start_time = factory.Faker("random_int", min=0, max=100000)
     has_end_time = factory.Faker("boolean")
     end_time = factory.Maybe(
@@ -244,22 +233,14 @@ class PodcastEpisodeFactory(factory.django.DjangoModelFactory):
         factory.Faker("url"),
         factory.Faker("uuid4"),
     )
-    pub_date = factory.Faker("date_time", tzinfo=timezone.utc)
+    pub_date = factory.Faker("date_time", tzinfo=datetime.timezone.utc)
     description = factory.Faker("paragraph")
-    duration_in_seconds = factory.Faker(
-        "random_int", min=1, max=7200
-    )
+    duration_in_seconds = factory.Faker("random_int", min=1, max=7200)
     duration = factory.LazyAttribute(
-        lambda o: datetime.timedelta(
-            seconds=o.duration_in_seconds
-        )
+        lambda o: datetime.timedelta(seconds=o.duration_in_seconds)
     )
     has_author_name = factory.Faker("boolean")
-    author_name = factory.Maybe(
-        "has_author_name",
-        factory.Faker("name"),
-        ""
-    )
+    author_name = factory.Maybe("has_author_name", factory.Faker("name"), "")
     has_author_email = factory.Faker("boolean")
     author_email = factory.Maybe(
         "has_author_email",
@@ -300,9 +281,8 @@ class PodcastEpisodeFactory(factory.django.DjangoModelFactory):
 
     force_itunes_episode_number = factory.Faker("boolean")
     has_itunes_episode_number = factory.LazyAttribute(
-        lambda o: o.force_itunes_episode_number or (
-            o.podcast.itunes_type == models.Podcast.PodcastType.SERIAL
-        )
+        lambda o: o.force_itunes_episode_number
+        or (o.podcast.itunes_type == models.Podcast.PodcastType.SERIAL)
     )
     itunes_episode_number = factory.Maybe(
         "has_itunes_episode_number",
@@ -313,7 +293,9 @@ class PodcastEpisodeFactory(factory.django.DjangoModelFactory):
     itunes_season_number = factory.Maybe(
         "has_itunes_season_number",
         factory.Faker(
-            "random_int", min=0, max=3,
+            "random_int",
+            min=0,
+            max=3,
         ),
         None,
     )
@@ -326,5 +308,5 @@ class PodcastEpisodeFactory(factory.django.DjangoModelFactory):
     chapters = factory.RelatedFactoryList(
         "podcasts.factories.PodcastChapterFactory",
         factory_related_name="episode",
-        size=lambda: random.randint(0, 5)
+        size=lambda: random.randint(0, 5),
     )

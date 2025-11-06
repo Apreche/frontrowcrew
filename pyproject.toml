@@ -2,49 +2,53 @@
 authors = [
     {name = "Scott Rubin", email = "apreche@frontrowcrew.com"},
 ]
+
 requires-python = "<3.14,>=3.13"
-dependencies = [
-    "Django<5.0,>=4.0",
-    "django-extensions>=3.1.5,<5.0.0",
-    "gunicorn<24.0.0,>=23.0.0",
-    "Pillow>=10.0.0,<12.0.0",
-    "docutils<1.0,>=0.21",
-    "psycopg2<3.0.0,>=2.9.10",
-    "pylibmc<2.0.0,>=1.6.1",
-    "django-storages<2.0.0,>=1.12.3",
-    "factory-boy<4.0.0,>=3.2.1",
-    "Markdown<4.0.0,>=3.3.6",
-    "mdgen<1.0.0,>=0.1.9",
-    "boto3<2.0.0,>=1.35.49",
-    "django-taggit<7.0.0,>=6.1.0",
-    "django-readonly-field<2.0.0,>=1.1.1",
-    "mutagen<2.0.0,>=1.45.1",
-    "python-xmp-toolkit<3.0.0,>=2.0.1",
-    "django-pagedown<3.0.0,>=2.2.1",
-    "django-crispy-forms<3.0,>=2.3",
-    "crispy-bootstrap5>=2024.10,<2026.0",
-    "python-magic<1.0.0,>=0.4.27",
-    "requests<3.0.0,>=2.28.2",
-    "tqdm<5.0.0,>=4.64.1",
-    "django-model-utils>=4.3.1,<6.0.0",
-    "atproto<1.0.0,>=0.0.55",
-    "procrastinate[django]>=3.0.2",
-]
 name = "frontrowcrew"
 version = "0.1.0"
 description = ""
+dependencies = [
+    "atproto>=0.0.63,<0.0.64",
+    "boto3>=1.40.67,<1.41.0",
+    "crispy-bootstrap5>=2025.6,<2025.7",
+    "django>=5.2.8,<5.3.0",
+    "django-crispy-forms>=2.4,<2.5",
+    "django-extensions>=4.1,<4.2",
+    "django-model-utils>=5.0.0,<5.1.0",
+    "django-pagedown>=2.2.1,<2.3.0",
+    "django-readonly-field>=1.3.0,<1.4.0",
+    "django-storages>=1.14.6,<1.15.0",
+    "django-taggit>=6.1.0,<6.2.0",
+    "docutils>=0.22.2,<0.22.3",
+    "factory-boy>=3.3.3,<3.4.0",
+    "gunicorn>=23.0.0,<23.1.0",
+    "markdown>=3.10,<3.11",
+    "mdgen>=0.1.10,<0.1.11",
+    "mutagen>=1.47.0,<1.48.0",
+    "pillow>=12.0.0,<12.1.0",
+    "procrastinate[django]>=3.5.3,<3.6.0",
+    "psycopg[pool]>=3.2.12,<3.3.0",
+    "pylibmc>=1.6.3,<1.7.0",
+    "python-magic>=0.4.27,<0.4.28",
+    "python-xmp-toolkit>=2.0.2,<2.1.0",
+    "requests>=2.32.5,<2.33.0",
+    "tqdm>=4.67.1,<4.68.0",
+]
+
+[tool.uv]
+add-bounds = "minor"
 
 [dependency-groups]
-test = [
-    "tblib<4.0.0,>=3.0.0",
-]
 dev = [
-    "coverage<8.0.0,>=7.6.4",
-    "django-debug-toolbar>=4.0.0,<7.0.0",
-    "ipdb<1.0.0,>=0.13.9",
-    "ipython>=8.29.0,<10.0.0",
-    "pgcli<5.0.0,>=4.0.0",
-    "pympler>=1.1",
-    "setuptools>=75.2.0,<78.0.0",
-    "Werkzeug<4.0.0,>=3.0.6",
+    "coverage>=7.11.0,<7.12.0",
+    "django-debug-toolbar>=6.1.0,<6.2.0",
+    "ipdb>=0.13.13,<0.13.14",
+    "ipython>=9.7.0,<9.8.0",
+    "pgcli>=4.3.0,<4.4.0",
+    "pympler>=1.1,<1.2",
+    "setuptools>=80.9.0,<80.10.0",
+    "werkzeug>=3.1.3,<3.2.0",
+]
+test = [
+    "tblib>=3.2.1,<3.3.0",
 ]
