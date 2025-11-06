@@ -15,10 +15,9 @@
 
 - name: Create PostgreSQL database user
   community.general.postgresql_user:
-    db: "{{ postgresql_db_name }}"
+    login_db: "{{ postgresql_db_name }}"
     name: "{{ postgresql_user }}"
     password: "{{ postgresql_password }}"
-    priv: ALL
     role_attr_flags: SUPERUSER,CREATEDB
     expires: infinity
   become: yes
