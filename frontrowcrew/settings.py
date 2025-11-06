@@ -132,6 +132,9 @@ DATABASES = {
         "PASSWORD": os.environ.get("FRONTROWCREW_DB_PASSWORD", "frontrowcrew"),
         "HOST": os.environ.get("FRONTROWCREW_DB_HOST", "localhost"),
         "PORT": os.environ.get("FRONTROWCREW_DB_PORT", "5432"),
+        "OPTIONS": {
+            "pool": True,
+        },
     }
 }
 

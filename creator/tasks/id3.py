@@ -1,3 +1,5 @@
+import datetime
+
 from django import urls
 from django import utils as django_utils
 from procrastinate.contrib.django import app as procrastinate_app
@@ -31,7 +33,7 @@ def apply_id3_tags(episode_id):
         "content_type": "Podcast",
         "description": episode.description,
         # "recording_time": None,  #  Leave whatever was set by recording app
-        "release_time": episode.pub_time.astimezone(django_utils.timezone.utc).strftime(
+        "release_time": episode.pub_time.astimezone(datetime.timezone.utc).strftime(
             "%Y-%m-%dT%H:%M"
         ),
         "tag_time": django_utils.timezone.now().strftime("%Y-%m-%dT%H:%M"),
