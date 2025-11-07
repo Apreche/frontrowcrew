@@ -3,14 +3,14 @@ import tempfile
 from unittest import mock
 
 from django import test
+from django.conf import global_settings
 
 from frontrowcrew.tests import utils
 from media import factories
 
 
 @test.override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
-    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    STORAGES=global_settings.STORAGES,
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CACHES={
         "default": {

@@ -4,7 +4,7 @@ import tempfile
 from http import HTTPStatus
 
 from django import test, urls
-from django.conf import settings
+from django.conf import global_settings, settings
 
 from etl import factories as etl_factories
 from frontrowcrew.tests import utils
@@ -12,8 +12,7 @@ from shows import factories as show_factories
 
 
 @test.override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
-    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    STORAGES=global_settings.STORAGES,
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CACHES={
         "default": {

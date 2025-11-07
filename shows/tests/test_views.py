@@ -5,6 +5,7 @@ import unittest
 from http import HTTPStatus
 
 from django import test, urls
+from django.conf import global_settings
 from django.utils import timezone
 
 from frontrowcrew.tests import utils
@@ -12,8 +13,7 @@ from shows import factories, models
 
 
 @test.override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
-    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    STORAGES=global_settings.STORAGES,
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CACHES={
         "default": {
@@ -58,8 +58,7 @@ class HomepageTests(utils.FRCTestCase):
 
 
 @test.override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
-    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    STORAGES=global_settings.STORAGES,
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CACHES={
         "default": {
@@ -108,8 +107,7 @@ class DisplayInNavTests(utils.FRCTestCase):
 
 
 @test.override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
-    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    STORAGES=global_settings.STORAGES,
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CACHES={
         "default": {
@@ -253,8 +251,7 @@ class ShowDetailTests(utils.FRCTestCase):
 
 
 @test.override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
-    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    STORAGES=global_settings.STORAGES,
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CACHES={
         "default": {
@@ -475,8 +472,7 @@ class ContentDetailTests(utils.FRCTestCase):
 
 
 @test.override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
-    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    STORAGES=global_settings.STORAGES,
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CACHES={
         "default": {
