@@ -5,6 +5,7 @@ from http import HTTPStatus
 from xml import etree
 
 from django import test, urls
+from django.conf import global_settings
 from django.contrib.sites.models import Site
 
 from frontrowcrew.tests import utils
@@ -14,8 +15,7 @@ from .. import factories
 
 
 @test.override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
-    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    STORAGES=global_settings.STORAGES,
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CACHES={
         "default": {

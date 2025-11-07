@@ -202,11 +202,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+    }
+}
 STATIC_URL = os.environ.get("FRONTROWCREW_STATIC_URL", "/static/")
 STATIC_ROOT = os.environ.get("FRONTROWCREW_STATIC_ROOT", "/tmp/static/")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
 # Media files (User Uploads)
 # https://docs.djangoproject.com/en/3.2/topics/files/
 
@@ -214,15 +217,22 @@ MEDIA_URL = os.environ.get("FRONTROWCREW_MEDIA_URL", "/media/")
 MEDIA_ROOT = os.environ.get("FRONTROWCREW_MEDIA_ROOT", "/tmp/media/")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("FRONTROWCREW_AWS_STORAGE_BUCKET_NAME", None)
 if AWS_STORAGE_BUCKET_NAME is not None:
-    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-    AWS_QUERYSTRING_AUTH = False
-    AWS_S3_FILE_OVERWRITE = False
-    AWS_S3_VERIFY = True
-    AWS_S3_ENDPOINT_URL = os.environ.get("FRONTROWCREW_AWS_S3_ENDPOINT_URL", None)
-    AWS_S3_URL_PROTOCOL = os.environ.get("FRONTROWCREW_AWS_S3_URL_PROTOCOL", "https:")
+    STORAGES["default"] = {  # type: ignore
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "bucket_name": AWS_STORAGE_BUCKET_NAME,
+            "querystring_auth": False,
+            "file_overwrite": False,
+            "verify": True,
+            "endpoint_url": os.environ.get("FRONTROWCREW_AWS_S3_ENDPOINT_URL", None),
+            "url_protocol": os.environ.get(
+                "FRONTROWCREW_AWS_S3_URL_PROTOCOL", "https:"
+            ),
+        },
+    }
     custom_domain = os.environ.get("FRONTROWCREW_AWS_S3_CUSTOM_DOMAIN", None)
     if custom_domain is not None:
-        AWS_S3_CUSTOM_DOMAIN = custom_domain
+        STORAGES["default"]["OPTIONS"]["custom_domain"] = custom_domain  # type: ignore
 
 # Logging
 LOGGING = {

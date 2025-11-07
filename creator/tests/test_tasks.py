@@ -6,6 +6,7 @@ import unittest
 import dateutil.parser
 from django import test, urls
 from django import utils as django_utils
+from django.conf import global_settings
 from mutagen import mp3 as mutagen_mp3
 from procrastinate import testing as procrastinate_testing
 from procrastinate.contrib.django import procrastinate_app
@@ -16,8 +17,7 @@ from frontrowcrew.tests import utils
 
 
 @test.override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage",
-    DEFAULT_FILE_STORAGE="django.core.files.storage.FileSystemStorage",
+    STORAGES=global_settings.STORAGES,
     MEDIA_ROOT=os.path.join(tempfile.gettempdir(), "frc_test_media"),
     CACHES={
         "default": {
