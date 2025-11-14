@@ -1,7 +1,5 @@
 import logging
 
-from atproto import Client as atpClient
-from atproto import models as atp_models
 from django.contrib.sites.models import Site
 from django.db import models
 from django.utils.html import strip_tags
@@ -26,6 +24,9 @@ class Bluesky(Syndicator):
         return f"https://{domain}{path}"
 
     def post(self, content):
+        from atproto import Client as atpClient
+        from atproto import models as atp_models
+
         client = atpClient()
         client.login(self.username, self.password)
 
