@@ -20,6 +20,7 @@ def geeknights_episode_detail_redirect(
     year=None,
     month=None,
     day=None,
+    datesix=None,
 ):
     """Redirect very old content detail patterns"""
     matching_content = show_models.Content.published.filter(
@@ -36,7 +37,18 @@ def geeknights_episode_detail_redirect(
         matching_content = matching_content.filter(
             id__in=import_record.values("new_id")
         )
+    year_is_set = year is not None
+    month_is_set = month is not None
+    day_is_set = day is not None
+    full_date_is_set = year_is_set and month_is_set and day_is_set
     date_matching_content = matching_content
+    if datesix:
+        if not full_date_is_set:
+            raise django_http.Http404(_("No matching content"))
+        yy = year[2:]
+        correct_datesix = f"{yy}{month}{day}"
+        if datesix != correct_datesix:
+            raise django_http.Http404(_("No matching content"))
     if year:
         date_matching_content = date_matching_content.filter(pub_time__year=year)
     if month:
@@ -44,7 +56,7 @@ def geeknights_episode_detail_redirect(
     if day:
         date_matching_content = date_matching_content.filter(pub_time__day=day)
         # Also try previous day because time zones
-        if not date_matching_content:
+        if not date_matching_content and full_date_is_set:
             date = datetime.datetime(year, month, day)
             previous_date = date - datetime.timedelta(days=1)
             date_matching_content = matching_content.filter(

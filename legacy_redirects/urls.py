@@ -1,4 +1,4 @@
-from django.urls import path, register_converter
+from django.urls import path, re_path, register_converter
 from django.views.generic import base
 
 from . import url_converters, views
@@ -117,7 +117,7 @@ urlpatterns = [
         name="legacy-redirect-bookclub-feed",
     ),
     path(
-        "bookclub/<catalog_number>/<slug:content_slug>/",
+        "bookclub/<str:catalog_number>/<slug:content_slug>/",
         base.RedirectView.as_view(
             pattern_name="content-detail",
             permanent=True,
@@ -380,6 +380,15 @@ urlpatterns = [
         name="legacy-redirect-videos",
     ),
     path(
+        "videos/tags/<str:tags>/",
+        base.RedirectView.as_view(
+            pattern_name="tag-filter",
+            permanent=True,
+            query_string=True,
+        ),
+        name="legacy-redirect-videos-tags",
+    ),
+    path(
         "videos/<slug:show_slug>/",
         base.RedirectView.as_view(
             pattern_name="show-detail",
@@ -389,21 +398,12 @@ urlpatterns = [
         name="legacy-redirect-videos-show-list",
     ),
     path(
-        "videos/<slug:show_slug>/<catalog_number>/<slug:content_slug>/",
+        "videos/<slug:show_slug>/<str:catalog_number>/<slug:content_slug>/",
         base.RedirectView.as_view(
             pattern_name="content-detail",
             permanent=True,
         ),
         name="legacy-redirect-videos-detail",
-    ),
-    path(
-        "videos/tags/<str:tags>/",
-        base.RedirectView.as_view(
-            pattern_name="tag-filter",
-            permanent=True,
-            query_string=True,
-        ),
-        name="legacy-redirect-videos-tags",
     ),
     path(
         "feeds/news/",
@@ -598,18 +598,23 @@ urlpatterns = [
         name="legacy-redirect-feeds-category-special",
     ),
     path(
-        "<yyyy:year>/<mm:month>/<dd:day>/<slug:slug>",
-        views.geeknights_episode_detail_redirect,
-        name="legacy-redirect-episode-detail-date-slug",
-    ),
-    path(
         "<yyyy:year>/<mm:month>/<dd:day>/",
         views.geeknights_episode_detail_redirect,
         name="legacy-redirect-episode-detail-date",
+    ),
+    re_path(
+        r"^(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/geeknights-(?P<datesix>[0-9]{6})-(?P<slug>[\w-]+)/$",
+        views.geeknights_episode_detail_redirect,
+        name="legacy-redirect-episode-detail-date-geeknights-old-slug",
     ),
     path(
         "<yyyy:year>/<mm:month>/<dd:day>/geeknights-<slug:slug>/",
         views.geeknights_episode_detail_redirect,
         name="legacy-redirect-episode-detail-date-geeknights-slug",
+    ),
+    path(
+        "<yyyy:year>/<mm:month>/<dd:day>/<slug:slug>",
+        views.geeknights_episode_detail_redirect,
+        name="legacy-redirect-episode-detail-date-slug",
     ),
 ]
