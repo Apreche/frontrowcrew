@@ -1,7 +1,7 @@
 import multiprocessing
-worker_class = 'sync'
-workers = (multiprocessing.cpu_count() * 2) + 1
-max_requests = 100
+worker_class = 'gevent'
+workers = 2
+max_requests = 1000
 
 bind = ['unix:{{ gunicorn_socket }}']
 timeout = "{{ gunicorn_timeout }}"

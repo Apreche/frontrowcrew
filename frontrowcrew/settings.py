@@ -148,7 +148,7 @@ if DEBUG and (os.environ.get("FRONTROWCREW_MEMCACHED_SOCKET", None) is None):
 else:
     CACHES = {
         "default": {
-            "BACKEND": "django.core.cache.backends.memcached.PyLibMCCache",
+            "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
             "LOCATION": os.environ.get(
                 "FRONTROWCREW_MEMCACHED_SOCKET", "127.0.0.1:11211"
             ),
