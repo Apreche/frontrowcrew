@@ -1,4 +1,4 @@
-from django.urls import path, register_converter
+from django.urls import path, re_path, register_converter
 from django.views.generic import base
 
 from . import url_converters, views
@@ -611,5 +611,10 @@ urlpatterns = [
         "<yyyy:year>/<mm:month>/<dd:day>/geeknights-<slug:slug>/",
         views.geeknights_episode_detail_redirect,
         name="legacy-redirect-episode-detail-date-geeknights-slug",
+    ),
+    re_path(
+        r"^(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/geeknights-[0-9]{6}-(?P<slug>[\w-]+)/$",
+        views.geeknights_episode_detail_redirect,
+        name="legacy-redirect-episode-detail-date-geeknights-old-slug",
     ),
 ]
