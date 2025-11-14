@@ -1,6 +1,6 @@
 import multiprocessing
 worker_class = 'gevent'
-workers = 2
+workers = multiprocessing.cpu_count() * 2 + 1
 max_requests = 1000
 
 bind = ['unix:{{ gunicorn_socket }}']

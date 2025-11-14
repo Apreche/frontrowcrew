@@ -1,6 +1,7 @@
 import logging
 
-import atproto
+from atproto import Client as atpClient
+from atproto import models as atp_models
 from django.contrib.sites.models import Site
 from django.db import models
 from django.utils.html import strip_tags
@@ -25,7 +26,7 @@ class Bluesky(Syndicator):
         return f"https://{domain}{path}"
 
     def post(self, content):
-        client = atproto.Client()
+        client = atpClient()
         client.login(self.username, self.password)
 
         # Bluesky can't intelligently embed, we need to do it ourselves
@@ -44,8 +45,8 @@ class Bluesky(Syndicator):
             thumb = client.upload_blob(image_data).blob
             embed_data["thumb"] = thumb
 
-        external = atproto.models.AppBskyEmbedExternal.External(**embed_data)
-        embed_external = atproto.models.AppBskyEmbedExternal.Main(external=external)
+        external = atp_models.AppBskyEmbedExternal.External(**embed_data)
+        embed_external = atp_models.AppBskyEmbedExternal.Main(external=external)
         response = client.send_post(
             text=content.title,
             embed=embed_external,
